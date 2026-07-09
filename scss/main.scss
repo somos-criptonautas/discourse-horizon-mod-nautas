@@ -645,11 +645,6 @@ img.emoji {
   padding-bottom: 0.11rem;
 }
 
-// [EXPERIMENTAL] Max-width fix on vertical structured profile
-.user-content {
-  max-width: 75%;
-}
-
 #user-content .topic-list-data .views .sortable .num,
 #user-content .num .views .topic-list-data {
   display: none;
@@ -662,10 +657,10 @@ img.emoji {
   --category-banner-color: unset !important;
 }
 
-// Float search hide header text on tablet devices
+// Hide header links on tablet and mobile
 @media (width <=1024px) {
-  .search-header--visible .custom-header-links {
-    display: none;
+  .custom-header-links {
+    display: none !important;
   }
 }
 
@@ -944,22 +939,22 @@ groups-page .page-intro--groups {
 }
 
 // Style user profile page
-.user-content {
+body.user-summary-page .user-content {
   max-width: unset;
   display: flex;
   flex-direction: column;
 }
 
-.summary-user-list .replied-section {
+body.user-summary-page .summary-user-list .replied-section {
   display: none;
 }
 
-.top-section .top-categories-section {
+body.user-summary-page .top-section .top-categories-section {
   order: 3;
 }
 
-.top-sub-section .links-section,
-.top-sub-section .summary-category-list,
-.top-sub-section .summary-category-list table {
+body.user-summary-page .top-sub-section .links-section,
+body.user-summary-page .top-sub-section .summary-category-list,
+body.user-summary-page .top-sub-section .summary-category-list table {
   width: 100%;
 }
