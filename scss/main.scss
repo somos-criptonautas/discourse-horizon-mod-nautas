@@ -893,9 +893,9 @@ groups-page .page-intro--groups {
 }
 
 // Style and fix wrap on Profile MP
-.user.user-navigation-secondary .navigation-controls {
+.user.user-navigation-secondary>.navigation-controls {
   flex-wrap: wrap-reverse;
-  justify-content: center;
+  justify-content: left;
 }
 
 .user-navigation-secondary .category-breadcrumb li {
@@ -959,13 +959,24 @@ body.user-summary-page .top-section .top-categories-section {
   order: 3 !important;
 }
 
-body.user-summary-page .top-sub-section .links-section,
-body.user-summary-page .top-sub-section .summary-category-list,
-body.user-summary-page .top-sub-section .summary-category-list table {
+body.user-summary-page>.top-sub-section .links-section,
+body.user-summary-page>.top-sub-section .summary-category-list,
+body.user-summary-page>.top-sub-section .summary-category-list table {
   width: 100% !important;
+}
+
+body.user-summary-page>.top-sub-section .summary-user-list {
+  display: none;
 }
 
 // Fix header with mods
 .d-header>.wrap .contents {
   grid-template-columns: minmax(auto, 1fr) auto minmax(0, calc(var(--d-max-width))) auto minmax(auto, 1fr) !important;
+}
+
+// Hiding topics outside docs categories
+body.category-glosario .more-topics__container,
+body.category-wiki .more-topics__container,
+body.category-trading-curso .more-topics__container {
+  display: none;
 }
