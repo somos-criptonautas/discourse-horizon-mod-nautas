@@ -449,12 +449,18 @@ body.user-activity-page .user-navigation .user-navigation-secondary {
   display: none !important;
 }
 
+// Fix for subscriptions con modded column display
+.new-user-content-wrapper .user-content {
+  padding-left: 2rem;
+  margin-top: 1rem;
+}
+
 // Workaround on MP messages for new User UI
 body.user-messages-page .new-user-wrapper .user-navigation-secondary {
   display: unset;
 }
 
-body.user-messages-page .new-user-wrapper .user-navigation .nav-pills li a {
+.user-navigation-secondary .nav-pills li a {
   justify-content: inherit;
 }
 
@@ -887,7 +893,7 @@ groups-page .page-intro--groups {
 }
 
 // Style and fix wrap on Profile MP
-.new-user.user-navigation-secondary .navigation-controls {
+.user.user-navigation-secondary .navigation-controls {
   flex-wrap: wrap-reverse;
   justify-content: center;
 }
@@ -946,15 +952,20 @@ body.user-summary-page .user-content {
 }
 
 body.user-summary-page .summary-user-list .replied-section {
-  display: none;
+  display: none !important;
 }
 
 body.user-summary-page .top-section .top-categories-section {
-  order: 3;
+  order: 3 !important;
 }
 
 body.user-summary-page .top-sub-section .links-section,
 body.user-summary-page .top-sub-section .summary-category-list,
 body.user-summary-page .top-sub-section .summary-category-list table {
-  width: 100%;
+  width: 100% !important;
+}
+
+// Fix header with mods
+.d-header>.wrap .contents {
+  grid-template-columns: minmax(auto, 1fr) auto minmax(0, calc(var(--d-max-width))) auto minmax(auto, 1fr) !important;
 }
