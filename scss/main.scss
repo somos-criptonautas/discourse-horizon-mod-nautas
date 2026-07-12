@@ -945,23 +945,23 @@ groups-page .page-intro--groups {
 }
 
 // Style user profile page
-body.user-summary-page .user-content {
+.user-summary-page .user-content {
   max-width: unset;
   display: flex;
   flex-direction: column;
 }
 
-body.user-summary-page .summary-user-list .replied-section {
+.user-summary-page .summary-user-list .replied-section {
   display: none !important;
 }
 
-body.user-summary-page .top-section .top-categories-section {
+.user-summary-page .top-section .top-categories-section {
   order: 3 !important;
 }
 
-body.user-summary-page>.top-sub-section .links-section,
-body.user-summary-page>.top-sub-section .summary-category-list,
-body.user-summary-page>.top-sub-section .summary-category-list table {
+.user-summary-page>.top-sub-section .links-section,
+.user-summary-page>.top-sub-section .summary-category-list,
+.user-summary-page>.top-sub-section .summary-category-list table {
   width: 100% !important;
 }
 
