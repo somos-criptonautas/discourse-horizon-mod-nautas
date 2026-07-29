@@ -2,7 +2,7 @@
 
 // Base font size (matches Discourse default)
 html {
-  font-size: 20px;
+  font-size: 22px;
 }
 
 :root {
@@ -515,6 +515,25 @@ ul.ai-helper-options li[data-value="replace_dates"] {
 .user-preferences .form-vertical .control-group .pref-flair,
 .user-preferences .form-vertical .control-group .pref-email-settings {
   display: none;
+}
+
+// Hide site logo on mobile only (keep on tablet/desktop)
+@media (width <=576px) {
+  .d-header .title a {
+    display: none;
+  }
+}
+
+// Modern glow effect on hamburger icon for specific categories
+body.category-glosario,
+body.category-wiki,
+body.category-trading-curso {
+
+  span.header-sidebar-toggle,
+  button.btn-sidebar-toggle {
+    filter: drop-shadow(0 0 4px var(--tertiary));
+    color: var(--tertiary);
+  }
 }
 
 // Hide report topic (we look into it when reporting posts)
