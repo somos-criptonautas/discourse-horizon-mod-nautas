@@ -10,6 +10,105 @@ html {
   --d-max-width-topic: 1250px;
   --below-topic-margin: 1.11rem;
   --d-control-height: --space-8;
+  --category-1-color: unset;
+  --category-2-color: unset;
+  --category-3-color: unset;
+  --category-4-color: unset;
+  --category-5-color: unset;
+  --category-6-color: unset;
+  --category-7-color: unset;
+  --category-8-color: unset;
+  --category-9-color: unset;
+  --category-10-color: unset;
+  --category-11-color: unset;
+  --category-12-color: unset;
+  --category-13-color: unset;
+  --category-14-color: unset;
+  --category-15-color: unset;
+  --category-16-color: unset;
+  --category-17-color: unset;
+  --category-18-color: unset;
+  --category-19-color: unset;
+  --category-20-color: unset;
+  --category-21-color: unset;
+  --category-22-color: unset;
+  --category-23-color: unset;
+  --category-24-color: unset;
+  --category-25-color: unset;
+  --category-26-color: unset;
+  --category-27-color: unset;
+  --category-28-color: unset;
+  --category-29-color: unset;
+  --category-30-color: unset;
+  --category-31-color: unset;
+  --category-32-color: unset;
+  --category-33-color: unset;
+  --category-34-color: unset;
+  --category-35-color: unset;
+  --category-36-color: unset;
+  --category-37-color: unset;
+  --category-38-color: unset;
+  --category-39-color: unset;
+  --category-40-color: unset;
+  --category-41-color: unset;
+  --category-42-color: unset;
+  --category-43-color: unset;
+  --category-44-color: unset;
+  --category-45-color: unset;
+  --category-46-color: unset;
+  --category-47-color: unset;
+  --category-48-color: unset;
+  --category-49-color: unset;
+  --category-50-color: unset;
+  --category-51-color: unset;
+  --category-52-color: unset;
+  --category-53-color: unset;
+  --category-54-color: unset;
+  --category-55-color: unset;
+  --category-56-color: unset;
+  --category-57-color: unset;
+  --category-58-color: unset;
+  --category-59-color: unset;
+  --category-60-color: unset;
+  --category-61-color: unset;
+  --category-62-color: unset;
+  --category-63-color: unset;
+  --category-64-color: unset;
+  --category-65-color: unset;
+  --category-66-color: unset;
+  --category-67-color: unset;
+  --category-68-color: unset;
+  --category-69-color: unset;
+  --category-70-color: unset;
+  --category-71-color: unset;
+  --category-72-color: unset;
+  --category-73-color: unset;
+  --category-74-color: unset;
+  --category-75-color: unset;
+  --category-76-color: unset;
+  --category-77-color: unset;
+  --category-78-color: unset;
+  --category-79-color: unset;
+  --category-80-color: unset;
+  --category-81-color: unset;
+  --category-82-color: unset;
+  --category-83-color: unset;
+  --category-84-color: unset;
+  --category-85-color: unset;
+  --category-86-color: unset;
+  --category-87-color: unset;
+  --category-88-color: unset;
+  --category-89-color: unset;
+  --category-90-color: unset;
+  --category-91-color: unset;
+  --category-92-color: unset;
+  --category-93-color: unset;
+  --category-94-color: unset;
+  --category-95-color: unset;
+  --category-96-color: unset;
+  --category-97-color: unset;
+  --category-98-color: unset;
+  --category-99-color: unset;
 }
 
 html:not(:has(.has-full-page-chat)) {
@@ -448,13 +547,6 @@ body.user-activity-page .user-navigation .user-navigation-secondary {
   display: none !important;
 }
 
-// Fix for subscriptions and profile and user-preferences-page with column display
-.user-billing-page .new-user-content-wrapper .user-content,
-.user-preferences-page .new-user-content-wrapper .user-content {
-  padding-left: 2rem;
-  margin-top: 1rem;
-}
-
 // Workaround on MP messages for new User UI
 body.user-messages-page .new-user-wrapper .user-navigation-secondary {
   display: unset;
@@ -524,16 +616,31 @@ ul.ai-helper-options li[data-value="replace_dates"] {
   }
 }
 
-// Modern glow effect on hamburger icon for specific categories
-body.category-glosario,
-body.category-wiki,
-body.category-trading-curso {
+// Modern glow effect on hamburger icon for specific categories (mobile only)
+@media (width <=576px) {
 
-  span.header-sidebar-toggle,
-  button.btn-sidebar-toggle {
-    filter: drop-shadow(0 0 4px var(--tertiary));
-    color: var(--tertiary);
+  body.category-glosario,
+  body.category-wiki,
+  body.category-trading-curso {
+
+    span.header-sidebar-toggle,
+    button.btn-sidebar-toggle {
+      filter: drop-shadow(0 0 6px var(--selected));
+      color: var(--selected);
+    }
   }
+}
+
+// Hide tags on questions
+
+body.category-preguntas li:has(.tag-drop) {
+  display: none;
+}
+
+// Right align be first to reply
+.first-reply-statement {
+  padding: 1em 2em 1em 1em;
+  justify-content: right;
 }
 
 // Hide report topic (we look into it when reporting posts)
@@ -871,6 +978,7 @@ img.emoji {
   display: none;
 }
 
+/* 
 // [EXPERIMENTAL] Welcome sections messages
 .custom-page-intro {
   display: none;
@@ -889,7 +997,7 @@ groups-page .page-intro--groups {
 .leaderboard-page .page-intro--leaderboard {
   display: block;
   margin: 1 1.5rem;
-}
+} */
 
 // Removing topic-list data on Docs Categories
 .category-wiki .topic-list .topic-list-data.num,
@@ -909,36 +1017,6 @@ groups-page .page-intro--groups {
     font-size: 17px;
   }
 
-}
-
-// Style and fix wrap on Profile MP
-.user.user-navigation-secondary>.navigation-controls {
-  flex-wrap: wrap-reverse;
-  justify-content: left;
-}
-
-.user-navigation-secondary .category-breadcrumb li {
-  width: 100%;
-}
-
-.user-navigation-secondary .category-breadcrumb li {
-  width: 100%;
-}
-
-.user-navigation-secondary .messages-dropdown-trigger,
-.user-navigation-secondary .fk-d-menu__trigger messages-dropdown-trigger,
-.navigation-controls button {
-  width: 100%;
-  height: 1.8rem;
-}
-
-.post__topic-map.topic-map.--op {
-  font-size: var(--font-down-1);
-}
-
-.user-navigation-secondary .nav-pills li {
-  width: 100%;
-  justify-content: left;
 }
 
 // Badges order + hide title choice
@@ -979,23 +1057,29 @@ groups-page .page-intro--groups {
   order: 3 !important;
 }
 
+.top-sub-section {
+  width: unset;
+}
+
+.top-sub-section .topic-section,
+.top-sub-section .resplies-section,
+.top-sub-section .liked-by-section,
+.top-sub-section .most-liked-section {
+  width: 50%;
+}
+
 .top-sub-section .links-section,
 .top-sub-section .summary-category-list,
 .top-sub-section .summary-category-list table {
-  width: 100% !important;
+  width: 100%;
+}
+
+.top-sub-section .ember-view more {
+  display: none;
 }
 
 .top-sub-section .summary-user-list {
   display: none;
-}
-
-.horizontal-overflow-nav .new-user-wrapper .user-navigation .nav-pills li a {
-  justify-content: left;
-  padding-left: 1rem;
-}
-
-.user-navigation-secondary .navigation-controls {
-  flex-wrap: wrap;
 }
 
 // Fix header with mods

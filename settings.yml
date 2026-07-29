@@ -1,9 +1,2 @@
-# Horizon Theme Component Settings
-# Add custom settings for this theme component here
-# https://meta.discourse.org/t/theme-settings/108449
-
-# Example settings (commented out - uncomment and modify as needed):
-# name: "Custom Setting"
-# type: "string"
-# default: "default value"
-# description: "Description of what this setting does"
+# Theme settings for Horizon Modifications
+# Leave empty if no custom settings are needed

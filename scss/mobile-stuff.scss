@@ -1,5 +1,9 @@
 @use "lib/viewport";
 
+html {
+  font-size: 20px !important;
+}
+
 // Sticky container?
 .list-container {
   position: inherit;
@@ -203,3 +207,39 @@ body.f-nav-hidden:not(.archetype-regular,
 #navigation-bar {
   flex-wrap: unset;
 } */
+
+// Disable weird background on navbar in mobile/tablet
+
+@media (width < 64rem) {
+
+  body.has-full-page-chat .sidebar-wrapper,
+  .sidebar-wrapper,
+  .sidebar-hamburger-dropdown {
+    background: unset;
+  }
+}
+
+// Less navbar width for easy closing it
+.menu-panel.slide-in {
+  max-width: 80vw;
+}
+
+// Fix border radius in mobile plugin
+.user-menu.revamped {
+  border-top-right-radius: 0;
+  border-top-left-radius: var(--d-border-radius-large);
+  border-bottom-left-radius: var(--d-border-radius-large);
+}
+
+.menu-panel {
+  border-top-right-radius: var(--d-border-radius-large);
+  border-bottom-right-radius: var(--d-border-radius-large);
+}
+
+// Style radius on search box
+
+.header-search--enabled .floating-search-input .search-banner-inner.wrap .search-menu .search-menu-panel,
+.search-header--visible .floating-search-input .search-banner-inner.wrap .search-menu .search-menu-panel {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

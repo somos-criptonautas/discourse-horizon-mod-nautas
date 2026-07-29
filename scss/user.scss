@@ -1,0 +1,6 @@
+// Fix for subscriptions and profile and user-preferences-page with column display
+.user-billing-page .new-user-content-wrapper .user-content,
+.user-preferences-page .new-user-content-wrapper .user-content {
+    padding-left: 2rem;
+    margin-top: 1rem;
+}

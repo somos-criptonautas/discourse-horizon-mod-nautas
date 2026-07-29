@@ -1,0 +1,35 @@
+.new-user-wrapper .user-navigation .nav-pills li a {
+    justify-content: left;
+    padding-left: 1rem;
+}
+
+.new-user-wrapper .user-navigation-secondary .navigation-controls {
+    flex-wrap: wrap;
+}
+
+// Style and fix wrap on Profile MP
+.user.user-navigation-secondary>.navigation-controls {
+    flex-wrap: wrap-reverse;
+    justify-content: left;
+}
+
+.user-navigation-secondary .messages-dropdown-trigger,
+.user-navigation-secondary .fk-d-menu__trigger messages-dropdown-trigger,
+.navigation-controls button {
+    width: 100%;
+    height: 1.8rem;
+}
+
+.post__topic-map.topic-map.--op {
+    font-size: var(--font-down-1);
+}
+
+.user-navigation-secondary .nav-pills li {
+    width: 100%;
+    justify-content: left;
+}
+
+.new-user-wrapper .user-navigation-secondary .messages-dropdown-trigger,
+.user-navigation-secondary .category-breadcrumb li {
+    width: 100%;
+}
