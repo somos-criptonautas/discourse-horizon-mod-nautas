@@ -3,7 +3,6 @@
 // Base font size (matches Discourse default)
 html {
   font-size: 18px;
-  font-size: 107%;
 }
 
 :root {
@@ -907,7 +906,8 @@ groups-page .page-intro--groups {
 }
 
 .user-navigation-secondary .messages-dropdown-trigger,
-.user-navigation-secondary .fk-d-menu__trigger messages-dropdown-trigger {
+.user-navigation-secondary .fk-d-menu__trigger messages-dropdown-trigger,
+.navigation-controls button {
   width: 100%;
   height: 1.8rem;
 }
@@ -945,28 +945,37 @@ groups-page .page-intro--groups {
 }
 
 // Style user profile page
-.user-summary-page .user-content {
+.user-content {
   max-width: unset;
   display: flex;
   flex-direction: column;
 }
 
-.user-summary-page .summary-user-list .replied-section {
+.replied-section {
   display: none !important;
 }
 
-.user-summary-page .top-section .top-categories-section {
+.top-section .top-categories-section {
   order: 3 !important;
 }
 
-.user-summary-page>.top-sub-section .links-section,
-.user-summary-page>.top-sub-section .summary-category-list,
-.user-summary-page>.top-sub-section .summary-category-list table {
+.top-sub-section .links-section,
+.top-sub-section .summary-category-list,
+.top-sub-section .summary-category-list table {
   width: 100% !important;
 }
 
-body.user-summary-page>.top-sub-section .summary-user-list {
+.top-sub-section .summary-user-list {
   display: none;
+}
+
+.horizontal-overflow-nav .new-user-wrapper .user-navigation .nav-pills li a {
+  justify-content: left;
+  padding-left: 1rem;
+}
+
+.user-navigation-secondary .navigation-controls {
+  flex-wrap: wrap;
 }
 
 // Fix header with mods
@@ -979,4 +988,20 @@ body.category-glosario .more-topics__container,
 body.category-wiki .more-topics__container,
 body.category-trading-curso .more-topics__container {
   display: none;
+}
+
+// Hide descriptions on categories
+.select-kit.combo-box.category-chooser .select-kit-row .category-desc {
+  display: none;
+}
+
+// Styling buttons + avatars
+.btn {
+  padding: .39em .5em;
+}
+
+@media (width >=40rem) {
+  .topic-avatar {
+    padding-top: var(--space-2);
+  }
 }
