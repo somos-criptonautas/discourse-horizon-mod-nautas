@@ -419,8 +419,10 @@ div.topic-post.comment .topic-body .who-read {
   font-family: var(--heading-font-family);
 }
 
-.chat-drawer-container .c-navbar__title {
-  padding: 0.53em 0 0.11em 0.53em;
+// Moved from .c-navbar__title to .c-navbar itself, and reduced 25%
+// (0.53em/0.11em -> 0.4em/0.08em)
+.chat-drawer-container .c-navbar {
+  padding: 0.4em 0 0.08em 0.4em;
 }
 
 .chat-channel-divider {
@@ -651,6 +653,21 @@ body.category-preguntas li:has(.tag-drop) {
   --category-banner-color: unset !important;
 }
 
+// The docs categories (glosario/wiki/trading-curso) are used as internal
+// pages, not real discussion categories, so their icon shouldn't carry a
+// custom category color — reset to the default/plain icon look.
+body.category-glosario,
+body.category-wiki,
+body.category-trading-curso {
+  .category-title-header {
+    --category-badge-color: unset;
+
+    .badge-category {
+      color: var(--primary) !important;
+    }
+  }
+}
+
 // Font-size adjust in Docs categories sidebar
 .discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link-content-text {
   font-size: var(--font-down-1);
@@ -820,6 +837,7 @@ body.category-trading-curso .more-topics__container {
 // Icons on Welcome Banner (EXPERIMENTAL)
 .welcome-banner__wrap {
   flex-wrap: wrap;
+  border-bottom: none;
 }
 
 .banner-featured-links__wrapper {

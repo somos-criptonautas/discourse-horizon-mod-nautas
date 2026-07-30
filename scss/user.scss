@@ -24,6 +24,11 @@
     flex-wrap: wrap;
 }
 
+.top-section .top-categories-section,
+.top-section .links-and-replied-to-section {
+    width: 100%;
+}
+
 .top-section .top-categories-section {
     order: 3 !important;
 }
@@ -34,9 +39,11 @@
     width: unset;
 }
 
-// .resplies-section was a typo for .replies-section — never matched anything
-.top-sub-section .topic-section,
-.top-sub-section .replies-section,
+// Was .topic-section/.resplies-section (typo for .replies-section) —
+// corrected to the real classes, including the .pull-left/.pull-right
+// modifiers that actually appear alongside them.
+.top-sub-section .topics-section.pull-right,
+.top-sub-section .replies-section.pull-left,
 .top-sub-section .liked-by-section,
 .top-sub-section .most-liked-section {
     width: 50%;

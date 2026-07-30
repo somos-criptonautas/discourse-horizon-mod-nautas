@@ -129,9 +129,19 @@ function sortDocTopicList(body, locale) {
     return; // already sorted — also breaks the observer's own feedback loop
   }
 
-  const fragment = document.createDocumentFragment();
-  sorted.forEach((row) => fragment.appendChild(row));
-  body.appendChild(fragment);
+  // Move only the rows that are actually out of place, one at a time —
+  // not a detach-everything-into-a-fragment-then-reappend. The fragment
+  // approach briefly removes every row from `body` in the same pass,
+  // which (with infinite scroll appending a load-more sentinel right
+  // after this list) was very likely shifting that sentinel enough to
+  // keep re-triggering "load more", i.e. the infinite-loading-forever
+  // symptom. This keeps rows continuously attached and only touches the
+  // ones that need to move.
+  sorted.forEach((row, index) => {
+    if (body.children[index] !== row) {
+      body.insertBefore(row, body.children[index] ?? null);
+    }
+  });
 }
 
 function sortDocCategoryTopicLists() {
@@ -177,36 +187,6 @@ function sortDocCategoryTopicLists() {
   });
 }
 
-// Mobile header: shows the logo again once the user has scrolled, instead
-// of relying on Discourse core's own .docked class — that dependency
-// wasn't reliably showing the logo back on scroll, and this way we don't
-// need to know core's exact internal mechanism at all; the CSS in
-// header.scss just keys off this class instead of .docked.
-function initMobileHeaderScrollState() {
-  const mobileQuery = window.matchMedia("(max-width: 576px)");
-  const SCROLL_THRESHOLD = 80;
-  let ticking = false;
-
-  const update = () => {
-    ticking = false;
-    document.body.classList.toggle(
-      "header-scrolled",
-      mobileQuery.matches && window.scrollY > SCROLL_THRESHOLD
-    );
-  };
-
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (!ticking) {
-        ticking = true;
-        window.requestAnimationFrame(update);
-      }
-    },
-    { passive: true }
-  );
-}
-
 // Hide the secondary nav on mobile for the user activity/invites/billing
 // pages. The existing CSS rules (new-user.scss/main.scss,
 // body.user-activity-page etc. .user-navigation-secondary, !important)
@@ -235,8 +215,6 @@ export default apiInitializer((api) => {
   api.replaceIcon("robot", "lightning");
   api.replaceIcon("language", "translate");
   api.replaceIcon("pencil", "note-pencil");
-
-  initMobileHeaderScrollState();
 
   // Do not display closed groups buttons
   const hideClosedButtons = () => {

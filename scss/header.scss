@@ -11,11 +11,17 @@
 }
 
 // Hide site logo on mobile only (keep on tablet/desktop). Skipped once the
-// user has scrolled (body.header-scrolled, set in init.gjs) so the logo
-// reappears alongside whatever Discourse shows in the header on scroll —
-// relying on core's own .docked class here didn't reliably show it back.
+// user has scrolled — using core's own body.f-nav-hidden (toggled by
+// Discourse itself, already correctly kept in sync across page
+// navigation) instead of a custom scroll listener, which had a real bug:
+// it only updated on 'scroll' events, so after an SPA route change it
+// kept showing whatever state the *previous* page had scrolled to, until
+// the user scrolled again on the new page — explaining why the logo
+// showed up wrong on category pages/homepage. Also always shown on the
+// login page, which has no scrollable content to ever trigger
+// f-nav-hidden, so it would otherwise stay hidden there forever.
 @media (width <=576px) {
-  body:not(.header-scrolled) .d-header .title a {
+  body:not(.f-nav-hidden):not(.login-page) .d-header .title a {
     display: none;
   }
 }

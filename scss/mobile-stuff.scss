@@ -215,14 +215,16 @@ body.f-nav-hidden:not(.archetype-regular,
   flex-wrap: unset;
 } */
 
-// Disable weird background on navbar in mobile/tablet
+// Disable weird background on navbar in mobile/tablet. !important added —
+// this was already "unset" (i.e. no background), so if a background is
+// still showing, some other rule is winning on specificity, not on value.
 
 @media (width < 64rem) {
 
   body.has-full-page-chat .sidebar-wrapper,
   .sidebar-wrapper,
   .sidebar-hamburger-dropdown {
-    background: unset;
+    background: none !important;
   }
 }
 
@@ -285,6 +287,7 @@ body.f-nav-hidden:not(.archetype-regular,
         border-radius: 50%;
         background-color: var(--tertiary);
         pointer-events: none;
+        z-index: 1; // guards against being painted under other header chrome
       }
 
       &::before {
@@ -325,12 +328,22 @@ body.f-nav-hidden:not(.archetype-regular,
   }
 }
 
-// Hiding secondary nav on mobile activity/invites/billing profiles
+// Hiding secondary nav on mobile activity/invites/billing profiles.
+// .user-secondary-navigation added alongside .user-navigation-secondary —
+// unconfirmed which one is actually real, so both are targeted.
 @media (width <=576px) {
 
   body.user-activity-page .user-navigation .user-navigation-secondary,
   body.user-invites-page .user-navigation .user-navigation-secondary,
-  body.user-billing-page .user-navigation .user-navigation-secondary {
+  body.user-billing-page .user-navigation .user-navigation-secondary,
+  body.user-billing-page .user-secondary-navigation {
     display: none;
+  }
+
+  // Now that the secondary nav is hidden, center the remaining content
+  // instead of leaving it stranded off to one side of the freed-up space.
+  .new-user-content-wrapper .user-content {
+    align-items: center;
+    text-align: center;
   }
 }

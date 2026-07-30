@@ -3,6 +3,15 @@
     padding-left: 1rem;
 }
 
+// ...but not the horizontal-overflow-nav variant (e.g. the invites tabs) —
+// that one should keep normal/modern alignment, not the vertical-column
+// hack. More specific than the rule above (extra .horizontal-overflow-nav
+// class), so it wins regardless of source order.
+.new-user-wrapper .user-navigation .horizontal-overflow-nav .nav-pills li a {
+    justify-content: unset;
+    padding-left: unset;
+}
+
 .new-user-wrapper .user-navigation-secondary .navigation-controls {
     flex-wrap: wrap;
 }
