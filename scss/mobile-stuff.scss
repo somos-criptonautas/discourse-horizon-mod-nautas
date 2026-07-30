@@ -184,7 +184,7 @@ body.f-nav-hidden:not(.archetype-regular,
 
 // On mobile: render the same components as desktop,
 // but stack them vertically (categories → recent posts)
-.mobile-view {
+/* .mobile-view {
   .category-list-with-topics {
     display: flex !important;
     flex-direction: column !important;
@@ -208,7 +208,7 @@ body.f-nav-hidden:not(.archetype-regular,
       order: 2;
     }
   }
-}
+} */
 
 /* // navigation-mobile-nowrap
 #navigation-bar {
