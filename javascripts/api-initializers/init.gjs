@@ -12,20 +12,42 @@ function cleanGroupNames() {
   });
 }
 
-// Categories rendered by the Discourse Docs plugin. Detected by the
-// plugin's own DOM presence (.discourse-docs-sidebar-panel — a confirmed
-// real, already-used-elsewhere selector) rather than a hardcoded slug list:
-// slug matching was fragile (had to be kept in sync manually, and the
-// glow/auto-open still didn't fire reliably) and this scales to any
-// current or future docs category automatically. Shared by the
-// auto-open-sidebar behavior below and the alphabetical sort further down —
-// the plugin has no native title sort (confirmed: no such setting exists,
-// and Discourse core doesn't index topics by title either), so it's done
-// client-side here instead of forking the plugin or a separate component.
+// Categories rendered by the Discourse Docs plugin. Detected two ways at
+// once (either is enough) since neither has been confirmed against live
+// markup: the plugin's own sidebar panel being present, OR the known
+// category slugs. Shared by the auto-open-sidebar behavior below and the
+// alphabetical sort further down — the plugin has no native title sort
+// (confirmed: no such setting exists, and Discourse core doesn't index
+// topics by title either), so it's done client-side here instead of
+// forking the plugin or a separate component.
+const DOC_CATEGORY_SLUGS = ["glosario", "wiki", "trading-curso"];
 const DOC_SIDEBAR_SEEN_KEY = "horizon-mods-doc-sidebar-seen";
 
 function isDocCategoryPage() {
-  return !!document.querySelector(".discourse-docs-sidebar-panel");
+  if (document.querySelector(".discourse-docs-sidebar-panel")) {
+    return true;
+  }
+  return DOC_CATEGORY_SLUGS.some((slug) =>
+    document.body.classList.contains(`category-${slug}`)
+  );
+}
+
+// #toggle-hamburger-menu confirmed from actual live markup (the button
+// inside <li class="header-dropdown-toggle hamburger-dropdown">, title
+// "Menú principal (categorías, mensajes, ajustes)") — .btn-sidebar-toggle
+// and .header-sidebar-toggle, used everywhere else in this theme
+// (including by the original pre-existing code), don't exist at all; kept
+// below only as harmless fallbacks in case some other page state uses them.
+function findSidebarToggleButton() {
+  return (
+    document.querySelector("#toggle-hamburger-menu") ||
+    document.querySelector(".hamburger-dropdown button") ||
+    document.querySelector(".btn-sidebar-toggle") ||
+    document.querySelector(".header-sidebar-toggle button") ||
+    document.querySelector(".header-sidebar-toggle") ||
+    document.querySelector('button[aria-label*="sidebar" i]') ||
+    document.querySelector('[data-identifier="sidebar-toggle"]')
+  );
 }
 
 function autoOpenDocSidebar() {
@@ -49,8 +71,10 @@ function autoOpenDocSidebar() {
     return;
   }
 
-  const toggle = document.querySelector(".btn-sidebar-toggle");
-  const alreadyOpen = document.querySelector(".sidebar-hamburger-dropdown");
+  const toggle = findSidebarToggleButton();
+  const alreadyOpen =
+    toggle?.getAttribute("aria-expanded") === "true" ||
+    !!document.querySelector(".sidebar-hamburger-dropdown");
 
   if (toggle && !alreadyOpen) {
     toggle.click();
@@ -129,15 +153,24 @@ function sortDocCategoryTopicLists() {
       body.classList.add("docs-sorted");
     }
 
-    // Debounced: infinite scroll appends rows one at a time across several
-    // mutations, and re-sorting on every single one caused a visible
-    // "items crawl into place as they trickle in" effect. Waiting for a
-    // short quiet period after the last mutation lets a whole batch land
-    // before sorting it once, cleanly.
-    let debounceTimer;
+    // Coalesced via rAF, not a setTimeout debounce: a fixed delay (tried
+    // 120ms) meant that during continuous infinite-scroll loading, mutations
+    // kept arriving faster than the delay, so the timer kept resetting and
+    // the list only ever looked sorted once scrolling fully stopped. Instead,
+    // schedule at most one resort per animation frame — it still coalesces
+    // multiple mutations landing in the same tick, but resolves right before
+    // the next paint instead of after an arbitrary wait, so each newly
+    // loaded batch gets sorted essentially immediately rather than only at
+    // the very end.
+    let rafId = null;
     const observer = new MutationObserver(() => {
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(() => sortDocTopicList(body, locale), 120);
+      if (rafId !== null) {
+        return;
+      }
+      rafId = window.requestAnimationFrame(() => {
+        rafId = null;
+        sortDocTopicList(body, locale);
+      });
     });
     observer.observe(body, { childList: true });
     docSortObservers.push(observer);
@@ -174,39 +207,26 @@ function initMobileHeaderScrollState() {
   );
 }
 
-// Hide the secondary nav on the mobile user-activity page. The existing
-// CSS rule (new-user.scss, body.user-activity-page .user-navigation
-// .user-navigation-secondary, !important) wasn't taking effect, and its
-// exact selector chain couldn't be confirmed against current Discourse
-// core/Horizon markup remotely. This targets the same element directly by
-// its own stable class and gates on the URL instead of a guessed body
-// class, as a more robust backup alongside the existing CSS.
+// Hide the secondary nav on mobile for the user activity/invites/billing
+// pages. The existing CSS rules (new-user.scss/main.scss,
+// body.user-activity-page etc. .user-navigation-secondary, !important)
+// weren't taking effect, and the exact selector chain couldn't be
+// confirmed against current Discourse core/Horizon markup remotely. This
+// targets the same element directly by its own stable class and gates on
+// the URL instead of a guessed body class, as a more robust backup
+// alongside the existing CSS.
 function hideActivitySecondaryNavOnMobile() {
   if (!window.matchMedia("(max-width: 576px)").matches) {
     return;
   }
 
-  if (!/^\/u\/[^/]+\/activity/.test(window.location.pathname)) {
+  if (!/^\/u\/[^/]+\/(activity|invited|billing)/.test(window.location.pathname)) {
     return;
   }
 
   document.querySelectorAll(".user-navigation-secondary").forEach((el) => {
     el.style.display = "none";
   });
-}
-
-// "Billing" -> "Suscripción" on the user preferences nav link. Overriding
-// the actual i18n key would require knowing its exact path, which isn't
-// confirmed — this instead edits the rendered text directly, the same
-// approach already used by cleanGroupNames() above.
-function translateBillingLink() {
-  document
-    .querySelectorAll('a[href*="/billing/subscriptions"] .item-label')
-    .forEach((el) => {
-      if (el.textContent.trim() === "Billing") {
-        el.textContent = "Suscripción";
-      }
-    });
 }
 
 export default apiInitializer((api) => {
@@ -230,7 +250,6 @@ export default apiInitializer((api) => {
 
   api.onPageChange(() => {
     hideClosedButtons();
-    translateBillingLink();
     // Deferred to afterRender: onPageChange can fire before Ember has
     // finished updating document.body's classList for the new route, so
     // checking for category-* classes immediately was racy.

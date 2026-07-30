@@ -254,14 +254,22 @@ body.f-nav-hidden:not(.archetype-regular,
 // Point users to the sidebar toggle on doc categories (mobile only).
 // A small dot "pings" outward on loop — cheap (transform + opacity only,
 // no filter/blur) and stops itself once the sidebar has been opened once
-// this session (see javascripts/api-initializers/init.gjs). Detected via
-// the Docs plugin's own sidebar panel being present anywhere on the page
-// (:has), not a hardcoded category slug list — matches whatever category
-// is actually docs-enabled, current or future, automatically.
+// this session (see javascripts/api-initializers/init.gjs). Detected two
+// ways at once, since neither is confirmed against live markup: the Docs
+// plugin's own sidebar panel being present (:has), OR the known category
+// slugs as a fallback.
 @media (width <=576px) {
 
-  body:has(.discourse-docs-sidebar-panel) {
+  body:has(.discourse-docs-sidebar-panel),
+  body.category-glosario,
+  body.category-wiki,
+  body.category-trading-curso {
 
+    // #toggle-hamburger-menu confirmed from live markup (the actual
+    // hamburger button, inside <li class="header-dropdown-toggle
+    // hamburger-dropdown">) — .header-sidebar-toggle doesn't exist at
+    // all, kept only as a harmless fallback.
+    #toggle-hamburger-menu,
     .header-sidebar-toggle {
       position: relative;
       display: inline-flex; // well-defined box for the absolutely-positioned dot below
@@ -287,6 +295,8 @@ body.f-nav-hidden:not(.archetype-regular,
 
   body.sidebar-toggle-seen {
 
+    #toggle-hamburger-menu::before,
+    #toggle-hamburger-menu::after,
     .header-sidebar-toggle::before,
     .header-sidebar-toggle::after {
       display: none;
@@ -307,15 +317,20 @@ body.f-nav-hidden:not(.archetype-regular,
 }
 
 @media (prefers-reduced-motion: reduce) {
+
+  #toggle-hamburger-menu::before,
   .header-sidebar-toggle::before {
     animation: none;
     display: none;
   }
 }
 
-// Hiding secondary nav on mobile activity profiles
+// Hiding secondary nav on mobile activity/invites/billing profiles
 @media (width <=576px) {
-  body.user-activity-page .user-navigation .user-navigation-secondary {
+
+  body.user-activity-page .user-navigation .user-navigation-secondary,
+  body.user-invites-page .user-navigation .user-navigation-secondary,
+  body.user-billing-page .user-navigation .user-navigation-secondary {
     display: none;
   }
 }
