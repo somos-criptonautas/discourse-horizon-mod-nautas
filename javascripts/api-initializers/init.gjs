@@ -12,24 +12,28 @@ function cleanGroupNames() {
   });
 }
 
-// Categories rendered by the Discourse Docs plugin. Shared by the
+// Categories rendered by the Discourse Docs plugin. Detected by the
+// plugin's own DOM presence (.discourse-docs-sidebar-panel — a confirmed
+// real, already-used-elsewhere selector) rather than a hardcoded slug list:
+// slug matching was fragile (had to be kept in sync manually, and the
+// glow/auto-open still didn't fire reliably) and this scales to any
+// current or future docs category automatically. Shared by the
 // auto-open-sidebar behavior below and the alphabetical sort further down —
 // the plugin has no native title sort (confirmed: no such setting exists,
 // and Discourse core doesn't index topics by title either), so it's done
 // client-side here instead of forking the plugin or a separate component.
-const DOC_CATEGORY_SLUGS = ["glosario", "wiki", "trading-curso"];
 const DOC_SIDEBAR_SEEN_KEY = "horizon-mods-doc-sidebar-seen";
+
+function isDocCategoryPage() {
+  return !!document.querySelector(".discourse-docs-sidebar-panel");
+}
 
 function autoOpenDocSidebar() {
   if (!window.matchMedia("(max-width: 576px)").matches) {
     return;
   }
 
-  const isDocCategory = DOC_CATEGORY_SLUGS.some((slug) =>
-    document.body.classList.contains(`category-${slug}`)
-  );
-
-  if (!isDocCategory) {
+  if (!isDocCategoryPage()) {
     return;
   }
 
@@ -110,14 +114,6 @@ function sortDocCategoryTopicLists() {
   docSortObservers.forEach((observer) => observer.disconnect());
   docSortObservers = [];
 
-  const isDocCategory = DOC_CATEGORY_SLUGS.some((slug) =>
-    document.body.classList.contains(`category-${slug}`)
-  );
-
-  if (!isDocCategory) {
-    return;
-  }
-
   const locale = docSortLocale();
 
   // .topic-list-body, not tbody/tr — Discourse's topic list moved off
@@ -133,10 +129,84 @@ function sortDocCategoryTopicLists() {
       body.classList.add("docs-sorted");
     }
 
-    const observer = new MutationObserver(() => sortDocTopicList(body, locale));
+    // Debounced: infinite scroll appends rows one at a time across several
+    // mutations, and re-sorting on every single one caused a visible
+    // "items crawl into place as they trickle in" effect. Waiting for a
+    // short quiet period after the last mutation lets a whole batch land
+    // before sorting it once, cleanly.
+    let debounceTimer;
+    const observer = new MutationObserver(() => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => sortDocTopicList(body, locale), 120);
+    });
     observer.observe(body, { childList: true });
     docSortObservers.push(observer);
   });
+}
+
+// Mobile header: shows the logo again once the user has scrolled, instead
+// of relying on Discourse core's own .docked class — that dependency
+// wasn't reliably showing the logo back on scroll, and this way we don't
+// need to know core's exact internal mechanism at all; the CSS in
+// header.scss just keys off this class instead of .docked.
+function initMobileHeaderScrollState() {
+  const mobileQuery = window.matchMedia("(max-width: 576px)");
+  const SCROLL_THRESHOLD = 80;
+  let ticking = false;
+
+  const update = () => {
+    ticking = false;
+    document.body.classList.toggle(
+      "header-scrolled",
+      mobileQuery.matches && window.scrollY > SCROLL_THRESHOLD
+    );
+  };
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    },
+    { passive: true }
+  );
+}
+
+// Hide the secondary nav on the mobile user-activity page. The existing
+// CSS rule (new-user.scss, body.user-activity-page .user-navigation
+// .user-navigation-secondary, !important) wasn't taking effect, and its
+// exact selector chain couldn't be confirmed against current Discourse
+// core/Horizon markup remotely. This targets the same element directly by
+// its own stable class and gates on the URL instead of a guessed body
+// class, as a more robust backup alongside the existing CSS.
+function hideActivitySecondaryNavOnMobile() {
+  if (!window.matchMedia("(max-width: 576px)").matches) {
+    return;
+  }
+
+  if (!/^\/u\/[^/]+\/activity/.test(window.location.pathname)) {
+    return;
+  }
+
+  document.querySelectorAll(".user-navigation-secondary").forEach((el) => {
+    el.style.display = "none";
+  });
+}
+
+// "Billing" -> "Suscripción" on the user preferences nav link. Overriding
+// the actual i18n key would require knowing its exact path, which isn't
+// confirmed — this instead edits the rendered text directly, the same
+// approach already used by cleanGroupNames() above.
+function translateBillingLink() {
+  document
+    .querySelectorAll('a[href*="/billing/subscriptions"] .item-label')
+    .forEach((el) => {
+      if (el.textContent.trim() === "Billing") {
+        el.textContent = "Suscripción";
+      }
+    });
 }
 
 export default apiInitializer((api) => {
@@ -145,6 +215,8 @@ export default apiInitializer((api) => {
   api.replaceIcon("robot", "lightning");
   api.replaceIcon("language", "translate");
   api.replaceIcon("pencil", "note-pencil");
+
+  initMobileHeaderScrollState();
 
   // Do not display closed groups buttons
   const hideClosedButtons = () => {
@@ -158,12 +230,14 @@ export default apiInitializer((api) => {
 
   api.onPageChange(() => {
     hideClosedButtons();
+    translateBillingLink();
     // Deferred to afterRender: onPageChange can fire before Ember has
     // finished updating document.body's classList for the new route, so
     // checking for category-* classes immediately was racy.
     schedule("afterRender", () => {
       autoOpenDocSidebar();
       sortDocCategoryTopicLists();
+      hideActivitySecondaryNavOnMobile();
     });
   });
 

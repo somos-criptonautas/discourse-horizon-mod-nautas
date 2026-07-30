@@ -16,16 +16,27 @@
     display: none !important;
 }
 
+// order only has an effect inside a flex/grid container — neither this nor
+// the 50%-width two-column rules below had one, so "ordering" and "widths"
+// were silently no-ops until now.
+.top-section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .top-section .top-categories-section {
     order: 3 !important;
 }
 
 .top-sub-section {
+    display: flex;
+    flex-wrap: wrap;
     width: unset;
 }
 
+// .resplies-section was a typo for .replies-section — never matched anything
 .top-sub-section .topic-section,
-.top-sub-section .resplies-section,
+.top-sub-section .replies-section,
 .top-sub-section .liked-by-section,
 .top-sub-section .most-liked-section {
     width: 50%;
@@ -37,7 +48,10 @@
     width: 100%;
 }
 
-.top-sub-section .ember-view more {
+// Was ".ember-view more" (descendant of a nonexistent <more> element,
+// matching nothing) — same missing-dot compound-class bug seen elsewhere
+// in this theme.
+.top-sub-section .ember-view.more {
     display: none;
 }
 

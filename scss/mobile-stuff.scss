@@ -254,12 +254,13 @@ body.f-nav-hidden:not(.archetype-regular,
 // Point users to the sidebar toggle on doc categories (mobile only).
 // A small dot "pings" outward on loop — cheap (transform + opacity only,
 // no filter/blur) and stops itself once the sidebar has been opened once
-// this session (see javascripts/api-initializers/init.gjs).
+// this session (see javascripts/api-initializers/init.gjs). Detected via
+// the Docs plugin's own sidebar panel being present anywhere on the page
+// (:has), not a hardcoded category slug list — matches whatever category
+// is actually docs-enabled, current or future, automatically.
 @media (width <=576px) {
 
-  body.category-glosario,
-  body.category-wiki,
-  body.category-trading-curso {
+  body:has(.discourse-docs-sidebar-panel) {
 
     .header-sidebar-toggle {
       position: relative;

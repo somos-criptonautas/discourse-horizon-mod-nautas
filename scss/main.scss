@@ -667,6 +667,11 @@ body.category-preguntas li:has(.tag-drop) {
   display: flex !important;
 }
 
+// No border on the topic-map shown at the bottom of a topic
+.topic-map.--bottom {
+  border: none;
+}
+
 .topic-post[data-post-number="1"] {
   .topic-avatar {
     display: block !important;
@@ -707,9 +712,12 @@ body.category-trading-curso .more-topics__container {
   display: none;
 }
 
-// More boxes in /categories
+// More boxes in /categories. gap was missing — a grid with no gap has zero
+// space between cells, which is what made wrapped boxes look stuck
+// together (same underlying issue as the tag pills above).
 .category-boxes-with-topics {
   grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+  gap: 1em;
   margin-top: 0.6rem;
 }
 
@@ -723,18 +731,14 @@ body.category-trading-curso .more-topics__container {
 // guaranteed two ways: JS adds .docs-sorted the instant sorting completes
 // (even on error, via try/finally), and — in case the initializer never
 // runs at all — the animation itself reveals the list on a short timer
-// regardless, so it can never get stuck invisible.
-body.category-glosario,
-body.category-wiki,
-body.category-trading-curso {
+// regardless, so it can never get stuck invisible. No category gating
+// needed — the selector itself only exists on docs-enabled categories.
+.topic-list.doc-simple-mode .topic-list-body {
+  opacity: 0;
+  animation: docs-list-reveal 0.5s ease-out 0.3s forwards;
 
-  .topic-list.doc-simple-mode .topic-list-body {
-    opacity: 0;
-    animation: docs-list-reveal 0.5s ease-out 0.3s forwards;
-
-    &.docs-sorted {
-      animation: docs-list-reveal 0.15s ease-out forwards;
-    }
+  &.docs-sorted {
+    animation: docs-list-reveal 0.15s ease-out forwards;
   }
 }
 
@@ -745,14 +749,9 @@ body.category-trading-curso {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
-  body.category-glosario,
-  body.category-wiki,
-  body.category-trading-curso {
-    .topic-list.doc-simple-mode .topic-list-body {
-      opacity: 1;
-      animation: none;
-    }
+  .topic-list.doc-simple-mode .topic-list-body {
+    opacity: 1;
+    animation: none;
   }
 }
 
@@ -988,6 +987,17 @@ img.emoji {
   }
 }
 
+// Progress-button numbers/icon were unreadable in dark mode — forcing a
+// scheme-aware color on the wrapper and its descendants rather than
+// whatever (apparently non-adaptive) color core uses internally there.
+.topic-progress-wrapper {
+  color: var(--primary);
+
+  * {
+    color: inherit;
+  }
+}
+
 // Intro text for pages Discourse doesn't explain well to new users
 // (groups/badges — leaderboard dropped, it already has its own info button
 // explaining itself). The markup lives in after_header.html, which
@@ -1002,7 +1012,9 @@ img.emoji {
 
 body.groups-page .custom-page-intro.intro--groups,
 body.badges-page .custom-page-intro.intro--badges {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
   box-sizing: border-box;
   max-width: 1000px;
   margin: var(--main-grid-gap) auto 0;
@@ -1013,7 +1025,12 @@ body.badges-page .custom-page-intro.intro--badges {
   font-size: var(--font-up-1);
   font-weight: 500;
   line-height: 1.5;
-  text-align: center;
+
+  .svg-icon {
+    flex-shrink: 0;
+    width: 1.75em;
+    height: 1.75em;
+  }
 }
 
 // -----------------------------------------------------------------------

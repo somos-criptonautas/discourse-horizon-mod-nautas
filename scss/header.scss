@@ -10,17 +10,18 @@
   grid-template-columns: minmax(auto, 1fr) auto minmax(0, calc(var(--d-max-width))) auto minmax(auto, 1fr) !important;
 }
 
-// Hide site logo on mobile only (keep on tablet/desktop). Skipped while
-// .d-header is .docked (core adds this the instant the header hits the top
-// of the viewport during topic scroll, which is also when it shows the
-// topic title in this same area) — otherwise we'd be hiding that too.
+// Hide site logo on mobile only (keep on tablet/desktop). Skipped once the
+// user has scrolled (body.header-scrolled, set in init.gjs) so the logo
+// reappears alongside whatever Discourse shows in the header on scroll —
+// relying on core's own .docked class here didn't reliably show it back.
 @media (width <=576px) {
-  .d-header:not(.docked) .title a {
+  body:not(.header-scrolled) .d-header .title a {
     display: none;
   }
 }
 
-// More tap/click area on the language switcher trigger — was too tiny
+// More tap/click area on the language switcher trigger — was too tiny.
+// More padding on width, less on height per feedback.
 .btn.no-text.fk-d-menu__trigger.language-switcher-trigger.btn-flat {
-  padding: 0.5em;
+  padding: 0.35em 0.85em;
 }

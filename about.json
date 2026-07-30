@@ -9,7 +9,9 @@
   "component": true,
   "modifiers": {
     "svg_icons": [
-      "fire"
+      "fire",
+      "users",
+      "award"
     ],
     "serialize_topic_is_hot": true
   },
