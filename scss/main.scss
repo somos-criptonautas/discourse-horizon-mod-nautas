@@ -6,6 +6,10 @@
 
 html {
   font-size: 22px;
+  // Prevents mobile Safari/Chrome from auto-inflating text size on narrow
+  // viewports independent of the px values we actually set.
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 :root {
@@ -296,6 +300,15 @@ div.topic-post.comment .topic-body .who-read {
 // Topic list styling
 .more-topics__list-title {
   font-size: var(--font-up-2);
+}
+
+// Fix tag pills sticking together when they wrap to a second line. Flex-wrap
+// only adds spacing between items on the same row via their own margin —
+// without an explicit gap, wrapped rows have zero space between them.
+.discourse-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3em 0.45em;
 }
 
 // Update posts message
@@ -715,7 +728,7 @@ body.category-glosario,
 body.category-wiki,
 body.category-trading-curso {
 
-  .topic-list.doc-simple-mode tbody {
+  .topic-list.doc-simple-mode .topic-list-body {
     opacity: 0;
     animation: docs-list-reveal 0.5s ease-out 0.3s forwards;
 
@@ -736,7 +749,7 @@ body.category-trading-curso {
   body.category-glosario,
   body.category-wiki,
   body.category-trading-curso {
-    .topic-list.doc-simple-mode tbody {
+    .topic-list.doc-simple-mode .topic-list-body {
       opacity: 1;
       animation: none;
     }
@@ -976,7 +989,8 @@ img.emoji {
 }
 
 // Intro text for pages Discourse doesn't explain well to new users
-// (groups/badges/leaderboard). The markup lives in after_header.html, which
+// (groups/badges — leaderboard dropped, it already has its own info button
+// explaining itself). The markup lives in after_header.html, which
 // Discourse renders right after <header> — outside #main-outlet-wrapper
 // entirely, so it inherits none of the normal page/content styling on its
 // own. It's styled here as a self-contained banner/callout rather than
@@ -987,18 +1001,19 @@ img.emoji {
 }
 
 body.groups-page .custom-page-intro.intro--groups,
-body.badges-page .custom-page-intro.intro--badges,
-body.leaderboard-page .custom-page-intro.intro--leaderboard {
+body.badges-page .custom-page-intro.intro--badges {
   display: block;
   box-sizing: border-box;
   max-width: 1000px;
   margin: var(--main-grid-gap) auto 0;
-  padding: 0.75em 1.25em;
+  padding: 0.85em 1.25em;
   border-radius: var(--d-border-radius-large);
   background-color: var(--selected);
   color: var(--primary);
-  font-size: var(--font-down-1);
+  font-size: var(--font-up-1);
+  font-weight: 500;
   line-height: 1.5;
+  text-align: center;
 }
 
 // -----------------------------------------------------------------------

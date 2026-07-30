@@ -19,3 +19,8 @@
     display: none;
   }
 }
+
+// More tap/click area on the language switcher trigger — was too tiny
+.btn.no-text.fk-d-menu__trigger.language-switcher-trigger.btn-flat {
+  padding: 0.5em;
+}

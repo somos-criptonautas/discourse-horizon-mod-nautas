@@ -1,7 +1,14 @@
 @use "lib/viewport";
 
-html {
-  font-size: 20px !important;
+// This file loads on every viewport (common stylesheets aren't
+// device-gated) — without a media query here, this !important rule
+// overrode main.scss's desktop 22px unconditionally, everywhere, making
+// the "desktop" size dead code and mobile/desktop identical instead of
+// mobile being intentionally smaller.
+@media (width <=576px) {
+  html {
+    font-size: 20px !important;
+  }
 }
 
 // Sticky container?
@@ -256,6 +263,7 @@ body.f-nav-hidden:not(.archetype-regular,
 
     .header-sidebar-toggle {
       position: relative;
+      display: inline-flex; // well-defined box for the absolutely-positioned dot below
 
       &::before,
       &::after {

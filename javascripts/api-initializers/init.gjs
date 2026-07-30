@@ -85,8 +85,8 @@ function docSortLocale() {
   }
 }
 
-function sortDocTopicList(tbody, locale) {
-  const rows = [...tbody.querySelectorAll(":scope > tr.topic-list-item")];
+function sortDocTopicList(body, locale) {
+  const rows = [...body.querySelectorAll(":scope > .topic-list-item")];
   if (rows.length < 2) {
     return;
   }
@@ -103,7 +103,7 @@ function sortDocTopicList(tbody, locale) {
 
   const fragment = document.createDocumentFragment();
   sorted.forEach((row) => fragment.appendChild(row));
-  tbody.appendChild(fragment);
+  body.appendChild(fragment);
 }
 
 function sortDocCategoryTopicLists() {
@@ -120,17 +120,21 @@ function sortDocCategoryTopicLists() {
 
   const locale = docSortLocale();
 
-  document.querySelectorAll(".topic-list.doc-simple-mode tbody").forEach((tbody) => {
+  // .topic-list-body, not tbody/tr — Discourse's topic list moved off
+  // table markup to Glimmer components; topic-list-body/topic-list-item
+  // are the stable classes it kept specifically so selectors like this
+  // wouldn't break across that migration.
+  document.querySelectorAll(".topic-list.doc-simple-mode .topic-list-body").forEach((body) => {
     // try/finally so the list is always revealed (see the .docs-sorted CSS
     // hook in main.scss) even if sorting itself throws for some reason.
     try {
-      sortDocTopicList(tbody, locale);
+      sortDocTopicList(body, locale);
     } finally {
-      tbody.classList.add("docs-sorted");
+      body.classList.add("docs-sorted");
     }
 
-    const observer = new MutationObserver(() => sortDocTopicList(tbody, locale));
-    observer.observe(tbody, { childList: true });
+    const observer = new MutationObserver(() => sortDocTopicList(body, locale));
+    observer.observe(body, { childList: true });
     docSortObservers.push(observer);
   });
 }
@@ -154,8 +158,13 @@ export default apiInitializer((api) => {
 
   api.onPageChange(() => {
     hideClosedButtons();
-    autoOpenDocSidebar();
-    sortDocCategoryTopicLists();
+    // Deferred to afterRender: onPageChange can fire before Ember has
+    // finished updating document.body's classList for the new route, so
+    // checking for category-* classes immediately was racy.
+    schedule("afterRender", () => {
+      autoOpenDocSidebar();
+      sortDocCategoryTopicLists();
+    });
   });
 
   // Navigation not dropdown on mobile
