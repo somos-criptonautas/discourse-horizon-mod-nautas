@@ -1055,29 +1055,55 @@ img.emoji {
   display: none;
 }
 
+// Structured like Discourse's own .category-title-header (logo/icon +
+// title + description, not a single flat line) — icon and heading get the
+// visual weight a real category banner has, description is secondary text
+// underneath rather than sharing a line with the icon.
 body.groups-page .custom-page-intro.intro--groups,
 body.badges-page .custom-page-intro.intro--badges {
   display: flex;
   align-items: center;
-  gap: 0.75em;
+  gap: 1em;
   box-sizing: border-box;
   width: 100%;
   margin: 0 0 var(--main-grid-gap);
-  padding-block: 1.25em;
-  // Full-bleed background like a real category banner, but the icon+text
-  // content stays aligned with the page's normal ~1000px content column
-  // on wide screens instead of hugging the viewport edge.
+  padding-block: 1.5em;
+  // Full-bleed background like a real category banner, but the content
+  // stays aligned with the page's normal ~1000px content column on wide
+  // screens instead of hugging the viewport edge.
   padding-inline: max(1.25em, calc((100% - 1000px) / 2));
   background-color: var(--selected);
   color: var(--primary);
-  font-size: var(--font-up-1);
-  font-weight: 500;
-  line-height: 1.5;
 
-  .svg-icon {
+  .custom-page-intro__logo {
     flex-shrink: 0;
-    width: 2em;
-    height: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .svg-icon {
+      width: 2.5em;
+      height: 2.5em;
+    }
+  }
+
+  .custom-page-intro__contents {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+  }
+
+  .custom-page-intro__title {
+    margin: 0;
+    font-size: var(--font-up-3);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .custom-page-intro__description {
+    font-size: var(--font-0);
+    line-height: 1.4;
+    opacity: 0.85;
   }
 }
 

@@ -80,12 +80,22 @@ function autoOpenDocSidebar() {
     toggle.click();
   }
 
-  document.body.classList.add("sidebar-toggle-seen");
   try {
     sessionStorage.setItem(DOC_SIDEBAR_SEEN_KEY, "1");
   } catch {
     // ignore
   }
+
+  // Deliberately NOT adding sidebar-toggle-seen here. It used to be added
+  // immediately, right after auto-opening — which hid the ping (the CSS
+  // in mobile-stuff.scss reacts to this class) within milliseconds of it
+  // ever appearing, on this very same page view. Instead let it animate
+  // for a few cycles (2.2s each) on this first-ever view, then settle —
+  // still just once per session, since the sessionStorage flag above
+  // already makes every later page view take the "seen" branch instantly.
+  window.setTimeout(() => {
+    document.body.classList.add("sidebar-toggle-seen");
+  }, 6600);
 }
 
 // Alphabetically sort the Docs plugin's topic list (glosario/wiki/trading-curso).
@@ -187,28 +197,6 @@ function sortDocCategoryTopicLists() {
   });
 }
 
-// Hide the secondary nav on mobile for the user activity/invites/billing
-// pages. The existing CSS rules (new-user.scss/main.scss,
-// body.user-activity-page etc. .user-navigation-secondary, !important)
-// weren't taking effect, and the exact selector chain couldn't be
-// confirmed against current Discourse core/Horizon markup remotely. This
-// targets the same element directly by its own stable class and gates on
-// the URL instead of a guessed body class, as a more robust backup
-// alongside the existing CSS.
-function hideActivitySecondaryNavOnMobile() {
-  if (!window.matchMedia("(max-width: 576px)").matches) {
-    return;
-  }
-
-  if (!/^\/u\/[^/]+\/(activity|invited|billing)/.test(window.location.pathname)) {
-    return;
-  }
-
-  document.querySelectorAll(".user-navigation-secondary").forEach((el) => {
-    el.style.display = "none";
-  });
-}
-
 export default apiInitializer((api) => {
 
   // Replace some icons
@@ -234,7 +222,6 @@ export default apiInitializer((api) => {
     schedule("afterRender", () => {
       autoOpenDocSidebar();
       sortDocCategoryTopicLists();
-      hideActivitySecondaryNavOnMobile();
     });
   });
 

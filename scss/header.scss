@@ -10,18 +10,21 @@
   grid-template-columns: minmax(auto, 1fr) auto minmax(0, calc(var(--d-max-width))) auto minmax(auto, 1fr) !important;
 }
 
-// Hide site logo on mobile only (keep on tablet/desktop). Skipped once the
-// user has scrolled — using core's own body.f-nav-hidden (toggled by
-// Discourse itself, already correctly kept in sync across page
-// navigation) instead of a custom scroll listener, which had a real bug:
-// it only updated on 'scroll' events, so after an SPA route change it
-// kept showing whatever state the *previous* page had scrolled to, until
-// the user scrolled again on the new page — explaining why the logo
-// showed up wrong on category pages/homepage. Also always shown on the
-// login page, which has no scrollable content to ever trigger
-// f-nav-hidden, so it would otherwise stay hidden there forever.
+// Hide site logo on mobile, but ONLY on topic/PM pages (.archetype-regular
+// / .archetype-private_message — confirmed real, already used elsewhere in
+// this theme) — matching the original ask, which was specifically about
+// topic scrolling revealing the title in this same header spot. Scoping
+// it this tightly, rather than site-wide, also fixes the millisecond
+// flash seen on non-topic pages: f-nav-hidden's exact toggling on pages
+// that aren't topics is unpredictable, so the safest fix is to just
+// always show the logo everywhere except where the hide/reveal behavior
+// actually makes sense. Skipped once scrolled (body.f-nav-hidden, core's
+// own class, kept correctly in sync across navigation unlike our earlier
+// custom scroll listener).
 @media (width <=576px) {
-  body:not(.f-nav-hidden):not(.login-page) .d-header .title a {
+
+  body.archetype-regular:not(.f-nav-hidden) .d-header .title a,
+  body.archetype-private_message:not(.f-nav-hidden) .d-header .title a {
     display: none;
   }
 }

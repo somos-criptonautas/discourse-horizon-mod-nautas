@@ -330,20 +330,43 @@ body.f-nav-hidden:not(.archetype-regular,
 
 // Hiding secondary nav on mobile activity/invites/billing profiles.
 // .user-secondary-navigation added alongside .user-navigation-secondary —
-// unconfirmed which one is actually real, so both are targeted.
+// unconfirmed which one is actually real, so both are targeted. Dropped
+// the .user-navigation ancestor requirement that was here before: a JS
+// fallback (targeting .user-navigation-secondary alone, no ancestor) was
+// the one actually succeeding, which is why this only ever hid the nav
+// after a visible flash — the JS ran later than CSS does. Now that this
+// rule matches on its own, the JS fallback was removed entirely (no more
+// flash, since there's no JS delay to race against).
 @media (width <=576px) {
 
-  body.user-activity-page .user-navigation .user-navigation-secondary,
-  body.user-invites-page .user-navigation .user-navigation-secondary,
-  body.user-billing-page .user-navigation .user-navigation-secondary,
+  body.user-activity-page .user-navigation-secondary,
+  body.user-invites-page .user-navigation-secondary,
+  body.user-billing-page .user-navigation-secondary,
   body.user-billing-page .user-secondary-navigation {
-    display: none;
+    display: none !important;
   }
 
-  // Now that the secondary nav is hidden, center the remaining content
-  // instead of leaving it stranded off to one side of the freed-up space.
+  // Now that the secondary nav is hidden, center the remaining content —
+  // same max-width + margin-inline: auto pattern #main-outlet itself uses
+  // to center the page's main content column, for consistency with how
+  // this theme centers content everywhere else, rather than an ad-hoc
+  // flex/text-align trick.
+  .new-user-content-wrapper {
+    justify-content: center;
+  }
+
   .new-user-content-wrapper .user-content {
+    max-width: 100%;
+    margin-inline: auto;
     align-items: center;
     text-align: center;
+  }
+
+  // Top-level profile tabs (perfil/actividad/mensajes/etc.) — centered.
+  // Explicitly NOT the sub-nav inside .horizontal-overflow-nav (e.g. the
+  // invites open/expired/redeemed tabs), which keeps its own alignment.
+  .nav-pills.main-nav.user-nav {
+    justify-content: center;
+    flex-wrap: wrap;
   }
 }
