@@ -4,3 +4,43 @@
     padding-left: 2rem;
     margin-top: 1rem;
 }
+
+// Style user profile page (moved from main.scss)
+.user-content {
+    max-width: unset;
+    display: flex;
+    flex-direction: column;
+}
+
+.replied-section {
+    display: none !important;
+}
+
+.top-section .top-categories-section {
+    order: 3 !important;
+}
+
+.top-sub-section {
+    width: unset;
+}
+
+.top-sub-section .topic-section,
+.top-sub-section .resplies-section,
+.top-sub-section .liked-by-section,
+.top-sub-section .most-liked-section {
+    width: 50%;
+}
+
+.top-sub-section .links-section,
+.top-sub-section .summary-category-list,
+.top-sub-section .summary-category-list table {
+    width: 100%;
+}
+
+.top-sub-section .ember-view more {
+    display: none;
+}
+
+.top-sub-section .summary-user-list {
+    display: none;
+}

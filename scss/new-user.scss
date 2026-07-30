@@ -13,9 +13,9 @@
     justify-content: left;
 }
 
-.user-navigation-secondary .messages-dropdown-trigger,
-.user-navigation-secondary .fk-d-menu__trigger messages-dropdown-trigger,
-.navigation-controls button {
+.new-user-wrapper .user-navigation-secondary .messages-dropdown-trigger,
+.new-user-wrapper .user-navigation-secondary .fk-d-menu__trigger.messages-dropdown-trigger,
+.new-user-wrapper .navigation-controls button {
     width: 100%;
     height: 1.8rem;
 }
@@ -30,6 +30,20 @@
 }
 
 .new-user-wrapper .user-navigation-secondary .messages-dropdown-trigger,
-.user-navigation-secondary .category-breadcrumb li {
+.new-user-wrapper .user-navigation-secondary .category-breadcrumb li {
     width: 100%;
+}
+
+// [EXPERIMENTAL] Hiding activity switch for MPs vertical navbar design (moved from main.scss)
+body.user-activity-page .user-navigation .user-navigation-secondary {
+    display: none !important;
+}
+
+// Workaround on MP messages for new User UI (moved from main.scss)
+body.user-messages-page .new-user-wrapper .user-navigation-secondary {
+    display: unset;
+}
+
+.user-navigation-secondary .nav-pills li a {
+    justify-content: inherit;
 }

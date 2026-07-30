@@ -1,114 +1,20 @@
 @use "lib/viewport";
 
-// Base font size (matches Discourse default)
+// -----------------------------------------------------------------------
+// Base & root variables
+// -----------------------------------------------------------------------
+
 html {
   font-size: 22px;
 }
 
 :root {
   --main-grid-gap: 0.5em;
-  --d-max-width-topic: 1250px;
-  --below-topic-margin: 1.11rem;
-  --d-control-height: --space-8;
-  --category-1-color: unset;
-  --category-2-color: unset;
-  --category-3-color: unset;
-  --category-4-color: unset;
-  --category-5-color: unset;
-  --category-6-color: unset;
-  --category-7-color: unset;
-  --category-8-color: unset;
-  --category-9-color: unset;
-  --category-10-color: unset;
-  --category-11-color: unset;
-  --category-12-color: unset;
-  --category-13-color: unset;
-  --category-14-color: unset;
-  --category-15-color: unset;
-  --category-16-color: unset;
-  --category-17-color: unset;
-  --category-18-color: unset;
-  --category-19-color: unset;
-  --category-20-color: unset;
-  --category-21-color: unset;
-  --category-22-color: unset;
-  --category-23-color: unset;
-  --category-24-color: unset;
-  --category-25-color: unset;
-  --category-26-color: unset;
-  --category-27-color: unset;
-  --category-28-color: unset;
-  --category-29-color: unset;
-  --category-30-color: unset;
-  --category-31-color: unset;
-  --category-32-color: unset;
-  --category-33-color: unset;
-  --category-34-color: unset;
-  --category-35-color: unset;
-  --category-36-color: unset;
-  --category-37-color: unset;
-  --category-38-color: unset;
-  --category-39-color: unset;
-  --category-40-color: unset;
-  --category-41-color: unset;
-  --category-42-color: unset;
-  --category-43-color: unset;
-  --category-44-color: unset;
-  --category-45-color: unset;
-  --category-46-color: unset;
-  --category-47-color: unset;
-  --category-48-color: unset;
-  --category-49-color: unset;
-  --category-50-color: unset;
-  --category-51-color: unset;
-  --category-52-color: unset;
-  --category-53-color: unset;
-  --category-54-color: unset;
-  --category-55-color: unset;
-  --category-56-color: unset;
-  --category-57-color: unset;
-  --category-58-color: unset;
-  --category-59-color: unset;
-  --category-60-color: unset;
-  --category-61-color: unset;
-  --category-62-color: unset;
-  --category-63-color: unset;
-  --category-64-color: unset;
-  --category-65-color: unset;
-  --category-66-color: unset;
-  --category-67-color: unset;
-  --category-68-color: unset;
-  --category-69-color: unset;
-  --category-70-color: unset;
-  --category-71-color: unset;
-  --category-72-color: unset;
-  --category-73-color: unset;
-  --category-74-color: unset;
-  --category-75-color: unset;
-  --category-76-color: unset;
-  --category-77-color: unset;
-  --category-78-color: unset;
-  --category-79-color: unset;
-  --category-80-color: unset;
-  --category-81-color: unset;
-  --category-82-color: unset;
-  --category-83-color: unset;
-  --category-84-color: unset;
-  --category-85-color: unset;
-  --category-86-color: unset;
-  --category-87-color: unset;
-  --category-88-color: unset;
-  --category-89-color: unset;
-  --category-90-color: unset;
-  --category-91-color: unset;
-  --category-92-color: unset;
-  --category-93-color: unset;
-  --category-94-color: unset;
-  --category-95-color: unset;
-  --category-96-color: unset;
-  --category-97-color: unset;
-  --category-98-color: unset;
-  --category-99-color: unset;
+  --d-control-height: var(--space-8);
+
+  @for $i from 1 through 99 {
+    --category-#{$i}-color: unset;
+  }
 }
 
 html:not(:has(.has-full-page-chat)) {
@@ -126,6 +32,10 @@ body {
     background-color: var(--d-content-background);
   }
 }
+
+// -----------------------------------------------------------------------
+// Layout — #main-outlet-wrapper, sidebar width, grid columns
+// -----------------------------------------------------------------------
 
 #main-outlet-wrapper {
   gap: var(--main-grid-gap);
@@ -159,6 +69,19 @@ body.has-full-page-chat:not(.has-sidebar-page) {
   :root {
     --d-sidebar-width: calc(17em * 0.75); // 12.75em (25% narrower)
   }
+}
+
+// Core animates the sidebar open/close by transitioning grid-template-columns
+// (body.sidebar-animate #main-outlet-wrapper) — expensive to animate (forces
+// full layout recalc every frame) and Chromium doesn't interpolate a
+// multi-value grid-template-columns smoothly, it steps between values,
+// which reads as lag. Not something a theme can change the mechanism of,
+// but core exposes these timing variables for exactly this kind of tuning —
+// a shorter, snappier duration keeps the visible "steps" on screen for less
+// time, which is the practical fix available here.
+:root {
+  --d-sidebar-animation-time: 0.15s;
+  --d-sidebar-animation-ease: ease-out;
 }
 
 body.has-sidebar-page #main-outlet-wrapper {
@@ -216,11 +139,102 @@ body:not(.has-full-page-chat, .wizard) {
   }
 }
 
-@media (width <=576px) {
-  .welcome-banner {
-    display: none;
+.no-ember {
+  #main-outlet {
+    border-radius: var(--d-border-radius-large);
+    margin: 0 var(--main-grid-gap) var(--main-grid-gap) var(--main-grid-gap);
+    padding: 2em;
+    max-height: calc(100vh - 50px - 1em - var(--main-grid-gap));
   }
 }
+
+// -----------------------------------------------------------------------
+// Header (local overrides — see also header.scss)
+// -----------------------------------------------------------------------
+
+// Hide header links on tablet and mobile
+@media (width <=1024px) {
+  .custom-header-links {
+    display: none !important;
+  }
+}
+
+// Custom Header Links adjustments
+.custom-header-links .headerLink a {
+  padding: 0 .27em;
+  color: var(--header_primary);
+  font-size: unset;
+  margin-right: 0.5rem;
+}
+
+// Anonymous users full display on login header
+.anon .d-header .panel {
+  grid-column-start: unset !important;
+}
+
+// -----------------------------------------------------------------------
+// Sidebar / navigation
+// -----------------------------------------------------------------------
+
+.has-ai-conversations-sidebar .ai-new-question-button {
+  margin: 1.8em 1rem 1rem;
+}
+
+[data-section-name="tags"],
+[data-section-name="user-threads"],
+[data-section-name="messages"] {
+  display: none !important;
+}
+
+// ** Apply styles to paid category ** //
+.sidebar-section-link [data-link-name="trading"] a,
+.sidebar-section-link [data-link-name="trading"] .icon svg {
+  color: var(--tertiary) !important;
+}
+
+// Same text for all sidebar makes sense
+.sidebar-section-link-wrapper[data-list-item-name="all-categories"],
+.sidebar-section-link-wrapper[data-list-item-name="all-tags"],
+.sidebar-section-link-wrapper[data-list-item-name="configure-default-navigation-menu-tags"] {
+  font-size: inherit;
+}
+
+// Remove apps from @anon sidebar
+.anon.sidebar-section[data-section-name="mas-apps"],
+li.sidebar-section-link-wrapper[data-category-id="37"] {
+  display: none !important;
+}
+
+// Disable theme switcher and Sidebar 'More'
+.sidebar-more-section-trigger:first-of-type,
+.user-color-palette-selector-trigger {
+  display: none !important;
+}
+
+// Fix weird CSS color icons
+.sidebar-section-link-wrapper .sidebar-section-link-prefix.icon {
+  color: inherit !important;
+}
+
+// Anonymous hiding some stuff on sidebar
+.anon .sidebar-section-wrapper.sidebar-section[data-section-name="apps-externas"],
+.anon .sidebar-section-wrapper.sidebar-section[data-section-name="categories"] {
+  display: none !important;
+}
+
+// Hide navigation bar
+#navigation-bar {
+  display: none;
+}
+
+// f-nav edits
+.f-nav {
+  height: 3rem !important;
+}
+
+// -----------------------------------------------------------------------
+// Topic list & topic body
+// -----------------------------------------------------------------------
 
 #list-area {
   .show-more.has-topics {
@@ -242,144 +256,8 @@ body:not(.has-full-page-chat, .wizard) {
   }
 }
 
-aside.onebox {
-  background-color: var(--d-content-background);
-}
-
-.d-editor-preview-wrapper {
-  border-radius: var(--d-border-radius);
-  padding: 1em;
-  background-color: var(--d-content-background);
-}
-
-.no-ember {
-  #main-outlet {
-    border-radius: var(--d-border-radius-large);
-    margin: 0 var(--main-grid-gap) var(--main-grid-gap) var(--main-grid-gap);
-    padding: 2em;
-    max-height: calc(100vh - 50px - 1em - var(--main-grid-gap));
-  }
-}
-
-// Mod edits //
-.signup-progress-bar,
-#user-menu-button-other-notifications,
-.presence-toggle,
-.user-nav__notifications,
-.user-nav__badges,
-.collapsed-info-panel:last-child,
-.sidebar-section-wrapper .sidebar-section-header-global-indicator .d-icon,
-.groups-header-filters,
-.user-nav__preferences-interface,
-.user-nav__preferences-navigation-menu,
-.user-nav__preferences-ai,
-.user-nav__activity-read,
-.category-quienes-somos .top-lists,
-.sidebar-section-link-wrapper [data-list-item-name="activity-pub-about"] {
-  display: none !important;
-}
-
-.tag-group-content_languages_disabled,
-.tag-group-content_languages,
-.tag-group-tickets_priority,
-.tag-group-tickets_status {
-  display: none !important;
-}
-
-.user-card .badge-section {
-  display: none !important;
-}
-
 .list-controls {
   padding: 0;
-}
-
-.img.emoji {
-  width: 23px;
-  height: 23px;
-  padding-bottom: 3px;
-  padding-left: 3px;
-}
-
-.collapsed-info-panel dl div:last-child,
-.collapsed-info-panel dd.trust-level,
-.collapsed-info-panel dl.trust-level,
-.user-content .badges-section {
-  display: none !important;
-}
-
-.collapsed-info-panel dd.groups a.ember-view {
-  display: none !important;
-}
-
-.badge-grouping:nth-child(1).badge-group-list::before {
-  content: "@anons se transforman en @randoms con 4 desafíos:";
-}
-
-.badge-grouping:nth-child(2).badge-group-list::before {
-  content: "@randoms son @traders con estos 9:";
-}
-
-#reply-control.draft {
-  padding: 0.5rem 0;
-}
-
-.has-ai-conversations-sidebar .ai-new-question-button {
-  margin: 1.8em 1rem 1rem;
-}
-
-.category-box .category-box-soporte,
-.category-box .category-box-wiki {
-  display: none;
-}
-
-.signup-fullpage .signup-body {
-  max-width: 850px;
-}
-
-[data-section-name="tags"],
-[data-section-name="user-threads"],
-[data-section-name="messages"] {
-  display: none !important;
-}
-
-// ** Dirty hack to hide titles and flair user changing ** //
-.control-group .pref-title,
-.control-group .pref-flair {
-  display: none !important;
-}
-
-// ** Apply styles to paid category ** //
-.sidebar-section-link [data-link-name="trading"] a,
-.sidebar-section-link [data-link-name="trading"] .icon svg {
-  color: #be99f8 !important;
-}
-
-// ** Invert search-box on search page ** //
-.not-found-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.page-not-found {
-  order: 1;
-}
-
-.page-not-found-search {
-  order: 2;
-  margin: 20px 0;
-}
-
-.page-not-found-topics {
-  order: 3;
-}
-
-.install-theme-item input:checked+label {
-  border-radius: 0.23rem;
-}
-
-.message-panel__inboxes .message-panel__inbox:nth-last-child {
-  display: none;
 }
 
 // Buttons on ending topics with normal line-height
@@ -397,21 +275,9 @@ button [title="similares"] .d-button-label {
   gap: 1em;
 }
 
-// Prevent weird spacing on user menu
-.custom-user-menu-content .fk-d-menu__profile-tab li.preferences {
-  padding-bottom: none;
-}
-
 // Prevent weird hover on more-topics buttons
 .discourse-no-touch .more-topics__container .nav li .btn:hover {
   background: none;
-}
-
-// Same text for all sidebar makes sense
-.sidebar-section-link-wrapper[data-list-item-name="all-categories"],
-.sidebar-section-link-wrapper[data-list-item-name="all-tags"],
-.sidebar-section-link-wrapper[data-list-item-name="configure-default-navigation-menu-tags"] {
-  font-size: inherit;
 }
 
 // Style journal plugin
@@ -427,7 +293,108 @@ div.topic-post.comment .topic-body .who-read {
   padding-bottom: 30px;
 }
 
-// Chat styling
+// Topic list styling
+.more-topics__list-title {
+  font-size: var(--font-up-2);
+}
+
+// Update posts message
+#list-area .show-more .alert {
+  padding: 0.65rem 1.15rem;
+  border-radius: 0.5rem;
+}
+
+// Hide redundant dropdowns on new posts
+.dropdown-menu__item [data-name="quote"],
+.dropdown-menu__item [data-name="toggle-whisper"],
+.dropdown-menu .shortcut {
+  display: none;
+}
+
+// Right align be first to reply
+.first-reply-statement {
+  padding: 1em 2em 1em 1em;
+  justify-content: right;
+}
+
+// Hide report topic (we look into it when reporting posts)
+.btn.topic-footer-button.flag-topic {
+  display: none;
+}
+
+// Heading on quotes titles
+.quote .title a {
+  font-family: var(--heading-font-family);
+  font-weight: 500;
+}
+
+.topic-list-body .topic-list-item .topic-status-card {
+  margin-right: 0.15rem;
+}
+
+.more-topics__lists {
+  margin-bottom: 2rem;
+}
+
+.top-lists {
+  display: flex;
+  padding: 0.66rem 0 0 1rem;
+}
+
+// Invert categories and tags order - Publish to right
+.list-controls .navigation-container .category-breadcrumb {
+  order: unset !important;
+}
+
+.navigation-controls {
+  flex: 1;
+  justify-content: flex-end;
+}
+
+#user-content .topic-list-data .views .sortable .num,
+#user-content .num .views .topic-list-data {
+  display: none;
+}
+
+// Hide view on MPs table display
+@include viewport.until(lg) {
+
+  .topic-list .topic-list-data.num.posts,
+  .topic-list .topic-list-data.num.views {
+    display: none;
+  }
+}
+
+@media (width >=40rem) {
+  .topic-avatar {
+    padding-top: var(--space-2);
+  }
+}
+
+// -----------------------------------------------------------------------
+// TOC
+// -----------------------------------------------------------------------
+
+.d-toc-main #d-toc li.d-toc-item {
+  padding-left: 0.33em;
+}
+
+.d-toc-main #d-toc li.d-toc-item.direct-active>a::before {
+  width: 2px;
+}
+
+.d-toc-main #d-toc>ul>li>ul li.direct-active>a::before {
+  margin-left: -5px;
+}
+
+.d-toc-heading:not(:first-child) {
+  padding-top: 0.33em;
+}
+
+// -----------------------------------------------------------------------
+// Chat
+// -----------------------------------------------------------------------
+
 .chat-drawer-content {
   font-size: var(--font-down-1);
 }
@@ -472,6 +439,48 @@ div.topic-post.comment .topic-body .who-read {
   padding-bottom: 0.3em;
 }
 
+.chat-message-separator-date+.chat-message-separator__line-container .chat-message-separator__line {
+  border-top: none;
+}
+
+.d-templates-chat-insert-template-btn {
+  display: none;
+}
+
+// -----------------------------------------------------------------------
+// User profile / user menu / groups
+// -----------------------------------------------------------------------
+
+.user-card .badge-section {
+  display: none !important;
+}
+
+.collapsed-info-panel dl div:last-child,
+.collapsed-info-panel dd.trust-level,
+.collapsed-info-panel dl.trust-level,
+.user-content .badges-section {
+  display: none !important;
+}
+
+.collapsed-info-panel dd.groups a.ember-view {
+  display: none !important;
+}
+
+// ** Dirty hack to hide titles and flair user changing ** //
+.control-group .pref-title,
+.control-group .pref-flair {
+  display: none !important;
+}
+
+.message-panel__inboxes .message-panel__inbox:nth-last-child {
+  display: none;
+}
+
+// Prevent weird spacing on user menu
+.custom-user-menu-content .fk-d-menu__profile-tab li.preferences {
+  padding-bottom: 0;
+}
+
 // Hide default trust_levels
 .group-box[data-group-name="trust_level_1"],
 .group-box[data-group-name="trust_level_2"],
@@ -486,7 +495,6 @@ div.topic-post.comment .topic-body .who-read {
   display: none !important;
 }
 
-
 // Hide them in selectors
 .select-kit .select-kit-row[data-name="trust_level_1"],
 .select-kit .select-kit-row[data-name="trust_level_2"],
@@ -497,14 +505,39 @@ div.topic-post.comment .topic-body .who-read {
   display: none !important;
 }
 
-// Padding on Docs
-.discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link {
-  padding: 0.3rem 0;
+// Hiding some profile card info
+.user-main .about .secondary.trust-level,
+.user-main .about .secondary.groups {
+  display: none;
 }
 
-// Topic list styling
-.more-topics__list-title {
-  font-size: var(--font-up-2);
+// Hide stuff on profile
+.user-preferences .form-vertical .control-group .pref-title,
+.user-preferences .form-vertical .control-group .pref-flair,
+.user-preferences .form-vertical .control-group .pref-email-settings {
+  display: none;
+}
+
+// Some icons on white
+.flair-agoristas {
+  color: var(--secondary);
+}
+
+// Group naming ordering [EXPERIMENTAL]
+.group-info-mention-name {
+  display: none;
+}
+
+// -----------------------------------------------------------------------
+// Badges
+// -----------------------------------------------------------------------
+
+.badge-grouping:nth-child(1).badge-group-list::before {
+  content: "@anons se transforman en @randoms con 4 desafíos:";
+}
+
+.badge-grouping:nth-child(2).badge-group-list::before {
+  content: "@randoms son @traders con estos 9:";
 }
 
 // No gold styling badges
@@ -523,37 +556,313 @@ div.topic-post.comment .topic-body .who-read {
 // Leading leaderboard with no styling
 .leaderboard .winner.-position1 .winner__avatar img,
 .leaderboard .winner.-position3 .winner__avatar img {
-  border-color: #c4c4c4;
-  background-color: #d6d6d6;
+  border-color: var(--primary-medium);
+  background-color: var(--primary-low);
 }
 
 .leaderboard .winner.-position1 .winner__rank,
 .leaderboard .winner.-position3 .winner__rank {
-  background-color: #c4c4c4;
+  background-color: var(--primary-medium);
 }
 
 .leaderboard .winner {
   margin: 0.33rem;
 }
 
-// Remove apps from @anon sidebar
-.anon.sidebar-section[data-section-name="mas-apps"],
-li.sidebar-section-link-wrapper[data-category-id="37"] {
+// Change earned badge styling
+.check-display.status-checked {
+  background-color: var(--primary-medium) !important;
+}
+
+.check-display {
+  border-radius: 0.15rem !important;
+}
+
+.check-display.status-checked .check-display .d-icon {
+  font-size: var(--font-up-2-rem) !important;
+}
+
+.groups-boxes .group-box .group-membership .is-group-owner,
+.groups-boxes .group-box .group-membership .is-group-member {
+  color: unset !important;
+}
+
+.is-group-member .svg-icon {
+  vertical-align: -0.2em !important;
+}
+
+// Badges order + hide title choice
+.badge-groups {
+  display: flex;
+  flex-direction: column;
+}
+
+.badge-grouping>div:has(h2#ogs) {
+  order: 6;
+}
+
+.badge-grant-info {
+  display: none;
+}
+
+// -----------------------------------------------------------------------
+// Categories & Docs plugin
+// -----------------------------------------------------------------------
+
+.category-box .category-box-soporte,
+.category-box .category-box-wiki {
+  display: none;
+}
+
+.tag-group-content_languages_disabled,
+.tag-group-content_languages,
+.tag-group-tickets_priority,
+.tag-group-tickets_status {
   display: none !important;
 }
 
-// [EXPERIMENTAL] Hiding activity switchs for MPs vertical navbar design
-body.user-activity-page .user-navigation .user-navigation-secondary {
+// Padding on Docs
+.discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link {
+  padding: 0.3rem 0;
+}
+
+// Hide tags on questions
+body.category-preguntas li:has(.tag-drop) {
+  display: none;
+}
+
+// Margin after header category + banner transparent
+.category-title-header {
+  margin-bottom: 1rem;
+  --category-banner-background: transparent !important;
+  --category-banner-color: unset !important;
+}
+
+// Font-size adjust in Docs categories sidebar
+.discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link-content-text {
+  font-size: var(--font-down-1);
+}
+
+@media (width >=40rem) {
+  #main-outlet div[class^="category-title-header"] {
+    max-width: 100%;
+  }
+}
+
+// Show comments in [EXP] unified docs feature
+.post__topic-map.topic-map.--op {
+  display: flex !important;
+}
+
+.topic-post[data-post-number="1"] {
+  .topic-avatar {
+    display: block !important;
+  }
+
+  .topic-meta-data {
+    .names {
+      display: block !important;
+    }
+
+    .like,
+    .reply {
+      display: block !important;
+    }
+  }
+}
+
+.topic-list.doc-simple-mode .link-bottom-line .badge-category__wrapper,
+.topic-list.doc-simple-mode .topic-excerpt {
+  display: inline-flex !important;
+}
+
+// Removing topic-list data on Docs Categories
+.category-wiki .topic-list .topic-list-data.num,
+.category-glosario .topic-list .topic-list-data.num {
+  display: none;
+}
+
+// Hiding topics outside docs categories
+body.category-glosario .more-topics__container,
+body.category-wiki .more-topics__container,
+body.category-trading-curso .more-topics__container {
+  display: none;
+}
+
+// Hide descriptions on categories
+.select-kit.combo-box.category-chooser .select-kit-row .category-desc {
+  display: none;
+}
+
+// More boxes in /categories
+.category-boxes-with-topics {
+  grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+  margin-top: 0.6rem;
+}
+
+// Categories info only on banners
+.cooked.d-wrap[data-wrap="info-canal"] {
+  display: none;
+}
+
+// Hide the Docs topic list until the A-Z sort (see init.gjs) finishes, to
+// avoid a flash of the unsorted order resorting itself. Reveal is
+// guaranteed two ways: JS adds .docs-sorted the instant sorting completes
+// (even on error, via try/finally), and — in case the initializer never
+// runs at all — the animation itself reveals the list on a short timer
+// regardless, so it can never get stuck invisible.
+body.category-glosario,
+body.category-wiki,
+body.category-trading-curso {
+
+  .topic-list.doc-simple-mode tbody {
+    opacity: 0;
+    animation: docs-list-reveal 0.5s ease-out 0.3s forwards;
+
+    &.docs-sorted {
+      animation: docs-list-reveal 0.15s ease-out forwards;
+    }
+  }
+}
+
+@keyframes docs-list-reveal {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  body.category-glosario,
+  body.category-wiki,
+  body.category-trading-curso {
+    .topic-list.doc-simple-mode tbody {
+      opacity: 1;
+      animation: none;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------
+// Search
+// -----------------------------------------------------------------------
+
+// ** Invert search-box on search page ** //
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.page-not-found {
+  order: 1;
+}
+
+.page-not-found-search {
+  order: 2;
+  margin: 20px 0;
+}
+
+.page-not-found-topics {
+  order: 3;
+}
+
+// Padding to search button
+.btn .search-icon {
+  padding-bottom: 0.11rem;
+}
+
+@media (width >=40rem) {
+
+  .header-search--enabled .floating-search-input-wrapper,
+  .search-header--visible .floating-search-input-wrapper {
+    justify-content: unset;
+  }
+}
+
+// Fix searchbar with header links
+.floating-search-input-wrapper {
+  margin: 0 0.5em;
+}
+
+// -----------------------------------------------------------------------
+// Banners (welcome / campaign)
+// -----------------------------------------------------------------------
+
+@media (width <=576px) {
+  .welcome-banner {
+    display: none;
+  }
+}
+
+.campaign-banner-info svg {
   display: none !important;
 }
 
-// Workaround on MP messages for new User UI
-body.user-messages-page .new-user-wrapper .user-navigation-secondary {
-  display: unset;
+// Big button on Subscriptions campaigns
+.campaign-banner .btn.close {
+  top: 0.5rem !important;
+  right: 0.5rem !important;
+  font-size: 1.3rem !important;
 }
 
-.user-navigation-secondary .nav-pills li a {
-  justify-content: inherit;
+// Icons on Welcome Banner (EXPERIMENTAL)
+.welcome-banner__wrap {
+  flex-wrap: wrap;
+}
+
+.banner-featured-links__wrapper {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.welcome-banner__wrap .search-menu,
+.welcome-banner__title {
+  flex: 1;
+}
+
+// -----------------------------------------------------------------------
+// Misc utility (emoji, [data-wrap] blocks, buttons, plugins)
+// -----------------------------------------------------------------------
+
+aside.onebox {
+  background-color: var(--d-content-background);
+}
+
+.d-editor-preview-wrapper {
+  border-radius: var(--d-border-radius);
+  padding: 1em;
+  background-color: var(--d-content-background);
+}
+
+// Mod edits //
+.signup-progress-bar,
+#user-menu-button-other-notifications,
+.presence-toggle,
+.user-nav__notifications,
+.user-nav__badges,
+.collapsed-info-panel:last-child,
+.sidebar-section-wrapper .sidebar-section-header-global-indicator .d-icon,
+.groups-header-filters,
+.user-nav__preferences-interface,
+.user-nav__preferences-navigation-menu,
+.user-nav__preferences-ai,
+.user-nav__activity-read,
+.category-quienes-somos .top-lists,
+.sidebar-section-link-wrapper [data-list-item-name="activity-pub-about"] {
+  display: none !important;
+}
+
+#reply-control.draft {
+  padding: 0.5rem 0;
+}
+
+.signup-fullpage .signup-body {
+  max-width: 850px;
+}
+
+.install-theme-item input:checked+label {
+  border-radius: 0.23rem;
 }
 
 // Disable some AI Helper functions
@@ -561,106 +870,12 @@ ul.ai-helper-options li[data-value="replace_dates"] {
   display: none;
 }
 
-// Style TOCs
-.d-toc-main #d-toc li.d-toc-item {
-  padding-left: 0.33em;
-}
-
-.d-toc-main #d-toc li.d-toc-item.direct-active>a::before {
-  width: 2px;
-}
-
-.d-toc-main #d-toc>ul>li>ul li.direct-active>a::before {
-  margin-left: -5px;
-}
-
-.d-toc-heading:not(first-child) {
-  padding-top: 0.33em;
-}
-
-// Hiding some profile card info
-.user-main .about .secondary.trust-level,
-.user-main .about .secondary.groups {
-  display: none;
-}
-
-// Update posts message
-#list-area .show-more .alert {
-  padding: 0.65rem 1.15rem;
-  border-radius: 0.5rem;
-}
-
-// Hide redundant dropdowns on new posts
-.dropdown-menu__item [data-name="quote"],
-.dropdown-menu__item [data-name="toggle-whisper"],
-.dropdown-menu .shortcut {
-  display: none;
-}
-
-/* // Fix chat thread title size
-.c-user-thread .chat__thread-title__name {
-  font-size: var(--font-up-1);
-} */
-
-// Hide stuff on profile
-.user-preferences .form-vertical .control-group .pref-title,
-.user-preferences .form-vertical .control-group .pref-flair,
-.user-preferences .form-vertical .control-group .pref-email-settings {
-  display: none;
-}
-
-// Hide site logo on mobile only (keep on tablet/desktop)
-@media (width <=576px) {
-  .d-header .title a {
-    display: none;
-  }
-}
-
-// Modern glow effect on hamburger icon for specific categories (mobile only)
-@media (width <=576px) {
-
-  body.category-glosario,
-  body.category-wiki,
-  body.category-trading-curso {
-
-    span.header-sidebar-toggle,
-    button.btn-sidebar-toggle {
-      filter: drop-shadow(0 0 6px var(--selected));
-      color: var(--selected);
-    }
-  }
-}
-
-// Hide tags on questions
-
-body.category-preguntas li:has(.tag-drop) {
-  display: none;
-}
-
-// Right align be first to reply
-.first-reply-statement {
-  padding: 1em 2em 1em 1em;
-  justify-content: right;
-}
-
-// Hide report topic (we look into it when reporting posts)
-.btn .topic-footer-button .flag-topic {
-  display: none;
-}
-
-// Disable theme switcher and Sidebar 'More'
-.sidebar-more-section-trigger:first-of-type,
-.user-color-palette-selector-trigger {
-  display: none !important;
-}
-
-// Some icons on white
-.flair-agoristas {
-  color: #f1f1f1;
-}
-
 // More stuff
 img.emoji {
+  width: 23px;
+  height: 23px;
+  padding-bottom: 3px;
+  padding-left: 3px;
   vertical-align: unset;
 }
 
@@ -708,38 +923,8 @@ img.emoji {
   margin: 0 auto;
 }
 
-// Heading on quotes titles
-.quote .title a {
-  font-family: var(--heading-font-family);
-  font-weight: 500;
-}
-
 .select-kit .select-kit-header {
   padding: 0.45em 0.65em;
-}
-
-.topic-list-body .topic-list-item .topic-status-card {
-  margin-right: 0.15rem;
-}
-
-.more-topics__lists {
-  margin-bottom: 2rem;
-}
-
-.top-lists {
-  display: flex;
-  padding: 0.66rem 0 0 1rem;
-}
-
-.campaign-banner-info svg {
-  display: none !important;
-}
-
-// Big button on Subscriptions campaigns
-.campaign-banner .btn.close {
-  top: 0.5rem !important;
-  right: 0.5rem !important;
-  font-size: 1.3rem !important;
 }
 
 // Remove ul spacing
@@ -747,72 +932,7 @@ img.emoji {
 .cooked ol,
 .d-editor-preview ul,
 .d-editor-preview ol {
-  padding-inline-start: none;
-}
-
-// Change earned badge styling
-.check-display.status-checked {
-  background-color: #ccc !important;
-}
-
-.check-display {
-  border-radius: 0.15rem !important;
-}
-
-.check-display.status-checked .check-display .d-icon {
-  font-size: var(--font-up-2-rem) !important;
-}
-
-.groups-boxes .group-box .group-membership .is-group-owner,
-.groups-boxes .group-box .group-membership .is-group-member {
-  color: unset !important;
-}
-
-.is-group-member .svg-icon {
-  vertical-align: -0.2em !important;
-}
-
-// Padding to search button
-.btn .search-icon {
-  padding-bottom: 0.11rem;
-}
-
-#user-content .topic-list-data .views .sortable .num,
-#user-content .num .views .topic-list-data {
-  display: none;
-}
-
-// Margin after header category + banner transparent
-.category-title-header {
-  margin-bottom: 1rem;
-  --category-banner-background: transparent !important;
-  --category-banner-color: unset !important;
-}
-
-// Hide header links on tablet and mobile
-@media (width <=1024px) {
-  .custom-header-links {
-    display: none !important;
-  }
-}
-
-// Custom Header Links adjustments
-
-.custom-header-links .headerLink a {
-  padding: 0 .27em;
-  color: var(--header_primary);
-  font-size: unset;
-  margin-right: 0.5rem;
-}
-
-// Fix weird CSS color icons
-.sidebar-section-link-wrapper .sidebar-section-link-prefix.icon {
-  color: inherit !important;
-}
-
-// Font-size adjust in Docs categories sidebar
-.discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link-content-text {
-  font-size: var(--font-down-1);
+  padding-inline-start: 0;
 }
 
 // Blog styling plugin (scale down)
@@ -826,7 +946,7 @@ img.emoji {
   display: none !important;
 }
 
-.btn .btn-small .btn-default .member-application-header-apply-btn {
+.btn.btn-small.btn-default.member-application-header-apply-btn {
   background-color: var(--accent-color);
   color: var(--accent-text-color);
   margin-left: 0.25rem;
@@ -839,273 +959,61 @@ img.emoji {
   }
 }
 
-// Anonymous users full display on login header
-.anon .d-header .panel {
-  grid-column-start: unset !important;
-}
-
-// Anonymous hiding some stuff on sidebar {
-.anon .sidebar-section-wrapper.sidebar-section[data-section-name="apps-externas"],
-.anon .sidebar-section-wrapper.sidebar-section[data-section-name="categories"] {
-  display: none !important;
-}
-
-// Show comments in [EXP] unified docs feature
-
-.post__topic-map.topic-map.--op {
-  display: flex !important
-}
-
-.topic-post[data-post-number="1"] {
-  .topic-avatar {
-    display: block !important;
-  }
-
-  .topic-meta-data {
-    .names {
-      display: block !important
-    }
-
-    .like,
-    .reply {
-      display: block !important
-    }
+// Styling buttons + avatars.
+// The tightened padding is desktop-only — applied everywhere before, it
+// made buttons cramped/hard to tap on mobile. Mobile keeps a roomier value
+// for comfortable touch targets.
+@media (width <768px) {
+  .btn {
+    padding: 0.6em 0.85em;
   }
 }
 
-.topic-list.doc-simple-mode .link-bottom-line .badge-category__wrapper,
-.topic-list.doc-simple-mode .topic-excerpt {
-  display: inline-flex !important
+@media (width >=768px) {
+  .btn {
+    padding: .39em .5em;
+  }
 }
 
-// Topic display testing
+// Intro text for pages Discourse doesn't explain well to new users
+// (groups/badges/leaderboard). The markup lives in after_header.html, which
+// Discourse renders right after <header> — outside #main-outlet-wrapper
+// entirely, so it inherits none of the normal page/content styling on its
+// own. It's styled here as a self-contained banner/callout rather than
+// relying on ambient page styles, and stays hidden by default since the
+// markup renders unconditionally on every page.
+.custom-page-intro {
+  display: none;
+}
 
+body.groups-page .custom-page-intro.intro--groups,
+body.badges-page .custom-page-intro.intro--badges,
+body.leaderboard-page .custom-page-intro.intro--leaderboard {
+  display: block;
+  box-sizing: border-box;
+  max-width: 1000px;
+  margin: var(--main-grid-gap) auto 0;
+  padding: 0.75em 1.25em;
+  border-radius: var(--d-border-radius-large);
+  background-color: var(--selected);
+  color: var(--primary);
+  font-size: var(--font-down-1);
+  line-height: 1.5;
+}
+
+// -----------------------------------------------------------------------
+// Experimental / unverified / inactive
+// -----------------------------------------------------------------------
+
+// [UNCONFIRMED] Topic display testing — selector not verified against
+// Discourse core or an installed plugin; may be dead. Kept until confirmed.
 @media screen and (width >=925px) {
   .container.posts {
     grid-template-columns: 80% 20%;
   }
 }
 
-@media (width >=40rem) {
-  body:not(.has-full-page-chat, .wizard) #main-outlet-wrapper #main-outlet> :not(.experimental-screen, .activate-account, .discourse-kanban-board-viewer) {
-    max-width: var(--d-max-width-topic) !important;
-  }
-}
-
-@media (width >=1024px) {
-  body:not(.has-full-page-chat, .wizard) #main-outlet-wrapper #main-outlet> :not(.experimental-screen, .activate-account) {
-    max-width: var(--d-max-width-topic) !important;
-  }
-}
-
-#topic-footer-buttons {
-  max-width: unset;
-}
-
-@media (width >=40rem) {
-  .topic-body {
-    width: calc(var(--topic-body-width) + var(--topic-body-width-padding)*2);
-  }
-
-  :root {
-    --topic-body-width: 850px;
-  }
-
-  .header-search--enabled .floating-search-input-wrapper,
-  .search-header--visible .floating-search-input-wrapper {
-    justify-content: unset;
-  }
-
-  #main-outlet div[class^="category-title-header"] {
-    max-width: 100%;
-  }
-}
-
-// Fix searchbar with header links
-.floating-search-input-wrapper {
-  margin: 0 0.5em;
-}
-
-// Group naming ordering [EXPERIMENTAL]
-.group-info-mention-name {
-  display: none;
-}
-
-// More boxes in /categories
-.category-boxes-with-topics {
-  grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
-  margin-top: 0.6rem;
-}
-
-// Categories info only on banners
-.cooked.d-wrap[data-wrap="info-canal"] {
-  display: none;
-}
-
-// f-nav edits
-.f-nav {
-  height: 3rem !important;
-}
-
-// Icons on Welcome Banner (EXPERIMENTAL)
-.welcome-banner__wrap {
-  flex-wrap: wrap;
-}
-
-.banner-featured-links__wrapper {
-  flex-basis: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.welcome-banner__wrap .search-menu,
-.welcome-banner__title {
-  flex: 1;
-}
-
-// Invert categories and tags order - Publish to right
-.list-controls .navigation-container .category-breadcrumb {
-  order: unset !important;
-}
-
-.navigation-controls {
-  flex: 1;
-  justify-content: flex-end;
-}
-
-// Hide navigation bar
-#navigation-bar {
-  display: none;
-}
-
-/* 
-// [EXPERIMENTAL] Welcome sections messages
-.custom-page-intro {
-  display: none;
-}
-
-groups-page .page-intro--groups {
-  display: block;
-  margin: 1 1.5rem;
-}
-
-.badges-page .page-intro--badges {
-  display: block;
-  margin: 1 1.5rem;
-}
-
-.leaderboard-page .page-intro--leaderboard {
-  display: block;
-  margin: 1 1.5rem;
+/* // Fix chat thread title size
+.c-user-thread .chat__thread-title__name {
+  font-size: var(--font-up-1);
 } */
-
-// Removing topic-list data on Docs Categories
-.category-wiki .topic-list .topic-list-data.num,
-.category-glosario .topic-list .topic-list-data.num {
-  display: none;
-}
-
-// Hide view on MPs table display + font-size adjust
-@include viewport.until(lg) {
-
-  .topic-list .topic-list-data.num.posts,
-  .topic-list .topic-list-data.num.views {
-    display: none;
-  }
-
-  :root {
-    font-size: 17px;
-  }
-
-}
-
-// Badges order + hide title choice
-.badge-groups {
-  display: flex;
-  flex-direction: column;
-}
-
-.badge-grouping>div:has(h2#ogs) {
-  order: 6;
-}
-
-.badge-grant-info {
-  display: none;
-}
-
-// Chat styling
-.chat-message-separator-date+.chat-message-separator__line-container .chat-message-separator__line {
-  border-top: none;
-}
-
-.d-templates-chat-insert-template-btn {
-  display: none;
-}
-
-// Style user profile page
-.user-content {
-  max-width: unset;
-  display: flex;
-  flex-direction: column;
-}
-
-.replied-section {
-  display: none !important;
-}
-
-.top-section .top-categories-section {
-  order: 3 !important;
-}
-
-.top-sub-section {
-  width: unset;
-}
-
-.top-sub-section .topic-section,
-.top-sub-section .resplies-section,
-.top-sub-section .liked-by-section,
-.top-sub-section .most-liked-section {
-  width: 50%;
-}
-
-.top-sub-section .links-section,
-.top-sub-section .summary-category-list,
-.top-sub-section .summary-category-list table {
-  width: 100%;
-}
-
-.top-sub-section .ember-view more {
-  display: none;
-}
-
-.top-sub-section .summary-user-list {
-  display: none;
-}
-
-// Fix header with mods
-.d-header>.wrap .contents {
-  grid-template-columns: minmax(auto, 1fr) auto minmax(0, calc(var(--d-max-width))) auto minmax(auto, 1fr) !important;
-}
-
-// Hiding topics outside docs categories
-body.category-glosario .more-topics__container,
-body.category-wiki .more-topics__container,
-body.category-trading-curso .more-topics__container {
-  display: none;
-}
-
-// Hide descriptions on categories
-.select-kit.combo-box.category-chooser .select-kit-row .category-desc {
-  display: none;
-}
-
-// Styling buttons + avatars
-.btn {
-  padding: .39em .5em;
-}
-
-@media (width >=40rem) {
-  .topic-avatar {
-    padding-top: var(--space-2);
-  }
-}

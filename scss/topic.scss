@@ -33,3 +33,34 @@
   font-size: inherit !important;
   line-height: 1.25;
 }
+
+// Topic body max-width (moved from main.scss)
+:root {
+  --d-max-width-topic: 1250px;
+}
+
+@media (width >=40rem) {
+  body:not(.has-full-page-chat, .wizard) #main-outlet-wrapper #main-outlet> :not(.experimental-screen, .activate-account, .discourse-kanban-board-viewer) {
+    max-width: var(--d-max-width-topic) !important;
+  }
+}
+
+@media (width >=1024px) {
+  body:not(.has-full-page-chat, .wizard) #main-outlet-wrapper #main-outlet> :not(.experimental-screen, .activate-account) {
+    max-width: var(--d-max-width-topic) !important;
+  }
+}
+
+#topic-footer-buttons {
+  max-width: unset;
+}
+
+@media (width >=40rem) {
+  :root {
+    --topic-body-width: 850px;
+  }
+
+  .topic-body {
+    width: calc(var(--topic-body-width) + var(--topic-body-width-padding) * 2);
+  }
+}

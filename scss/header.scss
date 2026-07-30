@@ -4,3 +4,18 @@
 .d-header-icons .header-dropdown-toggle [data-identifier="avatar-profile"] {
   display: none !important;
 }
+
+// Fix header with mods
+.d-header>.wrap .contents {
+  grid-template-columns: minmax(auto, 1fr) auto minmax(0, calc(var(--d-max-width))) auto minmax(auto, 1fr) !important;
+}
+
+// Hide site logo on mobile only (keep on tablet/desktop). Skipped while
+// .d-header is .docked (core adds this the instant the header hits the top
+// of the viewport during topic scroll, which is also when it shows the
+// topic title in this same area) — otherwise we'd be hiding that too.
+@media (width <=576px) {
+  .d-header:not(.docked) .title a {
+    display: none;
+  }
+}

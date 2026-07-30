@@ -243,3 +243,70 @@ body.f-nav-hidden:not(.archetype-regular,
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+// Point users to the sidebar toggle on doc categories (mobile only).
+// A small dot "pings" outward on loop — cheap (transform + opacity only,
+// no filter/blur) and stops itself once the sidebar has been opened once
+// this session (see javascripts/api-initializers/init.gjs).
+@media (width <=576px) {
+
+  body.category-glosario,
+  body.category-wiki,
+  body.category-trading-curso {
+
+    .header-sidebar-toggle {
+      position: relative;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0.3em;
+        right: 0.3em;
+        width: 0.5em;
+        height: 0.5em;
+        border-radius: 50%;
+        background-color: var(--tertiary);
+        pointer-events: none;
+      }
+
+      &::before {
+        animation: sidebar-toggle-ping 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+      }
+    }
+  }
+
+  body.sidebar-toggle-seen {
+
+    .header-sidebar-toggle::before,
+    .header-sidebar-toggle::after {
+      display: none;
+    }
+  }
+}
+
+@keyframes sidebar-toggle-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-sidebar-toggle::before {
+    animation: none;
+    display: none;
+  }
+}
+
+// Hiding secondary nav on mobile activity profiles
+@media (width <=576px) {
+  body.user-activity-page .user-navigation .user-navigation-secondary {
+    display: none;
+  }
+}
