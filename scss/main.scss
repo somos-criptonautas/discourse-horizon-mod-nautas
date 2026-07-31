@@ -209,6 +209,19 @@ li.sidebar-section-link-wrapper[data-category-id="37"] {
   display: none !important;
 }
 
+// Remove coaching subscribe section from allowed groups in sidebar
+.traders.sidebar-section[data-section-name="coaching"]:first,
+.team.sidebar-section[data-section-name="coaching"]:first,
+.lideres.sidebar-section[data-section-name="coaching"]:first {
+  display: none !important;
+}
+
+// Removing coaching enter section to not-subscribed groups in sidebar
+.anons:not(.traders):not(.team):not(.lideres) .sidebar-section[data-section-name="coaching"]:not(:first),
+.nautas:not(.traders):not(.team):not(.lideres) .sidebar-section[data-section-name="coaching"]:not(:first) {
+  display: none !important;
+}
+
 // Disable theme switcher and Sidebar 'More'
 .sidebar-more-section-trigger:first-of-type,
 .user-color-palette-selector-trigger {
@@ -776,14 +789,29 @@ body.category-trading-curso .more-topics__container {
 // Search
 // -----------------------------------------------------------------------
 
-// ** Invert search-box on search page ** //
-.not-found-container {
+// Invert search-box on search page + Hide button to home (icon do it) //
+
+.not-found-container .title_wrapper btn,
+.not-found-container .recent-topics a.btn {
+  display: none;
+}
+
+.not-found-container .recent-topics {
+  max-width: 50%;
+  flex-basis: unset;
+}
+
+.no-ember #main-outlet {
+  max-height: 100%;
+}
+
+.page-not-found row {
   display: flex;
-  flex-direction: column;
 }
 
 .page-not-found {
-  order: 1;
+  display: flex;
+  flex-flow: column;
 }
 
 .page-not-found-search {
@@ -834,6 +862,16 @@ body.category-trading-curso .more-topics__container {
   font-size: 1.3rem !important;
 }
 
+// Hover links on Welcome Banner
+.banner-featured-links__link:hover {
+  background-color: var(--tertiary-high);
+}
+
+// Underline hover links on Header Links
+.custom-header-links .headerLink a:hover {
+  font-style: underline;
+}
+
 // Icons on Welcome Banner (EXPERIMENTAL)
 .welcome-banner__wrap {
   flex-wrap: wrap;
@@ -849,6 +887,10 @@ body.category-trading-curso .more-topics__container {
 .welcome-banner__wrap .search-menu,
 .welcome-banner__title {
   flex: 1;
+}
+
+.welcome-banner__title {
+  font-weight: 700;
 }
 
 // -----------------------------------------------------------------------
@@ -1010,13 +1052,13 @@ img.emoji {
 // made buttons cramped/hard to tap on mobile. Mobile keeps a roomier value
 // for comfortable touch targets.
 @media (width <768px) {
-  .btn {
+  .btn:not(.btn-primary) {
     padding: 0.6em 0.85em;
   }
 }
 
 @media (width >=768px) {
-  .btn {
+  .btn.btn:not(.btn-primary) {
     // 1/3 less than the previous .39em .5em — some buttons were too big
     padding: 0.26em 0.33em;
   }
@@ -1123,3 +1165,8 @@ body.badges-page .custom-page-intro.intro--badges {
 .c-user-thread .chat__thread-title__name {
   font-size: var(--font-up-1);
 } */
+
+// Disable resenha automatic room
+.resenha-room-1 {
+  display: none;
+}
