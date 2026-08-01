@@ -1,15 +1,11 @@
 .new-user-wrapper .user-navigation .nav-pills li a {
     justify-content: left;
-    padding-left: 1rem;
+    padding-left: 2rem;
 }
 
-// ...but not the horizontal-overflow-nav variant (e.g. the invites tabs) —
-// that one should keep normal/modern alignment, not the vertical-column
-// hack. More specific than the rule above (extra .horizontal-overflow-nav
-// class), so it wins regardless of source order.
-.new-user-wrapper .user-navigation .horizontal-overflow-nav .nav-pills li a {
-    justify-content: unset;
-    padding-left: unset;
+.user.nav .new-user-wrapper .user-navigation .nav-pills li a {
+    justify-content: center;
+    padding-left: 1rem;
 }
 
 .new-user-wrapper .user-navigation-secondary .navigation-controls {

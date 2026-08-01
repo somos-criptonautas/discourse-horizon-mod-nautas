@@ -13,7 +13,8 @@
       "users",
       "award"
     ],
-    "serialize_topic_is_hot": true
+    "serialize_topic_is_hot": true,
+    "custom_homepage": true
   },
   "color_schemes": {
     "Horizon": {

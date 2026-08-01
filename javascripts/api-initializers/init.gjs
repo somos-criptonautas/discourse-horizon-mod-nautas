@@ -50,12 +50,19 @@ function findSidebarToggleButton() {
   );
 }
 
+// Guards against a re-entrant call hiding the ping instantly via its own just-set flag.
+let docSidebarPingActive = false;
+
 function autoOpenDocSidebar() {
   if (!window.matchMedia("(max-width: 576px)").matches) {
     return;
   }
 
   if (!isDocCategoryPage()) {
+    return;
+  }
+
+  if (docSidebarPingActive) {
     return;
   }
 
@@ -86,6 +93,8 @@ function autoOpenDocSidebar() {
     // ignore
   }
 
+  docSidebarPingActive = true;
+
   // Deliberately NOT adding sidebar-toggle-seen here. It used to be added
   // immediately, right after auto-opening — which hid the ping (the CSS
   // in mobile-stuff.scss reacts to this class) within milliseconds of it
@@ -95,6 +104,7 @@ function autoOpenDocSidebar() {
   // already makes every later page view take the "seen" branch instantly.
   window.setTimeout(() => {
     document.body.classList.add("sidebar-toggle-seen");
+    docSidebarPingActive = false;
   }, 6600);
 }
 
@@ -135,21 +145,10 @@ function sortDocTopicList(body, locale) {
     return titleA.localeCompare(titleB, locale);
   });
 
-  if (sorted.every((row, i) => rows[i] === row)) {
-    return; // already sorted — also breaks the observer's own feedback loop
-  }
-
-  // Move only the rows that are actually out of place, one at a time —
-  // not a detach-everything-into-a-fragment-then-reappend. The fragment
-  // approach briefly removes every row from `body` in the same pass,
-  // which (with infinite scroll appending a load-more sentinel right
-  // after this list) was very likely shifting that sentinel enough to
-  // keep re-triggering "load more", i.e. the infinite-loading-forever
-  // symptom. This keeps rows continuously attached and only touches the
-  // ones that need to move.
+  // CSS `order`, not DOM moves — moving nodes retriggered infinite-scroll's own "load more" endlessly.
   sorted.forEach((row, index) => {
-    if (body.children[index] !== row) {
-      body.insertBefore(row, body.children[index] ?? null);
+    if (row.style.order !== String(index)) {
+      row.style.order = index;
     }
   });
 }

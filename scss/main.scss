@@ -210,9 +210,9 @@ li.sidebar-section-link-wrapper[data-category-id="37"] {
 }
 
 // Remove coaching subscribe section from allowed groups in sidebar
-.traders.sidebar-section[data-section-name="coaching"]:first,
-.team.sidebar-section[data-section-name="coaching"]:first,
-.lideres.sidebar-section[data-section-name="coaching"]:first {
+.traders.sidebar-section[data-section-name="coaching"]:first-child,
+.team.sidebar-section[data-section-name="coaching"]:first-child,
+.lideres.sidebar-section[data-section-name="coaching"]:first-child {
   display: none !important;
 }
 
@@ -297,19 +297,6 @@ button [title="similares"] .d-button-label {
   background: none;
 }
 
-// Style journal plugin
-.topic-post.comment .topic-body .regular .post-menu-area,
-div.topic-post.comment .topic-body .who-liked,
-div.topic-post.comment .topic-body .who-read {
-  background: unset;
-  border-top: unset;
-}
-
-.topic-post.comment {
-  padding-left: 23px;
-  padding-bottom: 30px;
-}
-
 // Topic list styling
 .more-topics__list-title {
   font-size: var(--font-up-2);
@@ -334,6 +321,11 @@ div.topic-post.comment .topic-body .who-read {
 .dropdown-menu__item [data-name="quote"],
 .dropdown-menu__item [data-name="toggle-whisper"],
 .dropdown-menu .shortcut {
+  display: none;
+}
+
+// Hide redundant notifications options
+.notifications-tracking-btn:nth-child(4) {
   display: none;
 }
 
@@ -509,11 +501,11 @@ div.topic-post.comment .topic-body .who-read {
   padding-bottom: 0;
 }
 
-// Hide default trust_levels
-.group-box[data-group-name="trust_level_1"],
-.group-box[data-group-name="trust_level_2"],
-.group-box[data-group-name="trust_level_3"],
-.group-box[data-group-name="trust_level_4"] {
+// Hide default trust_levels (all going into tl1 -> 'nuevos')
+.group-box[data-group-name="tl0"],
+.group-box[data-group-name="tl2"],
+.group-box[data-group-name="tl3"],
+.group-box[data-group-name="tl4"] {
   display: none !important;
 }
 
@@ -1058,9 +1050,14 @@ img.emoji {
 }
 
 @media (width >=768px) {
-  .btn.btn:not(.btn-primary) {
+  .btn.btn:not(.btn-primary, .btn-icon-text) {
     // 1/3 less than the previous .39em .5em — some buttons were too big
     padding: 0.26em 0.33em;
+  }
+
+  // Icon+label buttons need extra horizontal room; same vertical padding keeps heights aligned.
+  .btn.btn-icon-text:not(.btn-primary) {
+    padding: 0.26em 0.65em;
   }
 }
 

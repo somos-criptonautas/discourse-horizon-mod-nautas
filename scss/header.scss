@@ -21,11 +21,12 @@
 // actually makes sense. Skipped once scrolled (body.f-nav-hidden, core's
 // own class, kept correctly in sync across navigation unlike our earlier
 // custom scroll listener).
+// visibility: hidden avoids the reflow display:none caused, which likely made this flash twice.
 @media (width <=576px) {
 
   body.archetype-regular:not(.f-nav-hidden) .d-header .title a,
   body.archetype-private_message:not(.f-nav-hidden) .d-header .title a {
-    display: none;
+    visibility: hidden;
   }
 }
 
@@ -33,4 +34,10 @@
 // More padding on width, less on height per feedback.
 .btn.no-text.fk-d-menu__trigger.language-switcher-trigger.btn-flat {
   padding: 0.35em 0.85em;
+}
+
+// Forces the login button hover to a brand-tertiary shade instead of core's default color.
+.login-button:hover {
+  background-color: light-dark(oklch(from var(--tertiary) 40% c h),
+      oklch(from var(--tertiary) 60% c h));
 }

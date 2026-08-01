@@ -5,7 +5,7 @@
     margin-top: 1rem;
 }
 
-// Style user profile page (moved from main.scss)
+// Style user profile page
 .user-content {
     max-width: unset;
     display: flex;
@@ -16,9 +16,6 @@
     display: none !important;
 }
 
-// order only has an effect inside a flex/grid container — neither this nor
-// the 50%-width two-column rules below had one, so "ordering" and "widths"
-// were silently no-ops until now.
 .top-section {
     display: flex;
     flex-wrap: wrap;
@@ -36,12 +33,8 @@
 .top-sub-section {
     display: flex;
     flex-wrap: wrap;
-    width: unset;
 }
 
-// Was .topic-section/.resplies-section (typo for .replies-section) —
-// corrected to the real classes, including the .pull-left/.pull-right
-// modifiers that actually appear alongside them.
 .top-sub-section .topics-section.pull-right,
 .top-sub-section .replies-section.pull-left,
 .top-sub-section .liked-by-section,
@@ -52,7 +45,7 @@
 .top-sub-section .links-section,
 .top-sub-section .summary-category-list,
 .top-sub-section .summary-category-list table {
-    width: 100%;
+    width: 100% !important;
 }
 
 // Was ".ember-view more" (descendant of a nonexistent <more> element,

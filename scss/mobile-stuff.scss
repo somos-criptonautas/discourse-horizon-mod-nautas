@@ -5,7 +5,8 @@
 // overrode main.scss's desktop 22px unconditionally, everywhere, making
 // the "desktop" size dead code and mobile/desktop identical instead of
 // mobile being intentionally smaller.
-@media (width <=576px) {
+// Upper bound raised to 1024px so tablets aren't stuck with desktop's 22px.
+@media (width <=1024px) {
   html {
     font-size: 20px !important;
   }
