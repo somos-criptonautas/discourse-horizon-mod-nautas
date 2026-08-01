@@ -107,7 +107,7 @@ function autoOpenDocSidebar() {
 // so collation (accents, ñ, ç, etc.) is correct for whatever locale the
 // page is actually rendered in — Spanish today, Portuguese/English/others
 // later, with no per-language code changes needed.
-let docSortObservers = [];
+let docSortObservers = new Map();
 
 function docSortLocale() {
   const lang = document.documentElement.lang;
@@ -135,24 +135,28 @@ function sortDocTopicList(body, locale) {
     return titleA.localeCompare(titleB, locale);
   });
 
-  // CSS `order`, not DOM moves — moving nodes retriggered infinite-scroll's own "load more" endlessly.
-  sorted.forEach((row, index) => {
-    if (row.style.order !== String(index)) {
-      row.style.order = index;
-    }
-  });
+  if (sorted.every((row, i) => rows[i] === row)) {
+    return; // already sorted — stops the observer from feeding itself
+  }
+
+  // Anchor = whatever follows the last row (load-more sentinel/spinner, if any).
+  // Inserting before it keeps that element last, so infinite scroll isn't retriggered.
+  const anchor = rows[rows.length - 1].nextSibling;
+
+  // Observer paused so our own moves don't re-enter this function.
+  const observer = docSortObservers.get(body);
+  observer?.disconnect();
+  sorted.forEach((row) => body.insertBefore(row, anchor));
+  observer?.observe(body, { childList: true });
 }
 
 function sortDocCategoryTopicLists() {
   docSortObservers.forEach((observer) => observer.disconnect());
-  docSortObservers = [];
+  docSortObservers = new Map();
 
   const locale = docSortLocale();
 
-  // .topic-list-body, not tbody/tr — Discourse's topic list moved off
-  // table markup to Glimmer components; topic-list-body/topic-list-item
-  // are the stable classes it kept specifically so selectors like this
-  // wouldn't break across that migration.
+  // Not a flex/grid container, so reordering must move DOM nodes — CSS `order` is ignored here.
   document.querySelectorAll(".topic-list.doc-simple-mode .topic-list-body").forEach((body) => {
     // try/finally so the list is always revealed (see the .docs-sorted CSS
     // hook in main.scss) even if sorting itself throws for some reason.
@@ -182,7 +186,7 @@ function sortDocCategoryTopicLists() {
       });
     });
     observer.observe(body, { childList: true });
-    docSortObservers.push(observer);
+    docSortObservers.set(body, observer);
   });
 }
 

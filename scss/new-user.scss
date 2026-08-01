@@ -14,8 +14,7 @@
 }
 
 .user-navigation-secondary .messages-dropdown-trigger,
-.user-navigation-secondary .fk-d-menu__trigger.messages-dropdown-trigger,
-.navigation-controls button {
+.user-navigation-secondary .fk-d-menu__trigger.messages-dropdown-trigger .navigation-controls button {
     width: 100%;
     height: 1.8rem;
 }
@@ -53,6 +52,6 @@ body.user-messages-page .new-user-wrapper .user-navigation-secondary {
     margin: 0 0 1em 0;
 }
 
-.user-content {
+.user-invites-page .user-content {
     margin: 0 auto 0 auto;
 }

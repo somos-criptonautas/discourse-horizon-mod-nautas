@@ -590,6 +590,11 @@ button [title="similares"] .d-button-label {
   margin: 0.33rem;
 }
 
+// Hiding leaderboard options
+.leaderboard__controls {
+  display: none;
+}
+
 // Change earned badge styling
 .check-display.status-checked {
   background-color: var(--primary-medium) !important;
@@ -712,6 +717,13 @@ body.category-preguntas li:has(.tag-drop) {
 body.category-glosario .more-topics__container,
 body.category-wiki .more-topics__container,
 body.category-trading-curso .more-topics__container {
+  display: none;
+}
+
+// Hiding categories and tags dropdown on docs
+.category-glosario .category-breadcrumb,
+.category-trading-curso .category-breadcrumb,
+.category-wiki .category-breadcrumb {
   display: none;
 }
 
