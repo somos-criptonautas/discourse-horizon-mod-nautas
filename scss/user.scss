@@ -35,8 +35,19 @@
     flex-wrap: wrap;
 }
 
-.top-sub-section .topics-section.pull-right,
-.top-sub-section .replies-section.pull-left,
+@media (width <=600px) {
+
+    .top-sub-section:not(.topics-section),
+    .top-sub-section:not(.replies-section),
+    .top-sub-section:not(.liked-by-section),
+    .top-sub-section:not(.most-liked-section) {
+        float: none;
+        width: 100;
+    }
+}
+
+.top-sub-section .topics-section,
+.top-sub-section .replies-section,
 .top-sub-section .liked-by-section,
 .top-sub-section .most-liked-section {
     width: 50%;

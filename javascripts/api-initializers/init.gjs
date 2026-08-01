@@ -32,6 +32,14 @@ function isDocCategoryPage() {
   );
 }
 
+// Per-category key — one shared key falsely marked all three categories "seen" after the first visit.
+function docSidebarSeenKey() {
+  const slug = DOC_CATEGORY_SLUGS.find((s) =>
+    document.body.classList.contains(`category-${s}`)
+  );
+  return `${DOC_SIDEBAR_SEEN_KEY}-${slug ?? "other"}`;
+}
+
 // #toggle-hamburger-menu confirmed from actual live markup (the button
 // inside <li class="header-dropdown-toggle hamburger-dropdown">, title
 // "Menú principal (categorías, mensajes, ajustes)") — .btn-sidebar-toggle
@@ -51,7 +59,8 @@ function findSidebarToggleButton() {
 }
 
 // Guards against a re-entrant call hiding the ping instantly via its own just-set flag.
-let docSidebarPingActive = false;
+// Keyed per category so opening one doesn't suppress the next one visited seconds later.
+let docSidebarPingActiveKey = null;
 
 function autoOpenDocSidebar() {
   if (!window.matchMedia("(max-width: 576px)").matches) {
@@ -62,13 +71,15 @@ function autoOpenDocSidebar() {
     return;
   }
 
-  if (docSidebarPingActive) {
+  const seenKey = docSidebarSeenKey();
+
+  if (docSidebarPingActiveKey === seenKey) {
     return;
   }
 
   let seen;
   try {
-    seen = sessionStorage.getItem(DOC_SIDEBAR_SEEN_KEY);
+    seen = sessionStorage.getItem(seenKey);
   } catch {
     return; // sessionStorage unavailable (e.g. private browsing)
   }
@@ -88,12 +99,12 @@ function autoOpenDocSidebar() {
   }
 
   try {
-    sessionStorage.setItem(DOC_SIDEBAR_SEEN_KEY, "1");
+    sessionStorage.setItem(seenKey, "1");
   } catch {
     // ignore
   }
 
-  docSidebarPingActive = true;
+  docSidebarPingActiveKey = seenKey;
 
   // Deliberately NOT adding sidebar-toggle-seen here. It used to be added
   // immediately, right after auto-opening — which hid the ping (the CSS
@@ -104,7 +115,9 @@ function autoOpenDocSidebar() {
   // already makes every later page view take the "seen" branch instantly.
   window.setTimeout(() => {
     document.body.classList.add("sidebar-toggle-seen");
-    docSidebarPingActive = false;
+    if (docSidebarPingActiveKey === seenKey) {
+      docSidebarPingActiveKey = null;
+    }
   }, 6600);
 }
 

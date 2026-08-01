@@ -210,15 +210,19 @@ li.sidebar-section-link-wrapper[data-category-id="37"] {
 }
 
 // Remove coaching subscribe section from allowed groups in sidebar
-.traders.sidebar-section[data-section-name="coaching"]:first-child,
-.team.sidebar-section[data-section-name="coaching"]:first-child,
-.lideres.sidebar-section[data-section-name="coaching"]:first-child {
+.traders.sidebar-section[data-section-name="coaching"]:first-of-type,
+.team.sidebar-section[data-section-name="coaching"]:first-of-type,
+.lideres.sidebar-section[data-section-name="coaching"]:first-of-type {
   display: none !important;
 }
 
 // Removing coaching enter section to not-subscribed groups in sidebar
-.anons:not(.traders):not(.team):not(.lideres) .sidebar-section[data-section-name="coaching"]:not(:first),
-.nautas:not(.traders):not(.team):not(.lideres) .sidebar-section[data-section-name="coaching"]:not(:first) {
+.anons:not(.traders).sidebar-section[data-section-name="coaching"]:not(:first),
+.anons:not(.team).sidebar-section[data-section-name="coaching"]:not(:first),
+.anons:not(.lideres).sidebar-section[data-section-name="coaching"]:not(:first),
+.nautas:not(.traders).sidebar-section[data-section-name="coaching"]:not(:first),
+.nautas:not(.team).sidebar-section[data-section-name="coaching"]:not(:first),
+.nautas:not(.lideres).sidebar-section[data-section-name="coaching"]:not(:first) {
   display: none !important;
 }
 
@@ -658,21 +662,6 @@ body.category-preguntas li:has(.tag-drop) {
   --category-banner-color: unset !important;
 }
 
-// The docs categories (glosario/wiki/trading-curso) are used as internal
-// pages, not real discussion categories, so their icon shouldn't carry a
-// custom category color — reset to the default/plain icon look.
-body.category-glosario,
-body.category-wiki,
-body.category-trading-curso {
-  .category-title-header {
-    --category-badge-color: unset;
-
-    .badge-category {
-      color: var(--primary) !important;
-    }
-  }
-}
-
 // Font-size adjust in Docs categories sidebar
 .discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link-content-text {
   font-size: var(--font-down-1);
@@ -928,6 +917,7 @@ aside.onebox {
 .user-nav__preferences-navigation-menu,
 .user-nav__preferences-ai,
 .user-nav__activity-read,
+.user-nav__activity,
 .category-quienes-somos .top-lists,
 .sidebar-section-link-wrapper [data-list-item-name="activity-pub-about"] {
   display: none !important;

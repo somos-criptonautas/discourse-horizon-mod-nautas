@@ -10,19 +10,12 @@
   grid-template-columns: minmax(auto, 1fr) auto minmax(0, calc(var(--d-max-width))) auto minmax(auto, 1fr) !important;
 }
 
-// Hide site logo on mobile, but ONLY on topic/PM pages (.archetype-regular
-// / .archetype-private_message — confirmed real, already used elsewhere in
-// this theme) — matching the original ask, which was specifically about
-// topic scrolling revealing the title in this same header spot. Scoping
-// it this tightly, rather than site-wide, also fixes the millisecond
-// flash seen on non-topic pages: f-nav-hidden's exact toggling on pages
-// that aren't topics is unpredictable, so the safest fix is to just
-// always show the logo everywhere except where the hide/reveal behavior
-// actually makes sense. Skipped once scrolled (body.f-nav-hidden, core's
-// own class, kept correctly in sync across navigation unlike our earlier
-// custom scroll listener).
-// visibility: hidden avoids the reflow display:none caused, which likely made this flash twice.
+// Hidden on mobile except topic/PM pages, where f-nav-hidden reveals the topic title in this slot.
 @media (width <=576px) {
+
+  body:not(.archetype-regular, .archetype-private_message) .d-header .title a {
+    visibility: hidden;
+  }
 
   body.archetype-regular:not(.f-nav-hidden) .d-header .title a,
   body.archetype-private_message:not(.f-nav-hidden) .d-header .title a {
