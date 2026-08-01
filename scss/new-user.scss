@@ -8,7 +8,7 @@
 }
 
 // Style and fix wrap on Profile MP
-.user.user-navigation-secondary>.navigation-controls {
+.user-navigation-secondary__horizontal-nav .new-user-wrapper .user-navigation .nav-pills li a {
     flex-wrap: wrap-reverse;
     justify-content: left;
 }
@@ -46,4 +46,13 @@ body.user-messages-page .new-user-wrapper .user-navigation-secondary {
 
 .user-navigation-secondary .nav-pills li a {
     justify-content: inherit;
+}
+
+// Removing padding on column dirty hacked profile page
+.new-user-wrapper .empty-state {
+    margin: 0 0 1em 0;
+}
+
+.user-content {
+    margin: 0 auto 0 auto;
 }

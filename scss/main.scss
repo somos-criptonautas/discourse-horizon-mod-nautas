@@ -210,25 +210,21 @@ body:not(.has-full-page-chat, .wizard) {
 }
 
 // Remove apps from @anon sidebar
-.anon.sidebar-section[data-section-name="mas-apps"],
+.anon .sidebar-section[data-section-name="mas-apps"],
 li.sidebar-section-link-wrapper[data-category-id="37"] {
   display: none !important;
 }
 
 // Remove coaching subscribe section from allowed groups in sidebar
-.traders.sidebar-section[data-section-name="coaching"]:first-of-type,
-.team.sidebar-section[data-section-name="coaching"]:first-of-type,
-.lideres.sidebar-section[data-section-name="coaching"]:first-of-type {
+.traders .sidebar-section[data-section-name="coaching"]:first-of-type,
+.team .sidebar-section[data-section-name="coaching"]:first-of-type,
+.lideres .sidebar-section[data-section-name="coaching"]:first-of-type {
   display: none !important;
 }
 
 // Removing coaching enter section to not-subscribed groups in sidebar
-.anons:not(.traders).sidebar-section[data-section-name="coaching"]:not(:first-of-type),
-.anons:not(.team).sidebar-section[data-section-name="coaching"]:not(:first-of-type),
-.anons:not(.lideres).sidebar-section[data-section-name="coaching"]:not(:first-of-type),
-.nautas:not(.traders).sidebar-section[data-section-name="coaching"]:not(:first-of-type),
-.nautas:not(.team).sidebar-section[data-section-name="coaching"]:not(:first-of-type),
-.nautas:not(.lideres).sidebar-section[data-section-name="coaching"]:not(:first-of-type) {
+.anons:not(.traders):not(.team):not(.lideres) .sidebar-section[data-section-name="coaching"]:not(:first-of-type),
+.nautas:not(.traders):not(.team):not(.lideres) .sidebar-section[data-section-name="coaching"]:not(:first-of-type) {
   display: none !important;
 }
 
@@ -378,6 +374,7 @@ button [title="similares"] .d-button-label {
 .navigation-controls {
   flex: 1;
   justify-content: flex-end;
+  flex-wrap: unset;
 }
 
 #user-content .topic-list-data .views .sortable .num,
@@ -527,10 +524,10 @@ button [title="similares"] .d-button-label {
 }
 
 // Hide them in selectors
-.select-kit .select-kit-row[data-name="trust_level_1"],
-.select-kit .select-kit-row[data-name="trust_level_2"],
-.select-kit .select-kit-row[data-name="trust_level_3"],
-.select-kit .select-kit-row[data-name="trust_level_4"],
+.select-kit .select-kit-row[data-name="tl0"],
+.select-kit .select-kit-row[data-name="tl2"],
+.select-kit .select-kit-row[data-name="tl3"],
+.select-kit .select-kit-row[data-name="tl4"],
 .select-kit .select-kit-row[data-name="moderadores"],
 .select-kit .select-kit-row[data-name="admins"] {
   display: none !important;
@@ -549,11 +546,6 @@ button [title="similares"] .d-button-label {
   display: none;
 }
 
-// Some icons on white
-.flair-agoristas {
-  color: var(--secondary);
-}
-
 // Group naming ordering [EXPERIMENTAL]
 .group-info-mention-name {
   display: none;
@@ -563,19 +555,17 @@ button [title="similares"] .d-button-label {
 // Badges
 // -----------------------------------------------------------------------
 
+// Disable heading for enabling banner one
+.container.badges h1 {
+  display: none;
+}
+
 .badge-grouping:nth-child(1).badge-group-list::before {
   content: "@anons se transforman en @randoms con 4 desafíos:";
 }
 
 .badge-grouping:nth-child(2).badge-group-list::before {
   content: "@randoms son @traders con estos 9:";
-}
-
-// No gold styling badges
-.badge-card .badge-contents .badge-icon.badge-type-gold .fa,
-.user-badge.badge-type-gold .fa,
-.user-card .badge-section .more-user-badges a.badge-type-gold .fa {
-  color: unset !important;
 }
 
 // No crown on /badges
@@ -851,13 +841,20 @@ body.category-trading-curso .more-topics__container {
 }
 
 // Hover links on Welcome Banner
+// Was a solid var(--tertiary-high) fill — that token is a saturated,
+// palette-generated shade (see the dark-mode readability issue reported
+// separately) and reads badly as a full background either way. A light
+// tint of the raw brand color plus a matching text color instead: stays
+// legible and on-brand regardless of what --tertiary-high happens to
+// resolve to in either scheme.
 .banner-featured-links__link:hover {
-  background-color: var(--tertiary-high);
+  background-color: color-mix(in srgb, var(--tertiary) 18%, transparent);
+  color: var(--tertiary);
 }
 
 // Underline hover links on Header Links
 .custom-header-links .headerLink a:hover {
-  font-style: underline;
+  text-decoration: underline;
 }
 
 // Icons on Welcome Banner (EXPERIMENTAL)
@@ -1141,6 +1138,14 @@ body.badges-page .custom-page-intro.intro--badges {
     line-height: 1.4;
     opacity: 0.85;
   }
+}
+
+// Medal icon accent for the badges page intro. No fill/width overrides here —
+// Discourse's .d-icon svgs are width/height: 1em and fill: currentColor by
+// default, so setting `color` on the wrapper is all "discourse icon
+// behavior" needs to recolor and it stays in sync with the 2.5em sizing above.
+body.badges-page .custom-page-intro.intro--badges .custom-page-intro__logo {
+  color: var(--tertiary);
 }
 
 // -----------------------------------------------------------------------

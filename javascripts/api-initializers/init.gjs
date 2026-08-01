@@ -186,7 +186,38 @@ function sortDocCategoryTopicLists() {
   });
 }
 
+// Mirrors Discourse core's DEFAULT_BINDINGS in
+// frontend/discourse/app/services/keyboard-shortcuts.js, minus:
+// - "o,enter" — kept enabled on purpose (opens the selected topic on Enter)
+// - "ctrl+alt+f", "mod+p", "shift+f11" — bound with `global: true` in core,
+//   meaning they fire even while typing; left alone as they're print/search/
+//   composer-fullscreen, not "browsing" shortcuts.
+// None of these ever overlap with native browser/OS keys (arrows, Ctrl+C/V,
+// Escape, Space, plain Enter) — Discourse doesn't bind any of those itself.
+// If Discourse core adds new default shortcuts, this list needs updating —
+// there's no public API to read DEFAULT_BINDINGS at runtime.
+const DISCOURSE_ONLY_SHORTCUTS = [
+  "!", "#", "/", "=", "?", ".",
+  "a", "b", "c", "shift+c",
+  "command+left", "command+[", "command+right", "command+]",
+  "d", "e", "end", "command+down", "f",
+  "g h", "g l", "g n", "g u", "g y", "g c", "g t", "g b", "g p", "g m", "g d",
+  "g s", "g j", "g k",
+  "home", "command+up", "j", "k", "l",
+  "m m", "m r", "m t", "m w",
+  "tab", "p", "q", "r", "s",
+  "shift+j", "shift+k", "shift+p", "shift+r", "shift+s", "shift+l",
+  "shift+z shift+z", "shift+u", "shift+a", "shift+b",
+  "t", "u", "x", "shift+d",
+];
+
 export default apiInitializer((api) => {
+
+  if (settings.disable_discourse_keyboard_shortcuts) {
+    api.container
+      .lookup("service:keyboard-shortcuts")
+      .pause(DISCOURSE_ONLY_SHORTCUTS);
+  }
 
   // Replace some icons
   api.replaceIcon("robot", "lightning");

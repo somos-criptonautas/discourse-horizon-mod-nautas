@@ -1,5 +1,3 @@
-@use "lib/viewport";
-
 // This file loads on every viewport (common stylesheets aren't
 // device-gated) — without a media query here, this !important rule
 // overrode main.scss's desktop 22px unconditionally, everywhere, making
@@ -8,7 +6,7 @@
 // Upper bound raised to 1024px so tablets aren't stuck with desktop's 22px.
 @media (width <=1024px) {
   html {
-    font-size: 20px !important;
+    font-size: 18px;
   }
 }
 
