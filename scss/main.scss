@@ -176,6 +176,12 @@ body:not(.has-full-page-chat, .wizard) {
   grid-column-start: unset !important;
 }
 
+// Hide chat double title
+
+.c-header .c-heading {
+  display: none;
+}
+
 // -----------------------------------------------------------------------
 // Sidebar / navigation
 // -----------------------------------------------------------------------
@@ -217,12 +223,12 @@ li.sidebar-section-link-wrapper[data-category-id="37"] {
 }
 
 // Removing coaching enter section to not-subscribed groups in sidebar
-.anons:not(.traders).sidebar-section[data-section-name="coaching"]:not(:first),
-.anons:not(.team).sidebar-section[data-section-name="coaching"]:not(:first),
-.anons:not(.lideres).sidebar-section[data-section-name="coaching"]:not(:first),
-.nautas:not(.traders).sidebar-section[data-section-name="coaching"]:not(:first),
-.nautas:not(.team).sidebar-section[data-section-name="coaching"]:not(:first),
-.nautas:not(.lideres).sidebar-section[data-section-name="coaching"]:not(:first) {
+.anons:not(.traders).sidebar-section[data-section-name="coaching"]:not(:first-of-type),
+.anons:not(.team).sidebar-section[data-section-name="coaching"]:not(:first-of-type),
+.anons:not(.lideres).sidebar-section[data-section-name="coaching"]:not(:first-of-type),
+.nautas:not(.traders).sidebar-section[data-section-name="coaching"]:not(:first-of-type),
+.nautas:not(.team).sidebar-section[data-section-name="coaching"]:not(:first-of-type),
+.nautas:not(.lideres).sidebar-section[data-section-name="coaching"]:not(:first-of-type) {
   display: none !important;
 }
 
@@ -329,7 +335,8 @@ button [title="similares"] .d-button-label {
 }
 
 // Hide redundant notifications options
-.notifications-tracking-btn:nth-child(4) {
+.notifications-tracking-btn:nth-child(4),
+.notifications-tracking-btn__texts:nth-child(4) {
   display: none;
 }
 

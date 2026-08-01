@@ -100,13 +100,8 @@ body.f-nav-hidden:not(.archetype-regular,
   border-top-right-radius: 0;
 }
 
-// Point users to the sidebar toggle on doc categories (mobile only).
-// A small dot "pings" outward on loop — cheap (transform + opacity only,
-// no filter/blur) and stops itself once the sidebar has been opened once
-// this session (see javascripts/api-initializers/init.gjs). Detected two
-// ways at once, since neither is confirmed against live markup: the Docs
-// plugin's own sidebar panel being present (:has), OR the known category
-// slugs as a fallback.
+// Permanent ping dot pointing at the sidebar toggle, on doc categories only (mobile).
+// Detected two ways: the Docs plugin's sidebar panel (:has), or the known category slugs.
 @media (width <=576px) {
 
   body:has(.discourse-docs-sidebar-panel),
@@ -140,16 +135,6 @@ body.f-nav-hidden:not(.archetype-regular,
       &::before {
         animation: sidebar-toggle-ping 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
       }
-    }
-  }
-
-  body.sidebar-toggle-seen {
-
-    #toggle-hamburger-menu::before,
-    #toggle-hamburger-menu::after,
-    .header-sidebar-toggle::before,
-    .header-sidebar-toggle::after {
-      display: none;
     }
   }
 }

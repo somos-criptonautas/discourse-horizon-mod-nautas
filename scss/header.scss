@@ -10,16 +10,17 @@
   grid-template-columns: minmax(auto, 1fr) auto minmax(0, calc(var(--d-max-width))) auto minmax(auto, 1fr) !important;
 }
 
-// Hidden on mobile except topic/PM pages, where f-nav-hidden reveals the topic title in this slot.
+// Logo hidden on mobile everywhere.
 @media (width <=576px) {
-
-  body:not(.archetype-regular, .archetype-private_message) .d-header .title a {
+  .d-header .title a {
     visibility: hidden;
   }
 
-  body.archetype-regular:not(.f-nav-hidden) .d-header .title a,
-  body.archetype-private_message:not(.f-nav-hidden) .d-header .title a {
-    visibility: hidden;
+  // Shown only once scrolled AND the title is in the header, so both land in one paint.
+  // Three candidate title selectors OR'd — whichever your build uses will match.
+  body.archetype-regular.f-nav-hidden .d-header:has(.extra-info-wrapper, .header-title, .topic-link) .title a,
+  body.archetype-private_message.f-nav-hidden .d-header:has(.extra-info-wrapper, .header-title, .topic-link) .title a {
+    visibility: visible;
   }
 }
 

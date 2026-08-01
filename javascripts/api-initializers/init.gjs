@@ -58,10 +58,8 @@ function findSidebarToggleButton() {
   );
 }
 
-// Guards against a re-entrant call hiding the ping instantly via its own just-set flag.
-// Keyed per category so opening one doesn't suppress the next one visited seconds later.
-let docSidebarPingActiveKey = null;
-
+// Auto-opens the sidebar once per category per session. The ping dot is pure
+// CSS now and always visible on doc categories, so nothing here touches it.
 function autoOpenDocSidebar() {
   if (!window.matchMedia("(max-width: 576px)").matches) {
     return;
@@ -73,10 +71,6 @@ function autoOpenDocSidebar() {
 
   const seenKey = docSidebarSeenKey();
 
-  if (docSidebarPingActiveKey === seenKey) {
-    return;
-  }
-
   let seen;
   try {
     seen = sessionStorage.getItem(seenKey);
@@ -85,7 +79,6 @@ function autoOpenDocSidebar() {
   }
 
   if (seen) {
-    document.body.classList.add("sidebar-toggle-seen");
     return;
   }
 
@@ -103,22 +96,6 @@ function autoOpenDocSidebar() {
   } catch {
     // ignore
   }
-
-  docSidebarPingActiveKey = seenKey;
-
-  // Deliberately NOT adding sidebar-toggle-seen here. It used to be added
-  // immediately, right after auto-opening — which hid the ping (the CSS
-  // in mobile-stuff.scss reacts to this class) within milliseconds of it
-  // ever appearing, on this very same page view. Instead let it animate
-  // for a few cycles (2.2s each) on this first-ever view, then settle —
-  // still just once per session, since the sessionStorage flag above
-  // already makes every later page view take the "seen" branch instantly.
-  window.setTimeout(() => {
-    document.body.classList.add("sidebar-toggle-seen");
-    if (docSidebarPingActiveKey === seenKey) {
-      docSidebarPingActiveKey = null;
-    }
-  }, 6600);
 }
 
 // Alphabetically sort the Docs plugin's topic list (glosario/wiki/trading-curso).
