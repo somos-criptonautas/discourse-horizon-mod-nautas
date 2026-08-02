@@ -16,10 +16,10 @@
     visibility: hidden;
   }
 
-  // Shown only once scrolled AND the title is in the header, so both land in one paint.
-  // Three candidate title selectors OR'd — whichever your build uses will match.
-  body.archetype-regular.f-nav-hidden .d-header:has(.extra-info-wrapper, .header-title, .topic-link) .title a,
-  body.archetype-private_message.f-nav-hidden .d-header:has(.extra-info-wrapper, .header-title, .topic-link) .title a {
+  // Tied purely to the title being in the header, so it appears and leaves with it in one paint.
+  // f-nav-hidden dropped: it cleared before the title did, which split the fade-out into two steps.
+  body.archetype-regular .d-header:has(.extra-info-wrapper, .header-title, .topic-link) .title a,
+  body.archetype-private_message .d-header:has(.extra-info-wrapper, .header-title, .topic-link) .title a {
     visibility: visible;
   }
 }

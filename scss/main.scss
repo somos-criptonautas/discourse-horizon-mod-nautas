@@ -6,8 +6,6 @@
 
 html {
   font-size: 22px;
-  // Prevents mobile Safari/Chrome from auto-inflating text size on narrow
-  // viewports independent of the px values we actually set.
   text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -64,25 +62,12 @@ body.has-full-page-chat:not(.has-sidebar-page) {
   }
 }
 
-// Narrow the docked sidebar to 75% of Discourse's default width on desktop.
-// Core sets --d-sidebar-width: 17em (common/foundation/variables.scss).
-// Overriding the variable itself keeps the sidebar's contents, padding, and
-// the layout grid column in sync. Scoped to >=1024px so the mobile/overlay
-// sidebar keeps its default behavior.
 @media (width >=1024px) {
   :root {
     --d-sidebar-width: calc(17em * 0.75); // 12.75em (25% narrower)
   }
 }
 
-// Core animates the sidebar open/close by transitioning grid-template-columns
-// (body.sidebar-animate #main-outlet-wrapper) — expensive to animate (forces
-// full layout recalc every frame) and Chromium doesn't interpolate a
-// multi-value grid-template-columns smoothly, it steps between values,
-// which reads as lag. Not something a theme can change the mechanism of,
-// but core exposes these timing variables for exactly this kind of tuning —
-// a shorter, snappier duration keeps the visible "steps" on screen for less
-// time, which is the practical fix available here.
 :root {
   --d-sidebar-animation-time: 0.15s;
   --d-sidebar-animation-ease: ease-out;
@@ -252,7 +237,7 @@ li.sidebar-section-link-wrapper[data-category-id="37"] {
 
 // f-nav edits
 .f-nav {
-  height: 3rem !important;
+  height: 2.7rem !important;
 }
 
 // -----------------------------------------------------------------------
@@ -1067,11 +1052,7 @@ img.emoji {
   }
 }
 
-// Progress-button numbers/icon were unreadable in dark mode. --primary is
-// already pure white in the dark scheme (the lightest a color can get), so
-// if this still doesn't look right it's almost certainly core's own rule
-// winning on specificity rather than the color itself needing to be
-// lighter — !important added to make sure this one actually wins.
+// Progress-button numbers/icon were unreadable in dark mode
 .topic-progress-wrapper,
 .topic-progress,
 #topic-progress-wrapper {
@@ -1085,17 +1066,12 @@ img.emoji {
 // Extra breathing room above the progress button
 .topic-progress-wrapper,
 #topic-progress-wrapper {
-  padding-top: 1rem;
+  padding: 1rem 0;
 }
 
 // Intro text for pages Discourse doesn't explain well to new users
 // (groups/badges — leaderboard dropped, it already has its own info button
-// explaining itself). The markup lives in after_header.html, which
-// Discourse renders right after <header> — outside #main-outlet-wrapper
-// entirely, so it inherits none of the normal page/content styling on its
-// own. It's styled here as a self-contained banner/callout rather than
-// relying on ambient page styles, and stays hidden by default since the
-// markup renders unconditionally on every page.
+// explaining itself)
 .custom-page-intro {
   display: none;
 }

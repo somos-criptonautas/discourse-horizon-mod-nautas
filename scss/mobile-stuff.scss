@@ -1,12 +1,15 @@
-// This file loads on every viewport (common stylesheets aren't
-// device-gated) — without a media query here, this !important rule
-// overrode main.scss's desktop 22px unconditionally, everywhere, making
-// the "desktop" size dead code and mobile/desktop identical instead of
-// mobile being intentionally smaller.
-// Upper bound raised to 1024px so tablets aren't stuck with desktop's 22px.
-@media (width <=1024px) {
+@use "lib/viewport";
+
+// Tablet 18px, mobile 19px — narrower query declared last so it wins.
+@include viewport.until(lg) {
   html {
     font-size: 18px;
+  }
+}
+
+@include viewport.until(sm) {
+  html {
+    font-size: 19px;
   }
 }
 
@@ -59,10 +62,7 @@ body.f-nav-hidden:not(.archetype-regular,
   border-bottom: none;
 }
 
-// Disable weird background on navbar in mobile/tablet. !important added —
-// this was already "unset" (i.e. no background), so if a background is
-// still showing, some other rule is winning on specificity, not on value.
-
+// Disable weird background on navbar in mobile/tablet
 @media (width < 64rem) {
 
   body.has-full-page-chat .sidebar-wrapper,
@@ -107,10 +107,6 @@ body.f-nav-hidden:not(.archetype-regular,
   body.category-wiki,
   body.category-trading-curso {
 
-    // #toggle-hamburger-menu confirmed from live markup (the actual
-    // hamburger button, inside <li class="header-dropdown-toggle
-    // hamburger-dropdown">) — .header-sidebar-toggle doesn't exist at
-    // all, kept only as a harmless fallback.
     #toggle-hamburger-menu,
     .header-sidebar-toggle {
       position: relative;
@@ -159,14 +155,6 @@ body.f-nav-hidden:not(.archetype-regular,
 }
 
 // Hiding secondary nav on mobile activity/invites/billing profiles.
-// .user-secondary-navigation added alongside .user-navigation-secondary —
-// unconfirmed which one is actually real, so both are targeted. Dropped
-// the .user-navigation ancestor requirement that was here before: a JS
-// fallback (targeting .user-navigation-secondary alone, no ancestor) was
-// the one actually succeeding, which is why this only ever hid the nav
-// after a visible flash — the JS ran later than CSS does. Now that this
-// rule matches on its own, the JS fallback was removed entirely (no more
-// flash, since there's no JS delay to race against).
 @media (width <=576px) {
 
   body.user-activity-page .user-navigation-secondary,

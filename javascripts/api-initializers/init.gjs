@@ -143,11 +143,20 @@ function sortDocTopicList(body, locale) {
   // Inserting before it keeps that element last, so infinite scroll isn't retriggered.
   const anchor = rows[rows.length - 1].nextSibling;
 
+  // First row still on screen, and where it sits. Each batch inserts rows above the
+  // viewport, which is what threw scroll back to the top; we undo that shift below.
+  const pinned = rows.find((row) => row.getBoundingClientRect().bottom > 0);
+  const pinnedTop = pinned?.getBoundingClientRect().top;
+
   // Observer paused so our own moves don't re-enter this function.
   const observer = docSortObservers.get(body);
   observer?.disconnect();
   sorted.forEach((row) => body.insertBefore(row, anchor));
   observer?.observe(body, { childList: true });
+
+  if (pinned) {
+    window.scrollBy(0, pinned.getBoundingClientRect().top - pinnedTop);
+  }
 }
 
 function sortDocCategoryTopicLists() {
