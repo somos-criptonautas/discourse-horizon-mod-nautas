@@ -201,16 +201,16 @@ li.sidebar-section-link-wrapper[data-category-id="37"] {
 }
 
 // Remove coaching subscribe section from allowed groups in sidebar
-.group-3_traders .sidebar-section[data-section-name="coaching"]:first-of-type,
-.group-4_traders .sidebar-section[data-section-name="coaching"]:first-of-type,
-.group-5_lideres .sidebar-section[data-section-name="coaching"]:first-of-type,
-.group-team .sidebar-section[data-section-name="coaching"]:first-of-type {
+.group-3_traders.sidebar-section-wrapper.sidebar-section[data-section-name="coaching"]:first-of-type,
+.group-4_agoristas.sidebar-section-wrapper.sidebar-section[data-section-name="coaching"]:first-of-type,
+.group-5_lideres.sidebar-section-wrapper.sidebar-section[data-section-name="coaching"]:first-of-type,
+.group-team.sidebar-section-wrapper.sidebar-section[data-section-name="coaching"]:first-of-type {
   display: none !important;
 }
 
 // Removing coaching enter section to not-subscribed groups in sidebar
-.group-1_anons:not(.traders):not(.team):not(.lideres) .sidebar-section[data-section-name="coaching"]:not(:first-of-type),
-.group-2_nautas:not(.traders):not(.team):not(.lideres) .sidebar-section[data-section-name="coaching"]:not(:first-of-type) {
+.group-1_anons:not(.traders):not(.team):not(.lideres).sidebar-section-wrapper.sidebar-section[data-section-name="coaching"]:not(:first-of-type),
+.group-2_nautas:not(.traders):not(.team):not(.lideres).sidebar-section-wrapper.sidebar-section[data-section-name="coaching"]:not(:first-of-type) {
   display: none !important;
 }
 
