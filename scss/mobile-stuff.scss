@@ -1,15 +1,15 @@
 @use "lib/viewport";
 
-// Tablet 18px, mobile 19px — narrower query declared last so it wins.
+// Tablet 20px, mobile 21px — narrower query declared last so it wins.
 @include viewport.until(lg) {
   html {
-    font-size: 18px;
+    font-size: 21px;
   }
 }
 
 @include viewport.until(sm) {
   html {
-    font-size: 19px;
+    font-size: 20px;
   }
 }
 
@@ -98,7 +98,6 @@ body.f-nav-hidden:not(.archetype-regular,
   border-top-right-radius: 0;
 }
 
-// Permanent ping dot on the sidebar toggle, doc categories only.
 @media (width <=576px) {
 
   body:has(.discourse-docs-sidebar-panel),
