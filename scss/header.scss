@@ -16,16 +16,14 @@
     visibility: hidden;
   }
 
-  // Tied purely to the title being in the header, so it appears and leaves with it in one paint.
-  // f-nav-hidden dropped: it cleared before the title did, which split the fade-out into two steps.
+  // Shown only while the title is in the header, so both change in one paint.
   body.archetype-regular .d-header:has(.extra-info-wrapper, .header-title, .topic-link) .title a,
   body.archetype-private_message .d-header:has(.extra-info-wrapper, .header-title, .topic-link) .title a {
     visibility: visible;
   }
 }
 
-// More tap/click area on the language switcher trigger — was too tiny.
-// More padding on width, less on height per feedback.
+// Bigger tap target on the language switcher — wider, shorter.
 .btn.no-text.fk-d-menu__trigger.language-switcher-trigger.btn-flat {
   padding: 0.35em 0.85em;
 }

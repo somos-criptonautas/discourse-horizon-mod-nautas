@@ -98,8 +98,7 @@ body.f-nav-hidden:not(.archetype-regular,
   border-top-right-radius: 0;
 }
 
-// Permanent ping dot pointing at the sidebar toggle, on doc categories only (mobile).
-// Detected two ways: the Docs plugin's sidebar panel (:has), or the known category slugs.
+// Permanent ping dot on the sidebar toggle, doc categories only.
 @media (width <=576px) {
 
   body:has(.discourse-docs-sidebar-panel),

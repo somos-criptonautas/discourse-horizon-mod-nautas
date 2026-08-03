@@ -5,7 +5,7 @@
 // -----------------------------------------------------------------------
 
 html {
-  font-size: 22px;
+  font-size: 23px;
   text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -201,15 +201,16 @@ li.sidebar-section-link-wrapper[data-category-id="37"] {
 }
 
 // Remove coaching subscribe section from allowed groups in sidebar
-.traders .sidebar-section[data-section-name="coaching"]:first-of-type,
-.team .sidebar-section[data-section-name="coaching"]:first-of-type,
-.lideres .sidebar-section[data-section-name="coaching"]:first-of-type {
+.group-3_traders .sidebar-section[data-section-name="coaching"]:first-of-type,
+.group-4_traders .sidebar-section[data-section-name="coaching"]:first-of-type,
+.group-5_lideres .sidebar-section[data-section-name="coaching"]:first-of-type,
+.group-team .sidebar-section[data-section-name="coaching"]:first-of-type {
   display: none !important;
 }
 
 // Removing coaching enter section to not-subscribed groups in sidebar
-.anons:not(.traders):not(.team):not(.lideres) .sidebar-section[data-section-name="coaching"]:not(:first-of-type),
-.nautas:not(.traders):not(.team):not(.lideres) .sidebar-section[data-section-name="coaching"]:not(:first-of-type) {
+.group-1_anons:not(.traders):not(.team):not(.lideres) .sidebar-section[data-section-name="coaching"]:not(:first-of-type),
+.group-2_nautas:not(.traders):not(.team):not(.lideres) .sidebar-section[data-section-name="coaching"]:not(:first-of-type) {
   display: none !important;
 }
 
@@ -293,9 +294,7 @@ button [title="similares"] .d-button-label {
   font-size: var(--font-up-2);
 }
 
-// Fix tag pills sticking together when they wrap to a second line. Flex-wrap
-// only adds spacing between items on the same row via their own margin —
-// without an explicit gap, wrapped rows have zero space between them.
+// Explicit gap so wrapped tag pills don't stick together.
 .discourse-tags {
   display: flex;
   flex-wrap: wrap;
@@ -417,8 +416,7 @@ button [title="similares"] .d-button-label {
   font-family: var(--heading-font-family);
 }
 
-// Moved from .c-navbar__title to .c-navbar itself, and reduced 25%
-// (0.53em/0.11em -> 0.4em/0.08em)
+// Moved to .c-navbar and reduced 25% (0.53em/0.11em -> 0.4em/0.08em)
 .chat-drawer-container .c-navbar {
   padding: 0.4em 0 0.08em 0.4em;
 }
@@ -717,9 +715,7 @@ body.category-trading-curso .more-topics__container {
   display: none;
 }
 
-// More boxes in /categories. gap was missing — a grid with no gap has zero
-// space between cells, which is what made wrapped boxes look stuck
-// together (same underlying issue as the tag pills above).
+// Grid gap was missing, so wrapped category boxes looked stuck together.
 .category-boxes-with-topics {
   grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
   gap: 1em;
@@ -731,13 +727,7 @@ body.category-trading-curso .more-topics__container {
   display: none;
 }
 
-// Hide the Docs topic list until the A-Z sort (see init.gjs) finishes, to
-// avoid a flash of the unsorted order resorting itself. Reveal is
-// guaranteed two ways: JS adds .docs-sorted the instant sorting completes
-// (even on error, via try/finally), and — in case the initializer never
-// runs at all — the animation itself reveals the list on a short timer
-// regardless, so it can never get stuck invisible. No category gating
-// needed — the selector itself only exists on docs-enabled categories.
+// Hidden until the A-Z sort adds .docs-sorted; the animation reveals it regardless.
 .topic-list.doc-simple-mode .topic-list-body {
   opacity: 0;
   animation: docs-list-reveal 0.5s ease-out 0.3s forwards;
@@ -837,15 +827,9 @@ body.category-trading-curso .more-topics__container {
   font-size: 1.3rem !important;
 }
 
-// Hover links on Welcome Banner
-// Was a solid var(--tertiary-high) fill — that token is a saturated,
-// palette-generated shade (see the dark-mode readability issue reported
-// separately) and reads badly as a full background either way. A light
-// tint of the raw brand color plus a matching text color instead: stays
-// legible and on-brand regardless of what --tertiary-high happens to
-// resolve to in either scheme.
+// Hover links on Welcome Banner — the theme's own light hover tint.
 .banner-featured-links__link:hover {
-  background-color: color-mix(in srgb, var(--tertiary) 18%, transparent);
+  background-color: var(--hover);
   color: var(--tertiary);
 }
 
@@ -879,13 +863,7 @@ body.category-trading-curso .more-topics__container {
 // Misc utility (emoji, [data-wrap] blocks, buttons, plugins)
 // -----------------------------------------------------------------------
 
-// "Billing" -> "suscripción" on Spanish-locale pages, CSS-only (no JS —
-// this is a plain text swap, doesn't need it). :lang(es) matches the
-// document's actual rendered locale (also matches es-ES/es-MX/etc via the
-// standard :lang hyphen-matching rules), same signal already used
-// elsewhere in this theme for locale-aware behavior. The original text is
-// zeroed out via font-size rather than removed, so the link/element itself
-// keeps its normal layout and click target.
+// "Billing" -> "suscripción" on Spanish pages; font-size: 0 hides the original.
 html:lang(es) a[href*="/billing/subscriptions"] .item-label {
   font-size: 0;
 
@@ -1030,10 +1008,7 @@ img.emoji {
   }
 }
 
-// Styling buttons + avatars.
-// The tightened padding is desktop-only — applied everywhere before, it
-// made buttons cramped/hard to tap on mobile. Mobile keeps a roomier value
-// for comfortable touch targets.
+// Tighter button padding on desktop only; mobile keeps roomier touch targets.
 @media (width <768px) {
   .btn:not(.btn-primary) {
     padding: 0.6em 0.85em;
@@ -1069,17 +1044,12 @@ img.emoji {
   padding: 1rem 0;
 }
 
-// Intro text for pages Discourse doesn't explain well to new users
-// (groups/badges — leaderboard dropped, it already has its own info button
-// explaining itself)
+// Intro text for groups/badges pages, rendered from after_header.html.
 .custom-page-intro {
   display: none;
 }
 
-// Structured like Discourse's own .category-title-header (logo/icon +
-// title + description, not a single flat line) — icon and heading get the
-// visual weight a real category banner has, description is secondary text
-// underneath rather than sharing a line with the icon.
+// Laid out like .category-title-header: icon, title, description underneath.
 body.groups-page .custom-page-intro.intro--groups,
 body.badges-page .custom-page-intro.intro--badges {
   display: flex;
@@ -1089,9 +1059,7 @@ body.badges-page .custom-page-intro.intro--badges {
   width: 100%;
   margin: 0 0 var(--main-grid-gap);
   padding-block: 1.5em;
-  // Full-bleed background like a real category banner, but the content
-  // stays aligned with the page's normal ~1000px content column on wide
-  // screens instead of hugging the viewport edge.
+  // Full-bleed background, content still aligned to the ~1000px column.
   padding-inline: max(1.25em, calc((100% - 1000px) / 2));
   background-color: var(--selected);
   color: var(--primary);
@@ -1128,10 +1096,7 @@ body.badges-page .custom-page-intro.intro--badges {
   }
 }
 
-// Medal icon accent for the badges page intro. No fill/width overrides here —
-// Discourse's .d-icon svgs are width/height: 1em and fill: currentColor by
-// default, so setting `color` on the wrapper is all "discourse icon
-// behavior" needs to recolor and it stays in sync with the 2.5em sizing above.
+// Icon accent for the badges intro — d-icon svgs inherit currentColor.
 body.badges-page .custom-page-intro.intro--badges .custom-page-intro__logo {
   color: var(--tertiary);
 }
@@ -1140,8 +1105,7 @@ body.badges-page .custom-page-intro.intro--badges .custom-page-intro__logo {
 // Experimental / unverified / inactive
 // -----------------------------------------------------------------------
 
-// [UNCONFIRMED] Topic display testing — selector not verified against
-// Discourse core or an installed plugin; may be dead. Kept until confirmed.
+// [UNCONFIRMED] Selector not verified against core or plugins; may be dead.
 @media screen and (width >=925px) {
   .container.posts {
     grid-template-columns: 80% 20%;

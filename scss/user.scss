@@ -48,9 +48,7 @@
     }
 }
 
-// topics-section/replies-section/etc are compound classes on the same
-// element as top-sub-section (not a nested descendant) — selectors need
-// no space, same missing-dot compound-class bug seen elsewhere in this theme.
+// Compound classes on the same element as top-sub-section — no descendant space.
 .top-sub-section.topics-section,
 .top-sub-section.replies-section,
 .top-sub-section.liked-by-section,

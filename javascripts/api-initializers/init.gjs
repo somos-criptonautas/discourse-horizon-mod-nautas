@@ -12,14 +12,7 @@ function cleanGroupNames() {
   });
 }
 
-// Categories rendered by the Discourse Docs plugin. Detected two ways at
-// once (either is enough) since neither has been confirmed against live
-// markup: the plugin's own sidebar panel being present, OR the known
-// category slugs. Shared by the auto-open-sidebar behavior below and the
-// alphabetical sort further down — the plugin has no native title sort
-// (confirmed: no such setting exists, and Discourse core doesn't index
-// topics by title either), so it's done client-side here instead of
-// forking the plugin or a separate component.
+// Doc categories, detected by the plugin's sidebar panel or known slugs.
 const DOC_CATEGORY_SLUGS = ["glosario", "wiki", "trading-curso"];
 const DOC_SIDEBAR_SEEN_KEY = "horizon-mods-doc-sidebar-seen";
 
@@ -32,7 +25,7 @@ function isDocCategoryPage() {
   );
 }
 
-// Per-category key — one shared key falsely marked all three categories "seen" after the first visit.
+// Per-category key — one shared key marked all three seen at once.
 function docSidebarSeenKey() {
   const slug = DOC_CATEGORY_SLUGS.find((s) =>
     document.body.classList.contains(`category-${s}`)
@@ -40,12 +33,7 @@ function docSidebarSeenKey() {
   return `${DOC_SIDEBAR_SEEN_KEY}-${slug ?? "other"}`;
 }
 
-// #toggle-hamburger-menu confirmed from actual live markup (the button
-// inside <li class="header-dropdown-toggle hamburger-dropdown">, title
-// "Menú principal (categorías, mensajes, ajustes)") — .btn-sidebar-toggle
-// and .header-sidebar-toggle, used everywhere else in this theme
-// (including by the original pre-existing code), don't exist at all; kept
-// below only as harmless fallbacks in case some other page state uses them.
+// #toggle-hamburger-menu is the real button; the rest are harmless fallbacks.
 function findSidebarToggleButton() {
   return (
     document.querySelector("#toggle-hamburger-menu") ||
@@ -58,8 +46,7 @@ function findSidebarToggleButton() {
   );
 }
 
-// Auto-opens the sidebar once per category per session. The ping dot is pure
-// CSS now and always visible on doc categories, so nothing here touches it.
+// Auto-opens the sidebar once per category per session.
 function autoOpenDocSidebar() {
   if (!window.matchMedia("(max-width: 576px)").matches) {
     return;
@@ -98,15 +85,7 @@ function autoOpenDocSidebar() {
   }
 }
 
-// Alphabetically sort the Docs plugin's topic list (glosario/wiki/trading-curso).
-// Re-runs on every page change and watches each list for further row
-// insertions (pagination/infinite scroll), so newly-loaded topics land in
-// the right spot without any manual pinning/reordering.
-//
-// Locale: uses the page's own <html lang> instead of a hardcoded language,
-// so collation (accents, ñ, ç, etc.) is correct for whatever locale the
-// page is actually rendered in — Spanish today, Portuguese/English/others
-// later, with no per-language code changes needed.
+// Sorts the Docs topic list A-Z, collating with the page's own <html lang>.
 let docSortObservers = new Map();
 
 function docSortLocale() {
@@ -139,12 +118,10 @@ function sortDocTopicList(body, locale) {
     return; // already sorted — stops the observer from feeding itself
   }
 
-  // Anchor = whatever follows the last row (load-more sentinel/spinner, if any).
-  // Inserting before it keeps that element last, so infinite scroll isn't retriggered.
+  // Insert before whatever follows the rows, keeping any load-more sentinel last.
   const anchor = rows[rows.length - 1].nextSibling;
 
-  // First row still on screen, and where it sits. Each batch inserts rows above the
-  // viewport, which is what threw scroll back to the top; we undo that shift below.
+  // Pin the first visible row so inserts above it don't jump the scroll.
   const pinned = rows.find((row) => row.getBoundingClientRect().bottom > 0);
   const pinnedTop = pinned?.getBoundingClientRect().top;
 
@@ -165,50 +142,29 @@ function sortDocCategoryTopicLists() {
 
   const locale = docSortLocale();
 
-  // Not a flex/grid container, so reordering must move DOM nodes — CSS `order` is ignored here.
+  // Not a flex/grid container, so reordering must move DOM nodes — CSS `order` is ignored.
   document.querySelectorAll(".topic-list.doc-simple-mode .topic-list-body").forEach((body) => {
-    // try/finally so the list is always revealed (see the .docs-sorted CSS
-    // hook in main.scss) even if sorting itself throws for some reason.
+    // try/finally so the list is always revealed even if sorting throws.
     try {
       sortDocTopicList(body, locale);
     } finally {
       body.classList.add("docs-sorted");
     }
 
-    // Coalesced via rAF, not a setTimeout debounce: a fixed delay (tried
-    // 120ms) meant that during continuous infinite-scroll loading, mutations
-    // kept arriving faster than the delay, so the timer kept resetting and
-    // the list only ever looked sorted once scrolling fully stopped. Instead,
-    // schedule at most one resort per animation frame — it still coalesces
-    // multiple mutations landing in the same tick, but resolves right before
-    // the next paint instead of after an arbitrary wait, so each newly
-    // loaded batch gets sorted essentially immediately rather than only at
-    // the very end.
-    let rafId = null;
+    // Sort only once loading goes quiet — mid-load reordering stalled the loader.
+    let settleTimer = null;
     const observer = new MutationObserver(() => {
-      if (rafId !== null) {
-        return;
-      }
-      rafId = window.requestAnimationFrame(() => {
-        rafId = null;
+      window.clearTimeout(settleTimer);
+      settleTimer = window.setTimeout(() => {
         sortDocTopicList(body, locale);
-      });
+      }, 400);
     });
     observer.observe(body, { childList: true });
     docSortObservers.set(body, observer);
   });
 }
 
-// Mirrors Discourse core's DEFAULT_BINDINGS in
-// frontend/discourse/app/services/keyboard-shortcuts.js, minus:
-// - "o,enter" — kept enabled on purpose (opens the selected topic on Enter)
-// - "ctrl+alt+f", "mod+p", "shift+f11" — bound with `global: true` in core,
-//   meaning they fire even while typing; left alone as they're print/search/
-//   composer-fullscreen, not "browsing" shortcuts.
-// None of these ever overlap with native browser/OS keys (arrows, Ctrl+C/V,
-// Escape, Space, plain Enter) — Discourse doesn't bind any of those itself.
-// If Discourse core adds new default shortcuts, this list needs updating —
-// there's no public API to read DEFAULT_BINDINGS at runtime.
+// Mirrors core's DEFAULT_BINDINGS, minus ones intentionally left enabled or global.
 const DISCOURSE_ONLY_SHORTCUTS = [
   "!", "#", "/", "=", "?", ".",
   "a", "b", "c", "shift+c",
@@ -249,9 +205,7 @@ export default apiInitializer((api) => {
 
   api.onPageChange(() => {
     hideClosedButtons();
-    // Deferred to afterRender: onPageChange can fire before Ember has
-    // finished updating document.body's classList for the new route, so
-    // checking for category-* classes immediately was racy.
+    // afterRender: onPageChange can fire before body classList updates.
     schedule("afterRender", () => {
       autoOpenDocSidebar();
       sortDocCategoryTopicLists();
