@@ -66,6 +66,22 @@
     display: none;
 }
 
-.top-sub-section.summary-user-list {
+// Hiding lot of groups from profile
+#collapsed-info-panel.secondary dl div:nth-child(7) {
     display: none;
+}
+
+// Bold in karma (profile)
+#collapsed-info-panel.secondary dl div:nth-child(8) {
+    font-weight: 600;
+}
+
+// Align website icon
+.user-profile-website {
+    display: initial !important;
+}
+
+// Padding to profile box
+.user-main .about.has-background .details {
+    padding: 0.5rem;
 }

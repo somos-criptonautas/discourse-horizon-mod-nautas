@@ -157,7 +157,7 @@ body:not(.has-full-page-chat, .wizard) {
 }
 
 // Anonymous users full display on login header
-.anon .d-header .panel {
+.group-0_nuevos .d-header .panel {
   grid-column-start: unset !important;
 }
 
@@ -181,36 +181,23 @@ body:not(.has-full-page-chat, .wizard) {
   display: none !important;
 }
 
-// ** Apply styles to paid category ** //
-.sidebar-section-link [data-link-name="trading"] a,
-.sidebar-section-link [data-link-name="trading"] .icon svg {
-  color: var(--tertiary) !important;
-}
-
-// Same text for all sidebar makes sense
-.sidebar-section-link-wrapper[data-list-item-name="all-categories"],
-.sidebar-section-link-wrapper[data-list-item-name="all-tags"],
-.sidebar-section-link-wrapper[data-list-item-name="configure-default-navigation-menu-tags"] {
-  font-size: inherit;
-}
-
 // Remove apps from @anon sidebar
-.anon .sidebar-section[data-section-name="mas-apps"],
+.group-0_nuevos.sidebar-section[data-section-name="mas-apps"],
 li.sidebar-section-link-wrapper[data-category-id="37"] {
   display: none !important;
 }
 
 // Remove coaching subscribe section from allowed groups in sidebar
-.group-3_traders.sidebar-section-wrapper.sidebar-section[data-section-name="coaching"]:first-of-type,
-.group-4_agoristas.sidebar-section-wrapper.sidebar-section[data-section-name="coaching"]:first-of-type,
-.group-5_lideres.sidebar-section-wrapper.sidebar-section[data-section-name="coaching"]:first-of-type,
-.group-team.sidebar-section-wrapper.sidebar-section[data-section-name="coaching"]:first-of-type {
+.group-3_traders.sidebar-section[data-section-name="coaching"]:first-of-type,
+.group-4_agoristas.sidebar-section[data-section-name="coaching"]:first-of-type,
+.group-5_lideres.sidebar-section[data-section-name="coaching"]:first-of-type,
+.group-team.sidebar-section[data-section-name="coaching"]:first-of-type {
   display: none !important;
 }
 
 // Removing coaching enter section to not-subscribed groups in sidebar
-.group-1_anons:not(.traders):not(.team):not(.lideres).sidebar-section-wrapper.sidebar-section[data-section-name="coaching"]:not(:first-of-type),
-.group-2_nautas:not(.traders):not(.team):not(.lideres).sidebar-section-wrapper.sidebar-section[data-section-name="coaching"]:not(:first-of-type) {
+.group-1_anons:not(.group-3_traders):not(.group-team):not(.group-4_agoristas):not(.group-5_lideres).sidebar-section[data-section-name="coaching"]:not(:first-of-type),
+.group-2_nautas:not(.group-3_traders):not(.group-team):not(.group-4_agoristas):not(.group-5_lideres).sidebar-section[data-section-name="coaching"]:not(:first-of-type) {
   display: none !important;
 }
 
@@ -226,8 +213,8 @@ li.sidebar-section-link-wrapper[data-category-id="37"] {
 }
 
 // Anonymous hiding some stuff on sidebar
-.anon .sidebar-section-wrapper.sidebar-section[data-section-name="apps-externas"],
-.anon .sidebar-section-wrapper.sidebar-section[data-section-name="categories"] {
+.group-0_nuevos .sidebar-section[data-section-name="apps-externas"],
+.group-0_nuevos .sidebar-section[data-section-name="categories"] {
   display: none !important;
 }
 
@@ -267,6 +254,8 @@ li.sidebar-section-link-wrapper[data-category-id="37"] {
 
 .list-controls {
   padding: 0;
+  border-top-left-radius: 0;
+  border-top-left-radius: 0;
 }
 
 // Buttons on ending topics with normal line-height
@@ -1010,20 +999,14 @@ img.emoji {
 
 // Tighter button padding on desktop only; mobile keeps roomier touch targets.
 @media (width <768px) {
-  .btn:not(.btn-primary) {
+  .btn {
     padding: 0.6em 0.85em;
   }
 }
 
 @media (width >=768px) {
-  .btn.btn:not(.btn-primary, .btn-icon-text) {
-    // 1/3 less than the previous .39em .5em — some buttons were too big
-    padding: 0.26em 0.33em;
-  }
-
-  // Icon+label buttons need extra horizontal room; same vertical padding keeps heights aligned.
-  .btn.btn-icon-text:not(.btn-primary) {
-    padding: 0.26em 0.65em;
+  .btn {
+    padding: 0.45em 0.65em;
   }
 }
 
@@ -1038,10 +1021,18 @@ img.emoji {
   }
 }
 
-// Extra breathing room above the progress button
-.topic-progress-wrapper,
-#topic-progress-wrapper {
-  padding: 1rem 0;
+// Less padding on progress bar
+.topic-progress {
+  padding: .35rem 1em;
+}
+
+@media (width >=768px) {
+
+  // Extra breathing room above the progress button
+  .topic-progress-wrapper,
+  #topic-progress-wrapper {
+    padding: 1rem 0;
+  }
 }
 
 // Intro text for groups/badges pages, rendered from after_header.html.
@@ -1049,56 +1040,10 @@ img.emoji {
   display: none;
 }
 
-// Laid out like .category-title-header: icon, title, description underneath.
-body.groups-page .custom-page-intro.intro--groups,
-body.badges-page .custom-page-intro.intro--badges {
-  display: flex;
-  align-items: center;
-  gap: 1em;
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0 0 var(--main-grid-gap);
-  padding-block: 1.5em;
-  // Full-bleed background, content still aligned to the ~1000px column.
-  padding-inline: max(1.25em, calc((100% - 1000px) / 2));
-  background-color: var(--selected);
-  color: var(--primary);
+body.groups-page .category-banner-groups,
+body.badges-page .category-banner-badges {
+  display: flex !important;
 
-  .custom-page-intro__logo {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .svg-icon {
-      width: 2.5em;
-      height: 2.5em;
-    }
-  }
-
-  .custom-page-intro__contents {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2em;
-  }
-
-  .custom-page-intro__title {
-    margin: 0;
-    font-size: var(--font-up-3);
-    font-weight: 700;
-    line-height: 1.2;
-  }
-
-  .custom-page-intro__description {
-    font-size: var(--font-0);
-    line-height: 1.4;
-    opacity: 0.85;
-  }
-}
-
-// Icon accent for the badges intro — d-icon svgs inherit currentColor.
-body.badges-page .custom-page-intro.intro--badges .custom-page-intro__logo {
-  color: var(--tertiary);
 }
 
 // -----------------------------------------------------------------------
@@ -1120,4 +1065,10 @@ body.badges-page .custom-page-intro.intro--badges .custom-page-intro__logo {
 // Disable resenha automatic room
 .resenha-room-1 {
   display: none;
+}
+
+// National flags re-styling
+.nationalflag-usersummary {
+  width: 30px;
+  border-radius: 0.15rem;
 }

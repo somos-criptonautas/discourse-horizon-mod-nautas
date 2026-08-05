@@ -1,6 +1,6 @@
 @use "lib/viewport";
 
-// Tablet 20px, mobile 21px — narrower query declared last so it wins.
+// Tablet 21px, mobile 20px, desktop 23px
 @include viewport.until(lg) {
   html {
     font-size: 21px;
@@ -36,25 +36,19 @@ body.f-nav-hidden:not(.archetype-regular,
 }
 
 // Vertical navbar on profile
-.new-user-content-wrapper {
+:not(.user-messages-page).new-user-content-wrapper {
   display: flex;
 }
 
 .user-navigation-secondary {
   margin: 1.5rem 1.5rem 0.5rem 0.5rem;
   font-size: var(--font-0);
-  min-width: 23%;
+  min-width: 27%;
 }
 
 .new-user-wrapper .user-navigation-secondary {
   height: 100%;
-  min-width: 23%;
-}
-
-.new-user-wrapper .user-navigation-secondary .nav-pills {
-  flex-direction: column;
-  height: 100%;
-  align-items: flex-start;
+  min-width: 27%;
 }
 
 // No border on end (prevent navbar redundance)
@@ -161,4 +155,9 @@ body.f-nav-hidden:not(.archetype-regular,
   body.user-billing-page .user-secondary-navigation {
     display: none !important;
   }
+}
+
+// More padding on search boxes 
+.select-kit.is-expanded .select-kit-filter.is-expanded {
+  padding: 0.45em 0.65em;
 }
