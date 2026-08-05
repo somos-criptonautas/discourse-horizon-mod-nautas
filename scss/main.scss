@@ -201,9 +201,10 @@ li.sidebar-section-link-wrapper[data-category-id="37"] {
   display: none !important;
 }
 
-// Disable theme switcher and Sidebar 'More'
+// Disable theme switcher, Sidebar 'More' and keyboard (disabled) shortcuts icon
 .sidebar-more-section-trigger:first-of-type,
-.user-color-palette-selector-trigger {
+.user-color-palette-selector-trigger,
+.sidebar-footer-actions .sidebar-footer-actions-keyboard-shortcuts {
   display: none !important;
 }
 
