@@ -214,8 +214,8 @@ body:not(.has-full-page-chat, .wizard) {
 }
 
 // Anonymous hiding some stuff on sidebar
-.group-0_nuevos .sidebar-section[data-section-name="apps-externas"],
-.group-0_nuevos .sidebar-section[data-section-name="categories"] {
+.group-0_nuevos:not(.group-1_anons):not(.group-2_nautas):not(.group-3_traders):not(.group-team):not(.group-4_agoristas):not(.group-5_lideres).sidebar-section[data-section-name="apps-externas"],
+.anons[data-section-name="categories"] {
   display: none !important;
 }
 
@@ -285,10 +285,29 @@ button [title="similares"] .d-button-label {
 }
 
 // Explicit gap so wrapped tag pills don't stick together.
-.discourse-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3em 0.45em;
+.extra-info-wrapper .topic-header-extra .discourse-tags {
+  display: inline-flex;
+  gap: var(--space-1);
+}
+
+// Border + radius to tags
+.extra-info-wrapper .discourse-tag.box {
+  border-radius: 0.21rem;
+}
+
+.hc-topic-card__category .badge-category__wrapper {
+  border: 1px solid var(--primary-200);
+}
+
+// Discourse card filter style to all tags
+.discourse-tag {
+  padding: var(--space-half) var(--space-2);
+  border-radius: var(--d-border-radius-small);
+  border: 1px solid var(--primary-low);
+  background: var(--secondary);
+  color: var(--primary-high);
+  white-space: nowrap;
+  font-size: var(--font-down-2-rem);
 }
 
 // Update posts message
@@ -608,61 +627,13 @@ button [title="similares"] .d-button-label {
 // Categories & Docs plugin
 // -----------------------------------------------------------------------
 
-// Fix for sticking tags on categories
-.category-boxes .subcategories .subcategory {
-  margin-bottom: 0.5rem !important;
-}
-
-// Coherence between font-sizes everywhere + pointer styling
-.category-box .description {
-  font-size: inherit;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  cursor: default;
-}
-
-// Target links on all the boxes
-.category-boxes.category-box.subcategories {
-  z-index: 2;
-}
-
-.category-boxes.category-box.description {
-  z-index: 0;
-}
-
-.category-boxes.category-box .parent-box-link::before {
-  z-index: 1;
-}
-
-// Distinctive category titles
-.category-boxes.category-box-heading .badge-category__name,
-.category-boxes-with-topics.category-box-heading.badge-category__name {
-  font-weight: 600;
-}
-
-// Disable group expand/collapse feature
-.custom-categories-groups a {
-  pointer-events: none;
-  cursor: default;
-}
-
-.custom-categories-groups.category-boxes.category-box-soporte,
-.custom-categories-groups.custom-category-group-toggle a svg {
-  display: none !important;
-}
-
-.tag-group-content_languages_disabled,
-.tag-group-content_languages,
-.tag-group-tickets_priority,
-.tag-group-tickets_status {
-  display: none !important;
-}
-
 // Padding on Docs
 .discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link {
   padding: 0.3rem 0;
+}
+
+body.doc-simple-mode .topic-post[data-post-number="1"] .cooked {
+  padding-top: revert-rule;
 }
 
 // Hide tags on questions
@@ -699,19 +670,8 @@ body.category-preguntas li:has(.tag-drop) {
 }
 
 .topic-post[data-post-number="1"] {
-  .topic-avatar {
+  .like {
     display: block !important;
-  }
-
-  .topic-meta-data {
-    .names {
-      display: block !important;
-    }
-
-    .like,
-    .reply {
-      display: block !important;
-    }
   }
 }
 
@@ -857,10 +817,16 @@ body.category-trading-curso .more-topics__container {
   font-size: 1.3rem !important;
 }
 
-// Hover links on Welcome Banner — the theme's own light hover tint.
+// Styling links on Welcome Banner — the theme's own light hover tint.
+.banner-featured-links__link,
+.banner-featured-links__link:visited {
+  color: var(--accent-text-color);
+}
+
 .banner-featured-links__link:hover {
-  background-color: var(--hover);
-  color: var(--tertiary);
+  background-color: var(--tertiary);
+  box-shadow: 0 0 0 4px var(--button-box-shadow);
+  color: var(--accent-text-color);
 }
 
 // Underline hover links on Header Links
@@ -1008,10 +974,44 @@ img.emoji {
 
 // Remove ul spacing
 .cooked ul,
-.cooked ol,
 .d-editor-preview ul,
 .d-editor-preview ol {
   padding-inline-start: 0;
+  list-style-type: "– ";
+
+}
+
+// Update ol types
+.cooked ol,
+.d-editor-preview ol {
+  padding-inline-start: 0;
+  counter-reset: item;
+  list-style: none;
+  padding-left: 0;
+  font-family: system-ui, sans-serif;
+}
+
+.post-content ol li {
+  counter-increment: item;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.2em 0;
+}
+
+.post-content ol li::before {
+  content: counter(item);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 50%;
+  border: 1px solid var(--tertiary);
+  background: transparent;
+  font-size: 0.75em;
+  color: var(--primary);
+  flex-shrink: 0;
 }
 
 // Blog styling plugin (scale down)
@@ -1060,6 +1060,24 @@ img.emoji {
   * {
     color: inherit !important;
   }
+}
+
+// Visible progress bar in tiny screens
+@media screen and (width <=400px) {
+  .with-topic-progress {
+    bottom: calc(env(safe-area-inset-bottom) + var(--composer-height, 51px));
+  }
+}
+
+@media screen and (width <=768px) {
+  .with-topic-progress {
+    bottom: calc(env(safe-area-inset-bottom) + var(--composer-height, 0px) + var(--d-border-radius-large)*2.7);
+  }
+}
+
+// Less height for progress bar 
+.topic-progress-wrapper {
+  height: 2.5rem;
 }
 
 // Less padding on progress bar

@@ -1,9 +1,9 @@
 @use "lib/viewport";
 
-// Tablet 21px, mobile 20px, desktop 23px
+// Tablet 19px, mobile 20px, desktop 23px
 @include viewport.until(lg) {
   html {
-    font-size: 21px;
+    font-size: 19px;
   }
 }
 
