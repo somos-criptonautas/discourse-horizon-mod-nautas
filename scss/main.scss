@@ -1227,3 +1227,39 @@ body.badges-page .category-banner-badges {
   width: 30px;
   border-radius: 0.15rem;
 }
+
+// Category groups into non-categories
+
+div[class^="category-title-header"] .category-title-contents {
+  max-width: 500px;
+  padding: 40px;
+}
+
+.category-title-contents {
+  display: grid;
+  grid-template-areas:
+    "logo title      "
+    "logo description";
+  grid-template-columns: auto 1fr;
+}
+
+.category-title-contents .category-title {
+  grid-area: title;
+  align-self: end;
+}
+
+div[class^="category-title-header"] .badge-category__wrapper {
+  display: inline-block;
+  color: unset;
+}
+
+div[class^="category-title-header"] .badge-category__wrapper .badge-category {
+  display: flex;
+  color: currentcolor;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-title-contents .category-title .badge-category__name {
+  font-size: var(--font-up-1);
+}

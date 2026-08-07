@@ -1,48 +1,3 @@
-/* // Fix for sticking tags on categories
-.category-boxes .subcategories .subcategory {
-    margin-bottom: 0.5rem !important;
-}
-
-// Coherence between font-sizes everywhere + pointer styling
-.category-box .description {
-    font-size: inherit;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    cursor: default;
-}
-
-// Target links on all the boxes
-.category-boxes.category-box.subcategories {
-    z-index: 2;
-}
-
-.category-boxes.category-box.description {
-    z-index: 0;
-}
-
-.category-boxes.category-box .parent-box-link::before {
-    z-index: 1;
-}
-
-// Distinctive category titles
-.category-boxes.category-box-heading .badge-category__name,
-.category-boxes-with-topics.category-box-heading.badge-category__name {
-    font-weight: 600;
-}
-
-// Disable group expand/collapse feature
-.custom-categories-groups a {
-    pointer-events: none;
-    cursor: default;
-}
-
-.custom-categories-groups.category-boxes.category-box-soporte,
-.custom-categories-groups.custom-category-group-toggle a svg {
-    display: none !important;
-} */
-
 // Fix for sticking tags on categories
 .category-boxes .subcategories .subcategory {
     margin-bottom: 0.5rem !important;
@@ -78,19 +33,14 @@
 }
 
 // Disable group expand/collapse feature
-.custom-categories-groups a {
+.custom-categories-groups a.custom-category-group-toggle {
     pointer-events: none;
     cursor: default;
 }
 
+// Hide some elements
 .custom-categories-groups .category-box-soporte,
-.custom-categories-groups .custom-category-group-toggle a svg {
-    display: none !important;
-}
-
-.tag-group-content_languages_disabled,
-.tag-group-content_languages,
-.tag-group-tickets_priority,
-.tag-group-tickets_status {
+.custom-category-group-toggle .d-icon,
+custom-category-group-muted is-expanded {
     display: none !important;
 }
