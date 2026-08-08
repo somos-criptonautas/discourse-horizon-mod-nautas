@@ -1,3 +1,9 @@
+// Apply category header style to badges and groups
+.badges-page .category-title-header,
+.groups-page .category-title-header {
+    display: flex;
+}
+
 // Fix for sticking tags on categories
 .category-boxes .subcategories .subcategory {
     margin-bottom: 0.5rem !important;
@@ -41,6 +47,6 @@
 // Hide some elements
 .custom-categories-groups .category-box-soporte,
 .custom-category-group-toggle .d-icon,
-custom-category-group-muted is-expanded {
+custom-category-group-muted {
     display: none !important;
 }

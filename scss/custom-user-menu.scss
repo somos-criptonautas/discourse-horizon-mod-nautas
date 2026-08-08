@@ -1,0 +1,35 @@
+// Custom user menu adjustments
+.custom-user-menu-content .fk-d-menu__inner-content {
+    min-width: 15.5rem;
+}
+
+.custom-user-menu-content .fk-d-menu__user-info {
+    grid-template-columns: 2rem 1fr;
+}
+
+.fk-d-menu__profile-tab {
+    font-size: 0.97rem;
+}
+
+.custom-user-menu-content .fk-d-menu__profile-tab {
+    padding: 0.56rem 0;
+}
+
+.fk-d-menu__profile-tab hr {
+    margin: 0.56rem;
+}
+
+.custom-user-menu-content .fk-d-menu__profile-tab li.logout {
+    padding-top: 0.56rem;
+}
+
+.fk-d-menu__profile-tab ul li:not([class]) {
+    padding-bottom: 0.56rem;
+}
+
+.custom-user-menu-content .fk-d-menu__inner-content a,
+.custom-user-menu-content .fk-d-menu__inner-content button {
+    margin: 0 0.56rem;
+    padding: 0 calc(var(--d-sidebar-row-horizontal-padding)*2);
+    border-radius: var(--d-border-radius);
+}

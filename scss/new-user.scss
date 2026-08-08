@@ -1,7 +1,8 @@
 @use "lib/viewport";
 
 .new-user-wrapper.user-navigation-secondary.navigation-controls {
-    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 0 0.5rem;
 }
 
 // Remove redundant AI chats on messages for better navigation
@@ -14,6 +15,7 @@
     width: 100%;
     max-width: 100%;
     height: 1.8rem;
+    margin: 0 0.5rem;
 }
 
 .post__topic-map.topic-map.--op {
@@ -23,6 +25,8 @@
 .new-user-wrapper .user-navigation-secondary .messages-dropdown-trigger,
 .new-user-wrapper .user-navigation-secondary .category-breadcrumb li {
     width: 100%;
+    max-width: 100%;
+    padding: 0 0.5rem;
 }
 
 // [EXPERIMENTAL] Hiding activity switch for MPs vertical navbar design
@@ -36,8 +40,10 @@ body.user-activity-page .user-navigation .user-navigation-secondary {
         display: unset;
     }
 
+    // Padding and alignment for vertical nav pills
     .nav-pills.action-list.messages-nav.nav-pills li a {
-        justify-content: inherit;
+        justify-content: left;
+        margin: 0 1.7rem;
     }
 
     // Removing padding on column dirty hacked profile page
@@ -60,14 +66,25 @@ body.user-activity-page .user-navigation .user-navigation-secondary {
         justify-content: left;
     }
 
-    // Padding and alignment for vertical nav pills
-    .user-navigation-secondary .nav-pills li a {
-        justify-content: left;
-        padding-left: 2rem;
-    }
-
     // Vertical flex display adjustment
     .new-user-wrapper .user-navigation-secondary .nav-pills li {
         flex: 1 1 auto !important;
     }
+
+    // Vertical navbar on profile
+    :not(.user-messages-page).new-user-content-wrapper {
+        display: flex;
+    }
+
+    .user-navigation-secondary {
+        margin: 1.5rem 1.5rem 0.5rem 0.5rem;
+        font-size: var(--font-0);
+        min-width: 27%;
+    }
+
+    .new-user-wrapper .user-navigation-secondary {
+        height: 100%;
+        min-width: 27%;
+    }
+
 }

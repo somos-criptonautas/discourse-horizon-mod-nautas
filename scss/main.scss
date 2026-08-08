@@ -486,6 +486,11 @@ button [title="similares"] .d-button-label {
   }
 }
 
+// Padding on <hr> elements
+.cooked hr {
+  margin: 2.1rem;
+}
+
 // -----------------------------------------------------------------------
 // TOC
 // -----------------------------------------------------------------------
@@ -978,7 +983,6 @@ aside.onebox {
 // Mod edits //
 .signup-progress-bar,
 #user-menu-button-other-notifications,
-.presence-toggle,
 .user-nav__notifications,
 .user-nav__badges,
 .collapsed-info-panel:last-child,
@@ -1055,7 +1059,7 @@ img.emoji {
   align-items: center;
 }
 
-// Restrict max-width if your vertical video is too tall
+// Restrict max-width if vertical video is too tall
 [data-wrap="centered-video"] video,
 [data-wrap="centered-video"] iframe {
   display: block;
@@ -1205,7 +1209,7 @@ body.badges-page .category-banner-badges {
 // Experimental / unverified / inactive
 // -----------------------------------------------------------------------
 
-// [UNCONFIRMED] Selector not verified against core or plugins; may be dead.
+// [UNCONFIRMED] Selector not verified against core or plugins; may be dead
 @media screen and (width >=925px) {
   .container.posts {
     grid-template-columns: 80% 20%;
@@ -1217,49 +1221,25 @@ body.badges-page .category-banner-badges {
   font-size: var(--font-up-1);
 } */
 
-// Disable resenha automatic room
-.resenha-room-1 {
-  display: none;
-}
-
 // National flags re-styling
 .nationalflag-usersummary {
   width: 30px;
   border-radius: 0.15rem;
 }
 
-// Category groups into non-categories
-
-div[class^="category-title-header"] .category-title-contents {
-  max-width: 500px;
-  padding: 40px;
+// Showing wrap selectors on composer only to staff
+.group-0_nuevos:not(.group-team):not(.group-4_agoristas):not(.group-5_lideres) [data-name="toggle-wrap"] {
+  display: none;
 }
 
-.category-title-contents {
-  display: grid;
-  grid-template-areas:
-    "logo title      "
-    "logo description";
-  grid-template-columns: auto 1fr;
+// Hiding hidden wraps
+.topic-post.d-wrap[data-wrap="hidden"] {
+  display: none;
 }
 
-.category-title-contents .category-title {
-  grid-area: title;
-  align-self: end;
-}
+// Hiding some tags on category pages
+[data-tag-name="cerrado"] // Hiding last selectors on MP (we do not use trust_level defaults)
 
-div[class^="category-title-header"] .badge-category__wrapper {
-  display: inline-block;
-  color: unset;
-}
-
-div[class^="category-title-header"] .badge-category__wrapper .badge-category {
-  display: flex;
-  color: currentcolor;
-  justify-content: center;
-  align-items: center;
-}
-
-.category-title-contents .category-title .badge-category__name {
-  font-size: var(--font-up-1);
+.messages-dropdown-content .dropdown-menu li:nth-last-of-type(-n+2) {
+  display: none;
 }
