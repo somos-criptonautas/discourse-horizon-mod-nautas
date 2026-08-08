@@ -34,6 +34,11 @@ body.user-activity-page .user-navigation .user-navigation-secondary {
     display: none !important;
 }
 
+// Hide gists on MPs
+.new-user-content-wrapper .excerpts-gists-toggle-btn {
+    display: none;
+}
+
 // Workaround on MP messages for new User UI
 @include viewport.from(sm) {
     body.user-messages-page .new-user-wrapper .user-navigation-secondary {

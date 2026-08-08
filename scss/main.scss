@@ -988,11 +988,14 @@ aside.onebox {
 .collapsed-info-panel:last-child,
 .sidebar-section-wrapper .sidebar-section-header-global-indicator .d-icon,
 .groups-header-filters,
-.user-nav__preferences-interface,
 .user-nav__preferences-navigation-menu,
 .user-nav__preferences-ai,
 .user-nav__activity-read,
 .user-nav__activity,
+.control-group[data-setting-name="user-color-scheme"],
+.control-group[data-setting-name="user-new-user-tips"],
+.controls[data-setting-name="user-enable-markdown-monospace-font"],
+.controls[data-setting-name="user-dynamic-favicon"],
 .category-quienes-somos .top-lists,
 .sidebar-section-link-wrapper [data-list-item-name="activity-pub-about"] {
   display: none !important;
@@ -1141,13 +1144,13 @@ img.emoji {
 // Tighter button padding on desktop only; mobile keeps roomier touch targets.
 @media (width <768px) {
   .btn {
-    padding: 0.6em 0.85em;
+    padding: 0.56em 0.81em;
   }
 }
 
 @media (width >=768px) {
   .btn {
-    padding: 0.45em 0.65em;
+    padding: 0.39em 0.63em;
   }
 }
 
