@@ -283,17 +283,17 @@ body:not(.has-full-page-chat, .wizard) {
   display: none !important;
 }
 
-// Remove coaching subscribe section from allowed groups in sidebar
-.group-3_traders.sidebar-section[data-section-name="coaching"]:first-of-type,
-.group-4_agoristas.sidebar-section[data-section-name="coaching"]:first-of-type,
-.group-5_lideres.sidebar-section[data-section-name="coaching"]:first-of-type,
-.group-team.sidebar-section[data-section-name="coaching"]:first-of-type {
+// Remove coach subscribe section from allowed groups in sidebar
+.group-3_traders.sidebar-section[data-section-name="coach"],
+.group-4_agoristas.sidebar-section[data-section-name="coach"],
+.group-5_lideres.sidebar-section[data-section-name="coach"],
+.group-team.sidebar-section[data-section-name="coach"] {
   display: none !important;
 }
 
 // Removing coaching enter section to not-subscribed groups in sidebar
-.group-1_anons:not(.group-3_traders):not(.group-team):not(.group-4_agoristas):not(.group-5_lideres).sidebar-section[data-section-name="coaching"]:not(:first-of-type),
-.group-2_nautas:not(.group-3_traders):not(.group-team):not(.group-4_agoristas):not(.group-5_lideres).sidebar-section[data-section-name="coaching"]:not(:first-of-type) {
+.group-1_anons:not(.group-3_traders):not(.group-team):not(.group-4_agoristas):not(.group-5_lideres).sidebar-section[data-section-name="coaching"],
+.group-2_nautas:not(.group-3_traders):not(.group-team):not(.group-4_agoristas):not(.group-5_lideres).sidebar-section[data-section-name="coaching"] {
   display: none !important;
 }
 
@@ -313,11 +313,6 @@ body:not(.has-full-page-chat, .wizard) {
 .group-0_nuevos:not(.group-1_anons):not(.group-2_nautas):not(.group-3_traders):not(.group-team):not(.group-4_agoristas):not(.group-5_lideres).sidebar-section[data-section-name="apps-externas"],
 .anons[data-section-name="categories"] {
   display: none !important;
-}
-
-// Hide navigation bar
-#navigation-bar {
-  display: none;
 }
 
 // f-nav edits
@@ -462,7 +457,6 @@ button [title="similares"] .d-button-label {
 
 .navigation-controls {
   flex: 1;
-  justify-content: flex-end;
   flex-wrap: unset;
 }
 
@@ -587,13 +581,17 @@ button [title="similares"] .d-button-label {
   display: none !important;
 }
 
-// ** Dirty hack to hide titles and flair user changing ** //
-.control-group .pref-title,
-.control-group .pref-flair {
+// Hidding noise from user profiles
+.pref-new-user-tips,
+.pref-reset-seen-user-tips {
   display: none !important;
 }
 
 .message-panel__inboxes .message-panel__inbox:nth-last-child {
+  display: none;
+}
+
+.control-group .upcoming-changes {
   display: none;
 }
 
@@ -993,7 +991,7 @@ aside.onebox {
 .user-nav__activity-read,
 .user-nav__activity,
 .control-group[data-setting-name="user-color-scheme"],
-.control-group[data-setting-name="user-new-user-tips"],
+.control-group[data-setting-name="pref-title"],
 .controls[data-setting-name="user-enable-markdown-monospace-font"],
 .controls[data-setting-name="user-dynamic-favicon"],
 .category-quienes-somos .top-lists,
@@ -1122,18 +1120,6 @@ img.emoji {
   font-size: var(--font-down-1);
 }
 
-// Signup button hiding (Member Applications Plugin ON)
-.auth-buttons .sign-up-button,
-#new-account-link {
-  display: none !important;
-}
-
-.btn.btn-small.btn-default.member-application-header-apply-btn {
-  background-color: var(--accent-color);
-  color: var(--accent-text-color);
-  margin-left: 0.25rem;
-}
-
 // Heading adapting heading font-size
 @media (width >=40rem) {
   .login-welcome-header .login-title {
@@ -1150,7 +1136,7 @@ img.emoji {
 
 @media (width >=768px) {
   .btn {
-    padding: 0.56em 0.81em;
+    padding: 0.41em 0.75em;
   }
 }
 
