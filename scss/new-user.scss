@@ -5,9 +5,21 @@
     padding: 0 0.5rem;
 }
 
+// Styling better on mobile
+@media (width < 40rem) {
+    .user-messages-page .user-content {
+        margin: 0.25rem 0 0 0;
+    }
+}
+
 // Remove redundant AI chats on messages for better navigation
 .user-nav__messages-ai-bot-chats {
     display: none;
+}
+
+// Remove weird border top in MPs (for vertical nav)
+.user-messages-page .paginated-topics-list .topic-list tbody.topic-list-body {
+    border-top: unset !important;
 }
 
 .new-user-wrapper.user-navigation-secondary .messages-dropdown-trigger,
@@ -22,11 +34,9 @@
     font-size: var(--font-down-1);
 }
 
-.new-user-wrapper .user-navigation-secondary .messages-dropdown-trigger,
-.new-user-wrapper .user-navigation-secondary .category-breadcrumb li {
-    width: 100%;
-    max-width: 100%;
-    padding: 0 0.5rem;
+// Same font-size than other profile navbars
+.new-user-wrapper .user-navigation-secondary {
+    font-size: unset !important;
 }
 
 // [EXPERIMENTAL] Hiding activity switch for MPs vertical navbar design
@@ -43,6 +53,21 @@ body.user-activity-page .user-navigation .user-navigation-secondary {
 @include viewport.from(sm) {
     body.user-messages-page .new-user-wrapper .user-navigation-secondary {
         display: unset;
+    }
+
+    // More width in (vertical display)
+    .new-user-wrapper .user-navigation-secondary .messages-dropdown-trigger,
+    .new-user-wrapper .user-navigation-secondary .category-breadcrumb li {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    // More padding in table on MPs profile (vertical display)
+    @media (width < 40rem) {
+        .topic-list .topic-list-data {
+            padding: 0.74rem 0;
+            max-width: 300px;
+        }
     }
 
     // Padding and alignment for vertical nav pills

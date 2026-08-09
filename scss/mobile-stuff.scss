@@ -130,17 +130,6 @@ body.f-nav-hidden:not(.archetype-regular,
   }
 }
 
-// Hiding secondary nav on mobile activity/invites/billing profiles.
-@media (width <=576px) {
-
-  body.user-activity-page .user-navigation-secondary,
-  body.user-invites-page .user-navigation-secondary,
-  body.user-billing-page .user-navigation-secondary,
-  body.user-billing-page .user-secondary-navigation {
-    display: none !important;
-  }
-}
-
 // More padding on search boxes 
 .select-kit.is-expanded .select-kit-filter.is-expanded {
   padding: 0.45em 0.65em;

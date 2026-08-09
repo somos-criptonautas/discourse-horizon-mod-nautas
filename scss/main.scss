@@ -1144,13 +1144,13 @@ img.emoji {
 // Tighter button padding on desktop only; mobile keeps roomier touch targets.
 @media (width <768px) {
   .btn {
-    padding: 0.56em 0.81em;
+    padding: 0.39em 0.63em;
   }
 }
 
 @media (width >=768px) {
   .btn {
-    padding: 0.39em 0.63em;
+    padding: 0.56em 0.81em;
   }
 }
 
