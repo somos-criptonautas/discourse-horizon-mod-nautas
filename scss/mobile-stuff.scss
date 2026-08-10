@@ -13,6 +13,11 @@
   }
 }
 
+// Hiding bookmarks on topic pages
+.navigation-bar .nav-item_bookmarks {
+  display: none;
+}
+
 // Sticky container?
 .list-container {
   position: inherit;
