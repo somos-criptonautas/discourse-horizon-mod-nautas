@@ -1,6 +1,6 @@
 {
-  "name": "Horizon Modifications",
-  "description": "Theme component adding custom modifications to the Discourse Horizon theme.",
+  "name": "Custom Horizon",
+  "description": "Custom modifications to the Discourse Horizon theme.",
   "authors": "satonotdead",
   "about_url": "https://meta.discourse.org/t/horizon-theme/360486",
   "license_url": "https://github.com/discourse/horizon/blob/main/LICENSE",

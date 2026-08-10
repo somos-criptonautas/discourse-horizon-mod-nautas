@@ -1,0 +1,7 @@
+    // More padding in table on MPs profile (vertical display)
+    @media (width < 40rem) {
+        .topic-list .topic-list-data {
+            padding: 0.74rem 0;
+            max-width: 300px;
+        }
+    }
