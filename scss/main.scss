@@ -233,6 +233,11 @@ body:not(.has-full-page-chat, .wizard) {
   }
 }
 
+// TEST: one line on navigation
+.navigation-container {
+  flex-wrap: nowrap;
+}
+
 // -----------------------------------------------------------------------
 // Header (local overrides — see also header.scss)
 // -----------------------------------------------------------------------
@@ -813,7 +818,7 @@ body.category-preguntas li:has(.tag-drop) {
 
 .category-wiki .navigation-container,
 .category-glosario .navigation-container {
-  justify-content: flex-end;
+  display: none;
 }
 
 // No borders on top but padding

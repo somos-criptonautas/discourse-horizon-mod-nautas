@@ -11,11 +11,11 @@
   html {
     font-size: 20px;
   }
-}
 
-// Hiding bookmarks on topic pages
-.navigation-bar .nav-item_bookmarks {
-  display: none;
+  // Hiding navigation bar
+  .navigation-bar {
+    display: none;
+  }
 }
 
 // Sticky container?
