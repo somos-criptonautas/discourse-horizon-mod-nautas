@@ -12,8 +12,9 @@
     font-size: 20px;
   }
 
-  // Hiding navigation bar
-  #navigation-bar {
+  // Hiding navigation bar and category dropdown
+  #navigation-bar,
+  .select-kit.combo-box.category-drop {
     display: none;
   }
 }
