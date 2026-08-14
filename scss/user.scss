@@ -41,8 +41,8 @@
     display: none;
 }
 
-@media (width <=600px) {
-    .top-sub-section:not(.topics-section):not(.replies-section):not(.liked-by-section):not(.most-liked-section) {
+@media (width <=4700px) {
+    .top-sub-section.topics-section {
         float: none;
         width: 100%;
     }
@@ -82,6 +82,6 @@
 }
 
 // Padding to profile box
-.user-main .about.has-background .details {
-    padding: 0.5rem;
+.user-main .details {
+    padding: 1rem;
 }

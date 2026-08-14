@@ -233,9 +233,14 @@ body:not(.has-full-page-chat, .wizard) {
   }
 }
 
-// TEST: one line on navigation
+// One line on navigation
 .navigation-container {
   flex-wrap: nowrap;
+}
+
+// Sidebar new topic full width button
+.sidebar-new-topic-button__wrapper {
+  margin: var(--space-3) var(--space-3) 0 var(--space-2);
 }
 
 // -----------------------------------------------------------------------
@@ -251,10 +256,22 @@ body:not(.has-full-page-chat, .wizard) {
 
 // Custom Header Links adjustments
 .custom-header-links .headerLink a {
-  padding: 0 .27em;
+  padding: 0.25em;
   color: var(--header_primary);
   font-size: unset;
   margin-right: 0.5rem;
+}
+
+.custom-header-links .headerLink a:hover {
+  background: var(--d-sidebar-highlight-background);
+  color: var(--d-sidebar-highlight-color);
+  outline: none;
+  border-radius: var(--d-border-radius);
+}
+
+// More room in header
+:where(.uc-modernize-foundation-theme) .d-header {
+  height: 3.5em;
 }
 
 // Anonymous users full display on login header
@@ -976,11 +993,6 @@ body.category-trading-curso .more-topics__container {
   background-color: var(--tertiary);
   box-shadow: 0 0 0 4px var(--button-box-shadow);
   color: var(--accent-text-color);
-}
-
-// Underline hover links on Header Links
-.custom-header-links .headerLink a:hover {
-  text-decoration: underline;
 }
 
 // Icons on Welcome Banner (EXPERIMENTAL)
