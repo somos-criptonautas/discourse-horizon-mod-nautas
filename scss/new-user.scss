@@ -84,9 +84,30 @@ body.user-activity-page .user-navigation .user-navigation-secondary {
 
     // Style and fix wrap on Profile MP
     #user-navigation-secondary__horizontal-nav .new-user-wrapper .user-navigation .nav-pills li a,
-    .user-nav__preferences-account .user-navigation .nav-pills li a {
+    #user-navigation-secondary__horizontal-nav .new-user-content-wrapper .user-navigation .nav-pills li a {
         flex-wrap: wrap-reverse;
         justify-content: left;
+    }
+
+    // Re-order in profile nav preferences (to the top)
+    .user-nav-preferences-activity-pub {
+        order: -2;
+    }
+
+    .user-nav__preferences-calendar-subscriptions {
+        order: -3;
+    }
+
+    .user-nav__preferences-account {
+        order: -5;
+    }
+
+    .user-nav__preferences-security {
+        order: -1;
+    }
+
+    .user-nav__preferences-profile {
+        order: -4;
     }
 
     // Vertical flex display adjustment

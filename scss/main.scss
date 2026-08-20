@@ -253,6 +253,11 @@ body.category .navigation-controls,
   z-index: 999;
 }
 
+// Hiding voice chats for a while
+.sidebar-section-wrapper[data-section-name="resenha-voice-rooms"] {
+  display: none;
+}
+
 // -----------------------------------------------------------------------
 // Header (local overrides — see also header.scss)
 // -----------------------------------------------------------------------
@@ -1219,13 +1224,7 @@ img.emoji {
 // Visible progress bar in tiny screens
 @media screen and (width <=400px) {
   .with-topic-progress {
-    bottom: calc(env(safe-area-inset-bottom) + var(--composer-height, 51px));
-  }
-}
-
-@media screen and (width <=768px) {
-  .with-topic-progress {
-    bottom: calc(env(safe-area-inset-bottom) + var(--composer-height, 0px) + var(--d-border-radius-large)*2.7);
+    bottom: calc(env(safe-area-inset-bottom) + var(--composer-height, 0px) + var(--d-border-radius-large)*3.3);
   }
 }
 
@@ -1246,6 +1245,11 @@ img.emoji {
   #topic-progress-wrapper {
     padding: 1rem 0;
   }
+}
+
+// Less height in progress bar
+#topic-progress-wrapper #topic-progress {
+  padding: .44rem 0.75em;
 }
 
 // Intro text for groups/badges pages, rendered from after_header.html.
@@ -1316,6 +1320,58 @@ ol.category-breadcrumb {
   display: none;
 }
 
-#navigation-bar {
+@media (width < 40rem) {
+
+  #main-outlet .list-controls .navigation-container .category-breadcrumb.hidden,
+  #main-outlet .list-controls .navigation-container .category-breadcrumb {
+    display: none !important;
+  }
+}
+
+.navigation-controls {
+  position: fixed;
+  bottom: 10vh;
+  right: 2vh;
+}
+
+// Hiding activitypub useless navigation and texts
+.activity-pub-navigation,
+.topic-map__activity-pub {
+  display: none;
+}
+
+// Hiding more topics navigation (disabled) on mobile
+@media (width < 40rem) {
+  .more-topics__container .more-topics__list .topic-list-header.--has-tabs {
+    display: none !important;
+  }
+}
+
+// More room for title in mobile
+#topic-title h1 {
+  padding: 0.5rem 0;
+}
+
+// Nested floating fixed (overlaps with custom bottom mobile navigation)
+.nested-view__floating-actions {
+  position: relative;
+  z-index: unset;
+}
+
+// Nested styling
+.nested-view {
+  background: unset;
+}
+
+.nested-view:not(.nested-context-view)>.nested-view__controls {
+  z-index: unset;
+  padding: .47rem 1rem;
+}
+
+.nested-view__controls-left {
+  order: 2;
+}
+
+.nested-view .first-reply-statement-wrapper {
   display: none;
 }

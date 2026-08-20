@@ -182,6 +182,10 @@ export default apiInitializer((api) => {
   api.replaceIcon("discobot", "lightning");
   api.replaceIcon("far-discobot", "lightning");
   api.replaceIcon("language", "translate");
+  api.replaceIcon("bars-staggered", "");
+  api.replaceIcon("icon-list", "ph-dt-list");
+api.replaceIcon("icon-pencil", "ph-dt-pencil");
+  api.replaceIcon("icon-phone", "ph-dt-phone-list");
 
   // Do not display closed groups buttons
   const hideClosedButtons = () => {

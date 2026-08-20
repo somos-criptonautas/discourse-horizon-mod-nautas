@@ -1,15 +1,15 @@
 @use "lib/viewport";
 
-// Tablet 19px, mobile 20px, desktop 23px
+// Tablet 19px, mobile 21px, desktop 23px
 @include viewport.until(lg) {
   html {
-    font-size: 19px;
+    font-size: 18px;
   }
 }
 
 @include viewport.until(sm) {
   html {
-    font-size: 20px;
+    font-size: 21px;
   }
 
   // Hiding navigation bar and category dropdown
@@ -29,12 +29,13 @@ body.f-nav-hidden:not(.has-full-page-chat) .f-nav {
   transform: none !important;
 }
 
+/* 
 // Hide navigation (desktop on mobile) on scrolling
 body.f-nav-hidden:not(.archetype-regular,
   .archetype-private_message,
   .has-full-page-chat) .list-controls {
   position: static;
-}
+} */
 
 // All categories sidebar same font-size
 .sidebar-wrapper .sidebar-section-link [data-link-name="all-categories"] {
