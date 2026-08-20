@@ -241,6 +241,16 @@ body:not(.has-full-page-chat, .wizard) {
 // Sidebar new topic full width button
 .sidebar-new-topic-button__wrapper {
   margin: var(--space-3) var(--space-3) 0 var(--space-2);
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+}
+
+body.tags-page .navigation-controls,
+body.category .navigation-controls,
+.navigation-topics .navigation-controls,
+.categories-list .navigation-controls {
+  z-index: 999;
 }
 
 // -----------------------------------------------------------------------
@@ -859,13 +869,6 @@ body.category-trading-curso .more-topics__container {
   display: none;
 }
 
-/* // Hiding categories and tags dropdown on docs
-.category-glosario .category-breadcrumb,
-.category-trading-curso .category-breadcrumb,
-.category-wiki .category-breadcrumb {
-  display: none;
-} */
-
 // Hide descriptions on categories
 .select-kit.combo-box.category-chooser .select-kit-row .category-desc {
   display: none;
@@ -1247,7 +1250,7 @@ img.emoji {
 
 // Intro text for groups/badges pages, rendered from after_header.html.
 .custom-page-intro {
-  display: none;
+  display: none !important;
 }
 
 body.groups-page .category-banner-groups,
@@ -1303,5 +1306,24 @@ body.badges-page .category-banner-badges {
 
 // Hiding text on gists (theme component) button
 .excerpts-gists-toggle-btn span {
+  display: none;
+}
+
+// [EXPERIMENTAL] Top nav display
+
+#navigation-bar>li:not([class*="custom_"]),
+ol.category-breadcrumb {
+  display: none;
+}
+
+#navigation-bar {
+  display: none;
+}
+
+body.category-glosario .custom_glosario .nav-item_custom_glosario {
+  display: none;
+}
+
+body.category-wiki .custom_wiki .nav-item_custom_wiki {
   display: none;
 }
