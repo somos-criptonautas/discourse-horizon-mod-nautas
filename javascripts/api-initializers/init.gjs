@@ -180,6 +180,7 @@ export default apiInitializer((api) => {
 
   // Replace some icons
   api.replaceIcon("discobot", "lightning");
+  api.replaceIcon("far-discobot", "lightning");
   api.replaceIcon("language", "translate");
 
   // Do not display closed groups buttons
