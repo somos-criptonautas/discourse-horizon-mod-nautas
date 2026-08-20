@@ -497,6 +497,40 @@ button [title="similares"] .d-button-label {
   order: unset !important;
 }
 
+// Inline top category navigation
+.list-controls .navigation-container {
+  display: flex;
+}
+
+.list-controls .navigation-container .category-breadcrumb {
+  flex-basis: unset;
+  padding-right: 0.1rem;
+
+}
+
+// Disable hiding top header in custom nav mobile
+body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.has-full-page-chat) .d-header-wrap {
+  transform: unset !important;
+  opacity: unset !important;
+  transition: unset !important;
+}
+
+// Rearrange search button on custom nav mobile
+@media (width < 48rem) {
+  .d-header .search-dropdown {
+    grid-area: unset !important;
+  }
+}
+
+// Disable image on no new topics
+.empty-state__image {
+  display: none;
+}
+
+.empty-state__container {
+  padding-top: 1.5rem;
+}
+
 // Navigation in one row
 .navigation-controls {
   flex-wrap: unset;
@@ -914,6 +948,35 @@ body.category-trading-curso .more-topics__container {
   }
 }
 
+// Better subcategories button styling
+.category-boxes .category .description,
+.category-boxes-with-topics .category .description {
+  display: none;
+}
+
+@media (width >=40rem) {
+
+  .category boxes {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .mobile-view .category-boxes .category-box,
+  .mobile-view .category-boxes-with-topics .category-box {
+    max-width: 45%;
+  }
+
+  .category-boxes .category-box-heading .badge-category__name,
+  .category-boxes-with-topics .category-box-heading .badge-category__name {
+    font-size: 1rem;
+  }
+
+  .category-boxes .category-details,
+  .category-boxes-with-topics .category-details {
+    height: 7.5vh;
+  }
+}
+
 // -----------------------------------------------------------------------
 // Search
 // -----------------------------------------------------------------------
@@ -1314,24 +1377,9 @@ body.badges-page .category-banner-badges {
 }
 
 // [EXPERIMENTAL] Top nav display
-
 #navigation-bar>li:not([class*="custom_"]),
 ol.category-breadcrumb {
   display: none;
-}
-
-@media (width < 40rem) {
-
-  #main-outlet .list-controls .navigation-container .category-breadcrumb.hidden,
-  #main-outlet .list-controls .navigation-container .category-breadcrumb {
-    display: none !important;
-  }
-}
-
-.navigation-controls {
-  position: fixed;
-  bottom: 10vh;
-  right: 2vh;
 }
 
 // Hiding activitypub useless navigation and texts
