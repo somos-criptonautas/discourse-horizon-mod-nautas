@@ -254,6 +254,11 @@ body:not(.has-full-page-chat, .wizard) {
   }
 }
 
+// Hide header links on homepage for avoid redundancy
+.custom-header-links {
+  display: none !important;
+}
+
 // Custom Header Links adjustments
 .custom-header-links .headerLink a {
   padding: 0.25em;
@@ -467,9 +472,9 @@ button [title="similares"] .d-button-label {
   margin-bottom: 2rem;
 }
 
+// Disable top list dropdown (list plain always)
 .top-lists {
-  display: flex;
-  padding: 0.66rem 0 0 1rem;
+  display: none;
 }
 
 // Invert categories and tags order - Publish to right
@@ -794,7 +799,7 @@ body.category-preguntas li:has(.tag-drop) {
 }
 
 @media (width >=40rem) {
-  #main-outlet div[class^="category-title-header"] {
+  #main-outlet div[class*="category-title-header"] {
     max-width: 100%;
   }
 }
@@ -832,11 +837,6 @@ body.category-preguntas li:has(.tag-drop) {
   display: none;
 }
 
-.category-wiki .navigation-container,
-.category-glosario .navigation-container {
-  display: none;
-}
-
 // No borders on top but padding
 .topic-list-item .category-glosario,
 .topic-list-item .category-wiki {
@@ -859,12 +859,12 @@ body.category-trading-curso .more-topics__container {
   display: none;
 }
 
-// Hiding categories and tags dropdown on docs
+/* // Hiding categories and tags dropdown on docs
 .category-glosario .category-breadcrumb,
 .category-trading-curso .category-breadcrumb,
 .category-wiki .category-breadcrumb {
   display: none;
-}
+} */
 
 // Hide descriptions on categories
 .select-kit.combo-box.category-chooser .select-kit-row .category-desc {
@@ -1281,6 +1281,12 @@ body.badges-page .category-banner-badges {
 // Showing wrap selectors on composer only to staff
 .group-0_nuevos:not(.group-team):not(.group-4_agoristas):not(.group-5_lideres) [data-name="toggle-wrap"] {
   display: none;
+}
+
+// Esc preview on similar topic aligment
+.composer-popup .btn.close {
+  top: 1.25em;
+  right: 0.75em;
 }
 
 // Hiding hidden wraps

@@ -1,5 +1,5 @@
 @media (width >=40rem) {
-    #main-outlet div[class^="category-title-header"] {
+    #main-outlet div[class*="category-title-header"] {
         max-width: calc(1250px - 3rem) !important;
     }
 }
