@@ -241,9 +241,9 @@ body:not(.has-full-page-chat, .wizard) {
 // Sidebar new topic full width button
 .sidebar-new-topic-button__wrapper {
   margin: var(--space-3) var(--space-3) 0 var(--space-2);
-  position: fixed;
+  /*   position: fixed;
   right: 1.25rem;
-  bottom: 1.25rem;
+  bottom: 1.25rem; */
 }
 
 body.tags-page .navigation-controls,
@@ -1317,13 +1317,5 @@ ol.category-breadcrumb {
 }
 
 #navigation-bar {
-  display: none;
-}
-
-body.category-glosario .custom_glosario .nav-item_custom_glosario {
-  display: none;
-}
-
-body.category-wiki .custom_wiki .nav-item_custom_wiki {
   display: none;
 }
