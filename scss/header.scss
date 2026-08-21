@@ -38,3 +38,8 @@ html:not(.anon) .d-header-icons .header-dropdown-toggle #toggle-current-user:not
   background-color: light-dark(oklch(from var(--tertiary) 40% c h),
       oklch(from var(--tertiary) 60% c h));
 }
+
+// Profile header to the right, compatible with other tweaks
+.d-header-icons {
+  margin-left: auto;
+}

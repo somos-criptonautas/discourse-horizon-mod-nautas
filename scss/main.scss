@@ -218,10 +218,6 @@ body.category .navigation-controls,
 // Sidebar / navigation
 // -----------------------------------------------------------------------
 
-.has-ai-conversations-sidebar .ai-new-question-button {
-  margin: 1.8em 1rem 1rem;
-}
-
 [data-section-name="tags"],
 [data-section-name="user-threads"],
 [data-section-name="messages"] {
@@ -581,10 +577,8 @@ body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.h
 }
 
 // Chat styling
-@container style(--scheme-type: dark) {
-  .is-expanded .chat-drawer-container {
-    box-shadow: 0 0 0 2px var(--primary-300);
-  }
+.is-expanded .chat-drawer-container {
+  box-shadow: 0 0 0 2px var(--primary-300);
 }
 
 // -----------------------------------------------------------------------
@@ -613,10 +607,6 @@ body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.h
 }
 
 .message-panel__inboxes .message-panel__inbox:nth-last-child {
-  display: none;
-}
-
-.control-group .upcoming-changes {
   display: none;
 }
 
@@ -658,7 +648,8 @@ body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.h
 // Hide stuff on profile
 .user-preferences .form-vertical .control-group .pref-title,
 .user-preferences .form-vertical .control-group .pref-flair,
-.user-preferences .form-vertical .control-group .pref-email-settings {
+.user-preferences .form-vertical .control-group .pref-email-settings,
+.control-group .upcoming-changes {
   display: none;
 }
 
@@ -924,6 +915,48 @@ body.category-trading-curso .more-topics__container {
   .category-boxes-with-topics .category-details {
     height: 7.5vh;
   }
+}
+
+// -----------------------------------------------------------------------
+// Groups rearrangment
+// -----------------------------------------------------------------------
+
+// We use a team group so hide redundancy
+.groups-boxes .group-box [data-group-name="admins"],
+.groups-boxes .group-box [data-group-name="mods"] {
+  display: none;
+}
+
+.groups-boxes .group-box [data-group-name="nuevos"] {
+  order: -8;
+}
+
+.groups-boxes .group-box [data-group-name="anons"] {
+  order: -7;
+}
+
+.groups-boxes .group-box [data-group-name="nautas"] {
+  order: -6;
+}
+
+.groups-boxes .group-box [data-group-name="traders"] {
+  order: -5;
+}
+
+.groups-boxes .group-box [data-group-name="agoristas"] {
+  order: -4;
+}
+
+.groups-boxes .group-box [data-group-name="lideres"] {
+  order: -3;
+}
+
+.groups-boxes .group-box [data-group-name="delistados"] {
+  order: -2;
+}
+
+.groups-boxes .group-box [data-group-name="team"] {
+  order: -1;
 }
 
 // -----------------------------------------------------------------------
@@ -1368,5 +1401,10 @@ body.badges-page .category-banner-badges {
 }
 
 .nested-view .first-reply-statement-wrapper {
+  display: none;
+}
+
+//Remove agent label on chatbots
+body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector__selection-wrapper label {
   display: none;
 }
