@@ -414,7 +414,7 @@ button [title="similares"] .d-button-label {
 
 // Disable new topic in mobile
 @media (width >=40rem) {
-  .d-combo-button .topic-create-button__combo {
+  body.d-combo-button .topic-create-button__combo {
     display: none;
   }
 }

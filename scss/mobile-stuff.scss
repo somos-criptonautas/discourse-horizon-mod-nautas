@@ -11,11 +11,6 @@
   html {
     font-size: 22px;
   }
-
-  // Hiding navigation bar and category dropdown
-  .select-kit.combo-box.category-drop {
-    display: none;
-  }
 }
 
 // Sticky container?
@@ -52,7 +47,8 @@ body.f-nav-hidden:not(.archetype-regular,
   body.has-full-page-chat .sidebar-wrapper,
   .sidebar-wrapper,
   .sidebar-hamburger-dropdown,
-  .sidebar-footer-wrapper {
+  .sidebar-footer-wrapper,
+  .chat-channel-row__content {
     background: none !important;
   }
 }
