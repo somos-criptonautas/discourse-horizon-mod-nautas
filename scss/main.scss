@@ -204,7 +204,7 @@ body.category .navigation-controls,
 }
 
 // Anonymous users full display on login header
-.group-0_nuevos .d-header .panel {
+.group-nuevos .d-header .panel {
   grid-column-start: unset !important;
 }
 
@@ -226,7 +226,7 @@ body.category .navigation-controls,
 
 // Remove apps from @anon sidebar
 .anons.sidebar-section[data-section-name="mas-apps"],
-.group-0_nuevos:not(.group-1_anons):not(.group-2_nautas):not(.group-3_traders):not(.group-team):not(.group-4_agoristas):not(.group-5_lideres).sidebar-section[data-section-name="mas-apps"] {
+.group-nuevos:not(.group-anons):not(.group-nautas):not(.group-traders):not(.group-team):not(.group-agoristas):not(.group-lideres).sidebar-section[data-section-name="mas-apps"] {
   display: none !important;
 }
 
@@ -243,7 +243,7 @@ body.category .navigation-controls,
 }
 
 // Anonymous hiding some stuff on sidebar
-.group-0_nuevos:not(.group-1_anons):not(.group-2_nautas):not(.group-3_traders):not(.group-team):not(.group-4_agoristas):not(.group-5_lideres).sidebar-section[data-section-name="apps-externas"],
+.group-nuevos:not(.group-anons):not(.group-nautas):not(.group-traders):not(.group-team):not(.group-agoristas):not(.group-lideres).sidebar-section[data-section-name="apps-externas"],
 .anons[data-section-name="categories"] {
   display: none !important;
 }
@@ -675,14 +675,6 @@ nav.c-footer .c-footer__item {
   display: none;
 }
 
-.badge-grouping:nth-child(1).badge-group-list::before {
-  content: "@anons se transforman en @randoms con 4 desafíos:";
-}
-
-.badge-grouping:nth-child(2).badge-group-list::before {
-  content: "@randoms son @traders con estos 9:";
-}
-
 // No crown on /badges
 .leaderboard .winner.-position1 .winner__crown,
 .leaderboard .ranking-col-names {
@@ -930,40 +922,40 @@ body.category-trading-curso .more-topics__container {
 // -----------------------------------------------------------------------
 
 // We use a team group so hide redundancy
-.groups-boxes .group-box [data-group-name="admins"],
-.groups-boxes .group-box [data-group-name="mods"] {
+.ember-view .groups-boxes .group-box[data-group-name="admins"],
+.ember-view .groups-boxes .group-box[data-group-name="mods"] {
   display: none;
 }
 
-body.groups-boxes .group-box [data-group-name="nuevos"] {
+.ember-view .groups-boxes .group-box[data-group-name="nuevos"] {
   order: -8;
 }
 
-body.groups-boxes .group-box [data-group-name="anons"] {
+.ember-view .groups-boxes .group-box[data-group-name="anons"] {
   order: -7;
 }
 
-.groups-boxes .group-box [data-group-name="nautas"] {
+.groups-boxes .group-box[data-group-name="nautas"] {
   order: -6;
 }
 
-body.groups-boxes .group-box [data-group-name="traders"] {
+.ember-view .groups-boxes .group-box[data-group-name="traders"] {
   order: -5;
 }
 
-body.groups-boxes .group-box [data-group-name="agoristas"] {
+.ember-view .groups-boxes .group-box[data-group-name="agoristas"] {
   order: -4;
 }
 
-body.groups-boxes .group-box [data-group-name="lideres"] {
+.ember-view .groups-boxes .group-box[data-group-name="lideres"] {
   order: -3;
 }
 
-.groups-boxes .group-box [data-group-name="delistados"] {
+.groups-boxes .group-box[data-group-name="delistados"] {
   order: -2;
 }
 
-body.groups-boxes .group-box [data-group-name="team"] {
+.ember-view .groups-boxes .group-box[data-group-name="team"] {
   order: -1;
 }
 
@@ -1310,7 +1302,7 @@ img.emoji {
   display: none !important;
 }
 
-body.groups-page .category-banner-groups,
+.ember-view .groups-page .category-banner-groups,
 body.badges-page .category-banner-badges {
   display: flex !important;
 
@@ -1339,7 +1331,7 @@ body.badges-page .category-banner-badges {
 }
 
 // Showing wrap selectors on composer only to staff
-.group-0_nuevos:not(.group-team):not(.group-4_agoristas):not(.group-5_lideres) [data-name="toggle-wrap"] {
+.group-nuevos:not(.group-team):not(.group-agoristas):not(.group-lideres) [data-name="toggle-wrap"] {
   display: none;
 }
 
