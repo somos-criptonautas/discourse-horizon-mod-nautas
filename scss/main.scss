@@ -13,106 +13,7 @@ html {
 :root {
   --main-grid-gap: 0.5em;
   --d-control-height: var(--space-8);
-
-  --category-1-color: unset !important;
-  --category-2-color: unset !important;
-  --category-3-color: unset !important;
-  --category-4-color: unset !important;
-  --category-5-color: unset !important;
-  --category-6-color: unset !important;
-  --category-7-color: unset !important;
-  --category-8-color: unset !important;
-  --category-9-color: unset !important;
-  --category-10-color: unset !important;
-  --category-11-color: unset !important;
-  --category-12-color: unset !important;
-  --category-13-color: unset !important;
-  --category-14-color: unset !important;
-  --category-15-color: unset !important;
-  --category-16-color: unset !important;
-  --category-17-color: unset !important;
-  --category-18-color: unset !important;
-  --category-19-color: unset !important;
-  --category-20-color: unset !important;
-  --category-21-color: unset !important;
-  --category-22-color: unset !important;
-  --category-23-color: unset !important;
-  --category-24-color: unset !important;
-  --category-25-color: unset !important;
-  --category-26-color: unset !important;
-  --category-27-color: unset !important;
-  --category-28-color: unset !important;
-  --category-29-color: unset !important;
-  --category-30-color: unset !important;
-  --category-31-color: unset !important;
-  --category-32-color: unset !important;
-  --category-33-color: unset !important;
-  --category-34-color: unset !important;
-  --category-35-color: unset !important;
-  --category-36-color: unset !important;
-  --category-37-color: unset !important;
-  --category-38-color: unset !important;
-  --category-39-color: unset !important;
-  --category-40-color: unset !important;
-  --category-41-color: unset !important;
-  --category-42-color: unset !important;
-  --category-43-color: unset !important;
-  --category-44-color: unset !important;
-  --category-45-color: unset !important;
-  --category-46-color: unset !important;
-  --category-47-color: unset !important;
-  --category-48-color: unset !important;
-  --category-49-color: unset !important;
-  --category-50-color: unset !important;
-  --category-51-color: unset !important;
-  --category-52-color: unset !important;
-  --category-53-color: unset !important;
-  --category-54-color: unset !important;
-  --category-55-color: unset !important;
-  --category-56-color: unset !important;
-  --category-57-color: unset !important;
-  --category-58-color: unset !important;
-  --category-59-color: unset !important;
-  --category-60-color: unset !important;
-  --category-61-color: unset !important;
-  --category-62-color: unset !important;
-  --category-63-color: unset !important;
-  --category-64-color: unset !important;
-  --category-65-color: unset !important;
-  --category-66-color: unset !important;
-  --category-67-color: unset !important;
-  --category-68-color: unset !important;
-  --category-69-color: unset !important;
-  --category-70-color: unset !important;
-  --category-71-color: unset !important;
-  --category-72-color: unset !important;
-  --category-73-color: unset !important;
-  --category-74-color: unset !important;
-  --category-75-color: unset !important;
-  --category-76-color: unset !important;
-  --category-77-color: unset !important;
-  --category-78-color: unset !important;
-  --category-79-color: unset !important;
-  --category-80-color: unset !important;
-  --category-81-color: unset !important;
-  --category-82-color: unset !important;
-  --category-83-color: unset !important;
-  --category-84-color: unset !important;
-  --category-85-color: unset !important;
-  --category-86-color: unset !important;
-  --category-87-color: unset !important;
-  --category-88-color: unset !important;
-  --category-89-color: unset !important;
-  --category-90-color: unset !important;
-  --category-91-color: unset !important;
-  --category-92-color: unset !important;
-  --category-93-color: unset !important;
-  --category-94-color: unset !important;
-  --category-95-color: unset !important;
-  --category-96-color: unset !important;
-  --category-97-color: unset !important;
-  --category-98-color: unset !important;
-  --category-99-color: unset !important;
+  --content-border-color: var(--primary-300);
 }
 
 html:not(:has(.has-full-page-chat)) {
@@ -253,9 +154,14 @@ body.category .navigation-controls,
   z-index: 999;
 }
 
-// Hiding voice chats for a while
-.sidebar-section-wrapper[data-section-name="resenha-voice-rooms"] {
+// Hiding voice chats sidebar for a while
+.sidebar-section-wrapper[data-section-name="resenha-rooms"] {
   display: none;
+}
+
+// No top navbar in categories page
+.categories-list #navigation-bar {
+  display: none !important;
 }
 
 // -----------------------------------------------------------------------
@@ -269,9 +175,12 @@ body.category .navigation-controls,
   }
 }
 
-// Hide header links on homepage for avoid redundancy
-.custom-header-links {
-  display: none !important;
+@media (width >=1024px) {
+
+  // Hide header links on homepage for avoid redundancy
+  .welcome-banner--enabled .custom-header-links {
+    display: none !important;
+  }
 }
 
 // Custom Header Links adjustments
@@ -895,6 +804,11 @@ button [title="similares"] .d-button-label {
   .topic-list.doc-simple-mode .link-bottom-line .badge-category__wrapper,
   .topic-list.doc-simple-mode .topic-excerpt {
     display: inline-flex !important;
+  }
+
+  // Fix different font in category groups
+  .custom-category-group .badge-category__wrapper {
+    font-size: var(--font-down-1);
   }
 
   // Hiding topic-list data on Docs Categories

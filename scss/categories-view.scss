@@ -39,8 +39,8 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
 }
 
 // Fix for sticking tags on categories
-.category-boxes .subcategories .subcategory {
-    margin-bottom: 0.5rem !important;
+.custom-category-group .category-details .subcategories {
+    0.25rem;
 }
 
 // Coherence between font-sizes everywhere + pointer styling
