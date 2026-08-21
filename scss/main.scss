@@ -432,1006 +432,1011 @@ button [title="similares"] .d-button-label {
   border: 1px solid var(--primary-200);
 }
 
-// Discourse card filter style to all tags
-.discourse-tag {
-  padding: var(--space-half) var(--space-2);
-  border-radius: var(--d-border-radius-small);
-  border: 1px solid var(--primary-low);
-  background: var(--secondary);
-  color: var(--primary-high);
-  white-space: nowrap;
-  font-size: var(--font-down-2-rem);
-}
+// More padding-margin to tags
+.discourse-tag.box {
+  padding: 4px 10px;
+  font-size: 0.95rem;
+  margin: 0 4px;
 
-// Update posts message
-#list-area .show-more .alert {
-  padding: 0.65rem 1.15rem;
-  border-radius: 0.5rem;
-}
-
-// Hide redundant dropdowns on new posts
-.dropdown-menu__item [data-name="quote"],
-.dropdown-menu__item [data-name="toggle-whisper"],
-.dropdown-menu .shortcut {
-  display: none;
-}
-
-// Hide redundant notifications options
-.notifications-tracking-btn:nth-child(4),
-.notifications-tracking-btn__texts:nth-child(4) {
-  display: none;
-}
-
-// Right align be first to reply
-.first-reply-statement {
-  padding: 1em 2em 1em 1em;
-  justify-content: right;
-}
-
-// Hide report topic (we look into it when reporting posts)
-.btn.topic-footer-button.flag-topic {
-  display: none;
-}
-
-// Heading on quotes titles
-.quote .title a {
-  font-family: var(--heading-font-family);
-  font-weight: 500;
-}
-
-.topic-list-body .topic-list-item .topic-status-card {
-  margin-right: 0.15rem;
-}
-
-.more-topics__lists {
-  margin-bottom: 2rem;
-}
-
-// Disable top list dropdown (list plain always)
-.top-lists {
-  display: none;
-}
-
-// Invert categories and tags order - Publish to right
-.list-controls .navigation-container .category-breadcrumb {
-  order: unset !important;
-}
-
-// Align custom top navbar on categories {
-@media (width < 40rem) {
-
-  #main-outlet .list-controls .navigation-container .category-breadcrumb.hidden,
-  #main-outlet .list-controls .navigation-container .category-breadcrumb {
-    column-gap: unset;
+  // Discourse card filter style to all tags
+  .discourse-tag {
+    padding: var(--space-half) var(--space-2);
+    border-radius: var(--d-border-radius-small);
+    border: 1px solid var(--primary-low);
+    background: var(--secondary);
+    color: var(--primary-high);
+    white-space: nowrap;
+    font-size: var(--font-down-2-rem);
   }
-}
 
-// Disable new topic in mobile
-@media (width >=40rem) {
-  .d-combo-button .topic-create-button__combo {
+  // Update posts message
+  #list-area .show-more .alert {
+    padding: 0.65rem 1.15rem;
+    border-radius: 0.5rem;
+  }
+
+  // Hide redundant dropdowns on new posts
+  .dropdown-menu__item [data-name="quote"],
+  .dropdown-menu__item [data-name="toggle-whisper"],
+  .dropdown-menu .shortcut {
     display: none;
   }
-}
 
-// Style no-tags dropdown display
-.select-kit.combo-box.tag-drop .select-kit-row[data-value="all-tags"],
-.select-kit.combo-box.tag-drop .select-kit-row[data-value="no-tags"] {
-  color: var(--primary-high);
-  font-size: var(--font-down-2-rem);
-  font-weight: normal;
-  padding: 0.5rem 1rem;
-}
-
-.list-controls .select-kit .select-kit-collection {
-  padding-left: 0.3rem;
-}
-
-// Disable hiding top header in custom nav mobile
-body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.has-full-page-chat) .d-header-wrap {
-  transform: unset !important;
-  opacity: unset !important;
-  transition: unset !important;
-}
-
-// Rearrange search button on custom nav mobile
-@media (width < 48rem) {
-  .d-header .search-dropdown {
-    grid-area: unset !important;
-  }
-}
-
-// Disable image on no new topics
-.empty-state__image {
-  display: none;
-}
-
-.empty-state__container {
-  padding-top: 1.5rem;
-}
-
-// Navigation in one row
-.navigation-controls {
-  flex-wrap: unset;
-}
-
-#user-content .topic-list-data .views .sortable .num,
-#user-content .num .views .topic-list-data {
-  display: none;
-}
-
-// Hide view on MPs table display
-@include viewport.until(lg) {
-
-  .topic-list .topic-list-data.num.posts,
-  .topic-list .topic-list-data.num.views {
+  // Hide redundant notifications options
+  .notifications-tracking-btn:nth-child(4),
+  .notifications-tracking-btn__texts:nth-child(4) {
     display: none;
   }
-}
 
-@media (width >=40rem) {
-  .topic-avatar {
-    padding-top: var(--space-2);
+  // Right align be first to reply
+  .first-reply-statement {
+    padding: 1em 2em 1em 1em;
+    justify-content: right;
   }
-}
 
-// Padding on <hr> elements
-.cooked hr {
-  margin: 2.1rem;
-}
-
-// No repeated notifications button
-#topic-footer-buttons .pinned-button .reason,
-#topic-footer-buttons .topic-notifications-button .reason {
-  display: none;
-}
-
-// Better margins on timeline 
-
-@media screen and (width >=925px) {
-  .container.posts .topic-navigation {
-    margin-bottom: 2.5rem;
+  // Hide report topic (we look into it when reporting posts)
+  .btn.topic-footer-button.flag-topic {
+    display: none;
   }
-}
 
-// -----------------------------------------------------------------------
-// TOC
-// -----------------------------------------------------------------------
-
-.d-toc-main #d-toc li.d-toc-item {
-  padding-left: 0.33em;
-}
-
-.d-toc-main #d-toc li.d-toc-item.direct-active>a::before {
-  width: 2px;
-}
-
-.d-toc-main #d-toc>ul>li>ul li.direct-active>a::before {
-  margin-left: -5px;
-}
-
-.d-toc-heading:not(:first-child) {
-  padding-top: 0.33em;
-}
-
-// -----------------------------------------------------------------------
-// Chat
-// -----------------------------------------------------------------------
-
-.chat-drawer-content {
-  font-size: var(--font-down-1);
-}
-
-.c-navbar__title-text {
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: var(--font-down-1);
-  font-family: var(--heading-font-family);
-}
-
-// Moved to .c-navbar and reduced 25% (0.53em/0.11em -> 0.4em/0.08em)
-.chat-drawer-container .c-navbar {
-  padding: 0.4em 0 0.08em 0.4em;
-}
-
-.chat-channel-divider {
-  display: none;
-}
-
-.chat-drawer-container .channels-list-container .chat-channel-row {
-  height: 3em;
-}
-
-.c-user-thread .chat__thread-title__name {
-  font-size: 1em;
-  font-weight: bold;
-}
-
-.c-user-thread .chat-message-thread-indicator {
-  font-size: var(--font-down-1);
-}
-
-.chat-message-actions {
-  font-size: var(--font-down-1-rem);
-}
-
-.chat-composer__outer-container {
-  padding-inline: 0.63em;
-}
-
-.is-send-disabled .chat-composer-button.-send {
-  padding-bottom: 0.3em;
-}
-
-.chat-message-separator-date+.chat-message-separator__line-container .chat-message-separator__line {
-  border-top: none;
-}
-
-.d-templates-chat-insert-template-btn {
-  display: none;
-}
-
-// -----------------------------------------------------------------------
-// User profile / user menu / groups
-// -----------------------------------------------------------------------
-
-.user-card .badge-section {
-  display: none !important;
-}
-
-.collapsed-info-panel dl div:last-child,
-.collapsed-info-panel dd.trust-level,
-.collapsed-info-panel dl.trust-level,
-.user-content .badges-section {
-  display: none !important;
-}
-
-.collapsed-info-panel dd.groups a.ember-view {
-  display: none !important;
-}
-
-// Hidding noise from user profiles
-.pref-new-user-tips,
-.pref-reset-seen-user-tips {
-  display: none !important;
-}
-
-.message-panel__inboxes .message-panel__inbox:nth-last-child {
-  display: none;
-}
-
-.control-group .upcoming-changes {
-  display: none;
-}
-
-// Prevent weird spacing on user menu
-.custom-user-menu-content .fk-d-menu__profile-tab li.preferences {
-  padding-bottom: 0;
-}
-
-// Hide default trust_levels (all going into tl1 -> 'nuevos')
-.group-box[data-group-name="tl0"],
-.group-box[data-group-name="tl2"],
-.group-box[data-group-name="tl3"],
-.group-box[data-group-name="tl4"] {
-  display: none !important;
-}
-
-// Hide redundant groups
-.group-box [data-group-name="moderadores"],
-.group-box [data-group-name="admins"] {
-  display: none !important;
-}
-
-// Hide them in selectors
-.select-kit .select-kit-row[data-name="tl0"],
-.select-kit .select-kit-row[data-name="tl2"],
-.select-kit .select-kit-row[data-name="tl3"],
-.select-kit .select-kit-row[data-name="tl4"],
-.select-kit .select-kit-row[data-name="moderadores"],
-.select-kit .select-kit-row[data-name="admins"] {
-  display: none !important;
-}
-
-// Hiding some profile card info
-.user-main .about .secondary.trust-level,
-.user-main .about .secondary.groups {
-  display: none;
-}
-
-// Hide stuff on profile
-.user-preferences .form-vertical .control-group .pref-title,
-.user-preferences .form-vertical .control-group .pref-flair,
-.user-preferences .form-vertical .control-group .pref-email-settings {
-  display: none;
-}
-
-// Group naming ordering [EXPERIMENTAL]
-.group-info-mention-name {
-  display: none;
-}
-
-// -----------------------------------------------------------------------
-// Badges
-// -----------------------------------------------------------------------
-
-// Disable heading for enabling banner one
-.container.badges h1 {
-  display: none;
-}
-
-.badge-grouping:nth-child(1).badge-group-list::before {
-  content: "@anons se transforman en @randoms con 4 desafíos:";
-}
-
-.badge-grouping:nth-child(2).badge-group-list::before {
-  content: "@randoms son @traders con estos 9:";
-}
-
-// No crown on /badges
-.leaderboard .winner.-position1 .winner__crown,
-.leaderboard .ranking-col-names {
-  display: none;
-}
-
-// Leading leaderboard with no styling
-.leaderboard .winner.-position1 .winner__avatar img,
-.leaderboard .winner.-position3 .winner__avatar img {
-  border-color: var(--primary-medium);
-  background-color: var(--primary-low);
-}
-
-.leaderboard .winner.-position1 .winner__rank,
-.leaderboard .winner.-position3 .winner__rank {
-  background-color: var(--primary-medium);
-}
-
-.leaderboard .winner {
-  margin: 0.33rem;
-}
-
-// Hiding leaderboard options
-.leaderboard__controls {
-  display: none;
-}
-
-// Change earned badge styling
-.check-display.status-checked {
-  background-color: var(--primary-medium) !important;
-}
-
-.check-display {
-  border-radius: 0.15rem !important;
-}
-
-.check-display.status-checked .check-display .d-icon {
-  font-size: var(--font-up-2-rem) !important;
-}
-
-.groups-boxes .group-box .group-membership .is-group-owner,
-.groups-boxes .group-box .group-membership .is-group-member {
-  color: unset !important;
-}
-
-.is-group-member .svg-icon {
-  vertical-align: -0.2em !important;
-}
-
-// Badges order + hide title choice
-.badge-groups {
-  display: flex;
-  flex-direction: column;
-}
-
-.badge-grouping>div:has(h2#ogs) {
-  order: 6;
-}
-
-.badge-grant-info {
-  display: none;
-}
-
-// -----------------------------------------------------------------------
-// Categories & Docs plugin
-// -----------------------------------------------------------------------
-
-// Disable nav in fancy categories page
-.categories-list .navigation-container {
-  display: none;
-}
-
-// Padding on Docs
-.discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link {
-  padding: 0.3rem 0;
-}
-
-body.doc-simple-mode .topic-post[data-post-number="1"] .cooked {
-  padding-top: revert-rule;
-}
-
-// Hide tags on questions
-body.category-preguntas li:has(.tag-drop) {
-  display: none;
-}
-
-// Margin after header category + banner transparent
-.category-title-header {
-  margin-bottom: 1rem;
-  --category-banner-background: transparent !important;
-  --category-banner-color: unset !important;
-}
-
-// Font-size adjust in Docs categories sidebar
-.discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link-content-text {
-  font-size: var(--font-down-1);
-}
-
-@media (width >=40rem) {
-  #main-outlet div[class*="category-title-header"] {
-    max-width: 100%;
+  // Heading on quotes titles
+  .quote .title a {
+    font-family: var(--heading-font-family);
+    font-weight: 500;
   }
-}
 
-// Show comments in [EXP] unified docs feature
-.post__topic-map.topic-map.--op {
-  display: flex !important;
-}
-
-// No border on the topic-map shown at the bottom of a topic
-.topic-map.--bottom {
-  border: none;
-}
-
-.topic-post[data-post-number="1"] {
-  .like {
-    display: block !important;
+  .topic-list-body .topic-list-item .topic-status-card {
+    margin-right: 0.15rem;
   }
-}
 
-.topic-list.doc-simple-mode .link-bottom-line .badge-category__wrapper,
-.topic-list.doc-simple-mode .topic-excerpt {
-  display: inline-flex !important;
-}
-
-// Hiding topic-list data on Docs Categories
-.category-wiki .topic-list .topic-list-data.num,
-.category-glosario .topic-list .topic-list-data.num {
-  display: none;
-}
-
-// No topic order in Docs Categories - Actions to right
-.category-wiki #navigation-bar,
-.category-glosario #navigation-bar {
-  display: none;
-}
-
-// No borders on top but padding
-.topic-list-item .category-glosario,
-.topic-list-item .category-wiki {
-  border-bottom: 0;
-}
-
-.category-wiki tbody.topic-list-body .category-glosario tbody.topic-list-body {
-  border-top: 0;
-}
-
-.category-wiki .list-container,
-.category-glosario .list-container {
-  padding-top: 1rem;
-}
-
-// Hiding topics outside docs categories
-body.category-glosario .more-topics__container,
-body.category-wiki .more-topics__container,
-body.category-trading-curso .more-topics__container {
-  display: none;
-}
-
-// Hide descriptions on categories
-.select-kit.combo-box.category-chooser .select-kit-row .category-desc {
-  display: none;
-}
-
-// Grid gap was missing, so wrapped category boxes looked stuck together.
-.category-boxes-with-topics {
-  grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
-  gap: 1em;
-  margin-top: 0.6rem;
-}
-
-// Categories info only on banners
-.cooked.d-wrap[data-wrap="info-canal"] {
-  display: none;
-}
-
-// Hidden until the A-Z sort adds .docs-sorted; the animation reveals it regardless.
-.topic-list.doc-simple-mode .topic-list-body {
-  opacity: 0;
-  animation: docs-list-reveal 0.5s ease-out 0.3s forwards;
-
-  &.docs-sorted {
-    animation: docs-list-reveal 0.15s ease-out forwards;
+  .more-topics__lists {
+    margin-bottom: 2rem;
   }
-}
 
-@keyframes docs-list-reveal {
-  to {
-    opacity: 1;
+  // Disable top list dropdown (list plain always)
+  .top-lists {
+    display: none;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .topic-list.doc-simple-mode .topic-list-body {
-    opacity: 1;
-    animation: none;
+  // Invert categories and tags order - Publish to right
+  .list-controls .navigation-container .category-breadcrumb {
+    order: unset !important;
   }
-}
 
-// Better subcategories button styling
-.category-boxes .category .description,
-.category-boxes-with-topics .category .description {
-  display: none;
-}
+  // Align custom top navbar on categories {
+  @media (width < 40rem) {
 
-@media (width >=40rem) {
+    #main-outlet .list-controls .navigation-container .category-breadcrumb {
+      column-gap: unset !important;
+    }
+  }
 
-  .category boxes {
+  // Disable new topic in mobile
+  @media (width >=40rem) {
+    .d-combo-button .topic-create-button__combo {
+      display: none;
+    }
+  }
+
+  // Style no-tags dropdown display
+  .select-kit.combo-box.tag-drop .select-kit-row[data-value="all-tags"],
+  .select-kit.combo-box.tag-drop .select-kit-row[data-value="no-tags"] {
+    color: var(--primary-high);
+    font-size: var(--font-down-2-rem);
+    font-weight: normal;
+    padding: 0.5rem 1rem;
+  }
+
+  .list-controls .select-kit .select-kit-collection {
+    padding-left: 0.3rem;
+  }
+
+  // Disable hiding top header in custom nav mobile
+  body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.has-full-page-chat) .d-header-wrap {
+    transform: unset !important;
+    opacity: unset !important;
+    transition: unset !important;
+  }
+
+  // Rearrange search button on custom nav mobile
+  @media (width < 48rem) {
+    .d-header .search-dropdown {
+      grid-area: unset !important;
+    }
+  }
+
+  // Disable image on no new topics
+  .empty-state__image {
+    display: none;
+  }
+
+  .empty-state__container {
+    padding-top: 1.5rem;
+  }
+
+  // Navigation in one row
+  .navigation-controls {
+    flex-wrap: unset;
+  }
+
+  #user-content .topic-list-data .views .sortable .num,
+  #user-content .num .views .topic-list-data {
+    display: none;
+  }
+
+  // Hide view on MPs table display
+  @include viewport.until(lg) {
+
+    .topic-list .topic-list-data.num.posts,
+    .topic-list .topic-list-data.num.views {
+      display: none;
+    }
+  }
+
+  @media (width >=40rem) {
+    .topic-avatar {
+      padding-top: var(--space-2);
+    }
+  }
+
+  // Padding on <hr> elements
+  .cooked hr {
+    margin: 2.1rem;
+  }
+
+  // No repeated notifications button
+  #topic-footer-buttons .pinned-button .reason,
+  #topic-footer-buttons .topic-notifications-button .reason {
+    display: none;
+  }
+
+  // Better margins on timeline 
+
+  @media screen and (width >=925px) {
+    .container.posts .topic-navigation {
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  // -----------------------------------------------------------------------
+  // TOC
+  // -----------------------------------------------------------------------
+
+  .d-toc-main #d-toc li.d-toc-item {
+    padding-left: 0.33em;
+  }
+
+  .d-toc-main #d-toc li.d-toc-item.direct-active>a::before {
+    width: 2px;
+  }
+
+  .d-toc-main #d-toc>ul>li>ul li.direct-active>a::before {
+    margin-left: -5px;
+  }
+
+  .d-toc-heading:not(:first-child) {
+    padding-top: 0.33em;
+  }
+
+  // -----------------------------------------------------------------------
+  // Chat
+  // -----------------------------------------------------------------------
+
+  .chat-drawer-content {
+    font-size: var(--font-down-1);
+  }
+
+  .c-navbar__title-text {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: var(--font-down-1);
+    font-family: var(--heading-font-family);
+  }
+
+  // Moved to .c-navbar and reduced 25% (0.53em/0.11em -> 0.4em/0.08em)
+  .chat-drawer-container .c-navbar {
+    padding: 0.4em 0 0.08em 0.4em;
+  }
+
+  .chat-channel-divider {
+    display: none;
+  }
+
+  .chat-drawer-container .channels-list-container .chat-channel-row {
+    height: 3em;
+  }
+
+  .c-user-thread .chat__thread-title__name {
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  .c-user-thread .chat-message-thread-indicator {
+    font-size: var(--font-down-1);
+  }
+
+  .chat-message-actions {
+    font-size: var(--font-down-1-rem);
+  }
+
+  .chat-composer__outer-container {
+    padding-inline: 0.63em;
+  }
+
+  .is-send-disabled .chat-composer-button.-send {
+    padding-bottom: 0.3em;
+  }
+
+  .chat-message-separator-date+.chat-message-separator__line-container .chat-message-separator__line {
+    border-top: none;
+  }
+
+  .d-templates-chat-insert-template-btn {
+    display: none;
+  }
+
+  // -----------------------------------------------------------------------
+  // User profile / user menu / groups
+  // -----------------------------------------------------------------------
+
+  .user-card .badge-section {
+    display: none !important;
+  }
+
+  .collapsed-info-panel dl div:last-child,
+  .collapsed-info-panel dd.trust-level,
+  .collapsed-info-panel dl.trust-level,
+  .user-content .badges-section {
+    display: none !important;
+  }
+
+  .collapsed-info-panel dd.groups a.ember-view {
+    display: none !important;
+  }
+
+  // Hidding noise from user profiles
+  .pref-new-user-tips,
+  .pref-reset-seen-user-tips {
+    display: none !important;
+  }
+
+  .message-panel__inboxes .message-panel__inbox:nth-last-child {
+    display: none;
+  }
+
+  .control-group .upcoming-changes {
+    display: none;
+  }
+
+  // Prevent weird spacing on user menu
+  .custom-user-menu-content .fk-d-menu__profile-tab li.preferences {
+    padding-bottom: 0;
+  }
+
+  // Hide default trust_levels (all going into tl1 -> 'nuevos')
+  .group-box[data-group-name="tl0"],
+  .group-box[data-group-name="tl2"],
+  .group-box[data-group-name="tl3"],
+  .group-box[data-group-name="tl4"] {
+    display: none !important;
+  }
+
+  // Hide redundant groups
+  .group-box [data-group-name="moderadores"],
+  .group-box [data-group-name="admins"] {
+    display: none !important;
+  }
+
+  // Hide them in selectors
+  .select-kit .select-kit-row[data-name="tl0"],
+  .select-kit .select-kit-row[data-name="tl2"],
+  .select-kit .select-kit-row[data-name="tl3"],
+  .select-kit .select-kit-row[data-name="tl4"],
+  .select-kit .select-kit-row[data-name="moderadores"],
+  .select-kit .select-kit-row[data-name="admins"] {
+    display: none !important;
+  }
+
+  // Hiding some profile card info
+  .user-main .about .secondary.trust-level,
+  .user-main .about .secondary.groups {
+    display: none;
+  }
+
+  // Hide stuff on profile
+  .user-preferences .form-vertical .control-group .pref-title,
+  .user-preferences .form-vertical .control-group .pref-flair,
+  .user-preferences .form-vertical .control-group .pref-email-settings {
+    display: none;
+  }
+
+  // Group naming ordering [EXPERIMENTAL]
+  .group-info-mention-name {
+    display: none;
+  }
+
+  // -----------------------------------------------------------------------
+  // Badges
+  // -----------------------------------------------------------------------
+
+  // Disable heading for enabling banner one
+  .container.badges h1 {
+    display: none;
+  }
+
+  .badge-grouping:nth-child(1).badge-group-list::before {
+    content: "@anons se transforman en @randoms con 4 desafíos:";
+  }
+
+  .badge-grouping:nth-child(2).badge-group-list::before {
+    content: "@randoms son @traders con estos 9:";
+  }
+
+  // No crown on /badges
+  .leaderboard .winner.-position1 .winner__crown,
+  .leaderboard .ranking-col-names {
+    display: none;
+  }
+
+  // Leading leaderboard with no styling
+  .leaderboard .winner.-position1 .winner__avatar img,
+  .leaderboard .winner.-position3 .winner__avatar img {
+    border-color: var(--primary-medium);
+    background-color: var(--primary-low);
+  }
+
+  .leaderboard .winner.-position1 .winner__rank,
+  .leaderboard .winner.-position3 .winner__rank {
+    background-color: var(--primary-medium);
+  }
+
+  .leaderboard .winner {
+    margin: 0.33rem;
+  }
+
+  // Hiding leaderboard options
+  .leaderboard__controls {
+    display: none;
+  }
+
+  // Change earned badge styling
+  .check-display.status-checked {
+    background-color: var(--primary-medium) !important;
+  }
+
+  .check-display {
+    border-radius: 0.15rem !important;
+  }
+
+  .check-display.status-checked .check-display .d-icon {
+    font-size: var(--font-up-2-rem) !important;
+  }
+
+  .groups-boxes .group-box .group-membership .is-group-owner,
+  .groups-boxes .group-box .group-membership .is-group-member {
+    color: unset !important;
+  }
+
+  .is-group-member .svg-icon {
+    vertical-align: -0.2em !important;
+  }
+
+  // Badges order + hide title choice
+  .badge-groups {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
   }
 
-  .mobile-view .category-boxes .category-box,
-  .mobile-view .category-boxes-with-topics .category-box {
-    max-width: 45%;
+  .badge-grouping>div:has(h2#ogs) {
+    order: 6;
   }
 
-  .category-boxes .category-box-heading .badge-category__name,
-  .category-boxes-with-topics .category-box-heading .badge-category__name {
-    font-size: 1rem;
-  }
-
-  .category-boxes .category-details,
-  .category-boxes-with-topics .category-details {
-    height: 7.5vh;
-  }
-}
-
-// -----------------------------------------------------------------------
-// Search
-// -----------------------------------------------------------------------
-
-// Invert search-box on search page + Hide button to home (icon do it) //
-
-.not-found-container .title_wrapper btn,
-.not-found-container .recent-topics a.btn {
-  display: none;
-}
-
-.not-found-container .recent-topics {
-  max-width: 50%;
-  flex-basis: unset;
-}
-
-.no-ember #main-outlet {
-  max-height: 100%;
-}
-
-.page-not-found row {
-  display: flex;
-}
-
-.page-not-found {
-  display: flex;
-  flex-flow: column;
-}
-
-.page-not-found-search {
-  order: 2;
-  margin: 20px 0;
-}
-
-.page-not-found-topics {
-  order: 3;
-}
-
-// Padding to search button
-.btn .search-icon {
-  padding-bottom: 0.11rem;
-}
-
-@media (width >=40rem) {
-
-  .header-search--enabled .floating-search-input-wrapper,
-  .search-header--visible .floating-search-input-wrapper {
-    justify-content: unset;
-  }
-}
-
-// Fix searchbar with header links
-.floating-search-input-wrapper {
-  margin: 0 0.5em;
-}
-
-// -----------------------------------------------------------------------
-// Banners (welcome / campaign)
-// -----------------------------------------------------------------------
-
-@media (width <=576px) {
-  .welcome-banner {
+  .badge-grant-info {
     display: none;
   }
-}
 
-.campaign-banner-info svg {
-  display: none !important;
-}
+  // -----------------------------------------------------------------------
+  // Categories & Docs plugin
+  // -----------------------------------------------------------------------
 
-// Big button on Subscriptions campaigns
-.campaign-banner .btn.close {
-  top: 0.5rem !important;
-  right: 0.5rem !important;
-  font-size: 1.3rem !important;
-}
-
-// Styling links on Welcome Banner — the theme's own light hover tint.
-.banner-featured-links__link,
-.banner-featured-links__link:visited {
-  color: var(--accent-text-color);
-}
-
-.banner-featured-links__link:hover {
-  background-color: var(--tertiary);
-  box-shadow: 0 0 0 4px var(--button-box-shadow);
-  color: var(--accent-text-color);
-}
-
-// Icons on Welcome Banner (EXPERIMENTAL)
-.welcome-banner__wrap {
-  flex-wrap: wrap;
-  border-bottom: none;
-}
-
-.banner-featured-links__wrapper {
-  flex-basis: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.welcome-banner__wrap .search-menu,
-.welcome-banner__title {
-  flex: 1;
-}
-
-.welcome-banner__title {
-  font-weight: 700;
-}
-
-// -----------------------------------------------------------------------
-// Misc utility (emoji, [data-wrap] blocks, buttons, plugins)
-// -----------------------------------------------------------------------
-
-// "Billing" -> "suscripción" on Spanish pages; font-size: 0 hides the original.
-html:lang(es) a[href*="/billing/subscriptions"] .item-label {
-  font-size: 0;
-
-  &::after {
-    content: "suscripción";
-    font-size: 1rem;
+  // Disable nav in fancy categories page
+  .categories-list .navigation-container {
+    display: none;
   }
-}
 
-aside.onebox {
-  background-color: var(--d-content-background);
-}
-
-.d-editor-preview-wrapper {
-  border-radius: var(--d-border-radius);
-  padding: 1em;
-  background-color: var(--d-content-background);
-}
-
-// Mod edits //
-.signup-progress-bar,
-#user-menu-button-other-notifications,
-.user-nav__notifications,
-.user-nav__badges,
-.collapsed-info-panel:last-child,
-.sidebar-section-wrapper .sidebar-section-header-global-indicator .d-icon,
-.groups-header-filters,
-.user-nav__preferences-navigation-menu,
-.user-nav__preferences-ai,
-.user-nav__activity-read,
-.user-nav__activity,
-.control-group[data-setting-name="user-color-scheme"],
-.control-group[data-setting-name="pref-title"],
-.controls[data-setting-name="user-enable-markdown-monospace-font"],
-.controls[data-setting-name="user-dynamic-favicon"],
-.category-quienes-somos .top-lists,
-.sidebar-section-link-wrapper [data-list-item-name="activity-pub-about"] {
-  display: none !important;
-}
-
-#reply-control.draft {
-  padding: 0.5rem 0;
-}
-
-.signup-fullpage .signup-body {
-  max-width: 850px;
-}
-
-.install-theme-item input:checked+label {
-  border-radius: 0.23rem;
-}
-
-// Disable some AI Helper functions
-ul.ai-helper-options li[data-value="replace_dates"] {
-  display: none;
-}
-
-// More stuff
-img.emoji {
-  width: 23px;
-  height: 23px;
-  padding-bottom: 3px;
-  padding-left: 3px;
-  vertical-align: unset;
-}
-
-[data-wrap="button"] {
-  text-align: center;
-  padding-top: 0.3rem;
-}
-
-[data-wrap="button"] a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  font-weight: normal;
-  border-radius: var(--d-button-border-radius);
-  transition: var(--d-button-transition);
-  cursor: pointer;
-  font-size: var(--font-0);
-  line-height: normal;
-  box-sizing: border-box;
-  padding: 0.5em 0.65em;
-  border: var(--d-button-border);
-  background-color: var(--accent-color);
-  color: var(--accent-text-color);
-}
-
-[data-wrap="button"] a:hover {
-  background: light-dark(oklch(from var(--accent-color) 40% c h),
-      oklch(from var(--accent-color) 50% c h));
-}
-
-// Centered videos
-[data-wrap="centered-video"] {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-// Restrict max-width if vertical video is too tall
-[data-wrap="centered-video"] video,
-[data-wrap="centered-video"] iframe {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
-}
-
-.select-kit .select-kit-header {
-  padding: 0.45em 0.65em;
-}
-
-// Remove ul spacing
-.cooked ul,
-.d-editor-preview ul,
-.d-editor-preview ol {
-  padding-inline-start: 0;
-  list-style-type: "– ";
-
-}
-
-// Update ol types
-.cooked ol,
-.d-editor-preview ol {
-  padding-inline-start: 0;
-  counter-reset: item;
-  list-style: none;
-  padding-left: 0;
-  font-family: system-ui, sans-serif;
-}
-
-.post-content ol li {
-  counter-increment: item;
-  display: flex;
-  align-items: center;
-  gap: 0.6em;
-  padding: 0.2em 0;
-}
-
-.post-content ol li::before {
-  content: counter(item);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.6em;
-  height: 1.6em;
-  border-radius: 50%;
-  border: 1px solid var(--tertiary);
-  background: transparent;
-  font-size: 0.75em;
-  color: var(--primary);
-  flex-shrink: 0;
-}
-
-// Blog styling plugin (scale down)
-.blog-post .regular {
-  font-size: var(--font-down-1);
-}
-
-// Heading adapting heading font-size
-@media (width >=40rem) {
-  .login-welcome-header .login-title {
-    font-size: var(--font-up-5);
+  // Padding on Docs
+  .discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link {
+    padding: 0.3rem 0;
   }
-}
 
-// Tighter button padding on desktop only; mobile keeps roomier touch targets.
-@media (width <768px) {
-  .btn {
-    padding: 0.39em 0.63em;
+  body.doc-simple-mode .topic-post[data-post-number="1"] .cooked {
+    padding-top: revert-rule;
   }
-}
 
-@media (width >=768px) {
-  .btn {
-    padding: 0.41em 0.75em;
+  // Hide tags on questions
+  body.category-preguntas li:has(.tag-drop) {
+    display: none;
   }
-}
 
-// Progress-button numbers/icon were unreadable in dark mode
-.topic-progress-wrapper,
-.topic-progress,
-#topic-progress-wrapper {
-  color: var(--primary) !important;
-
-  * {
-    color: inherit !important;
+  // Margin after header category + banner transparent
+  .category-title-header {
+    margin-bottom: 1rem;
+    --category-banner-background: transparent !important;
+    --category-banner-color: unset !important;
   }
-}
 
-// Visible progress bar in tiny screens
-@media screen and (width <=400px) {
-  .with-topic-progress {
-    bottom: calc(env(safe-area-inset-bottom) + var(--composer-height, 0px) + var(--d-border-radius-large)*3.3);
+  // Font-size adjust in Docs categories sidebar
+  .discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link-content-text {
+    font-size: var(--font-down-1);
   }
-}
 
-// Less height for progress bar 
-.topic-progress-wrapper {
-  height: 2.5rem;
-}
+  @media (width >=40rem) {
+    #main-outlet div[class*="category-title-header"] {
+      max-width: 100%;
+    }
+  }
 
-// Less padding on progress bar
-.topic-progress {
-  padding: .35rem 1em;
-}
+  // Show comments in [EXP] unified docs feature
+  .post__topic-map.topic-map.--op {
+    display: flex !important;
+  }
 
-@media (width >=768px) {
+  // No border on the topic-map shown at the bottom of a topic
+  .topic-map.--bottom {
+    border: none;
+  }
 
-  // Extra breathing room above the progress button
+  .topic-post[data-post-number="1"] {
+    .like {
+      display: block !important;
+    }
+  }
+
+  .topic-list.doc-simple-mode .link-bottom-line .badge-category__wrapper,
+  .topic-list.doc-simple-mode .topic-excerpt {
+    display: inline-flex !important;
+  }
+
+  // Hiding topic-list data on Docs Categories
+  .category-wiki .topic-list .topic-list-data.num,
+  .category-glosario .topic-list .topic-list-data.num {
+    display: none;
+  }
+
+  // No topic order in Docs Categories - Actions to right
+  .category-wiki #navigation-bar,
+  .category-glosario #navigation-bar {
+    display: none;
+  }
+
+  // No borders on top but padding
+  .topic-list-item .category-glosario,
+  .topic-list-item .category-wiki {
+    border-bottom: 0;
+  }
+
+  .category-wiki tbody.topic-list-body .category-glosario tbody.topic-list-body {
+    border-top: 0;
+  }
+
+  .category-wiki .list-container,
+  .category-glosario .list-container {
+    padding-top: 1rem;
+  }
+
+  // Hiding topics outside docs categories
+  body.category-glosario .more-topics__container,
+  body.category-wiki .more-topics__container,
+  body.category-trading-curso .more-topics__container {
+    display: none;
+  }
+
+  // Hide descriptions on categories
+  .select-kit.combo-box.category-chooser .select-kit-row .category-desc {
+    display: none;
+  }
+
+  // Grid gap was missing, so wrapped category boxes looked stuck together.
+  .category-boxes-with-topics {
+    grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+    gap: 1em;
+    margin-top: 0.6rem;
+  }
+
+  // Categories info only on banners
+  .cooked.d-wrap[data-wrap="info-canal"] {
+    display: none;
+  }
+
+  // Hidden until the A-Z sort adds .docs-sorted; the animation reveals it regardless.
+  .topic-list.doc-simple-mode .topic-list-body {
+    opacity: 0;
+    animation: docs-list-reveal 0.5s ease-out 0.3s forwards;
+
+    &.docs-sorted {
+      animation: docs-list-reveal 0.15s ease-out forwards;
+    }
+  }
+
+  @keyframes docs-list-reveal {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .topic-list.doc-simple-mode .topic-list-body {
+      opacity: 1;
+      animation: none;
+    }
+  }
+
+  // Better subcategories button styling
+  .category-boxes .category .description,
+  .category-boxes-with-topics .category .description {
+    display: none;
+  }
+
+  @media (width >=40rem) {
+
+    .category boxes {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .mobile-view .category-boxes .category-box,
+    .mobile-view .category-boxes-with-topics .category-box {
+      max-width: 45%;
+    }
+
+    .category-boxes .category-box-heading .badge-category__name,
+    .category-boxes-with-topics .category-box-heading .badge-category__name {
+      font-size: 1rem;
+    }
+
+    .category-boxes .category-details,
+    .category-boxes-with-topics .category-details {
+      height: 7.5vh;
+    }
+  }
+
+  // -----------------------------------------------------------------------
+  // Search
+  // -----------------------------------------------------------------------
+
+  // Invert search-box on search page + Hide button to home (icon do it) //
+
+  .not-found-container .title_wrapper btn,
+  .not-found-container .recent-topics a.btn {
+    display: none;
+  }
+
+  .not-found-container .recent-topics {
+    max-width: 50%;
+    flex-basis: unset;
+  }
+
+  .no-ember #main-outlet {
+    max-height: 100%;
+  }
+
+  .page-not-found row {
+    display: flex;
+  }
+
+  .page-not-found {
+    display: flex;
+    flex-flow: column;
+  }
+
+  .page-not-found-search {
+    order: 2;
+    margin: 20px 0;
+  }
+
+  .page-not-found-topics {
+    order: 3;
+  }
+
+  // Padding to search button
+  .btn .search-icon {
+    padding-bottom: 0.11rem;
+  }
+
+  @media (width >=40rem) {
+
+    .header-search--enabled .floating-search-input-wrapper,
+    .search-header--visible .floating-search-input-wrapper {
+      justify-content: unset;
+    }
+  }
+
+  // Fix searchbar with header links
+  .floating-search-input-wrapper {
+    margin: 0 0.5em;
+  }
+
+  // -----------------------------------------------------------------------
+  // Banners (welcome / campaign)
+  // -----------------------------------------------------------------------
+
+  @media (width <=576px) {
+    .welcome-banner {
+      display: none;
+    }
+  }
+
+  .campaign-banner-info svg {
+    display: none !important;
+  }
+
+  // Big button on Subscriptions campaigns
+  .campaign-banner .btn.close {
+    top: 0.5rem !important;
+    right: 0.5rem !important;
+    font-size: 1.3rem !important;
+  }
+
+  // Styling links on Welcome Banner — the theme's own light hover tint.
+  .banner-featured-links__link,
+  .banner-featured-links__link:visited {
+    color: var(--accent-text-color);
+  }
+
+  .banner-featured-links__link:hover {
+    background-color: var(--tertiary);
+    box-shadow: 0 0 0 4px var(--button-box-shadow);
+    color: var(--accent-text-color);
+  }
+
+  // Icons on Welcome Banner (EXPERIMENTAL)
+  .welcome-banner__wrap {
+    flex-wrap: wrap;
+    border-bottom: none;
+  }
+
+  .banner-featured-links__wrapper {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .welcome-banner__wrap .search-menu,
+  .welcome-banner__title {
+    flex: 1;
+  }
+
+  .welcome-banner__title {
+    font-weight: 700;
+  }
+
+  // -----------------------------------------------------------------------
+  // Misc utility (emoji, [data-wrap] blocks, buttons, plugins)
+  // -----------------------------------------------------------------------
+
+  // "Billing" -> "suscripción" on Spanish pages; font-size: 0 hides the original.
+  html:lang(es) a[href*="/billing/subscriptions"] .item-label {
+    font-size: 0;
+
+    &::after {
+      content: "suscripción";
+      font-size: 1rem;
+    }
+  }
+
+  aside.onebox {
+    background-color: var(--d-content-background);
+  }
+
+  .d-editor-preview-wrapper {
+    border-radius: var(--d-border-radius);
+    padding: 1em;
+    background-color: var(--d-content-background);
+  }
+
+  // Mod edits //
+  .signup-progress-bar,
+  #user-menu-button-other-notifications,
+  .user-nav__notifications,
+  .user-nav__badges,
+  .collapsed-info-panel:last-child,
+  .sidebar-section-wrapper .sidebar-section-header-global-indicator .d-icon,
+  .groups-header-filters,
+  .user-nav__preferences-navigation-menu,
+  .user-nav__preferences-ai,
+  .user-nav__activity-read,
+  .user-nav__activity,
+  .control-group[data-setting-name="user-color-scheme"],
+  .control-group[data-setting-name="pref-title"],
+  .controls[data-setting-name="user-enable-markdown-monospace-font"],
+  .controls[data-setting-name="user-dynamic-favicon"],
+  .category-quienes-somos .top-lists,
+  .sidebar-section-link-wrapper [data-list-item-name="activity-pub-about"] {
+    display: none !important;
+  }
+
+  #reply-control.draft {
+    padding: 0.5rem 0;
+  }
+
+  .signup-fullpage .signup-body {
+    max-width: 850px;
+  }
+
+  .install-theme-item input:checked+label {
+    border-radius: 0.23rem;
+  }
+
+  // Disable some AI Helper functions
+  ul.ai-helper-options li[data-value="replace_dates"] {
+    display: none;
+  }
+
+  // More stuff
+  img.emoji {
+    width: 23px;
+    height: 23px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    vertical-align: unset;
+  }
+
+  [data-wrap="button"] {
+    text-align: center;
+    padding-top: 0.3rem;
+  }
+
+  [data-wrap="button"] a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-weight: normal;
+    border-radius: var(--d-button-border-radius);
+    transition: var(--d-button-transition);
+    cursor: pointer;
+    font-size: var(--font-0);
+    line-height: normal;
+    box-sizing: border-box;
+    padding: 0.5em 0.65em;
+    border: var(--d-button-border);
+    background-color: var(--accent-color);
+    color: var(--accent-text-color);
+  }
+
+  [data-wrap="button"] a:hover {
+    background: light-dark(oklch(from var(--accent-color) 40% c h),
+        oklch(from var(--accent-color) 50% c h));
+  }
+
+  // Centered videos
+  [data-wrap="centered-video"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  // Restrict max-width if vertical video is too tall
+  [data-wrap="centered-video"] video,
+  [data-wrap="centered-video"] iframe {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .select-kit .select-kit-header {
+    padding: 0.45em 0.65em;
+  }
+
+  // Remove ul spacing
+  .cooked ul,
+  .d-editor-preview ul,
+  .d-editor-preview ol {
+    padding-inline-start: 0;
+    list-style-type: "– ";
+
+  }
+
+  // Update ol types
+  .cooked ol,
+  .d-editor-preview ol {
+    padding-inline-start: 0;
+    counter-reset: item;
+    list-style: none;
+    padding-left: 0;
+    font-family: system-ui, sans-serif;
+  }
+
+  .post-content ol li {
+    counter-increment: item;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    padding: 0.2em 0;
+  }
+
+  .post-content ol li::before {
+    content: counter(item);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.6em;
+    height: 1.6em;
+    border-radius: 50%;
+    border: 1px solid var(--tertiary);
+    background: transparent;
+    font-size: 0.75em;
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+
+  // Blog styling plugin (scale down)
+  .blog-post .regular {
+    font-size: var(--font-down-1);
+  }
+
+  // Heading adapting heading font-size
+  @media (width >=40rem) {
+    .login-welcome-header .login-title {
+      font-size: var(--font-up-5);
+    }
+  }
+
+  // Tighter button padding on desktop only; mobile keeps roomier touch targets.
+  @media (width <768px) {
+    .btn {
+      padding: 0.39em 0.63em;
+    }
+  }
+
+  @media (width >=768px) {
+    .btn {
+      padding: 0.41em 0.75em;
+    }
+  }
+
+  // Progress-button numbers/icon were unreadable in dark mode
   .topic-progress-wrapper,
+  .topic-progress,
   #topic-progress-wrapper {
-    padding: 1rem 0;
+    color: var(--primary) !important;
+
+    * {
+      color: inherit !important;
+    }
   }
-}
 
-// Less height in progress bar
-#topic-progress-wrapper #topic-progress {
-  padding: .44rem 0.75em;
-}
-
-// Intro text for groups/badges pages, rendered from after_header.html.
-.custom-page-intro {
-  display: none !important;
-}
-
-body.groups-page .category-banner-groups,
-body.badges-page .category-banner-badges {
-  display: flex !important;
-
-}
-
-// -----------------------------------------------------------------------
-// Experimental / unverified / inactive
-// -----------------------------------------------------------------------
-
-// [UNCONFIRMED] Selector not verified against core or plugins; may be dead
-@media screen and (width >=925px) {
-  .container.posts {
-    grid-template-columns: 80% 20%;
+  // Visible progress bar in tiny screens
+  @media screen and (width <=400px) {
+    .with-topic-progress {
+      bottom: calc(env(safe-area-inset-bottom) + var(--composer-height, 0px) + var(--d-border-radius-large)*3.3);
+    }
   }
-}
 
-/* // Fix chat thread title size
+  // Less height for progress bar 
+  .topic-progress-wrapper {
+    height: 2.5rem;
+  }
+
+  // Less padding on progress bar
+  .topic-progress {
+    padding: .35rem 1em;
+  }
+
+  @media (width >=768px) {
+
+    // Extra breathing room above the progress button
+    .topic-progress-wrapper,
+    #topic-progress-wrapper {
+      padding: 1rem 0;
+    }
+  }
+
+  // Less height in progress bar
+  #topic-progress-wrapper #topic-progress {
+    padding: .44rem 0.75em;
+  }
+
+  // Intro text for groups/badges pages, rendered from after_header.html.
+  .custom-page-intro {
+    display: none !important;
+  }
+
+  body.groups-page .category-banner-groups,
+  body.badges-page .category-banner-badges {
+    display: flex !important;
+
+  }
+
+  // -----------------------------------------------------------------------
+  // Experimental / unverified / inactive
+  // -----------------------------------------------------------------------
+
+  // [UNCONFIRMED] Selector not verified against core or plugins; may be dead
+  @media screen and (width >=925px) {
+    .container.posts {
+      grid-template-columns: 80% 20%;
+    }
+  }
+
+  /* // Fix chat thread title size
 .c-user-thread .chat__thread-title__name {
   font-size: var(--font-up-1);
 } */
 
-// National flags re-styling
-.nationalflag-usersummary {
-  width: 30px;
-  border-radius: 0.15rem;
-}
+  // National flags re-styling
+  .nationalflag-usersummary {
+    width: 30px;
+    border-radius: 0.15rem;
+  }
 
-// Showing wrap selectors on composer only to staff
-.group-0_nuevos:not(.group-team):not(.group-4_agoristas):not(.group-5_lideres) [data-name="toggle-wrap"] {
-  display: none;
-}
+  // Showing wrap selectors on composer only to staff
+  .group-0_nuevos:not(.group-team):not(.group-4_agoristas):not(.group-5_lideres) [data-name="toggle-wrap"] {
+    display: none;
+  }
 
-// Esc preview on similar topic aligment
-.composer-popup .btn.close {
-  top: 1.25em;
-  right: 0.75em;
-}
+  // Esc preview on similar topic aligment
+  .composer-popup .btn.close {
+    top: 1.25em;
+    right: 0.75em;
+  }
 
-// Hiding hidden wraps
-.topic-post.d-wrap[data-wrap="hidden"] {
-  display: none;
-}
+  // Hiding hidden wraps
+  .topic-post.d-wrap[data-wrap="hidden"] {
+    display: none;
+  }
 
-// Hiding some tags on category pages
-[data-tag-name="cerrado"] // Hiding last selectors on MP (we do not use trust_level defaults)
+  // Hiding some tags on category pages
+  [data-tag-name="cerrado"] // Hiding last selectors on MP (we do not use trust_level defaults)
 
-.messages-dropdown-content .dropdown-menu li:nth-last-of-type(-n+2) {
-  display: none;
-}
+  .messages-dropdown-content .dropdown-menu li:nth-last-of-type(-n+2) {
+    display: none;
+  }
 
-// Hiding text on gists (theme component) button
-.excerpts-gists-toggle-btn span {
-  display: none;
-}
+  // Hiding text on gists (theme component) button
+  .excerpts-gists-toggle-btn span {
+    display: none;
+  }
 
-// Hiding activitypub useless navigation and texts
-.activity-pub-navigation,
-.topic-map__activity-pub {
-  display: none !important;
-}
-
-// Hiding more topics navigation (disabled) on mobile
-@media (width < 40rem) {
-  .more-topics__container .more-topics__list .topic-list-header.--has-tabs {
+  // Hiding activitypub useless navigation and texts
+  .activity-pub-navigation,
+  .topic-map__activity-pub {
     display: none !important;
   }
-}
 
-// More room for title in mobile
-#topic-title h1 {
-  padding: 0.5rem 0;
-}
+  // Hiding more topics navigation (disabled) on mobile
+  @media (width < 40rem) {
+    .more-topics__container .more-topics__list .topic-list-header.--has-tabs {
+      display: none !important;
+    }
+  }
 
-// Nested floating fixed (overlaps with custom bottom mobile navigation)
-.nested-view__floating-actions {
-  position: relative;
-  z-index: unset;
-}
+  // More room for title in mobile
+  #topic-title h1 {
+    padding: 0.5rem 0;
+  }
 
-// Nested styling
-.nested-view {
-  background: unset;
-}
+  // Nested floating fixed (overlaps with custom bottom mobile navigation)
+  .nested-view__floating-actions {
+    position: relative;
+    z-index: unset;
+  }
 
-.nested-view:not(.nested-context-view)>.nested-view__controls {
-  z-index: unset;
-  padding: .47rem 1rem;
-}
+  // Nested styling
+  .nested-view {
+    background: unset;
+  }
 
-.nested-view__controls-left {
-  order: 2;
-}
+  .nested-view:not(.nested-context-view)>.nested-view__controls {
+    z-index: unset;
+    padding: .47rem 1rem;
+  }
 
-.nested-view .first-reply-statement-wrapper {
-  display: none;
-}
+  .nested-view__controls-left {
+    order: 2;
+  }
+
+  .nested-view .first-reply-statement-wrapper {
+    display: none;
+  }

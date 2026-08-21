@@ -1,6 +1,6 @@
 @use "lib/viewport";
 
-// Tablet 19px, mobile 21px, desktop 23px
+// Tablet 18px, mobile 22px, desktop 23px
 @include viewport.until(lg) {
   html {
     font-size: 18px;
@@ -9,7 +9,7 @@
 
 @include viewport.until(sm) {
   html {
-    font-size: 21px;
+    font-size: 22px;
   }
 
   // Hiding navigation bar and category dropdown
@@ -139,4 +139,40 @@ body.f-nav-hidden:not(.archetype-regular,
 // More padding on search boxes 
 .select-kit.is-expanded .select-kit-filter.is-expanded {
   padding: 0.45em 0.65em;
+}
+
+// Hide avatars on glosario and wiki (simplified docs)
+.topic-list-item .category-glosario .pull-left,
+.topic-list-item .category-wiki .pull-left {
+  display: none;
+}
+
+@media (width < 40rem) {
+
+  .topic-list-item .category-glosario .topic-list .right,
+  .topic-list-item .category-wiki .topic-list .right {
+    margin-left: 1.25rem;
+  }
+}
+
+
+// Disable tags in glosario/wiki
+.category-glosario #main-outlet .list-controls .navigation-container .category-breadcrumb,
+.category-wiki #main-outlet .list-controls .navigation-container .category-breadcrumb {
+  display: none !important;
+}
+
+// [EXPERIMENTAL] Hamburger position for arrange icons on custom nav mobile
+@media (width < 48rem) {
+  .d-header .hamburger-dropdown {
+    position: absolute;
+  }
+}
+
+@media (width < 48rem) {
+
+  .d-header .panel,
+  .d-header .panel>.d-header-icons {
+    display: inherit;
+  }
 }

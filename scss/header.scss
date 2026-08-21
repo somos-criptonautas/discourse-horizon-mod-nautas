@@ -1,9 +1,14 @@
 @use "lib/viewport";
-/* 
+
 // Hide user menu panel on mobile
 .d-header-icons .header-dropdown-toggle [data-identifier="avatar-profile"] {
   display: none !important;
-} */
+}
+
+// Show on mobile nav custom notifications
+html:not(.anon) .d-header-icons .header-dropdown-toggle #toggle-current-user:not(.avatar-profile-trigger) {
+  display: inherit !important;
+}
 
 // Fix header with mods
 .d-header>.wrap .contents {
