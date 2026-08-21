@@ -162,17 +162,10 @@ body.f-nav-hidden:not(.archetype-regular,
   display: none !important;
 }
 
-// [EXPERIMENTAL] Hamburger position for arrange icons on custom nav mobile
-@media (width < 48rem) {
-  .d-header .hamburger-dropdown {
-    position: absolute;
-  }
-}
+// Notifications position for arrange icons on custom nav mobile
 
 @media (width < 48rem) {
-
-  .d-header .panel,
-  .d-header .panel>.d-header-icons {
-    display: inherit;
+  .d-header .current-user {
+    grid-area: unset;
   }
 }

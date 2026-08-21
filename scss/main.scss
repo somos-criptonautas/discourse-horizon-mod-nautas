@@ -544,7 +544,15 @@ body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.h
 }
 
 .chat-drawer-container .channels-list-container .chat-channel-row {
-  height: 3em;
+  height: 2.75rem;
+}
+
+.c-footer__item .d-button-label {
+  display: none;
+}
+
+nav.c-footer .c-footer__item {
+  height: 3.8rem;
 }
 
 .c-user-thread .chat__thread-title__name {
@@ -927,11 +935,11 @@ body.category-trading-curso .more-topics__container {
   display: none;
 }
 
-.groups-boxes .group-box [data-group-name="nuevos"] {
+body.groups-boxes .group-box [data-group-name="nuevos"] {
   order: -8;
 }
 
-.groups-boxes .group-box [data-group-name="anons"] {
+body.groups-boxes .group-box [data-group-name="anons"] {
   order: -7;
 }
 
@@ -939,15 +947,15 @@ body.category-trading-curso .more-topics__container {
   order: -6;
 }
 
-.groups-boxes .group-box [data-group-name="traders"] {
+body.groups-boxes .group-box [data-group-name="traders"] {
   order: -5;
 }
 
-.groups-boxes .group-box [data-group-name="agoristas"] {
+body.groups-boxes .group-box [data-group-name="agoristas"] {
   order: -4;
 }
 
-.groups-boxes .group-box [data-group-name="lideres"] {
+body.groups-boxes .group-box [data-group-name="lideres"] {
   order: -3;
 }
 
@@ -955,7 +963,7 @@ body.category-trading-curso .more-topics__container {
   order: -2;
 }
 
-.groups-boxes .group-box [data-group-name="team"] {
+body.groups-boxes .group-box [data-group-name="team"] {
   order: -1;
 }
 
