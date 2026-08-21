@@ -580,6 +580,13 @@ body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.h
   display: none;
 }
 
+// Chat styling
+@container style(--scheme-type: dark) {
+  .is-expanded .chat-drawer-container {
+    box-shadow: 0 0 0 2px var(--primary-300);
+  }
+}
+
 // -----------------------------------------------------------------------
 // User profile / user menu / groups
 // -----------------------------------------------------------------------
