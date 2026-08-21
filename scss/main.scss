@@ -497,15 +497,33 @@ button [title="similares"] .d-button-label {
   order: unset !important;
 }
 
-// Inline top category navigation
-.list-controls .navigation-container {
-  display: flex;
+// Align custom top navbar on categories {
+@media (width < 40rem) {
+
+  #main-outlet .list-controls .navigation-container .category-breadcrumb.hidden,
+  #main-outlet .list-controls .navigation-container .category-breadcrumb {
+    column-gap: unset;
+  }
 }
 
-.list-controls .navigation-container .category-breadcrumb {
-  flex-basis: unset;
-  padding-right: 0.1rem;
+// Disable new topic in mobile
+@media (width >=40rem) {
+  .d-combo-button .topic-create-button__combo {
+    display: none;
+  }
+}
 
+// Style no-tags dropdown display
+.select-kit.combo-box.tag-drop .select-kit-row[data-value="all-tags"],
+.select-kit.combo-box.tag-drop .select-kit-row[data-value="no-tags"] {
+  color: var(--primary-high);
+  font-size: var(--font-down-2-rem);
+  font-weight: normal;
+  padding: 0.5rem 1rem;
+}
+
+.list-controls .select-kit .select-kit-collection {
+  padding-left: 0.3rem;
 }
 
 // Disable hiding top header in custom nav mobile
@@ -1376,16 +1394,10 @@ body.badges-page .category-banner-badges {
   display: none;
 }
 
-// [EXPERIMENTAL] Top nav display
-#navigation-bar>li:not([class*="custom_"]),
-ol.category-breadcrumb {
-  display: none;
-}
-
 // Hiding activitypub useless navigation and texts
 .activity-pub-navigation,
 .topic-map__activity-pub {
-  display: none;
+  display: none !important;
 }
 
 // Hiding more topics navigation (disabled) on mobile
