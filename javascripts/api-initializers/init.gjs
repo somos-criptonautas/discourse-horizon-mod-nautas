@@ -179,8 +179,8 @@ export default apiInitializer((api) => {
   }
 
   // Replace some icons
-  api.replaceIcon("discobot", "anonist");
-  api.replaceIcon("far-discobot", "anonist");
+  api.replaceIcon("discobot", "ph-dt-anonist");
+  api.replaceIcon("far-discobot", "ph-dt-anonist");
   api.replaceIcon("language", "translate");
   api.replaceIcon("bars-staggered", "");
   api.replaceIcon("list", "ph-dt-list");
