@@ -3,14 +3,11 @@
 
 es:
   blocked_sidebar:
+    dismiss: "ok"
+    cta: "Entrar ahora"
     nautas:
       title: "Disponible para nautas"
-      message: "Sección habilitada para @nautas. Participa activamente de la comunidad o suscríbete para ingresar."
+      message: "Sección exclusiva para @nautas. Participa en la comunidad o consigue un ticket suscribiéndote."
     traders:
       title: "Disponible para traders"
-      message: "Espacio reservado para @traders. Se desbloquea con participación en la comunidad o a través de nuestra suscripción."
-  js:
-    badges_banner:
-      description: "Supera nuestros retos aportando en la Comunidad"
-    groups_banner:
-      description: "Nuestros ghettos habilitan funciones y mas accesos"
+      message: "Sector dedicado para @traders. Se desbloquea con participación sostenida o a través de un ticket (suscripción mensual)."

@@ -36,23 +36,6 @@ body {
 // Layout — #main-outlet-wrapper, sidebar width, grid columns
 // -----------------------------------------------------------------------
 
-// Cosmetic access modal for locked categories/sections
-
-.no-nautas .sidebar-section-link[href$="/57"],
-.no-traders .sidebar-section-link[href$="/64"],
-.no-traders .sidebar-section-link[href$="/5"],
-.no-traders .sidebar-section-link[href$="/59"],
-.no-traders .sidebar-section-link[href^="/upcoming-events"],
-.no-traders .sidebar-section-link[href^="/resenha/r/lounge"] {
-  cursor: help;
-  opacity: 0.65;
-
-  &:hover,
-  &:focus {
-    opacity: 0.8;
-  }
-}
-
 #main-outlet-wrapper {
   gap: var(--main-grid-gap);
 }
@@ -241,12 +224,6 @@ body.category .navigation-controls,
   display: none !important;
 }
 
-// Remove apps from @anon sidebar
-.anons.sidebar-section[data-section-name="mas-apps"],
-.group-nuevos:not(.group-anons):not(.group-nautas):not(.group-traders):not(.group-team):not(.group-agoristas):not(.group-lideres).sidebar-section[data-section-name="mas-apps"] {
-  display: none !important;
-}
-
 // Disable theme switcher, Sidebar 'More' and keyboard (disabled) shortcuts icon
 .sidebar-more-section-trigger:first-of-type,
 .user-color-palette-selector-trigger,
@@ -260,8 +237,8 @@ body.category .navigation-controls,
 }
 
 // Anonymous hiding some stuff on sidebar
-.group-nuevos:not(.group-anons):not(.group-nautas):not(.group-traders):not(.group-team):not(.group-agoristas):not(.group-lideres).sidebar-section[data-section-name="apps-externas"],
-.anons[data-section-name="categories"] {
+/* .group-nuevos:not(.group-anons):not(.group-nautas):not(.group-traders):not(.group-team):not(.group-agoristas):not(.group-lideres).sidebar-section[data-section-name="apps-externas"],*/
+.anon[data-section-name="categories"] {
   display: none !important;
 }
 
@@ -1366,4 +1343,11 @@ body.badges-page .category-banner-badges {
 //Remove agent label on chatbots
 body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector__selection-wrapper label {
   display: none;
+}
+
+// Fix to login buttons with searchbar for anons
+@media screen and (width >=1400px) {
+  .anon .d-header .panel {
+    grid-column-start: unset;
+  }
 }

@@ -9,6 +9,7 @@
   "component": true,
   "modifiers": {
     "svg_icons": [
+      "ph-dt-anonist",
       "ph-dt-arrow-fat-lines-down",
       "ph-dt-arrow-fat-lines-left",
       "ph-dt-arrow-fat-lines-right",

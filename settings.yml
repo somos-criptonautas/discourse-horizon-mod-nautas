@@ -1,4 +1,42 @@
-# Theme settings for Horizon Modifications
+blocked_sections:
+  type: objects
+  schema:
+    name: tier
+    identifier: key
+    properties:
+      key:
+        type: string
+        required: true
+        validations:
+          max_length: 40
+      allowed_groups:
+        type: groups
+      categories:
+        type: categories
+      paths:
+        type: string
+      cta_url:
+        type: string
+      cta_icon:
+        type: icon
+      hide:
+        type: boolean
+        default: false
+  default:
+    - key: "nautas"
+      allowed_groups: []
+      categories: [57]
+      paths: ""
+      cta_url: "/s"
+      cta_icon: "ticket"
+      hide: false
+    - key: "traders"
+      allowed_groups: []
+      categories: [64, 5, 59]
+      paths: "/upcoming-events, /resenha/r/lounge"
+      cta_url: "/s"
+      cta_icon: "ticket"
+      hide: false# Theme settings for Horizon Modifications
 
 disable_discourse_keyboard_shortcuts:
   type: bool

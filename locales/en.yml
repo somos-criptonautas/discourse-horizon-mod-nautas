@@ -3,16 +3,15 @@
 
 en:
   theme_metadata:
-    description: "Dims sidebar links the user's group can't open and explains why in a modal."
+    description: "Blocks configured sidebar links for users outside a group and explains why in a modal."
+    settings:
+      blocked_sections: "One row per tier. `key` links the row to its title/message in the translations tab. Leave `allowed_groups` empty and the tier applies to everyone. `paths` is a comma-separated list of link paths for anything that isn't a category. `cta_url` empty hides the second button."
   blocked_sidebar:
+    dismiss: "ok"
+    cta: "Get in"
     nautas:
-      title: "Available from nautas"
-      message: "This section unlocks being a member of @nautas. Keep taking part in the community or subscribe to get in."
+      title: "Available for nautas"
+      message: "This section unlocks at @nautas ghetto. Keep taking part in the community and it opens on its own."
     traders:
       title: "Available for traders"
-      message: "This section is reserved for @traders. It unlocks through our karma system or subscriptions."
-  js:
-    badges_banner:
-      description: "Complete quests by participating in our Community"
-    groups_banner:
-      description: "Our ghettos enable more actions, access and funcionality"
+      message: "This section is reserved for @traders ghetto. It unlocks with sustained participation in the community."

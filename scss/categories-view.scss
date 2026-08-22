@@ -1,3 +1,28 @@
+// The link styling is generated at runtime from the blocked_sections setting.
+// This file only restyles these modals, scoped by the class the initializer
+// passes to dialog.alert().
+
+.blocked-sidebar-dialog {
+    .dialog-header {
+        border-bottom: none;
+    }
+
+    .dialog-footer {
+        border-top: none;
+        justify-content: space-between;
+
+        // core sets margin-right on every .btn; kills the gap at the right edge
+        .btn:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+// Disable colors everywhere
+.badge-category__wrapper .badge-category.--style-icon .d-icon {
+    color: unset !important;
+}
+
 // Apply category header style to badges and groups
 .badges-page .category-title-header,
 .groups-page .category-title-header {
@@ -29,8 +54,8 @@ div[class*="category-title-header"] .category-title-contents {
 
 
 div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-icon {
-    height: .75em;
-    width: .75em;
+    height: 1.35em;
+    width: 1.35em;
 }
 
 .category-title-contents .category-title .badge-category__name {
