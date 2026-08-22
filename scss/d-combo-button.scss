@@ -1,6 +1,6 @@
 // Disable new topic in mobile
 @media (width >=40rem) {
-    .d-combo-button --has-menu .topic-create-button__combo {
+    .d-combo-button {
         display: none;
     }
 }
@@ -17,4 +17,10 @@
 // Hide descriptions on categories
 .select-kit.combo-box.category-chooser .select-kit-row .category-desc {
     display: none;
+}
+
+// Disable navigation categories and tags in Horizon
+body#main-outlet .list-controls .navigation-container .category-breadcrumb.hidden,
+body#main-outlet .list-controls .navigation-container .category-breadcrumb {
+    display: none !important;
 }

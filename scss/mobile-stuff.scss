@@ -23,6 +23,11 @@ body.f-nav-hidden:not(.has-full-page-chat) .f-nav {
   transform: none !important;
 }
 
+// Update last icon to publish on f-nav
+.f-nav.tab:last-child {
+  color: var(--accent-color);
+}
+
 /* 
 // Hide navigation (desktop on mobile) on scrolling
 body.f-nav-hidden:not(.archetype-regular,
@@ -148,14 +153,6 @@ body.f-nav-hidden:not(.archetype-regular,
   .topic-list-item .category-glosario .topic-list .right,
   .topic-list-item .category-wiki .topic-list .right {
     margin-left: 1.25rem;
-  }
-}
-
-@media (width < 40rem) {
-
-  body#main-outlet .list-controls .navigation-container .category-breadcrumb.hidden,
-  body#main-outlet .list-controls .navigation-container .category-breadcrumb {
-    display: none !important;
   }
 }
 
