@@ -478,8 +478,8 @@ body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.h
 }
 
 // Hide locked icon
-.badge-category .restricted .d-icon-lock {
-  display: none;
+.d-icon-lock {
+  display: none !important;
 }
 
 // -----------------------------------------------------------------------
@@ -1299,7 +1299,7 @@ body.badges-page .category-banner-badges {
 }
 
 // Hiding activitypub useless navigation and texts
-.extra-nav-item-outlet .activity-pub-navigation .ember-view,
+#navigation-bar .extra-nav-item-outlet .activity-pub-navigation .ember-view,
 .topic-map__activity-pub {
   display: none !important;
 }

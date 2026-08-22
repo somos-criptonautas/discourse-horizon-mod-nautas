@@ -1,18 +1,18 @@
 // -----------------------------------------------------------------------
-// Groups rearrangment
+// Groups
 // -----------------------------------------------------------------------
 
 // We use a team group so hide redundancy
-.ember-view .groups-boxes.group-box[data-group-name="admins"],
-.ember-view .groups-boxes.group-box[data-group-name="mods"] {
+.groups-boxes.group-box[data-group-name="admins"],
+.groups-boxes.group-box[data-group-name="mods"] {
     display: none;
 }
 
-.ember-view .groups-boxes.group-box[data-group-name="nuevos"] {
+.groups-boxes.group-box[data-group-name="nuevos"] {
     order: -8;
 }
 
-.ember-view .groups-boxes.group-box[data-group-name="anons"] {
+.groups-boxes.group-box[data-group-name="anons"] {
     order: -7;
 }
 
@@ -20,15 +20,15 @@
     order: -6;
 }
 
-.ember-view .groups-boxes.group-box[data-group-name="traders"] {
+.groups-boxes.group-box[data-group-name="traders"] {
     order: -5;
 }
 
-.ember-view .groups-boxes.group-box[data-group-name="agoristas"] {
+.groups-boxes.group-box[data-group-name="agoristas"] {
     order: -4;
 }
 
-.ember-view .groups-boxes.group-box[data-group-name="lideres"] {
+.groups-boxes.group-box[data-group-name="lideres"] {
     order: -3;
 }
 
@@ -36,6 +36,22 @@
     order: -2;
 }
 
-.ember-view .groups-boxes.group-box[data-group-name="team"] {
+.groups-boxes.group-box[data-group-name="team"] {
     order: -1;
+}
+
+// No green color on group boxes archivements
+.groups-boxes .group-box .group-membership .is-group-owner,
+.groups-boxes .group-box .group-membership .is-group-member {
+    color: unset;
+}
+
+// More sizing on groups icons and descriptions
+.groups-boxes .group-box .group-avatar-flair .avatar-flair .d-icon {
+    width: 1.3rem;
+    height: 1.3rem;
+}
+
+.groups-boxes .group-box .group-box-inner .group-description {
+    padding-top: 0.5rem;
 }

@@ -103,3 +103,10 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
 custom-category-group-muted {
     display: none !important;
 }
+
+// Recover category descriptions on Horizon
+.category-boxes .category .description,
+.category-boxes-with-topics .category .description {
+    display: inherit !important;
+    font-size: 0.95rem !important;
+}
