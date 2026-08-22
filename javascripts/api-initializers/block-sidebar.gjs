@@ -13,11 +13,11 @@ function modalFor(group) {
 
 // ---- WHAT EACH GROUP UNLOCKS -------------------------------------------
 const RULES = {
-  tl2: {
+  nautas: {
     categoryIds: [57], // feedback
     paths: [],
   },
-  tl3: {
+  traders: {
     categoryIds: [64, 5, 59], // en la mira, analisis, eventos
     paths: ["/upcoming-events", "/resenha/r/lounge"],
   },

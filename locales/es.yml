@@ -3,10 +3,10 @@
 
 es:
   blocked_sidebar:
-    tl2:
+    nautas:
       title: "Disponible para nautas"
       message: "Sección habilitada para @nautas. Participa activamente de la comunidad o suscríbete para ingresar."
-    tl3:
+    traders:
       title: "Disponible para traders"
       message: "Espacio reservado para @traders. Se desbloquea con participación en la comunidad o a través de nuestra suscripción."
   js:

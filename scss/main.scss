@@ -38,12 +38,12 @@ body {
 
 // Cosmetic access modal for locked categories/sections
 
-.no-tl2 .sidebar-section-link[href$="/57"],
-.no-tl3 .sidebar-section-link[href$="/64"],
-.no-tl3 .sidebar-section-link[href$="/5"],
-.no-tl3 .sidebar-section-link[href$="/59"],
-.no-tl3 .sidebar-section-link[href^="/upcoming-events"],
-.no-tl3 .sidebar-section-link[href^="/resenha/r/lounge"] {
+.no-nautas .sidebar-section-link[href$="/57"],
+.no-traders .sidebar-section-link[href$="/64"],
+.no-traders .sidebar-section-link[href$="/5"],
+.no-traders .sidebar-section-link[href$="/59"],
+.no-traders .sidebar-section-link[href^="/upcoming-events"],
+.no-traders .sidebar-section-link[href^="/resenha/r/lounge"] {
   cursor: help;
   opacity: 0.65;
 
