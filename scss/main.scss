@@ -141,10 +141,11 @@ body:not(.has-full-page-chat, .wizard) {
 
 // Sidebar new topic full width button
 .sidebar-new-topic-button__wrapper {
-  margin: var(--space-3) var(--space-3) 0 var(--space-2);
-  /*   position: fixed;
-  right: 1.25rem;
-  bottom: 1.25rem; */
+  padding-bottom: 0.3rem;
+}
+
+.sidebar-wrapper .sidebar-sections {
+  padding-top: 0.5rem;
 }
 
 body.tags-page .navigation-controls,
@@ -1266,9 +1267,26 @@ body.badges-page .category-banner-badges {
   border-radius: 0.15rem;
 }
 
+// More padding on composer
+.ProseMirror p:first-child {
+  padding-top: 0.75rem;
+}
+
 // Showing wrap selectors on composer only to staff
 .group-nuevos:not(.group-team):not(.group-agoristas):not(.group-lideres) [data-name="toggle-wrap"] {
   display: none;
+}
+
+// Hiding unnecessary text
+.composer-whisper-indicator span {
+  display: none;
+}
+
+// 10% more size on svg icons and their titles
+.svg-icon,
+.svg-icon-title {
+  height: 1.1em;
+  width: 1.1em;
 }
 
 // Esc preview on similar topic aligment
@@ -1340,9 +1358,27 @@ body.badges-page .category-banner-badges {
   display: none;
 }
 
-//Remove agent label on chatbots
+//Style the anonist (IA Bot) main chat page
 body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector__selection-wrapper label {
   display: none;
+}
+
+body.has-ai-conversations-sidebar .ai-bot-conversations__input-container {
+  width: 70%;
+  flex-direction: row-reverse;
+
+}
+
+body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector__selection-wrapper .name {
+  text-transform: uppercase;
+  font-size: var(--font-up-1);
+}
+
+body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn {
+  background-color: var(--primary-50);
+  font-weight: bold;
+  padding: 0.55rem 0.85rem;
+  border-radius: var(--d-border-radius-large);
 }
 
 // Fix to login buttons with searchbar for anons
