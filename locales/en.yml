@@ -2,6 +2,15 @@
 # Add custom translations here if needed
 
 en:
+  theme_metadata:
+    description: "Dims sidebar links the user's group can't open and explains why in a modal."
+  blocked_sidebar:
+    tl2:
+      title: "Available from nautas"
+      message: "This section unlocks being a member of @nautas. Keep taking part in the community or subscribe to get in."
+    tl3:
+      title: "Available for traders"
+      message: "This section is reserved for @traders. It unlocks through our karma system or subscriptions."
   js:
     badges_banner:
       description: "Complete quests by participating in our Community"

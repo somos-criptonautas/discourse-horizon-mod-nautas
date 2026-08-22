@@ -151,11 +151,18 @@ body.f-nav-hidden:not(.archetype-regular,
   }
 }
 
+@media (width < 40rem) {
 
-// Disable tags in glosario/wiki
-.category-glosario #main-outlet .list-controls .navigation-container .category-breadcrumb,
-.category-wiki #main-outlet .list-controls .navigation-container .category-breadcrumb {
-  display: none !important;
+  #main-outlet .list-controls .navigation-container .category-breadcrumb.hidden,
+  #main-outlet .list-controls .navigation-container .category-breadcrumb {
+    display: none !important;
+
+    // Disable tags in glosario/wiki
+    .category-glosario #main-outlet .list-controls .navigation-container .category-breadcrumb,
+    .category-wiki #main-outlet .list-controls .navigation-container .category-breadcrumb {
+      display: none !important;
+    }
+  }
 }
 
 // Notifications position for arrange icons on custom nav mobile

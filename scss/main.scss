@@ -36,6 +36,22 @@ body {
 // Layout — #main-outlet-wrapper, sidebar width, grid columns
 // -----------------------------------------------------------------------
 
+.no-nauta .sidebar-section-link[href$="/57"],
+.no-trader .sidebar-section-link[href$="/64"],
+.no-trader .sidebar-section-link[href$="/5"],
+.no-trader .sidebar-section-link[href$="/59"],
+.no-trader .sidebar-section-link[href^="/upcoming-events"],
+.no-trader .sidebar-section-link[href^="/resenha/r/lounge"] {
+  cursor: help;
+  opacity: 0.55;
+
+  &:hover,
+  &:focus {
+    opacity: 0.7;
+  }
+}
+
+
 #main-outlet-wrapper {
   gap: var(--main-grid-gap);
 }
@@ -414,7 +430,7 @@ button [title="similares"] .d-button-label {
 
 // Disable new topic in mobile
 @media (width >=40rem) {
-  body.d-combo-button .topic-create-button__combo {
+  .d-combo-button --has-menu .topic-create-button__combo {
     display: none;
   }
 }
@@ -724,8 +740,8 @@ nav.c-footer .c-footer__item {
   font-size: var(--font-up-2-rem) !important;
 }
 
-.groups-boxes .group-box .group-membership .is-group-owner,
-.groups-boxes .group-box .group-membership .is-group-member {
+.groups-boxes.group-box .group-membership .is-group-owner,
+.groups-boxes.group-box .group-membership .is-group-member {
   color: unset !important;
 }
 
@@ -922,40 +938,40 @@ body.category-trading-curso .more-topics__container {
 // -----------------------------------------------------------------------
 
 // We use a team group so hide redundancy
-.ember-view .groups-boxes .group-box[data-group-name="admins"],
-.ember-view .groups-boxes .group-box[data-group-name="mods"] {
+.ember-view .groups-boxes.group-box[data-group-name="admins"],
+.ember-view .groups-boxes.group-box[data-group-name="mods"] {
   display: none;
 }
 
-.ember-view .groups-boxes .group-box[data-group-name="nuevos"] {
+.ember-view .groups-boxes.group-box[data-group-name="nuevos"] {
   order: -8;
 }
 
-.ember-view .groups-boxes .group-box[data-group-name="anons"] {
+.ember-view .groups-boxes.group-box[data-group-name="anons"] {
   order: -7;
 }
 
-.groups-boxes .group-box[data-group-name="nautas"] {
+.groups-boxes.group-box[data-group-name="nautas"] {
   order: -6;
 }
 
-.ember-view .groups-boxes .group-box[data-group-name="traders"] {
+.ember-view .groups-boxes.group-box[data-group-name="traders"] {
   order: -5;
 }
 
-.ember-view .groups-boxes .group-box[data-group-name="agoristas"] {
+.ember-view .groups-boxes.group-box[data-group-name="agoristas"] {
   order: -4;
 }
 
-.ember-view .groups-boxes .group-box[data-group-name="lideres"] {
+.ember-view .groups-boxes.group-box[data-group-name="lideres"] {
   order: -3;
 }
 
-.groups-boxes .group-box[data-group-name="delistados"] {
+.groups-boxes.group-box[data-group-name="delistados"] {
   order: -2;
 }
 
-.ember-view .groups-boxes .group-box[data-group-name="team"] {
+.ember-view .groups-boxes.group-box[data-group-name="team"] {
   order: -1;
 }
 
@@ -1363,7 +1379,7 @@ body.badges-page .category-banner-badges {
 }
 
 // Hiding activitypub useless navigation and texts
-.activity-pub-navigation,
+.extra-nav-item-outlet .activity-pub-navigation .ember-view,
 .topic-map__activity-pub {
   display: none !important;
 }
