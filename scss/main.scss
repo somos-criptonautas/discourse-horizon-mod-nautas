@@ -36,21 +36,22 @@ body {
 // Layout — #main-outlet-wrapper, sidebar width, grid columns
 // -----------------------------------------------------------------------
 
-.no-nauta .sidebar-section-link[href$="/57"],
-.no-trader .sidebar-section-link[href$="/64"],
-.no-trader .sidebar-section-link[href$="/5"],
-.no-trader .sidebar-section-link[href$="/59"],
-.no-trader .sidebar-section-link[href^="/upcoming-events"],
-.no-trader .sidebar-section-link[href^="/resenha/r/lounge"] {
+// Cosmetic access modal for locked categories/sections
+
+.no-tl2 .sidebar-section-link[href$="/57"],
+.no-tl3 .sidebar-section-link[href$="/64"],
+.no-tl3 .sidebar-section-link[href$="/5"],
+.no-tl3 .sidebar-section-link[href$="/59"],
+.no-tl3 .sidebar-section-link[href^="/upcoming-events"],
+.no-tl3 .sidebar-section-link[href^="/resenha/r/lounge"] {
   cursor: help;
-  opacity: 0.55;
+  opacity: 0.65;
 
   &:hover,
   &:focus {
-    opacity: 0.7;
+    opacity: 0.8;
   }
 }
-
 
 #main-outlet-wrapper {
   gap: var(--main-grid-gap);
@@ -428,22 +429,6 @@ button [title="similares"] .d-button-label {
   }
 }
 
-// Disable new topic in mobile
-@media (width >=40rem) {
-  .d-combo-button --has-menu .topic-create-button__combo {
-    display: none;
-  }
-}
-
-// Style no-tags dropdown display
-.select-kit.combo-box.tag-drop .select-kit-row[data-value="all-tags"],
-.select-kit.combo-box.tag-drop .select-kit-row[data-value="no-tags"] {
-  color: var(--primary-high);
-  font-size: var(--font-down-2-rem);
-  font-weight: normal;
-  padding: 0.5rem 1rem;
-}
-
 .list-controls .select-kit .select-kit-collection {
   padding-left: 0.3rem;
 }
@@ -513,6 +498,11 @@ body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.h
   .container.posts .topic-navigation {
     margin-bottom: 2.5rem;
   }
+}
+
+// Hide locked icon
+.badge-category .restricted .d-icon-lock {
+  display: none;
 }
 
 // -----------------------------------------------------------------------
@@ -864,11 +854,6 @@ body.category-trading-curso .more-topics__container {
   display: none;
 }
 
-// Hide descriptions on categories
-.select-kit.combo-box.category-chooser .select-kit-row .category-desc {
-  display: none;
-}
-
 // Grid gap was missing, so wrapped category boxes looked stuck together.
 .category-boxes-with-topics {
   grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
@@ -931,48 +916,6 @@ body.category-trading-curso .more-topics__container {
   .category-boxes-with-topics .category-details {
     height: 7.5vh;
   }
-}
-
-// -----------------------------------------------------------------------
-// Groups rearrangment
-// -----------------------------------------------------------------------
-
-// We use a team group so hide redundancy
-.ember-view .groups-boxes.group-box[data-group-name="admins"],
-.ember-view .groups-boxes.group-box[data-group-name="mods"] {
-  display: none;
-}
-
-.ember-view .groups-boxes.group-box[data-group-name="nuevos"] {
-  order: -8;
-}
-
-.ember-view .groups-boxes.group-box[data-group-name="anons"] {
-  order: -7;
-}
-
-.groups-boxes.group-box[data-group-name="nautas"] {
-  order: -6;
-}
-
-.ember-view .groups-boxes.group-box[data-group-name="traders"] {
-  order: -5;
-}
-
-.ember-view .groups-boxes.group-box[data-group-name="agoristas"] {
-  order: -4;
-}
-
-.ember-view .groups-boxes.group-box[data-group-name="lideres"] {
-  order: -3;
-}
-
-.groups-boxes.group-box[data-group-name="delistados"] {
-  order: -2;
-}
-
-.ember-view .groups-boxes.group-box[data-group-name="team"] {
-  order: -1;
 }
 
 // -----------------------------------------------------------------------

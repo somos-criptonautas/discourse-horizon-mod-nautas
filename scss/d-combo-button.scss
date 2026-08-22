@@ -1,0 +1,20 @@
+// Disable new topic in mobile
+@media (width >=40rem) {
+    .d-combo-button --has-menu .topic-create-button__combo {
+        display: none;
+    }
+}
+
+// Style no-tags dropdown display
+.select-kit.combo-box.tag-drop .select-kit-row[data-value="all-tags"],
+.select-kit.combo-box.tag-drop .select-kit-row[data-value="no-tags"] {
+    color: var(--primary-high);
+    font-size: var(--font-down-2-rem);
+    font-weight: normal;
+    padding: 0.5rem 1rem;
+}
+
+// Hide descriptions on categories
+.select-kit.combo-box.category-chooser .select-kit-row .category-desc {
+    display: none;
+}

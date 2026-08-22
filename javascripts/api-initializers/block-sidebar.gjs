@@ -19,15 +19,14 @@ const RULES = {
   },
   tl3: {
     categoryIds: [64, 5, 59], // en la mira, analisis, eventos
-    // eventos is listed in both: matched by id if the link renders as a
-    // category url, by path if it renders as /upcoming-events.
     paths: ["/upcoming-events", "/resenha/r/lounge"],
   },
 };
 // -------------------------------------------------------------------------
 
-// Trailing numeric segment of the path — the category id, regardless of how
-// many slug segments precede it or whether the slugs get translated.
+// These are custom sidebar links, so the only stable identifier is the id at
+// the end of the href (/c/57). Link names are slugs — they change on rename
+// and differ per language.
 function categoryIdFrom(path) {
   const match = path.match(/\/(\d+)(?:\/l\/[a-z-]+)?\/?(?:\?|$)/);
   return match ? parseInt(match[1], 10) : null;
