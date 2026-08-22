@@ -17,27 +17,25 @@ blocked_sections:
         type: string
       cta_url:
         type: string
-      # plain string, not type: icon — the icon list is validated server-side
-      # and `ticket` is registered client-side by another initializer
       cta_icon:
         type: string
       hide:
         type: boolean
         default: false
   default:
-    - key: "tl2"
+    - key: "nautas"
       allowed_groups: []
       categories: [57]
       paths: ""
       cta_url: "/s"
-      cta_icon: "ticket"
+      cta_icon: "ph-dt-ticket"
       hide: false
-    - key: "tl3"
+    - key: "traders"
       allowed_groups: []
       categories: [64, 5, 59]
       paths: "/upcoming-events, /resenha/r/lounge"
       cta_url: "/s"
-      cta_icon: "ticket"
+      cta_icon: "ph-dt-ticket"
       hide: false
 
 disable_discourse_keyboard_shortcuts:

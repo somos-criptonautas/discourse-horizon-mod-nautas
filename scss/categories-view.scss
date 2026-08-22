@@ -9,12 +9,6 @@
 
     .dialog-footer {
         border-top: none;
-        justify-content: space-between;
-
-        // core sets margin-right on every .btn; kills the gap at the right edge
-        .btn:last-child {
-            margin-right: 0;
-        }
     }
 }
 
