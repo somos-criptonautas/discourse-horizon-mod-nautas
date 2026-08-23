@@ -564,9 +564,23 @@ body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.h
   font-family: var(--heading-font-family);
 }
 
+/* 
 // Moved to .c-navbar and reduced 25% (0.53em/0.11em -> 0.4em/0.08em)
 .chat-drawer-container .c-navbar {
   padding: 0.4em 0 0.08em 0.4em;
+} */
+
+.c-navbar {
+  align-items: center;
+  height: 2.75rem;
+}
+
+.chat-message-separator-date .chat-message-separator__text-container {
+  top: 0.3rem;
+}
+
+.chat-composer__wrapper {
+  padding: var(--space-3) 0 env(safe-area-inset-bottom) 0;
 }
 
 .chat-channel-divider {
