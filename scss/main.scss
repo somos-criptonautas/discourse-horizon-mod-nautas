@@ -1469,8 +1469,14 @@ body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector__sel
 
 body.has-ai-conversations-sidebar .ai-bot-conversations__input-container {
   width: 70%;
-  flex-direction: row-reverse;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
 
+body.has-ai-conversations-sidebar .ai-bot-conversations__input-wrapper #ai-bot-conversations-input {
+  paddint-left: 0.5rem;
 }
 
 body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector__selection-wrapper .name {
@@ -1483,6 +1489,15 @@ body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn
   font-weight: bold;
   padding: 0.55rem 0.85rem;
   border-radius: var(--d-border-radius-large);
+}
+
+body.has-ai-conversations-sidebar .ai-bot-conversations__input-wrapper {
+  border-radius: 1rem;
+}
+
+body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn:hover,
+body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn:focus {
+  background: unset;
 }
 
 // Fix to login buttons with searchbar for anons
