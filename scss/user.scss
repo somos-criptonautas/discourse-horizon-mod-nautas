@@ -62,8 +62,20 @@
     width: 100% !important;
 }
 
+.top-sub-section {
+    margin-top: 1rem;
+}
+
+.top-sub-section li {
+    margin: 0.75rem 0;
+}
+
 .top-sub-section .ember-view.more {
     display: none;
+}
+
+.stats-title {
+    font-size: var(--font-up-3)
 }
 
 // Hiding lot of groups from profile

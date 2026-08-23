@@ -682,6 +682,97 @@ nav.c-footer .c-footer__item {
   display: none;
 }
 
+// Styling from Oniel Flat Theme
+.user-main .stats-section>ul>li {
+  width: auto !important;
+  min-width: 0;
+  min-height: 82px;
+  padding: 12px;
+  border: 0 !important;
+  border-radius: var(--mf-radius-md);
+  background: rgba(0, 0, 0, 0) !important;
+  box-shadow: none !important;
+}
+
+.user-content .stats-section ul li .user-stat,
+#user-summary .stats-section ul li .user-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.user-content .stats-section ul,
+#user-summary .stats-section ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--mf-space-3);
+}
+
+.user-main .stats-section>ul {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.user-content .top-section,
+#user-summary .top-section {
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: var(--mf-space-8);
+}
+
+.user-main .top-section,
+.user-main .user-stream .item,
+.user-main .user-stream-item,
+.user-main .user-content,
+.user-main .user-content-wrapper {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.user-stream-item,
+.top-section,
+.details,
+.block-hero__chip,
+.category-box {
+  box-shadow: none !important;
+}
+
+// Styling on MPs
+.new-user-content-wrapper .new-private-message-btn {
+  width: 90%;
+  margin: auto;
+  margin-top: 0.5rem;
+}
+
+.new-user-content-wrapper .user-navigation {
+  border-bottom: unset;
+}
+
+.new-user-content-wrapper .discourse-no-touch .nav-pills>li>a {
+  border-radius: 0.3rem;
+}
+
+.new-user-content-wrapper .nav-pills>li>a:hover .d-icon,
+.nav-pills>li button:hover .d-icon {
+  color: unset;
+}
+
+.new-user-content-wrapper .discourse-no-touch .nav-pills>li>a:hover,
+.new-user-content-wrapper .discourse-no-touch .nav-pills>li button:hover {
+  background: var(--d-sidebar-highlight-background);
+  color: var(--d-sidebar-highlight-color);
+  outline: none;
+}
+
+.new-user-content-wrapper .discourse-no-touch .nav-pills>li>a:hover::after,
+.new-user-content-wrapper .discourse-no-touch .nav-pills>li button:hover::after {
+  display: none;
+}
+
 // -----------------------------------------------------------------------
 // Badges
 // -----------------------------------------------------------------------
