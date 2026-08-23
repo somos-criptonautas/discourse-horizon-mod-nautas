@@ -43,3 +43,14 @@ html:not(.anon) .d-header-icons .header-dropdown-toggle #toggle-current-user:not
 .d-header-icons {
   margin-left: auto;
 }
+
+// Less size on top right user header icons (larger global svgs compatibility)
+:where(.uc-modernize-foundation-theme) .header-sidebar-toggle button .d-icon,
+:where(.uc-modernize-foundation-theme) .d-header-icons .header-dropdown-toggle:not(.user-menu-panel, .language-switcher) .d-icon,
+.d-header-icons .d-icon {
+  font-size: var(--font-up-2);
+}
+
+:where(.uc-modernize-foundation-theme) .d-header-icons .icon img.avatar {
+  width: 1.9em;
+}

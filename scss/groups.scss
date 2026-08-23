@@ -44,12 +44,6 @@
     order: -1;
 }
 
-// No green color on group boxes archivements
-.group-box .group-membership .is-group-owner,
-.group-box .group-membership .is-group-member {
-    color: unset;
-}
-
 // More sizing on groups icons and descriptions
 .group-box .group-avatar-flair .avatar-flair .d-icon {
     width: 1.5rem !important;

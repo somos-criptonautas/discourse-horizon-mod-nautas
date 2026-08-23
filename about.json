@@ -69,21 +69,21 @@
     "custom_homepage": true
   },
   "color_schemes": {
-    "Horizon": {
+    "Light": {
       "primary": "1A1A1A",
-      "secondary": "F1F1F1",
-      "tertiary": "595bca",
+      "secondary": "f8f8f8",
+      "tertiary": "ec6322",
       "tertiary-med-or-tertiary": "595bca",
       "selected": "d7dfff",
       "header_background": "F1F1F1",
       "header_primary": "1A1A1A",
       "hover": "E1E8FF"
     },
-    "Horizon Dark": {
+    "Dark": {
       "primary": "F1F1F1",
       "secondary": "1C1C1C",
-      "tertiary": "A4A5E5",
-      "tertiary-med-or-tertiary": "A4A5E5",
+      "tertiary": "9A5CFD",
+      "tertiary-med-or-tertiary": "595BCA",
       "selected": "3b3e56",
       "header_background": "1C1C1C",
       "header_primary": "F1F1F1",

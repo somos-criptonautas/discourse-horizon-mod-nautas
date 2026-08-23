@@ -19,8 +19,9 @@
     display: none;
 }
 
+/* 
 // Disable navigation categories and tags in Horizon
-body#main-outlet .list-controls .navigation-container .category-breadcrumb.hidden,
-body#main-outlet .list-controls .navigation-container .category-breadcrumb {
+#main-outlet .list-controls .navigation-container .category-breadcrumb.hidden,
+#main-outlet .list-controls .navigation-container .category-breadcrumb {
     display: none !important;
-}
+} */

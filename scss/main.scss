@@ -14,6 +14,11 @@ html {
   --main-grid-gap: 0.5em;
   --d-control-height: var(--space-8);
   --content-border-color: var(--primary-300);
+  --d-border-radius-large: 17px;
+  --highlight: var(--tertiary-600);
+  --danger: #e45735;
+  --tertiary-med-or-tertiary: unset;
+  --success: var(--primary);
 }
 
 html:not(:has(.has-full-page-chat)) {
@@ -165,13 +170,19 @@ body.category .navigation-controls,
   display: none;
 }
 
+/* 
 // NOT green when passing
 .course-lesson-completed {
   color: unset !important;
-}
+} */
 
 // No top navbar in categories page
 .categories-list #navigation-bar {
+  display: none !important;
+}
+
+// No categories (they are accesible from sidebar)
+.select-kit.combo-box.category-drop {
   display: none !important;
 }
 
@@ -336,6 +347,19 @@ button [title="similares"] .d-button-label {
   }
 }
 
+.hc-topic-card__status.--hot,
+.hc-topic-card__status.--solved {
+  border: 1px solid var(--secondary-medium);
+  color: var(--secondary-medium);
+}
+
+// Modal expand button styling
+.hc-topic-card__title .d-icon-expand {
+  height: 1;
+  width: 1;
+  fill: var(--secondary-medium);
+}
+
 // More padding-margin to tags
 .discourse-tag.box {
   padding: 4px 10px;
@@ -407,14 +431,6 @@ button [title="similares"] .d-button-label {
 .navigation-container .category-breadcrumb {
   order: unset !important;
   column-gap: unset !important;
-}
-
-// Align custom top navbar on categories {
-@media (width < 40rem) {
-
-  .navigation-container .category-breadcrumb {
-    display: none !important;
-  }
 }
 
 .list-controls .select-kit .select-kit-collection {
@@ -491,6 +507,11 @@ body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.h
 // Hide locked icon
 .d-icon-lock {
   display: none !important;
+}
+
+// No redundant not-dropdowns in topic lists
+.topic-replies-toggle-wrapper {
+  display: none;
 }
 
 // -----------------------------------------------------------------------
@@ -719,11 +740,12 @@ nav.c-footer .c-footer__item {
   font-size: var(--font-up-2-rem) !important;
 }
 
+/* 
 .groups-boxes.group-box .group-membership .is-group-owner,
 .groups-boxes.group-box .group-membership .is-group-member {
   color: unset !important;
 }
-
+ */
 .is-group-member .svg-icon {
   vertical-align: -0.2em !important;
 }
@@ -988,6 +1010,7 @@ body.category-trading-curso .more-topics__container {
 .banner-featured-links__link,
 .banner-featured-links__link:visited {
   color: var(--accent-text-color);
+  border-radius: var(--d-border-radius-large)
 }
 
 .banner-featured-links__link:hover {
@@ -1190,7 +1213,7 @@ img.emoji {
   }
 }
 
-// Progress-button numbers/icon were unreadable in dark mode
+/* // Progress-button numbers/icon were unreadable in dark mode
 .topic-progress-wrapper,
 .topic-progress,
 #topic-progress-wrapper {
@@ -1199,7 +1222,7 @@ img.emoji {
   * {
     color: inherit !important;
   }
-}
+} */
 
 // Visible progress bar in tiny screens
 @media screen and (width <=400px) {
