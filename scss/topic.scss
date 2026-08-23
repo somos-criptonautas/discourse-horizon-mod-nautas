@@ -1,24 +1,12 @@
-/* .topic-statuses {
+.topic-statuses {
   display: none;
 }
 
 .welcome-banner__wrap .btn.search-icon,
-.welcome-banner__wrap
-  .d-modal.json-schema-editor-modal
-  .je-ready
-  button.search-icon,
-.d-modal.json-schema-editor-modal
-  .je-ready
-  .welcome-banner__wrap
-  button.search-icon,
-.welcome-banner__wrap
-  .d-modal.json-schema-editor-modal
-  .je-ready
-  .search-icon.json-editor-btn-add,
-.d-modal.json-schema-editor-modal
-  .je-ready
-  .welcome-banner__wrap
-  .search-icon.json-editor-btn-add {
+.welcome-banner__wrap .d-modal.json-schema-editor-modal .je-ready button.search-icon,
+.d-modal.json-schema-editor-modal .je-ready .welcome-banner__wrap button.search-icon,
+.welcome-banner__wrap .d-modal.json-schema-editor-modal .je-ready .search-icon.json-editor-btn-add,
+.d-modal.json-schema-editor-modal .je-ready .welcome-banner__wrap .search-icon.json-editor-btn-add {
   z-index: 1;
 }
 
