@@ -13,12 +13,12 @@ html {
 :root {
   --main-grid-gap: 0.5em;
   --d-control-height: var(--space-8);
-  --content-border-color: var(--primary-300);
+  --content-border-color: var(--primary-low);
   --d-border-radius-large: 17px;
   --highlight: var(--tertiary-600);
   --danger: #e45735;
   --tertiary-med-or-tertiary: unset;
-  --success: var(--primary);
+  --success: var(--primary-low);
 }
 
 html:not(:has(.has-full-page-chat)) {
@@ -66,7 +66,7 @@ body.has-full-page-chat:not(.has-sidebar-page) {
 
 @media (width >=1024px) {
   :root {
-    --d-sidebar-width: calc(17em * 0.75); // 12.75em (25% narrower)
+    --d-sidebar-width: calc(20em * 0.75);
   }
 }
 
@@ -254,8 +254,8 @@ body.category .navigation-controls,
 }
 
 // Fix weird CSS color icons
-.sidebar-section-link-wrapper .sidebar-section-link-prefix.icon {
-  color: inherit !important;
+.navigation-category .sidebar-section-link-wrapper .sidebar-section-link-prefix.icon {
+  display: none;
 }
 
 // Anonymous hiding some stuff on sidebar
@@ -266,6 +266,10 @@ body.category .navigation-controls,
 // f-nav edits
 .f-nav {
   height: 2.8rem !important;
+}
+
+.group-traders .group-agoristas .group-lideres .group-team .sidebar-section-link-wrapper [data-list-item-name="entrar"] {
+  display: none;
 }
 
 // -----------------------------------------------------------------------
@@ -355,15 +359,14 @@ button [title="similares"] .d-button-label {
 
 // Modal expand button styling
 .hc-topic-card__title .d-icon-expand {
-  height: 1;
-  width: 1;
+  height: 1rem;
+  width: 1rem;
   fill: var(--secondary-medium);
 }
 
 // More padding-margin to tags
 .discourse-tag.box {
   padding: 4px 10px;
-  font-size: 0.95rem;
   margin: 0 4px;
 }
 
@@ -431,10 +434,22 @@ button [title="similares"] .d-button-label {
 .navigation-container .category-breadcrumb {
   order: unset !important;
   column-gap: unset !important;
+  flex-wrap: nowrap;
 }
 
 .list-controls .select-kit .select-kit-collection {
   padding-left: 0.3rem;
+}
+
+// Hide category breadcrumb in mobile, keep it on support and Q&A categories
+@media (width < 40rem) {
+  .navigation-container .category-breadcrumb {
+    display: none !important;
+  }
+}
+
+:not(.category-soporte):not(.category-support):not(category-preguntas):not(category-questions).navigation-container .category-breadcrumb {
+  display: none;
 }
 
 // Disable hiding top header in custom nav mobile
@@ -687,9 +702,9 @@ nav.c-footer .c-footer__item {
   width: auto !important;
   min-width: 0;
   min-height: 82px;
-  padding: 12px;
+  padding: 0.65rem;
   border: 0 !important;
-  border-radius: var(--mf-radius-md);
+  border-radius: var(--d-border-radius);
   background: rgba(0, 0, 0, 0) !important;
   box-shadow: none !important;
 }
@@ -712,7 +727,13 @@ nav.c-footer .c-footer__item {
 }
 
 .user-main .stats-section>ul {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (width < 40rem) {
+  .user-main .stats-section>ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .user-content .top-section,
@@ -810,9 +831,6 @@ nav.c-footer .c-footer__item {
 }
 
 // Change earned badge styling
-.check-display.status-checked {
-  background-color: var(--primary-300) !important;
-}
 
 .badge-card {
   border: 1px solid var(--primary-300);
@@ -829,6 +847,17 @@ nav.c-footer .c-footer__item {
 
 .check-display.status-checked .check-display .d-icon {
   font-size: var(--font-up-2-rem) !important;
+  color: var(--primary);
+}
+
+.badge-card .check-display {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+}
+
+.check-display.status-checked {
+  display: none;
 }
 
 /* 
@@ -888,6 +917,7 @@ body.category-preguntas li:has(.tag-drop) {
 // Font-size adjust in Docs categories sidebar
 .discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link-content-text {
   font-size: var(--font-down-1);
+  padding-left: 0.3rem;
 }
 
 @media (width >=40rem) {
@@ -1366,9 +1396,14 @@ body.badges-page .category-banner-badges {
 } */
 
 // National flags re-styling
-.nationalflag-usersummary {
+.about .nationalflag-usersummary {
   width: 30px;
   border-radius: 0.15rem;
+  padding-bottom: 0.45rem;
+}
+
+.about:not(.collapsed-info) .nationalflag-usersummary {
+  display: none;
 }
 
 // More padding on composer
@@ -1475,8 +1510,15 @@ body.has-ai-conversations-sidebar .ai-bot-conversations__input-container {
   gap: 0.75rem;
 }
 
+@media (width < 40rem) {
+  body.has-ai-conversations-sidebar .ai-bot-conversations__input-container {
+    width: 100% !important;
+    height: 4rem;
+  }
+}
+
 body.has-ai-conversations-sidebar .ai-bot-conversations__input-wrapper #ai-bot-conversations-input {
-  paddint-left: 0.5rem;
+  padding-left: 0.5rem;
 }
 
 body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector__selection-wrapper .name {

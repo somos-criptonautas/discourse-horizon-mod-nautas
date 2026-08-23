@@ -1,6 +1,6 @@
 // Disable new topic in mobile
 @media (width >=40rem) {
-    .d-combo-button {
+    body.d-combo-button {
         display: none !important;
     }
 }
@@ -9,7 +9,7 @@
 .select-kit.combo-box.tag-drop .select-kit-row[data-value="all-tags"],
 .select-kit.combo-box.tag-drop .select-kit-row[data-value="no-tags"] {
     color: var(--primary-high);
-    font-size: var(--font-down-2-rem);
+    font-size: var(--font-down-1-rem);
     font-weight: normal;
     padding: 0.5rem 1rem;
 }

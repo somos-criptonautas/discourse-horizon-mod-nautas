@@ -6,6 +6,10 @@
     padding-bottom: 2rem;
 }
 
+.group-boxes .group-box {
+    background-color: var(--d-badge-card-background-color);
+}
+
 // We use a team group so hide redundancy
 .group-box[data-group-name="admins"],
 .group-box[data-group-name="moderadores"] {

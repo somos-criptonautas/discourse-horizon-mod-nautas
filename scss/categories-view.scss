@@ -1,12 +1,3 @@
-// The link styling is generated at runtime from the blocked_sections setting.
-// This file only restyles these modals, scoped by the class the initializer
-// passes to dialog.alert().
-//
-// Tokens are Horizon's: --d-border-radius is 8px there (its middle step,
-// between --d-input-border-radius 6px and --d-border-radius-large 20px) and
-// falls back to core's 4px under any other theme. Spacing uses Horizon's
-// --spacing-* scale with plain-value fallbacks.
-
 .blocked-sidebar-dialog {
     --dialog-pad: var(--spacing-inline-m, 1rem);
 
@@ -139,7 +130,7 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
 // Hide some elements
 .custom-categories-groups .category-box-soporte,
 .custom-category-group-toggle .d-icon,
-custom-category-group-muted {
+.custom-category-group-muted {
     display: none !important;
 }
 

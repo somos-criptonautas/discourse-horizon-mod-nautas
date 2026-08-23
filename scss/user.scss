@@ -74,8 +74,10 @@
     display: none;
 }
 
-.stats-title {
-    font-size: var(--font-up-3)
+@media (width < 40rem) {
+    .stats-title {
+        font-size: var(--font-up-2)
+    }
 }
 
 // Hiding lot of groups from profile
