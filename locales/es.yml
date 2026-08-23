@@ -3,8 +3,8 @@
 
 es:
   blocked_sidebar:
-    dismiss: "ok"
-    cta: "Entrar ahora"
+    dismiss: "seguir navegando"
+    cta: "entrar ahora"
     nautas:
       title: "Disponible para nautas"
       message: "Sección exclusiva para @nautas. Participa en la comunidad o consigue un ticket suscribiéndote."

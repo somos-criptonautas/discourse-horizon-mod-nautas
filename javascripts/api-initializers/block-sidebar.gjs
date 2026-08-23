@@ -64,7 +64,7 @@ export default apiInitializer("1.8.0", (api) => {
       }
       return tier.hide
         ? `${selectors} { display: none; }`
-        : `${selectors} { cursor: help; opacity: 0.55; }`;
+        : `${selectors} { cursor: not-allowed; opacity: 0.55; }`;
     })
     .filter(Boolean)
     .join("\n");
@@ -82,25 +82,44 @@ export default apiInitializer("1.8.0", (api) => {
   const dialog = api.container.lookup("service:dialog");
 
   function openDialog(tier) {
-    const buttons = [];
+    const scrollY = window.scrollY;
+    let navigating = false;
+    // dismiss first so it renders on the left, primary action on the right
+    const buttons = [{ label: t("dismiss"), class: "btn-default" }];
 
     if (tier.cta_url) {
       buttons.push({
         label: t("cta"),
         icon: tier.cta_icon || "ticket",
         class: "btn-primary",
-        action: () => DiscourseURL.routeTo(tier.cta_url),
+        action: () => {
+          navigating = true;
+          DiscourseURL.routeTo(tier.cta_url);
+        },
       });
     }
 
-    buttons.push({ label: t("dismiss"), class: "btn-default" });
-
-    dialog.alert({
-      title: t(`${tier.key}.title`),
-      message: t(`${tier.key}.message`),
-      class: "blocked-sidebar-dialog",
-      buttons,
-    });
+    dialog
+      .alert({
+        title: t(`${tier.key}.title`),
+        message: t(`${tier.key}.message`),
+        class: "blocked-sidebar-dialog",
+        buttons,
+      })
+      .then(() => {
+        if (navigating) {
+          return;
+        }
+        // a11y-dialog refocuses the trigger on close and the browser scrolls
+        // to reveal it. Two frames puts us after that, so the restore sticks.
+        requestAnimationFrame(() =>
+          requestAnimationFrame(() => {
+            if (window.scrollY !== scrollY) {
+              window.scrollTo({ top: scrollY, behavior: "instant" });
+            }
+          })
+        );
+      });
   }
 
   // One delegated listener, capture phase, so it runs before Ember's router
@@ -123,6 +142,11 @@ export default apiInitializer("1.8.0", (api) => {
 
     event.preventDefault();
     event.stopPropagation();
+
+    // a11y-dialog remembers document.activeElement and refocuses it on close;
+    // blurring first means it restores to <body> instead of scrolling the
+    // sidebar link back into view.
+    link.blur();
 
     // auxclick fires for middle-click; no modal there, just don't open the tab
     if (event.type === "click" && !tier.hide) {

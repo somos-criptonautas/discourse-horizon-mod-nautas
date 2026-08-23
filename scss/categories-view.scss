@@ -1,14 +1,53 @@
 // The link styling is generated at runtime from the blocked_sections setting.
 // This file only restyles these modals, scoped by the class the initializer
 // passes to dialog.alert().
+//
+// Tokens are Horizon's: --d-border-radius is 8px there (its middle step,
+// between --d-input-border-radius 6px and --d-border-radius-large 20px) and
+// falls back to core's 4px under any other theme. Spacing uses Horizon's
+// --spacing-* scale with plain-value fallbacks.
 
 .blocked-sidebar-dialog {
+    --dialog-pad: var(--spacing-inline-m, 1rem);
+
+    // core's dialog has no responsive rules at all: .dialog-content is only
+    // min-width: 40vw, so on a phone it grows edge to edge. This caps it and
+    // keeps a gutter at every size, no media query needed.
+    .dialog-content {
+        max-width: min(32em, calc(100vw - 2rem));
+        border-radius: var(--d-border-radius);
+        animation-duration: 150ms; // core ships 250ms
+    }
+
+    .dialog-overlay {
+        animation-duration: 150ms;
+    }
+
+    // core guards its own animation this way; the overrides above would
+    // otherwise win and reintroduce motion
+    @media (prefers-reduced-motion) {
+
+        .dialog-content,
+        .dialog-overlay {
+            animation-duration: 0s;
+        }
+    }
+
+    // one uniform 1rem frame instead of core's 10/14/15px mix
     .dialog-header {
         border-bottom: none;
+        padding: var(--dialog-pad) var(--dialog-pad) 0;
+    }
+
+    .dialog-body {
+        padding: var(--spacing-block-s, 0.5rem) var(--dialog-pad);
+        line-height: 1.5;
     }
 
     .dialog-footer {
         border-top: none;
+        padding: 0 var(--dialog-pad) var(--dialog-pad);
+        --btn-bottom-margin: 0; // core adds 0.3em under each button
     }
 }
 
@@ -88,7 +127,7 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
 // Distinctive category titles
 .category-boxes .category-box-heading .badge-category__name,
 .category-boxes-with-topics .category-box-heading .badge-category__name {
-    font-weight: 600;
+    font-weight: 700;
 }
 
 // Disable group expand/collapse feature

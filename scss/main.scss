@@ -238,7 +238,6 @@ body.category .navigation-controls,
 }
 
 // Anonymous hiding some stuff on sidebar
-/* .group-nuevos:not(.group-anons):not(.group-nautas):not(.group-traders):not(.group-team):not(.group-agoristas):not(.group-lideres).sidebar-section[data-section-name="apps-externas"],*/
 .anon[data-section-name="categories"] {
   display: none !important;
 }
@@ -1003,7 +1002,7 @@ body.category-trading-curso .more-topics__container {
 }
 
 .welcome-banner__title {
-  font-weight: 700;
+  font-weight: 800;
 }
 
 // -----------------------------------------------------------------------
@@ -1239,10 +1238,9 @@ img.emoji {
   display: none !important;
 }
 
-.ember-view .groups-page .category-banner-groups,
+body.groups-page .category-banner-groups,
 body.badges-page .category-banner-badges {
   display: flex !important;
-
 }
 
 // -----------------------------------------------------------------------

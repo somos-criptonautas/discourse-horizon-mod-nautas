@@ -7,7 +7,7 @@ en:
     settings:
       blocked_sections: "One row per tier. `key` links the row to its title/message in the translations tab. Leave `allowed_groups` empty and the tier applies to everyone. `paths` is a comma-separated list of link paths for anything that isn't a category. `cta_url` empty hides the second button."
   blocked_sidebar:
-    dismiss: "ok"
+    dismiss: "Keep browsing"
     cta: "Get in"
     nautas:
       title: "Available for nautas"
