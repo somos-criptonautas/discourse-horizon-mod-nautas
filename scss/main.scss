@@ -160,6 +160,16 @@ body.category .navigation-controls,
   display: none;
 }
 
+// Hide coaching enter to who entered
+.traders.sidebar-section-wrapper[data-section-name="entrar"] {
+  display: none;
+}
+
+// NOT green when passing
+.course-lesson-completed {
+  color: unset !important;
+}
+
 // No top navbar in categories page
 .categories-list #navigation-bar {
   display: none !important;
@@ -1393,4 +1403,11 @@ body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn
   :where(.uc-enable-composer-redesign) .reply-to {
     padding: var(--space-2) var(--space-3) !important;
   }
+}
+
+// Fix weird color text on core experimentations
+:root body .ai-bot-conversations__title,
+:root body .ai-bot-conversations__header .ai-bot-conversations__title,
+:root body .discourse-ai .ai-bot-conversations__title {
+  color: unset !important;
 }

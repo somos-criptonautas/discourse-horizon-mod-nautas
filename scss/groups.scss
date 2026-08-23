@@ -8,7 +8,7 @@
 
 // We use a team group so hide redundancy
 .group-box[data-group-name="admins"],
-.group-box[data-group-name="mods"] {
+.group-box[data-group-name="moderadores"] {
     display: none;
 }
 
@@ -52,8 +52,8 @@
 
 // More sizing on groups icons and descriptions
 .group-box .group-avatar-flair .avatar-flair .d-icon {
-    width: 1.3rem;
-    height: 1.3rem;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
 }
 
 .group-box .group-box-inner .group-description {
