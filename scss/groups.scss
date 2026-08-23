@@ -2,37 +2,41 @@
 // Groups
 // -----------------------------------------------------------------------
 
+.groups-boxes {
+    padding-bottom: 2rem;
+}
+
 // We use a team group so hide redundancy
-.groups-boxes.group-box[data-group-name="admins"],
-.groups-boxes.group-box[data-group-name="mods"] {
+.group-box[data-group-name="admins"],
+.group-box[data-group-name="mods"] {
     display: none;
 }
 
-.groups-boxes.group-box[data-group-name="nuevos"] {
+.group-box[data-group-name="nuevos"] {
     order: -8;
 }
 
-.groups-boxes.group-box[data-group-name="anons"] {
+.group-box[data-group-name="anons"] {
     order: -7;
 }
 
-.groups-boxes.group-box[data-group-name="nautas"] {
+.group-box[data-group-name="nautas"] {
     order: -6;
 }
 
-.groups-boxes.group-box[data-group-name="traders"] {
+.group-box[data-group-name="traders"] {
     order: -5;
 }
 
-.groups-boxes.group-box[data-group-name="agoristas"] {
+.group-box[data-group-name="agoristas"] {
     order: -4;
 }
 
-.groups-boxes.group-box[data-group-name="lideres"] {
+.group-box[data-group-name="lideres"] {
     order: -3;
 }
 
-a.group-box[data-group-name="delistados"] {
+.group-box[data-group-name="delistados"] {
     order: -2;
 }
 
@@ -41,17 +45,17 @@ a.group-box[data-group-name="delistados"] {
 }
 
 // No green color on group boxes archivements
-.groups-boxes .group-box .group-membership .is-group-owner,
-.groups-boxes .group-box .group-membership .is-group-member {
+.group-box .group-membership .is-group-owner,
+.group-box .group-membership .is-group-member {
     color: unset;
 }
 
 // More sizing on groups icons and descriptions
-.groups-boxes .group-box .group-avatar-flair .avatar-flair .d-icon {
+.group-box .group-avatar-flair .avatar-flair .d-icon {
     width: 1.3rem;
     height: 1.3rem;
 }
 
-.groups-boxes .group-box .group-box-inner .group-description {
+.group-box .group-box-inner .group-description {
     padding-top: 0.5rem;
 }

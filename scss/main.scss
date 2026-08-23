@@ -394,15 +394,16 @@ button [title="similares"] .d-button-label {
 }
 
 // Invert categories and tags order - Publish to right
-.list-controls .navigation-container .category-breadcrumb {
+.navigation-container .category-breadcrumb {
   order: unset !important;
+  column-gap: unset !important;
 }
 
 // Align custom top navbar on categories {
 @media (width < 40rem) {
 
-  #main-outlet .list-controls .navigation-container .category-breadcrumb {
-    column-gap: unset !important;
+  .navigation-container .category-breadcrumb {
+    display: none !important;
   }
 }
 
@@ -526,7 +527,7 @@ body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.h
   display: none;
 }
 
-.chat-drawer-container .channels-list-container .chat-channel-row {
+.chat-channel-row {
   height: 2.75rem;
 }
 
@@ -535,7 +536,12 @@ body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.h
 }
 
 nav.c-footer .c-footer__item {
-  height: 3.8rem;
+  height: 2.8rem;
+}
+
+.c-footer {
+  border-top: 1px solid var(--primary-low);
+  background-color: var(--header_background);
 }
 
 .c-user-thread .chat__thread-title__name {
@@ -553,10 +559,6 @@ nav.c-footer .c-footer__item {
 
 .chat-composer__outer-container {
   padding-inline: 0.63em;
-}
-
-.is-send-disabled .chat-composer-button.-send {
-  padding-bottom: 0.3em;
 }
 
 .chat-message-separator-date+.chat-message-separator__line-container .chat-message-separator__line {
@@ -1178,19 +1180,6 @@ img.emoji {
   }
 }
 
-// Tighter button padding on desktop only; mobile keeps roomier touch targets.
-@media (width <768px) {
-  .btn {
-    padding: 0.39em 0.63em;
-  }
-}
-
-@media (width >=768px) {
-  .btn {
-    padding: 0.41em 0.75em;
-  }
-}
-
 // Progress-button numbers/icon were unreadable in dark mode
 .topic-progress-wrapper,
 .topic-progress,
@@ -1247,13 +1236,6 @@ body.badges-page .category-banner-badges {
 // Experimental / unverified / inactive
 // -----------------------------------------------------------------------
 
-// [UNCONFIRMED] Selector not verified against core or plugins; may be dead
-@media screen and (width >=925px) {
-  .container.posts {
-    grid-template-columns: 80% 20%;
-  }
-}
-
 /* // Fix chat thread title size
 .c-user-thread .chat__thread-title__name {
   font-size: var(--font-up-1);
@@ -1280,11 +1262,11 @@ body.badges-page .category-banner-badges {
   display: none;
 }
 
-// 10% more size on svg icons and their titles
+// 25% more size on svg icons and their titles
 .svg-icon,
 .svg-icon-title {
-  height: 1.1em;
-  width: 1.1em;
+  height: 1.25em;
+  width: 1.25em;
 }
 
 // Esc preview on similar topic aligment
@@ -1315,7 +1297,7 @@ body.badges-page .category-banner-badges {
 }
 
 // Hiding activitypub useless navigation and texts
-#navigation-bar .extra-nav-item-outlet .activity-pub-navigation .ember-view,
+.activity-pub-navigation,
 .topic-map__activity-pub {
   display: none !important;
 }
@@ -1383,5 +1365,32 @@ body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn
 @media screen and (width >=1400px) {
   .anon .d-header .panel {
     grid-column-start: unset;
+  }
+}
+
+// Re-enable good styling (composer-redesign core experiment)
+@media (width < 40rem) {
+
+  :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel .btn.btn-primary,
+  :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel .d-modal.json-schema-editor-modal .je-ready .btn-primary.json-editor-btn-add,
+  .d-modal.json-schema-editor-modal .je-ready :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel .btn-primary.json-editor-btn-add,
+  :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel .d-modal.json-schema-editor-modal .je-ready button.btn-primary,
+  .d-modal.json-schema-editor-modal .je-ready :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel button.btn-primary {
+    background-color: var(--accent-color) !important;
+    color: var(--accent-text-color) !important;
+    font-weight: unset !important;
+  }
+}
+
+// Fix weird paddings (composer-redesign core experiment)
+@media (width < 40rem) {
+  :where(.uc-enable-composer-redesign) .composer-footer .submit-panel {
+    padding: var(--space-2) var(--space-4) !important;
+  }
+}
+
+@media (width < 40rem) {
+  :where(.uc-enable-composer-redesign) .reply-to {
+    padding: var(--space-2) var(--space-3) !important;
   }
 }

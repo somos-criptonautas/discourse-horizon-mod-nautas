@@ -163,3 +163,18 @@ body.f-nav-hidden:not(.archetype-regular,
     grid-area: unset;
   }
 }
+
+// Removing avatars on discourse category docs
+.navigation-category .topic-list-data .pull-left {
+  display: none;
+}
+
+@media (width < 40rem) {
+  .navigation-category .topic-list .right {
+    margin-left: 0.87rem;
+  }
+
+  .navigation-category .topic-list .topic-item-stats .num.activity {
+    display: none;
+  }
+}

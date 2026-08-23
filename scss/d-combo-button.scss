@@ -1,7 +1,7 @@
 // Disable new topic in mobile
 @media (width >=40rem) {
     .d-combo-button {
-        display: none;
+        display: none !important;
     }
 }
 
