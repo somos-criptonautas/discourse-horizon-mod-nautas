@@ -92,6 +92,10 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
     gap: 0.25rem;
 }
 
+.category-boxes {
+    padding-top: 1rem;
+}
+
 // Coherence between font-sizes everywhere + pointer styling
 .category-boxes .category-box .description {
     font-size: inherit;
