@@ -125,6 +125,16 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
 .custom-categories-groups a.custom-category-group-toggle {
     pointer-events: none;
     cursor: default;
+    text-transform: uppercase;
+}
+
+.custom-categories-groups a.custom-category-group-toggle:not(:first-of-type) {
+    margin: 2.5rem 0 1.5rem;
+}
+
+.custom-category-group-toggle h2 {
+    font-size: var(--font-up-4);
+    font-weight: 800;
 }
 
 // Hide some elements

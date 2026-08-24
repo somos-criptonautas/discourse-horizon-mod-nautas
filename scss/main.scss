@@ -254,7 +254,9 @@ body.category .navigation-controls,
 }
 
 // Fix weird CSS color icons
-.navigation-category .sidebar-section-link-wrapper .sidebar-section-link-prefix.icon {
+.category-glosario .sidebar-section-link-wrapper .sidebar-section-link-prefix.icon,
+.category-glossary .sidebar-section-link-wrapper .sidebar-section-link-prefix.icon,
+.category-wiki .sidebar-section-link-wrapper .sidebar-section-link-prefix.icon {
   display: none;
 }
 
@@ -263,13 +265,21 @@ body.category .navigation-controls,
   display: none !important;
 }
 
-// f-nav edits
+// f-nav + modals edits
 .f-nav {
   height: 2.8rem !important;
 }
 
 .group-traders .group-agoristas .group-lideres .group-team .sidebar-section-link-wrapper [data-list-item-name="entrar"] {
   display: none;
+}
+
+.d-modal__header {
+  padding: 0.75rem 0.75rem 0.75rem 1.5rem !important;
+}
+
+.d-modal__footer {
+  flex-direction: row-reverse;
 }
 
 // -----------------------------------------------------------------------
@@ -699,8 +709,8 @@ nav.c-footer .c-footer__item {
 }
 
 // Hide stuff on profile
-.user-preferences .form-vertical .control-group .pref-title,
-.user-preferences .form-vertical .control-group .pref-flair,
+.user-preferences .form-vertical .control-group .user-title,
+.user-preferences .form-vertical .control-group .user-flair,
 .user-preferences .form-vertical .control-group .pref-email-settings,
 .control-group .upcoming-changes {
   display: none;
@@ -777,7 +787,7 @@ nav.c-footer .c-footer__item {
 }
 
 // Styling on MPs
-.new-user-content-wrapper .new-private-message-btn {
+.new-private-message-btn {
   width: 90%;
   margin: auto;
   margin-top: 0.5rem;
@@ -787,7 +797,7 @@ nav.c-footer .c-footer__item {
   border-bottom: unset;
 }
 
-.new-user-content-wrapper .discourse-no-touch .nav-pills>li>a {
+.new-user-content-wrapper .nav-pills>li>a {
   border-radius: 0.3rem;
 }
 
@@ -796,15 +806,15 @@ nav.c-footer .c-footer__item {
   color: unset;
 }
 
-.new-user-content-wrapper .discourse-no-touch .nav-pills>li>a:hover,
-.new-user-content-wrapper .discourse-no-touch .nav-pills>li button:hover {
+.new-user-content-wrapper .nav-pills>li>a:hover,
+.new-user-content-wrapper .nav-pills>li button:hover {
   background: var(--d-sidebar-highlight-background);
   color: var(--d-sidebar-highlight-color);
   outline: none;
 }
 
-.new-user-content-wrapper .discourse-no-touch .nav-pills>li>a:hover::after,
-.new-user-content-wrapper .discourse-no-touch .nav-pills>li button:hover::after {
+.new-user-content-wrapper .nav-pills>li>a:hover::after,
+.new-user-content-wrapper .nav-pills>li button:hover::after {
   display: none;
 }
 
@@ -851,8 +861,8 @@ nav.c-footer .c-footer__item {
 }
 
 .badge-card [id^="badge-awarded-"] svg.d-icon-check {
-  height: 1.25rem;
-  width: 1.25rem;
+  height: 1.25rem !important;
+  width: 1.25rem !important;
 }
 
 .check-display {
@@ -861,17 +871,13 @@ nav.c-footer .c-footer__item {
 
 .check-display.status-checked .check-display .d-icon {
   font-size: var(--font-up-2-rem) !important;
-  color: var(--primary);
+  color: var(--primary) !important;
 }
 
 .badge-card .check-display {
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;
-}
-
-.check-display.status-checked {
-  display: none;
 }
 
 /* 
@@ -901,6 +907,12 @@ nav.c-footer .c-footer__item {
 // -----------------------------------------------------------------------
 // Categories & Docs plugin
 // -----------------------------------------------------------------------
+
+// [EXPERIMENTAL] Disable border
+.topic-list-item,
+tbody tr {
+  border-bottom: none;
+}
 
 // Disable nav in fancy categories page
 .categories-list .navigation-container {

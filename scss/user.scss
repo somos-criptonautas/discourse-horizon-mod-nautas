@@ -41,7 +41,7 @@
     display: none;
 }
 
-@media (width <=4700px) {
+@media (width <=470px) {
     .top-sub-section.topics-section {
         float: none;
         width: 100%;
@@ -74,9 +74,35 @@
     display: none;
 }
 
+.stats-title {
+    font-size: var(--font-up-3);
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.user-info .user-detail .details {
+    display: flex;
+    flex-direction: column;
+}
+
 @media (width < 40rem) {
     .stats-title {
         font-size: var(--font-up-2);
+    }
+
+    .top-sub-section.most-liked-section {
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 1rem;
+    }
+
+    .top-sub-section .user-info .user-detail .name-line .username {
+        display: none;
+    }
+
+    .user-content .d-icon-heart {
+        height: 1.5rem;
+        width: 1.5rem;
     }
 }
 
@@ -97,6 +123,6 @@
 
 // Padding to profile box
 .user-main .about .details {
-    padding: 1rem;
+    padding: 1rem !important;
     margin-bottom: 1rem;
 }
