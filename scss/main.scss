@@ -19,6 +19,106 @@ html {
   --danger: #e45735;
   --tertiary-med-or-tertiary: unset;
   --success: var(--primary-low);
+
+  --category-1-color: none !important;
+  --category-2-color: none !important;
+  --category-3-color: none !important;
+  --category-4-color: none !important;
+  --category-5-color: none !important;
+  --category-6-color: none !important;
+  --category-7-color: none !important;
+  --category-8-color: none !important;
+  --category-9-color: none !important;
+  --category-10-color: none !important;
+  --category-11-color: none !important;
+  --category-12-color: none !important;
+  --category-13-color: none !important;
+  --category-14-color: none !important;
+  --category-15-color: none !important;
+  --category-16-color: none !important;
+  --category-17-color: none !important;
+  --category-18-color: none !important;
+  --category-19-color: none !important;
+  --category-20-color: none !important;
+  --category-21-color: none !important;
+  --category-22-color: none !important;
+  --category-23-color: none !important;
+  --category-24-color: none !important;
+  --category-25-color: none !important;
+  --category-26-color: none !important;
+  --category-27-color: none !important;
+  --category-28-color: none !important;
+  --category-29-color: none !important;
+  --category-30-color: none !important;
+  --category-31-color: none !important;
+  --category-32-color: none !important;
+  --category-33-color: none !important;
+  --category-34-color: none !important;
+  --category-35-color: none !important;
+  --category-36-color: none !important;
+  --category-37-color: none !important;
+  --category-38-color: none !important;
+  --category-39-color: none !important;
+  --category-40-color: none !important;
+  --category-41-color: none !important;
+  --category-42-color: none !important;
+  --category-43-color: none !important;
+  --category-44-color: none !important;
+  --category-45-color: none !important;
+  --category-46-color: none !important;
+  --category-47-color: none !important;
+  --category-48-color: none !important;
+  --category-49-color: none !important;
+  --category-50-color: none !important;
+  --category-51-color: none !important;
+  --category-52-color: none !important;
+  --category-53-color: none !important;
+  --category-54-color: none !important;
+  --category-55-color: none !important;
+  --category-56-color: none !important;
+  --category-57-color: none !important;
+  --category-58-color: none !important;
+  --category-59-color: none !important;
+  --category-60-color: none !important;
+  --category-61-color: none !important;
+  --category-62-color: none !important;
+  --category-63-color: none !important;
+  --category-64-color: none !important;
+  --category-65-color: none !important;
+  --category-66-color: none !important;
+  --category-67-color: none !important;
+  --category-68-color: none !important;
+  --category-69-color: none !important;
+  --category-70-color: none !important;
+  --category-71-color: none !important;
+  --category-72-color: none !important;
+  --category-73-color: none !important;
+  --category-74-color: none !important;
+  --category-75-color: none !important;
+  --category-76-color: none !important;
+  --category-77-color: none !important;
+  --category-78-color: none !important;
+  --category-79-color: none !important;
+  --category-80-color: none !important;
+  --category-81-color: none !important;
+  --category-82-color: none !important;
+  --category-83-color: none !important;
+  --category-84-color: none !important;
+  --category-85-color: none !important;
+  --category-86-color: none !important;
+  --category-87-color: none !important;
+  --category-88-color: none !important;
+  --category-89-color: none !important;
+  --category-90-color: none !important;
+  --category-91-color: none !important;
+  --category-92-color: none !important;
+  --category-93-color: none !important;
+  --category-94-color: none !important;
+  --category-95-color: none !important;
+  --category-96-color: none !important;
+  --category-97-color: none !important;
+  --category-98-color: none !important;
+  --category-99-color: none !important;
 }
 
 html:not(:has(.has-full-page-chat)) {
@@ -220,9 +320,11 @@ body.category .navigation-controls,
   border-radius: var(--d-border-radius);
 }
 
-// More room in header
-:where(.uc-modernize-foundation-theme) .d-header {
-  height: 3.5em;
+// [DESKTOP] More room in header
+@media (width >=40rem) {
+  :where(.uc-modernize-foundation-theme) .d-header {
+    height: 3.5em;
+  }
 }
 
 // Anonymous users full display on login header
@@ -1087,13 +1189,19 @@ body.category-trading-curso .more-topics__container {
   display: none;
 }
 
-.not-found-container .recent-topics {
-  max-width: 50%;
-  flex-basis: unset;
+@media (width <=40rem) {
+  .not-found-container .recent-topics {
+    max-width: 50%;
+    flex-basis: unset;
+  }
 }
 
-.no-ember #main-outlet {
-  max-height: 100%;
+.page-not-found #main-outlet {
+  max-height: 100% !important;
+}
+
+.page-not-found .btn.--home {
+  display: none !important
 }
 
 .page-not-found row {
@@ -1447,11 +1555,21 @@ body.badges-page .category-banner-badges {
   display: none;
 }
 
-// 25% more size on svg icons and their titles
+// [DESKTOP] 25% more size on SVG icons and their titles
 .svg-icon,
 .svg-icon-title {
   height: 1.25em;
   width: 1.25em;
+}
+
+// [MOBILE] 10% more size on SVG icons and their titles
+@media (width < 40rem) {
+
+  .svg-icon,
+  .svg-icon-title {
+    height: 1.1em;
+    width: 1.1em;
+  }
 }
 
 // Esc preview on similar topic aligment
@@ -1607,4 +1725,16 @@ body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn
 :root body .ai-bot-conversations__header .ai-bot-conversations__title,
 :root body .discourse-ai .ai-bot-conversations__title {
   color: unset !important;
+}
+
+// Fix absolute button positioning
+.ai-bot-scroll-indicator {
+  bottom: calc(85% + .75em);
+}
+
+// Bad margin in hard stylished border
+@media (width < 40rem) {
+  .archetype-private_message .regular.contents {
+    margin-top: 1rem;
+  }
 }
