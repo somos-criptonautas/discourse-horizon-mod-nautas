@@ -132,7 +132,7 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
     text-transform: uppercase;
 }
 
-.custom-categories-groups a.custom-category-group-toggle:not(:first-of-type) {
+.custom-categories-groups a.custom-category-group-toggle:not(:first-child) {
     margin: 2.5rem 0 1.5rem;
 }
 

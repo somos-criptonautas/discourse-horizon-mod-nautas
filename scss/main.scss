@@ -17,7 +17,6 @@ html {
   --d-border-radius-large: 17px;
   --highlight: var(--tertiary-600);
   --danger: #e45735;
-  --tertiary-med-or-tertiary: unset;
   --success: var(--primary-low);
 
   --category-1-color: none !important;
@@ -247,6 +246,7 @@ body:not(.has-full-page-chat, .wizard) {
 // Sidebar new topic full width button
 .sidebar-new-topic-button__wrapper {
   padding-bottom: 0.3rem;
+  width: 95% !important;
 }
 
 .sidebar-wrapper .sidebar-sections {
@@ -362,6 +362,12 @@ body.category .navigation-controls,
   display: none;
 }
 
+.sidebar-section-link-wrapper .sidebar-section-link-prefix.icon,
+.sidebar-section-link-wrapper .sidebar-section-link-prefix.square,
+.sidebar-section-link-wrapper .sidebar-section-link-prefix.emoji {
+  color: var(--d-sidebar-link-icon-color) !important;
+}
+
 // Anonymous hiding some stuff on sidebar
 .anon[data-section-name="categories"] {
   display: none !important;
@@ -372,7 +378,7 @@ body.category .navigation-controls,
   height: 2.8rem !important;
 }
 
-.group-traders .group-agoristas .group-lideres .group-team .sidebar-section-link-wrapper [data-list-item-name="entrar"] {
+body:is(.group-traders .group-agoristas .group-lideres .group-team).sidebar-section-link-wrapper [data-list-item-name="entrar"] {
   display: none;
 }
 
@@ -551,6 +557,13 @@ button [title="similares"] .d-button-label {
 
 .list-controls .select-kit .select-kit-collection {
   padding-left: 0.3rem;
+}
+
+@media (width < 40rem) {
+
+  #main-outlet .tag-drop-header {
+    margin-right: 0.75rem;
+  }
 }
 
 // Hide category breadcrumb in mobile, keep it on support and Q&A categories

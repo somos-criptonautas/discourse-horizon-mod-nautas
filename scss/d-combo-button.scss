@@ -1,7 +1,17 @@
 // Disable new topic in mobile
 @media (width >=40rem) {
-    body.d-combo-button {
+    .navigation-controls .d-combo-button {
         display: none !important;
+    }
+
+    .navigation-controls {
+        position: relative;
+        top: -41vh;
+        right: 3vh;
+    }
+
+    .select-kit.solved-status-filter {
+        padding-right: unset !important;
     }
 }
 
