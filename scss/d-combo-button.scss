@@ -1,8 +1,5 @@
-// Disable new topic in mobile
+// Styling no new-topic button in mobile
 @media (width >=40rem) {
-    .navigation-controls .d-combo-button {
-        display: none !important;
-    }
 
     .navigation-controls {
         position: relative;
@@ -29,9 +26,7 @@
     display: none;
 }
 
-/* 
-// Disable navigation categories and tags in Horizon
-#main-outlet .list-controls .navigation-container .category-breadcrumb.hidden,
-#main-outlet .list-controls .navigation-container .category-breadcrumb {
-    display: none !important;
-} */
+// [TEST] Really disable new-topic button
+.horizon-new-topic-button-enabled .list-controls .topic-create-button__combo {
+    display: none;
+}
