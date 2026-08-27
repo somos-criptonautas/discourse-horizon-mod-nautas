@@ -5,3 +5,28 @@
             max-width: 300px;
         }
     }
+
+// AI gists (discourse-ai). Rendered by our own outlet since Horizon drops the ones
+// discourse-ai uses — see javascripts/api-initializers/ai-gist-horizon.gjs
+
+// Horizon's card excerpt and the gist say the same thing — keep the gist.
+// :has() scopes this to cards that actually got one; the rest keep their excerpt.
+.hc-topic-card:has(.horizon-ai-gist) .hc-topic-card__excerpt {
+    display: none;
+}
+
+// Mirrors Horizon's own `.topic-excerpt` under `.--high-context` so it reads as native.
+// font-weight/-style are resets: the outlet sits inside .hc-topic-card__title, which is
+// bold and font-up-1-rem, and those inherit.
+.horizon-ai-gist {
+    width: 100%;
+    color: var(--primary-high);
+    font-size: var(--font-0);
+    font-weight: normal;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

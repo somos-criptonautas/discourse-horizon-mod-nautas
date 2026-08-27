@@ -338,6 +338,16 @@ body.category .navigation-controls,
   display: none;
 }
 
+@media screen and (width >=1400px) {
+  .anon .d-header .panel {
+    grid-column-start: unset !important;
+  }
+
+  .panel .d-header .header-buttons {
+    margin-right: 0.5rem;
+  }
+}
+
 // -----------------------------------------------------------------------
 // Sidebar / navigation
 // -----------------------------------------------------------------------
