@@ -246,7 +246,7 @@ body:not(.has-full-page-chat, .wizard) {
 // Sidebar new topic full width button
 .sidebar-new-topic-button__wrapper {
   padding-bottom: 0.3rem;
-  width: 95% !important;
+  width: 93% !important;
 }
 
 .sidebar-wrapper .sidebar-sections {
@@ -266,7 +266,7 @@ body.category .navigation-controls,
 }
 
 // Hide coaching enter to who entered
-.traders.sidebar-section-wrapper[data-section-name="entrar"] {
+.group-traders .group-agoristas .group-lideres .group-team .sidebar-section-wrapper[data-section-name="entrar"] {
   display: none;
 }
 
@@ -386,10 +386,6 @@ body.category .navigation-controls,
 // f-nav + modals edits
 .f-nav {
   height: 2.8rem !important;
-}
-
-body:is(.group-traders .group-agoristas .group-lideres .group-team).sidebar-section-link-wrapper [data-list-item-name="entrar"] {
-  display: none;
 }
 
 .d-modal__header {
@@ -583,7 +579,7 @@ button [title="similares"] .d-button-label {
   }
 }
 
-:not(.category-soporte):not(.category-support):not(category-preguntas):not(category-questions).navigation-container .category-breadcrumb {
+body:not(.category-soporte):not(.category-preguntas) .navigation-container .category-breadcrumb {
   display: none;
 }
 
