@@ -15,7 +15,7 @@ html:not(.anon) .d-header-icons .header-dropdown-toggle #toggle-current-user:not
   grid-template-columns: minmax(auto, 1fr) auto minmax(0, calc(var(--d-max-width))) auto minmax(auto, 1fr) !important;
 }
 
-// Logo hidden on mobile everywhere.
+// Logo and anonist icons hidden on mobile
 @media (width <=576px) {
   .d-header .title a {
     visibility: hidden;
@@ -25,6 +25,10 @@ html:not(.anon) .d-header-icons .header-dropdown-toggle #toggle-current-user:not
   body.archetype-regular .d-header:has(.extra-info-wrapper, .header-title, .topic-link) .title a,
   body.archetype-private_message .d-header:has(.extra-info-wrapper, .header-title, .topic-link) .title a {
     visibility: visible;
+  }
+
+  .d-header-icons .ai-bot-button {
+    display: none;
   }
 }
 

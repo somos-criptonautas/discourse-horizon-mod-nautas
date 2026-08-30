@@ -10,6 +10,10 @@
     .select-kit.solved-status-filter {
         padding-right: unset !important;
     }
+
+    .topic-create-button__combo {
+        display: none !important;
+    }
 }
 
 // Style no-tags dropdown display
@@ -23,10 +27,5 @@
 
 // Hide descriptions on categories
 .select-kit.combo-box.category-chooser .select-kit-row .category-desc {
-    display: none;
-}
-
-// [TEST] Really disable new-topic button
-.horizon-new-topic-button-enabled .list-controls .topic-create-button__combo {
     display: none;
 }
