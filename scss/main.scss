@@ -765,6 +765,12 @@ nav.c-footer .c-footer__item {
   box-shadow: 0 0 0 2px var(--primary-300);
 }
 
+.chat-composer .chat-composer-button,
+.chat-composer .chat-composer-separator,
+.chat-composer-button__wrapper {
+  align-self: unset;
+}
+
 // -----------------------------------------------------------------------
 // User profile / user menu / groups
 // -----------------------------------------------------------------------
