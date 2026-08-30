@@ -64,7 +64,7 @@ export default apiInitializer("1.8.0", (api) => {
       }
       return tier.hide
         ? `${selectors} { display: none; }`
-        : `${selectors} { cursor: not-allowed; opacity: 0.55; }`;
+        : `${selectors} { cursor: help; opacity: 0.55; }`;
     })
     .filter(Boolean)
     .join("\n");
