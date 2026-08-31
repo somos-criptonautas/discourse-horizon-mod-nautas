@@ -87,77 +87,78 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
     .category-title-contents .category-title .badge-category__name {
         font-size: var(--font-up-1);
     }
+}
 
-    .category-title-contents .category-title .badge-category__name {
-        color: var(--primary);
-        font-weight: 800;
-        text-transform: uppercase;
-    }
+.category-title-contents .category-title .badge-category__name {
+    color: var(--primary);
+    font-weight: 800;
+    text-transform: uppercase;
+}
 
-    // Fix for sticking tags on categories
-    .custom-category-group .category-details .subcategories {
-        gap: 0.25rem;
-    }
+// Fix for sticking tags on categories
+.custom-category-group .category-details .subcategories {
+    gap: 0.25rem;
+}
 
-    .category-boxes {
-        padding-top: 1rem;
-    }
+.category-boxes {
+    padding-top: 1rem;
+}
 
-    // Coherence between font-sizes everywhere + pointer styling
-    .category-boxes .category-box .description {
-        font-size: inherit;
-        user-select: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        cursor: default;
-    }
+// Coherence between font-sizes everywhere + pointer styling
+.category-boxes .category-box .description {
+    font-size: inherit;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: default;
+}
 
-    // Target links on all the boxes
-    .category-boxes .category-box .subcategories {
-        z-index: 2;
-    }
+// Target links on all the boxes
+.category-boxes .category-box .subcategories {
+    z-index: 2;
+}
 
-    .category-boxes .category-box .description {
-        z-index: 0;
-    }
+.category-boxes .category-box .description {
+    z-index: 0;
+}
 
-    .category-boxes .category-box .parent-box-link::before {
-        z-index: 1;
-    }
+.category-boxes .category-box .parent-box-link::before {
+    z-index: 1;
+}
 
-    // Distinctive category titles
-    .category-boxes .category-box-heading .badge-category__name,
-    .category-boxes-with-topics .category-box-heading .badge-category__name {
-        font-weight: 700;
-    }
+// Distinctive category titles
+.category-boxes .category-box-heading .badge-category__name,
+.category-boxes-with-topics .category-box-heading .badge-category__name {
+    font-weight: 700;
+}
 
-    // Disable group expand/collapse feature
-    .custom-categories-groups a.custom-category-group-toggle {
-        pointer-events: none;
-        cursor: default;
-        text-transform: uppercase;
-    }
+// Disable group expand/collapse feature
+.custom-categories-groups a.custom-category-group-toggle {
+    pointer-events: none;
+    cursor: default;
+    text-transform: uppercase;
+}
 
-    .custom-categories-groups a.custom-category-group-toggle:not(:first-child) {
-        margin: 2.5rem 0 1.5rem;
-    }
+.custom-categories-groups a.custom-category-group-toggle:not(:first-child) {
+    margin: 2.5rem 0 1.5rem;
+}
 
-    .custom-category-group-toggle h2 {
-        font-size: var(--font-up-4);
-        font-weight: 800;
-    }
+.custom-category-group-toggle h2 {
+    font-size: var(--font-up-4);
+    font-weight: 800;
+}
 
-    // Hide some elements
-    .custom-categories-groups .category-box-soporte,
-    .custom-category-group-toggle .d-icon,
-    .custom-category-group-muted {
-        display: none !important;
-    }
+// Hide some elements
+.custom-categories-groups .category-box-soporte,
+.custom-category-group-toggle .d-icon,
+.custom-category-group-muted {
+    display: none !important;
+}
 
-    // Recover category descriptions on Horizon
-    .category-boxes .category .description,
-    .category-boxes-with-topics .category .description {
-        display: inherit !important;
-        font-size: 0.95rem !important;
-    }
+// Recover category descriptions on Horizon
+.category-boxes .category .description,
+.category-boxes-with-topics .category .description {
+    display: inherit !important;
+    font-size: 0.95rem !important;
+}
