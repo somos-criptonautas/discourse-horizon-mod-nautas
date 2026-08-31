@@ -266,7 +266,7 @@ body.category .navigation-controls,
 }
 
 // Hide coaching enter to who entered
-.group-traders .group-agoristas .group-lideres .group-team .sidebar-section-link-wrapper[data-section-name="entrar"] {
+.group-traders .group-agoristas .group-lideres .group-team .sidebar-section-link-wrapper[data-list-item-name="entrar"] {
   display: none;
 }
 
@@ -284,6 +284,11 @@ body.category .navigation-controls,
 // No categories (they are accesible from sidebar)
 .select-kit.combo-box.category-drop {
   display: none !important;
+}
+
+// Disable apps-externas in anonymous visitors
+.anon .sidebar-section-wrapper[data-section-name="apps-externas"] {
+  display: none;
 }
 
 // -----------------------------------------------------------------------
@@ -402,7 +407,7 @@ body.category .navigation-controls,
 
 #list-area {
   .show-more.has-topics {
-    @media (width >=1024px) {
+    @media (width >=40rem) {
       width: auto;
       right: 50%;
       transform: translateX(50%);
@@ -420,10 +425,11 @@ body.category .navigation-controls,
   }
 }
 
-.list-controls {
-  padding: 0;
-  border-top-left-radius: 0;
-  border-top-left-radius: 0;
+// Hiding radius on mobile
+@media (width <=40rem) {
+  .list-controls {
+    border-radius: 0 !important;
+  }
 }
 
 // Buttons on ending topics with normal line-height
