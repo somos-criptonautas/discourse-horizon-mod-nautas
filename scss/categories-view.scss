@@ -94,6 +94,8 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
     color: var(--primary);
     font-weight: 800;
     text-transform: uppercase;
+    text-wrap: wrap;
+    padding-left: 0.5rem;
 }
 
 // Fix for sticking tags on categories

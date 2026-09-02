@@ -11,3 +11,4 @@ es:
     traders:
       title: "Disponible para traders"
       message: "Sector dedicado para @traders. Se desbloquea con participación sostenida o a través de un ticket (suscripción mensual)."
+  podium_note: "Cada uno recibe 3% del total de suscripciones pagas (en Monero)."

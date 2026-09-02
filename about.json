@@ -72,7 +72,7 @@
     "Light": {
       "primary": "1A1A1A",
       "secondary": "f8f8f8",
-      "tertiary": "ec6322",
+      "tertiary": "9A5CFD",
       "tertiary-med-or-tertiary": "595bca",
       "selected": "d7dfff",
       "header_background": "F1F1F1",
@@ -82,12 +82,12 @@
     "Dark": {
       "primary": "F1F1F1",
       "secondary": "1C1C1C",
-      "tertiary": "9A5CFD",
+      "tertiary": "b5b7f9",
       "tertiary-med-or-tertiary": "595BCA",
-      "selected": "3b3e56",
+      "selected": "d7dfff",
       "header_background": "1C1C1C",
       "header_primary": "F1F1F1",
-      "hover": "333548"
+      "hover": "E1E8FF"
     }
   },
   "parent_themes": [

@@ -968,22 +968,77 @@ nav.c-footer .c-footer__item {
   display: none;
 }
 
-// No crown on /badges
+// Not competitive leaderboard adjustments
+.leaderboard .winner.-position1 {
+  width: none;
+  order: unset;
+}
+
 .leaderboard .winner.-position1 .winner__crown,
 .leaderboard .ranking-col-names {
   display: none;
 }
 
+.leaderboard .podium__wrapper {
+  border-radius: var(--d-border-radius-large);
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.leaderboard .podium {
+  padding-bottom: 1.5rem;
+  width: 65%;
+}
+
+.leaderboard .winner {
+  width: inherit;
+}
+
+.leaderboard .winner.-position2,
+.leaderboard .winner.-position3 {
+  transform: unset;
+}
+
+.podium-note {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  font-size: 1.1em;
+  line-height: 1.6;
+  padding: 1rem;
+}
+
+.podium-note::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 303px;
+  border-top: 1px solid var(--primary-300);
+}
+
+.podium::after {
+  content: "Reciben un porcentaje de nuestras subscripciones.";
+  display: block;
+  text-align: center;
+  margin-top: 1em;
+}
+
 // Leading leaderboard with no styling
 .leaderboard .winner.-position1 .winner__avatar img,
+.leaderboard .winner.-position2 .winner__avatar img,
 .leaderboard .winner.-position3 .winner__avatar img {
-  border-color: var(--primary-medium);
+  border-color: var(--primary-300);
   background-color: var(--primary-low);
 }
 
 .leaderboard .winner.-position1 .winner__rank,
+.leaderboard .winner.-position2 .winner__rank,
 .leaderboard .winner.-position3 .winner__rank {
-  background-color: var(--primary-medium);
+  background-color: var(--primary-300);
+  color: var(--primary);
 }
 
 .leaderboard .winner {
@@ -1556,7 +1611,8 @@ img.emoji {
 
 body.groups-page .category-banner-groups,
 body.badges-page .category-banner-badges,
-body.leaderboard-page .category-banner-leaderboard {
+body.leaderboard-page .category-banner-leaderboard,
+body.static-guidelines .category-banner-guidelines {
   display: flex !important;
 }
 
