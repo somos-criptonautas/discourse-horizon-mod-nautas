@@ -970,7 +970,7 @@ nav.c-footer .c-footer__item {
 
 // Not competitive leaderboard adjustments
 .leaderboard .winner.-position1 {
-  width: none;
+  width: inherit;
   order: unset;
 }
 
@@ -982,8 +982,7 @@ nav.c-footer .c-footer__item {
 .leaderboard .podium__wrapper {
   border-radius: var(--d-border-radius-large);
   width: 75%;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 1rem auto 3rem;
 }
 
 .leaderboard .podium {
@@ -1001,12 +1000,12 @@ nav.c-footer .c-footer__item {
 }
 
 .podium-note {
-  max-width: 600px;
+  max-width: 35vw;
   margin: auto;
   text-align: center;
   font-size: 1.1em;
   line-height: 1.6;
-  padding: 1rem;
+  padding: 0.5rem 1rem 1.5rem;
 }
 
 .podium-note::before {
@@ -1017,13 +1016,6 @@ nav.c-footer .c-footer__item {
   transform: translateX(-50%);
   width: 303px;
   border-top: 1px solid var(--primary-300);
-}
-
-.podium::after {
-  content: "Reciben un porcentaje de nuestras subscripciones.";
-  display: block;
-  text-align: center;
-  margin-top: 1em;
 }
 
 // Leading leaderboard with no styling
