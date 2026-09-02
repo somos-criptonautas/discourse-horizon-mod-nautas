@@ -266,7 +266,10 @@ body.category .navigation-controls,
 }
 
 // Hide coaching enter to who entered
-.group-traders .group-agoristas .group-lideres .group-team .sidebar-section-link-wrapper[data-list-item-name="entrar"] {
+.group-traders .sidebar-section-link-wrapper[data-list-item-name="entrar"],
+.group-agoristas .sidebar-section-link-wrapper[data-list-item-name="entrar"],
+.group-lideres .sidebar-section-link-wrapper[data-list-item-name="entrar"],
+.group-team .sidebar-section-link-wrapper[data-list-item-name="entrar"] {
   display: none;
 }
 
@@ -288,6 +291,11 @@ body.category .navigation-controls,
 
 // Disable apps-externas in anonymous visitors
 .anon .sidebar-section-wrapper[data-section-name="apps-externas"] {
+  display: none;
+}
+
+// Disable weird world icon on global sidebar sections
+.sidebar-section-header-global-indicator {
   display: none;
 }
 
@@ -351,6 +359,11 @@ body.category .navigation-controls,
   .panel .d-header .header-buttons {
     margin-right: 0.5rem;
   }
+}
+
+// Disable original header on leaderboard
+.leadearboard .page__header {
+  display: none;
 }
 
 // -----------------------------------------------------------------------
@@ -654,11 +667,6 @@ body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.h
   .container.posts .topic-navigation {
     margin-bottom: 2.5rem;
   }
-}
-
-// Hide locked icon
-.d-icon-lock {
-  display: none !important;
 }
 
 // No redundant not-dropdowns in topic lists
@@ -1547,7 +1555,8 @@ img.emoji {
 }
 
 body.groups-page .category-banner-groups,
-body.badges-page .category-banner-badges {
+body.badges-page .category-banner-badges,
+body.leaderboard-page .category-banner-leaderboard {
   display: flex !important;
 }
 

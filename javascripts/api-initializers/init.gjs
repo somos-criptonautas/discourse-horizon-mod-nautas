@@ -206,4 +206,10 @@ export default apiInitializer((api) => {
     return false;
   });
 
+  // Add leaderboard page CSS body class
+  api.onPageChange((url) => {
+  const isLeaderboard = url.startsWith("/leaderboard");
+  document.body.classList.toggle("leaderboard-page", isLeaderboard);
+  });
+
 });

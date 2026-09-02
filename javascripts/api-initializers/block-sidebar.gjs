@@ -90,7 +90,7 @@ export default apiInitializer("1.8.0", (api) => {
     if (tier.cta_url) {
       buttons.push({
         label: t("cta"),
-        icon: tier.cta_icon || "ticket",
+        icon: tier.cta_icon || "ph-dt-ticket",
         class: "btn-primary",
         action: () => {
           navigating = true;
