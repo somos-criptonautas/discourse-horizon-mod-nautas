@@ -54,7 +54,7 @@ body.f-nav-hidden:not(.archetype-regular,
   .sidebar-hamburger-dropdown,
   .sidebar-footer-wrapper,
   .chat-channel-row__content {
-    background: none !important;
+    background: var(--d-content-background) !important;
   }
 }
 

@@ -979,15 +979,33 @@ nav.c-footer .c-footer__item {
   display: none;
 }
 
+@media (width >=40rem) {
+  .leaderboard .podium__wrapper {
+    width: 75%;
+  }
+
+  .podium-note {
+    max-width: 35vw;
+    font-size: 1.1em;
+  }
+}
+
+@media (width <=40rem) {
+  .leaderboard .podium {
+    width: 90%;
+  }
+}
+
 .leaderboard .podium__wrapper {
   border-radius: var(--d-border-radius-large);
-  width: 75%;
+
   margin: 1rem auto 3rem;
 }
 
 .leaderboard .podium {
   padding-bottom: 1.5rem;
   width: 65%;
+  margin: auto;
 }
 
 .leaderboard .winner {
@@ -1000,10 +1018,8 @@ nav.c-footer .c-footer__item {
 }
 
 .podium-note {
-  max-width: 35vw;
   margin: auto;
   text-align: center;
-  font-size: 1.1em;
   line-height: 1.6;
   padding: 0.5rem 1rem 1.5rem;
 }
