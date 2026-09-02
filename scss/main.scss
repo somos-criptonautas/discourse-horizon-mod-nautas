@@ -1842,3 +1842,8 @@ body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn
     margin-top: 1rem;
   }
 }
+
+// Hiding locked icons
+.restricted .d-icon-lock {
+  display: none;
+}
