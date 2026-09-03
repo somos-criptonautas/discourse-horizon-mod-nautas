@@ -1,6 +1,6 @@
 {
   "name": "Custom Horizon",
-  "description": "Custom modifications to the Discourse Horizon theme.",
+  "description": "Criptonautas customizations on top of Horizon: layout, typography and colour overrides, alphabetical docs categories with an auto-opening docs sidebar, AI gists on topic cards, group-gated sidebar sections, custom category banners, leaderboard and new-user UI tweaks, and optional keyboard-shortcut removal.",
   "authors": "satonotdead",
   "about_url": "https://meta.discourse.org/t/horizon-theme/360486",
   "license_url": "https://github.com/discourse/horizon/blob/main/LICENSE",

@@ -2,6 +2,10 @@
 # Add custom translations here if needed
 
 es:
+  theme_metadata:
+    description: "Personalizaciones de Criptonautas sobre Horizon. Estilos: ajustes de maquetación, tipografía, color y móvil en listas de temas, categorías, temas, perfiles y leaderboard. Comportamiento: orden alfabético en categorías de documentación, barra lateral de docs abierta automáticamente una vez por sesión en móvil, resúmenes de IA en las tarjetas de tema de Horizon, secciones de la barra lateral restringidas por grupo con modal explicativo, banners de categoría propios y desactivación opcional de los atajos de teclado de Discourse."
+    settings:
+      blocked_sections: "Una fila por nivel. `key` enlaza la fila con su título/mensaje en la pestaña de traducciones. Si `allowed_groups` queda vacío, el nivel aplica a todos. `paths` es una lista separada por comas de rutas para lo que no sea una categoría. Si `cta_url` queda vacío se oculta el segundo botón."
   blocked_sidebar:
     dismiss: "seguir navegando"
     cta: "entrar ahora"
