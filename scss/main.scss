@@ -1683,7 +1683,7 @@ body.static-guidelines .category-banner-guidelines {
 }
 
 // Hiding hidden wraps
-.topic-post.d-wrap[data-wrap="hidden"] {
+.cooked .d-wrap[data-wrap="hidden"] {
   display: none;
 }
 
@@ -1845,5 +1845,10 @@ body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn
 
 // Hiding locked icons
 .restricted .d-icon-lock {
+  display: none;
+}
+
+// Hide top navbar on coaching/events
+.category-feedback-coaching .ct-nav-scroller {
   display: none;
 }
