@@ -16,7 +16,7 @@
 
     // core guards its own animation this way; the overrides above would
     // otherwise win and reintroduce motion
-    @media (prefers-reduced-motion) {
+    @media (prefers-reduced-motion: reduce) {
 
         .dialog-content,
         .dialog-overlay {
@@ -84,7 +84,7 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
     width: 1.35em;
 }
 
-@media (width >=40rem) {
+@include viewport.from(sm) {
     .category-title-contents .category-title .badge-category__name {
         font-size: var(--font-up-1);
     }

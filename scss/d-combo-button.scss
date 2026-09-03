@@ -1,5 +1,5 @@
 // Styling no new-topic button in mobile
-@media (width <=40rem) {
+@include viewport.until(sm) {
 
     /*     .navigation-controls {
         position: relative;

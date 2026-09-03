@@ -41,7 +41,7 @@
     display: none;
 }
 
-@media (width <=470px) {
+@media (width <= 470px) {
     .top-sub-section.topics-section {
         float: none;
         width: 100%;
@@ -85,7 +85,7 @@
     flex-direction: column;
 }
 
-@media (width < 40rem) {
+@include viewport.until(sm) {
     .stats-title {
         font-size: var(--font-up-2);
     }

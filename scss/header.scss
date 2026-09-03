@@ -1,4 +1,3 @@
-@use "lib/viewport";
 
 // Hide user menu panel on mobile
 .d-header-icons .header-dropdown-toggle [data-identifier="avatar-profile"] {
@@ -16,7 +15,7 @@ html:not(.anon) .d-header-icons .header-dropdown-toggle #toggle-current-user:not
 }
 
 // Logo and anonist icons hidden on mobile
-@media (width <=576px) {
+@include viewport.until(sm) {
   .d-header .title a {
     visibility: hidden;
   }

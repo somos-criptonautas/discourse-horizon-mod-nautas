@@ -1,4 +1,4 @@
-@media (width >=40rem) {
+@include viewport.from(sm) {
     #main-outlet div[class*="category-title-header"] {
         max-width: calc(1250px - 3rem) !important;
     }
