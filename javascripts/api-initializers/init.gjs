@@ -75,6 +75,39 @@ function autoOpenDocSidebar() {
   }
 }
 
+// A-Z needs the whole category: core cannot order a topic list by title
+// (TopicQuery::SORTABLE_MAPPING has no "title"), so we exhaust the paginated list
+// before sorting. Capped — docs categories are small; anything bigger falls back to
+// sorting whatever is loaded, which the MutationObserver below keeps up to date.
+// ponytail: drop this whole loop if core ever ships server-side title ordering.
+const MAX_DOC_PAGES = 12; // ~360 topics at 30 per page
+let docLoadRun = 0;
+
+async function loadAllDocTopics(api) {
+  const run = ++docLoadRun;
+
+  // Semi-private: the discovery controller has been refactored before. Failing here
+  // just means we sort the first page, so every step is optional-chained.
+  const list = api.container.lookup("controller:discovery/topics")?.model;
+  if (!list?.loadMore) {
+    return;
+  }
+
+  for (let page = 0; page < MAX_DOC_PAGES; page++) {
+    if (!list.more_topics_url) {
+      return;
+    }
+
+    const before = list.topics?.length ?? 0;
+    await list.loadMore();
+
+    // Navigated away mid-load, or the list stopped growing — either way, stop.
+    if (run !== docLoadRun || (list.topics?.length ?? 0) === before) {
+      return;
+    }
+  }
+}
+
 // Sorts the Docs topic list A-Z, collating with the page's own <html lang>.
 let docSortObservers = new Map();
 
@@ -197,7 +230,16 @@ export default apiInitializer((api) => {
     // afterRender: onPageChange can fire before body classList updates.
     schedule("afterRender", () => {
       autoOpenDocSidebar();
-      sortDocCategoryTopicLists();
+
+      if (!document.querySelector(".topic-list.doc-simple-mode")) {
+        return;
+      }
+
+      // Sort once the category is fully loaded; finally() so a failed or capped
+      // load still gets the first page sorted and revealed.
+      loadAllDocTopics(api)
+        .catch(() => {}) // a failed page load is not a reason to leave the list hidden
+        .finally(() => schedule("afterRender", sortDocCategoryTopicLists));
     });
   });
 
