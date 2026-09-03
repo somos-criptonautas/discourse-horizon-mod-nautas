@@ -1,4 +1,4 @@
-# Custom Horizon
+# Horizon Mods Nautas
 
 Theme component for **comunidad.criptonautas.co**. Child of the
 [Horizon](https://meta.discourse.org/t/horizon-theme/360486) theme — everything here

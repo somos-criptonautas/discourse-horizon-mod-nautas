@@ -1,10 +1,11 @@
-# English translations for Horizon Modifications theme component
+# English translations for the Horizon Mods Nautas theme component
 # Add custom translations here if needed
 
 en:
   theme_metadata:
-    description: "Criptonautas customizations on top of Horizon. Styling: layout, typography, colour and mobile overrides across topic lists, categories, topics, user pages and the leaderboard. Behaviour: alphabetical sorting in docs categories, docs sidebar auto-opened once per session on mobile, AI gists rendered on Horizon topic cards, sidebar sections gated by group with an explanatory modal, custom category banners, and optional removal of Discourse keyboard shortcuts."
+    description: "Criptonautas customizations on top of Horizon: styling and palette overrides, alphabetical docs categories, AI gists on topic cards, and group-gated sidebar sections."
     settings:
+      disable_discourse_keyboard_shortcuts: "Disables Discourse's own keyboard shortcuts (j/k navigation, ?, g-sequences). Native browser and OS keys are never affected."
       blocked_sections: "One row per tier. `key` links the row to its title/message in the translations tab. Leave `allowed_groups` empty and the tier applies to everyone. `paths` is a comma-separated list of link paths for anything that isn't a category. `cta_url` empty hides the second button."
   blocked_sidebar:
     dismiss: "Keep browsing"
@@ -15,4 +16,4 @@ en:
     traders:
       title: "Available for traders"
       message: "This section is reserved for @traders ghetto. It unlocks with sustained participation in the community."
-  podium_note: "Each one recieve 3% of our total paid subscriptions (in Monero)."
+  podium_note: "Each one receives 3% of our total paid subscriptions (in Monero)."

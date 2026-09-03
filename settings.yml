@@ -41,4 +41,3 @@ blocked_sections:
 disable_discourse_keyboard_shortcuts:
   type: bool
   default: false
-  description: "Disables Discourse's own keyboard shortcuts (j/k navigation, ?, g-sequences, etc). Native browser/OS behavior (arrow keys, Ctrl+C/V, Escape, Space, Enter) is never affected."
