@@ -71,10 +71,15 @@
   "color_schemes": {
     "Light": {
       "primary": "1A1A1A",
-      "secondary": "f8f8f8",
-      "tertiary": "9A5CFD",
-      "tertiary-med-or-tertiary": "595bca",
-      "selected": "d7dfff",
+      "secondary": "F8F8F8",
+      "tertiary": "595BCA",
+      "tertiary-med-or-tertiary": "4B4DB0",
+      "quaternary": "9A5CFD",
+      "highlight": "E1E8FF",
+      "danger": "D63B4A",
+      "success": "1F7A5C",
+      "love": "C4477E",
+      "selected": "D7DFFF",
       "header_background": "F1F1F1",
       "header_primary": "1A1A1A",
       "hover": "E1E8FF"
@@ -82,9 +87,14 @@
     "Dark": {
       "primary": "F1F1F1",
       "secondary": "1C1C1C",
-      "tertiary": "b5b7f9",
+      "tertiary": "B5B7F9",
       "tertiary-med-or-tertiary": "595BCA",
-      "selected": "d7dfff",
+      "quaternary": "9A5CFD",
+      "highlight": "2E3163",
+      "danger": "E8657A",
+      "success": "4FB894",
+      "love": "E58AB0",
+      "selected": "D7DFFF",
       "header_background": "1C1C1C",
       "header_primary": "F1F1F1",
       "hover": "E1E8FF"
