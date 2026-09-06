@@ -1,0 +1,46 @@
+// Injected into the /embed/comments iframe (ThemeField maps this path to
+// embedded_scss, loaded by app/views/layouts/embed.html.erb). Core's embed.scss
+// imports color_definitions compiled with theme_id: nil, so the iframe is always
+// the default light palette until these custom properties are restated.
+//
+// Two triggers: the visitor's OS by default, and data-theme when the parent page
+// tells us what it is (see embedded_header.html).
+@mixin dark-embed {
+  // Base colours — mirrors the Dark palette in about.json.
+  --secondary: #1c1c1c;
+  --primary: #f1f1f1;
+  --tertiary: #b5b7f9;
+  --quaternary: #9a5cfd;
+  --highlight: #2e3163;
+  --danger: #e8657a;
+  --success: #4fb894;
+
+  // Derived scales are baked at compile time from the light palette, so
+  // overriding --primary alone changes nothing downstream.
+  --primary-very-low: color-mix(in srgb, var(--primary) 5%, var(--secondary));
+  --primary-low: color-mix(in srgb, var(--primary) 10%, var(--secondary));
+  --primary-low-mid: color-mix(in srgb, var(--primary) 35%, var(--secondary));
+  --primary-medium: color-mix(in srgb, var(--primary) 55%, var(--secondary));
+  --primary-high: color-mix(in srgb, var(--primary) 75%, var(--secondary));
+  --tertiary-low: color-mix(in srgb, var(--tertiary) 15%, var(--secondary));
+  --danger-low: color-mix(in srgb, var(--danger) 15%, var(--secondary));
+  --content-border-color: var(--primary-low);
+  --hover: var(--primary-very-low);
+
+  color: var(--primary);
+
+  // Drop this if the blog's own background should show through instead.
+  background: var(--secondary);
+}
+
+// Parent page told us. Wins over the media query, in both directions.
+html[data-theme="dark"] {
+  @include dark-embed;
+}
+
+// No parent handshake (or it hasn't landed yet): follow the visitor's OS.
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    @include dark-embed;
+  }
+}

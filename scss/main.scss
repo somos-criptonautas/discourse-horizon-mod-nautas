@@ -1,4 +1,3 @@
-
 // -----------------------------------------------------------------------
 // Base & root variables
 // -----------------------------------------------------------------------
@@ -14,7 +13,7 @@ html {
   --d-control-height: var(--space-8);
   --content-border-color: var(--primary-low);
   --d-border-radius-large: 17px;
-  --success: var(--primary-low);
+  --success: var(--primary-800);
 
   --category-1-color: none !important;
   --category-2-color: none !important;
@@ -186,7 +185,7 @@ body:not(.has-sidebar-page) #main-outlet-wrapper {
 }
 
 body:not(.has-full-page-chat, .wizard) {
-  @media (width >= 1200px) {
+  @media (width >=1200px) {
     background-color: var(--background-color);
   }
 
@@ -348,7 +347,7 @@ body.category .navigation-controls,
   display: none;
 }
 
-@media (width >= 1400px) {
+@media (width >=1400px) {
   .anon .d-header .panel {
     grid-column-start: unset !important;
   }
@@ -660,7 +659,7 @@ body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.h
 
 // Better margins on timeline 
 
-@media (width >= 925px) {
+@media (width >=925px) {
   .container.posts .topic-navigation {
     margin-bottom: 2.5rem;
   }
@@ -1569,7 +1568,7 @@ img.emoji {
 } */
 
 // Visible progress bar in tiny screens
-@media (width <= 400px) {
+@media (width <=400px) {
   .with-topic-progress {
     bottom: calc(env(safe-area-inset-bottom) + var(--composer-height, 0px) + var(--d-border-radius-large)*3.3);
   }
@@ -1609,6 +1608,28 @@ body.badges-page .category-banner-badges,
 body.leaderboard-page .category-banner-leaderboard,
 body.static-guidelines .category-banner-guidelines {
   display: flex !important;
+}
+
+// -----------------------------------------------------------------------
+// Embed comments
+// -----------------------------------------------------------------------
+
+body.embed-mode #main-outlet-wrapper {
+  display: block !important;
+}
+
+body.embed-mode {
+  --topic-body-width: 100%;
+}
+
+/* height */
+body.embed-mode .topic-post:first-child {
+  display: none !important;
+}
+
+/* flicker */
+.post-stream--cloaked {
+  min-height: 0 !important;
 }
 
 // -----------------------------------------------------------------------
@@ -1778,7 +1799,7 @@ body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn
 }
 
 // Fix to login buttons with searchbar for anons
-@media (width >= 1400px) {
+@media (width >=1400px) {
   .anon .d-header .panel {
     grid-column-start: unset;
   }
@@ -1837,5 +1858,14 @@ body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn
 
 // Hide top navbar on coaching/events
 .category-feedback-coaching .ct-nav-scroller {
+  display: none;
+}
+
+// Simple calendar events
+#category-events-calendar {
+  margin-top: 0.5rem;
+}
+
+#category-events-calendar .fc-toolbar {
   display: none;
 }
