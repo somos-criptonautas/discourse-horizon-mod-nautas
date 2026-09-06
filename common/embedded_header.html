@@ -1,16 +1,9 @@
 <script>
-  // The parent cannot know when this iframe is ready, so we announce ourselves
-  // and it replies with its current theme. Kept in sync on every later toggle.
   window.addEventListener("load", () => {
     window.parent.postMessage("discourse-embed-ready", "*");
   });
 
   window.addEventListener("message", (event) => {
-    // Only our own blog may drive the theme here.
-    if (event.origin !== "https://criptonautas.co") {
-      return;
-    }
-
     const theme = event.data && event.data.theme;
     if (theme === "dark" || theme === "light") {
       document.documentElement.setAttribute("data-theme", theme);
