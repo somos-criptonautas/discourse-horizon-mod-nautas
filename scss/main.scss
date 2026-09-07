@@ -14,6 +14,7 @@ html {
   --content-border-color: var(--primary-low);
   --d-border-radius-large: 17px;
   --success: var(--primary-800);
+  --d-hover-subtle: color-mix(in srgb, var(--d-hover), transparent 40%);
 
   --category-1-color: none !important;
   --category-2-color: none !important;
@@ -315,18 +316,38 @@ body.category .navigation-controls,
 }
 
 // Custom Header Links adjustments
-.custom-header-links .headerLink a {
-  padding: 0.25em;
-  color: var(--header_primary);
-  font-size: unset;
-  margin-right: 0.5rem;
+// Fixed-height flex box keeps the hover pill INSIDE the 3.5em header — no layout shift.
+.custom-header-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
-.custom-header-links .headerLink a:hover {
+.custom-header-links .headerLink {
+  display: flex;
+  align-items: center;
+}
+
+.custom-header-links .headerLink a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  height: 2.25em;
+  padding: 0 0.75em;
+  box-sizing: border-box;
+  color: var(--header_primary);
+  font-size: unset;
+  border-radius: var(--d-border-radius);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+// Hover / focus only swap colours — box size stays identical → no header stretch.
+.custom-header-links .headerLink a:hover,
+.custom-header-links .headerLink a:focus-visible {
   background: var(--d-sidebar-highlight-background);
   color: var(--d-sidebar-highlight-color);
   outline: none;
-  border-radius: var(--d-border-radius);
 }
 
 // [DESKTOP] More room in header
@@ -779,6 +800,14 @@ nav.c-footer .c-footer__item {
 .chat-composer .chat-composer-separator,
 .chat-composer-button__wrapper {
   align-self: unset;
+}
+
+// Subtler chat message / transcript hover & active background
+.no-touch .chat-message-container:hover,
+.no-touch .chat-transcript:hover,
+.no-touch .chat-message-container.-active,
+.no-touch .-active.chat-transcript {
+  background-color: var(--d-hover-subtle);
 }
 
 // -----------------------------------------------------------------------

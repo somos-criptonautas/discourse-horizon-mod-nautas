@@ -86,9 +86,12 @@ let docLoadRun = 0;
 async function loadAllDocTopics(api) {
   const run = ++docLoadRun;
 
-  // Semi-private: the discovery controller has been refactored before. Failing here
-  // just means we sort the first page, so every step is optional-chained.
-  const list = api.container.lookup("controller:discovery/topics")?.model;
+  // `controller:discovery/topics` is deprecated in current Discourse
+  // (deprecation id: discourse.discovery-topics-controller). Discovery now uses a
+  // dedicated controller per filter; docs categories are always the latest topic
+  // list, so we look that controller up directly. Failing here just means we sort
+  // the first page, so every step is optional-chained.
+  const list = api.container.lookup("controller:discovery/latest")?.model;
   if (!list?.loadMore) {
     return;
   }

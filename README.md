@@ -55,7 +55,7 @@ imported once in `common/common.scss`. Raw `@media` is kept only for off-grid wi
   (`TopicQuery::SORTABLE_MAPPING` has no `title`), so `init.gjs` exhausts the paginated
   list (`loadMore()`, capped at `MAX_DOC_PAGES`) and then sorts. Two consequences: entering
   a docs category costs one request per 30 topics, and the loop reads
-  `controller:discovery/topics` — semi-private API. If it breaks or the cap is hit, it
+  the latest discovery controller (`controller:discovery/latest`; the old `controller:discovery/topics` catch-all is deprecated) — semi-private API. If it breaks or the cap is hit, it
   degrades to sorting the rows that are loaded. Delete the loop if core ever ships
   server-side title ordering.
 - `compatibility.scss` and `main.scss` both set `max-width` on
