@@ -1,4 +1,3 @@
-
 // Tablet 18px, mobile 22px, desktop 23px
 @include viewport.until(lg) {
   html {
@@ -87,7 +86,7 @@ body.f-nav-hidden:not(.archetype-regular,
   body:has(.discourse-docs-sidebar-panel),
   body.category-glosario,
   body.category-wiki,
-  body.category-trading-curso {
+  body.category-curso {
 
     #toggle-hamburger-menu,
     .header-sidebar-toggle {

@@ -881,11 +881,18 @@ nav.c-footer .c-footer__item {
   display: none;
 }
 
+// [EXPERIMENTAL] Margin on top of invitations buttons
+.user-invite-buttons {
+  margin-top: 1rem;
+}
+
 // Hide stuff on profile
 .user-preferences .form-vertical .control-group .user-title,
 .user-preferences .form-vertical .control-group .user-flair,
 .user-preferences .form-vertical .control-group .pref-email-settings,
-.control-group .upcoming-changes {
+.user-preferences .form-vertical .control-group .pref-associated-accounts,
+.user-preferences .form-vertical .control-group .pref-flair,
+.user-preferences .form-vertical .control-group .pref-flair .control-group .upcoming-changes {
   display: none;
 }
 
@@ -973,10 +980,20 @@ nav.c-footer .c-footer__item {
 }
 
 // Styling on MPs
-.new-private-message-btn {
-  width: 90%;
-  margin: auto;
+#new-private-message-btn {
+  width: 100%;
   margin-top: 0.5rem;
+}
+
+.user-navigation-secondary__horizontal-nav .nav-pills>li a.active::after,
+.user-navigation-secondary__horizontal-nav .nav-pills>li button.active::after:hover {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: var(--d-nav-underline-height);
+  background: var(--d-nav-color--active);
 }
 
 .new-user-content-wrapper .user-navigation {
@@ -1258,7 +1275,7 @@ body.category-preguntas li:has(.tag-drop) {
 // Hiding topics outside docs categories
 body.category-glosario .more-topics__container,
 body.category-wiki .more-topics__container,
-body.category-trading-curso .more-topics__container {
+body.category-curso .more-topics__container {
   display: none;
 }
 

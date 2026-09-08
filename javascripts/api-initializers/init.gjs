@@ -3,7 +3,7 @@ import { apiInitializer } from "discourse/lib/api";
 import { schedule } from "@ember/runloop";
 
 // Doc categories, detected by the plugin's sidebar panel or known slugs.
-const DOC_CATEGORY_SLUGS = ["glosario", "wiki", "trading-curso"];
+const DOC_CATEGORY_SLUGS = ["glosario", "wiki", "curso"];
 const DOC_SIDEBAR_SEEN_KEY = "horizon-mods-doc-sidebar-seen";
 
 function isDocCategoryPage() {

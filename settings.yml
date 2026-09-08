@@ -33,7 +33,7 @@ blocked_sections:
     - key: "traders"
       allowed_groups: []
       categories: [64, 5, 59]
-      paths: "/upcoming-events, /resenha/r/lounge"
+      paths: "/upcoming-events, /voice/r/lounge"
       cta_url: "/s"
       cta_icon: "ph-dt-ticket"
       hide: false
