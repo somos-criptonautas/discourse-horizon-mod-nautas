@@ -154,11 +154,11 @@ body.f-nav-hidden:not(.archetype-regular,
   }
 }
 
-// Notifications position for arrange icons on custom nav mobile
+// Notifications/user position for arrange icons on custom nav mobile
 
-@include viewport.until(md) {
+@media (width < 48rem) {
   .d-header .current-user {
-    grid-area: unset;
+    grid-area: unset !important;
   }
 }
 

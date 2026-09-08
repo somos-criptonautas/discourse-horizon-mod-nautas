@@ -1036,6 +1036,15 @@ nav.c-footer .c-footer__item {
   order: unset;
 }
 
+// Styling leaderboard
+.leaderboard .user {
+  margin-bottom: 1rem;
+}
+
+.leaderboard .ranking {
+  font-size: 0.9rem;
+}
+
 .leaderboard .winner.-position1 .winner__crown,
 .leaderboard .ranking-col-names {
   display: none;
@@ -1054,7 +1063,7 @@ nav.c-footer .c-footer__item {
 
 @include viewport.until(sm) {
   .leaderboard .podium {
-    width: 90%;
+    width: 90% !important;
   }
 }
 
