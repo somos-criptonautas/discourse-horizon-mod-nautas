@@ -15,6 +15,7 @@ html {
   --d-border-radius-large: 17px;
   --success: var(--primary-800);
   --d-hover-subtle: color-mix(in srgb, var(--d-hover), transparent 40%);
+  --primary-25: color-mix(in srgb, var(--primary-50), var(--secondary) 50%);
 
   --category-1-color: none !important;
   --category-2-color: none !important;
@@ -507,8 +508,14 @@ button [title="similares"] .d-button-label {
   @include viewport.from(sm) {
     .topic-list-item.--high-context {
       border: 1px solid var(--primary-300);
+      box-shadow: 0 0 6px 1px var(--topic-card-shadow);
     }
   }
+}
+
+// Hover on all cards (not only in last-visited)
+.topic-list.--d-topic-cards .topic-list-body .topic-list-item:hover {
+  border-color: var(--accent-color);
 }
 
 .hc-topic-card__status.--hot,
@@ -882,6 +889,11 @@ nav.c-footer .c-footer__item {
   display: none;
 }
 
+// Less primary icon size
+.user-profile-names__primary .d-icon {
+  font-size: .75em;
+}
+
 // Group naming ordering [EXPERIMENTAL]
 .group-info-mention-name {
   display: none;
@@ -895,7 +907,7 @@ nav.c-footer .c-footer__item {
   padding: 0.65rem;
   border: 0 !important;
   border-radius: var(--d-border-radius);
-  background: rgba(0, 0, 0, 0) !important;
+  background: var(--primary-50);
   box-shadow: none !important;
 }
 
@@ -932,7 +944,6 @@ nav.c-footer .c-footer__item {
   border: none;
   border-radius: 0;
   padding: 0;
-  margin-bottom: var(--mf-space-8);
 }
 
 .user-main .top-section,
@@ -950,6 +961,15 @@ nav.c-footer .c-footer__item {
 .block-hero__chip,
 .category-box {
   box-shadow: none !important;
+}
+
+// More room between blocks on profile
+.top-section {
+  margin-bottom: 1rem;
+}
+
+.top-sub-section {
+  margin-bottom: none;
 }
 
 // Styling on MPs
@@ -1213,9 +1233,10 @@ body.category-preguntas li:has(.tag-drop) {
   display: none;
 }
 
-// No topic order in Docs Categories - Actions to right
+// No topic order in specific categories
 .category-wiki #navigation-bar,
-.category-glosario #navigation-bar {
+.category-glosario #navigation-bar,
+.category-curso #navigation-bar {
   display: none;
 }
 
@@ -1474,6 +1495,14 @@ ul.ai-helper-options li[data-value="replace_dates"] {
   display: none;
 }
 
+.ai-custom-prompt__input[type="text"] {
+  width: 100%;
+}
+
+.ai-helper-options__button kbd {
+  display: none;
+}
+
 // More stuff
 img.emoji {
   width: 23px;
@@ -1672,7 +1701,7 @@ body.embed-mode .topic-post:first-child {
 
 // National flags re-styling
 .about .nationalflag-usersummary {
-  width: 30px;
+  width: 1.2rem;
   border-radius: 0.15rem;
   padding-bottom: 0.45rem;
 }

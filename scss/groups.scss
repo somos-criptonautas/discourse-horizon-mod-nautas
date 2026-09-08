@@ -6,8 +6,14 @@
     padding-bottom: 2rem;
 }
 
+// Group boxes styling
 .group-boxes .group-box {
-    background-color: var(--d-badge-card-background-color);
+    background-color: var(--primary-25);
+    box-shadow: 0 0 6px 1px var(--topic-card-shadow);
+}
+
+.group-boxes .group-box:hover {
+    background-color: var(--primary-50);
 }
 
 // We use a team group so hide redundancy
@@ -32,19 +38,19 @@
     order: -5;
 }
 
-.group-box[data-group-name="agoristas"] {
+.group-box[data-group-name="lideres"] {
     order: -4;
 }
 
-.group-box[data-group-name="lideres"] {
+.group-box[data-group-name="agoristas"] {
     order: -3;
 }
 
-.group-box[data-group-name="delistados"] {
+.group-box[data-group-name="team"] {
     order: -2;
 }
 
-.group-box[data-group-name="team"] {
+.group-box[data-group-name="delistados"] {
     order: -1;
 }
 

@@ -41,8 +41,10 @@
     display: none;
 }
 
-@media (width <= 470px) {
-    .top-sub-section.topics-section {
+@media (width <=390px) {
+
+    .top-sub-section.topics-section,
+    .top-sub-section.replies-section {
         float: none;
         width: 100%;
     }
@@ -82,12 +84,15 @@
 
 .user-info .user-detail .details {
     display: flex;
-    flex-direction: column;
 }
 
 @include viewport.until(sm) {
     .stats-title {
         font-size: var(--font-up-2);
+    }
+
+    .user-info .user-detail .details {
+        flex-direction: column;
     }
 
     .top-sub-section.most-liked-section {

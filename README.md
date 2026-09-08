@@ -38,7 +38,14 @@ imported once in `common/common.scss`. Raw `@media` is kept only for off-grid wi
   setting: dims or hides the link and explains the requirement in a modal with a CTA.
   Copy lives in `locales/*.yml`, keyed by each tier's `key`.
 - **`ai-gist-horizon.gjs`** — renders `ai_topic_gist` into `topic-list-after-title`,
-  the only core outlet Horizon's high-context card keeps.
+  the only core outlet Horizon's high-context card keeps. **Prerequisite:** the
+  attribute is only in the payload when discourse-ai's server-side
+  `Guardian#can_see_gists?` passes (`ai_summary_gists_enabled` on, agent configured,
+  gists generated). With `horizon-topic-thumbnails` active the per-user "AI summaries
+  in topic lists" toggle is suppressed, so the site must satisfy that guard — or
+  re-serialize `ai_topic_gist` with its own include-condition from a plugin. When the
+  attribute is missing the outlet renders nothing, silently. The value is HTML, so the
+  template triple-staches it.
 - **`translated-texts.gjs`** — appends the translated note under the leaderboard podium.
 - **`connectors/custom-homepage`** — placeholder outlet for the custom homepage.
 
