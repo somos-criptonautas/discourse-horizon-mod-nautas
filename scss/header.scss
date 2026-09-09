@@ -57,3 +57,36 @@ html:not(.anon) .d-header-icons .header-dropdown-toggle #toggle-current-user:not
 :where(.uc-modernize-foundation-theme) .d-header-icons .icon img.avatar {
   width: 1.9em;
 }
+
+// Hamburger glyph, scoped to the two header toggles that open a navigation menu:
+// the desktop sidebar toggle and the mobile/dropdown-mode hamburger.
+//
+// `api.replaceIcon()` is a global registry keyed by icon name, so remapping
+// `bars` in discourse-phosphor-duotone-icons would change every `bars` in the
+// forum. Core exposes no per-location icon hook and CSS cannot rewrite a
+// sprite's `<use href>`, so we hide the sprite glyph and repaint the same
+// element with a mask. Masking `.d-icon` rather than a pseudo-element is
+// deliberate: `#toggle-hamburger-menu::before` / `::after` are already spoken
+// for by the docs-category ping dot in mobile-stuff.scss, and this way the
+// existing `.d-icon` sizing rules above still apply untouched.
+//
+// Alpha masking preserves the duotone — Phosphor's `opacity="0.2"` layer lands
+// at 20% of `currentColor` — so hover, active and light/dark all still work.
+//
+// The glyph is ph-dt-sidebar, matching what core already shows for
+// `discourse-sidebar` in desktop dropdown mode, so all three agree.
+//
+// To use a different glyph, swap $hamburger-icon for any URL-encoded SVG
+// (`%3C` for `<`, `%3E` for `>`); the sprite in discourse-phosphor-duotone-icons
+// is the easiest source.
+$hamburger-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M88,48V208H40a8,8,0,0,1-8-8V56a8,8,0,0,1,8-8Z' opacity='0.2'/%3E%3Cpath d='M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM40,152H56a8,8,0,0,0,0-16H40V120H56a8,8,0,0,0,0-16H40V88H56a8,8,0,0,0,0-16H40V56H80V200H40Zm176,48H96V56H216V200Z'/%3E%3C/svg%3E");
+
+.header-sidebar-toggle .btn-sidebar-toggle .d-icon,
+#toggle-hamburger-menu .d-icon {
+  background-color: currentColor;
+  mask: $hamburger-icon center / contain no-repeat;
+
+  use {
+    display: none;
+  }
+}
