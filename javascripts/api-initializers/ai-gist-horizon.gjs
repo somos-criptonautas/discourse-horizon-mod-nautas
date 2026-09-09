@@ -12,11 +12,19 @@ import { apiInitializer } from "discourse/lib/api";
 //     include_condition: -> { scope.can_see_gists? })
 // If that guard fails server-side, the attribute is left out of latest.json entirely
 // (not null — omitted), so the #if below is simply false and nothing renders, with no
-// console or server error. With topic-thumbnails active the per-user "AI summaries in
-// topic lists" (table_ai) toggle is suppressed, which is what keeps the guard false.
-// There is no client-side fix for a missing attribute: the site must satisfy the guard
-// (ai_summary_gists_enabled + agent configured + gists actually generated), or
-// re-serialize the attribute with its own include-condition from a plugin/initializer.
+// console or server error. Confirm with, on /latest:
+//   fetch('/latest.json').then(r=>r.json()).then(d=>
+//     console.log(d.topic_list.topics.filter(t=>'ai_topic_gist' in t).length))
+//
+// can_see_gists? needs ai_summarization_enabled + ai_summary_gists_enabled + an agent
+// that ai_summary_gists_agent resolves to, whose allowed_group_ids contain `everyone`
+// or one of the viewer's groups. That last clause is the one that bites: backfill
+// generates gists without consulting the agent's groups, so the admin UI can show
+// healthy gists while every payload omits the attribute. An empty allowed_group_ids
+// hides them from everyone.
+//
+// There is no client-side fix for a missing attribute — the site must satisfy the
+// guard, or a plugin must re-serialize the attribute with its own include-condition.
 //
 // No site-setting guard needed on our side: the attribute is only serialized when
 // Guardian#can_see_gists? passes, so the #if already covers plugin/gists enabled,
@@ -31,10 +39,11 @@ export default apiInitializer((api) => {
     "topic-list-after-title",
     <template>
       {{#if @outletArgs.topic.ai_topic_gist}}
-        {{! triple-stache: the value is HTML (AiSummary#summarized_text); double-staching
-            would print literal <p>…</p> markup instead of rendering it }}
+        {{! Plain text, not HTML: discourse-ai renders the gist with a plain {{this.gist}}
+            and reserves trustHTML for its excerpt fallback. Keep it escaped — this is
+            LLM output, and unescaping it would make it an injection surface. }}
         <div class="horizon-ai-gist" aria-hidden="true">
-          {{{@outletArgs.topic.ai_topic_gist}}}
+          {{@outletArgs.topic.ai_topic_gist}}
         </div>
       {{/if}}
     </template>

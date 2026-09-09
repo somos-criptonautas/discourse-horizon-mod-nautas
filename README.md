@@ -40,12 +40,15 @@ imported once in `common/common.scss`. Raw `@media` is kept only for off-grid wi
 - **`ai-gist-horizon.gjs`** — renders `ai_topic_gist` into `topic-list-after-title`,
   the only core outlet Horizon's high-context card keeps. **Prerequisite:** the
   attribute is only in the payload when discourse-ai's server-side
-  `Guardian#can_see_gists?` passes (`ai_summary_gists_enabled` on, agent configured,
-  gists generated). With `horizon-topic-thumbnails` active the per-user "AI summaries
-  in topic lists" toggle is suppressed, so the site must satisfy that guard — or
-  re-serialize `ai_topic_gist` with its own include-condition from a plugin. When the
-  attribute is missing the outlet renders nothing, silently. The value is HTML, so the
-  template triple-staches it.
+  `Guardian#can_see_gists?` passes — `ai_summarization_enabled` and
+  `ai_summary_gists_enabled` on, `ai_summary_gists_agent` resolving to an agent whose
+  `allowed_group_ids` include `everyone` or one of the viewer's groups. That last
+  clause is the one that bites: backfill generates gists without consulting the
+  agent's groups, so the admin UI can show healthy gists while every payload omits
+  the attribute (empty `allowed_group_ids` hides them from everyone). When the
+  attribute is missing the outlet renders nothing, silently — check with
+  `fetch('/latest.json').then(r=>r.json()).then(d=>console.log(
+  d.topic_list.topics.filter(t=>'ai_topic_gist' in t).length))`.
 - **`translated-texts.gjs`** — appends the translated note under the leaderboard podium.
 - **`connectors/custom-homepage`** — placeholder outlet for the custom homepage.
 
