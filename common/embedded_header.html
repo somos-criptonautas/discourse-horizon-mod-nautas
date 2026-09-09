@@ -1,12 +1,39 @@
-<script>
-  window.addEventListener("load", () => {
-    window.parent.postMessage("discourse-embed-ready", "*");
-  });
+<!-- Follow the blog's light/dark theme inside the embedded comments iframe.
 
-  window.addEventListener("message", (event) => {
-    const theme = event.data && event.data.theme;
-    if (theme === "dark" || theme === "light") {
-      document.documentElement.setAttribute("data-theme", theme);
+  The blog half lives in ghost-headline-theme-nautas, assets/js/discourse-theme.js:
+  it waits for the "discourse-embed-ready" ping below, keeps the event.source,
+  and posts {theme: "light"|"dark"} on every change - both from the toggle and
+  from its own prefers-color-scheme listener. -->
+<script>
+  (function () {
+    var BLOG_ORIGIN = "https://criptonautas.co";
+
+    function announce() {
+      // Target origin stays "*": the payload is a fixed, non-sensitive string,
+      // and pinning it would silently break the handshake if the embed is ever
+      // served from another allowed host (www, staging). The security boundary
+      // is the incoming check below, where the data actually matters.
+      window.parent.postMessage("discourse-embed-ready", "*");
     }
-  });
+
+    // Guard the race: if this runs after load has already fired, a plain
+    // addEventListener("load") never runs and the blog never learns we exist.
+    if (document.readyState === "complete") {
+      announce();
+    } else {
+      window.addEventListener("load", announce);
+    }
+
+    window.addEventListener("message", function (event) {
+      // Without this, any page that embeds this iframe can drive its theme.
+      if (event.origin !== BLOG_ORIGIN) {
+        return;
+      }
+
+      var theme = event.data && event.data.theme;
+      if (theme === "dark" || theme === "light") {
+        document.documentElement.setAttribute("data-theme", theme);
+      }
+    });
+  })();
 </script>
