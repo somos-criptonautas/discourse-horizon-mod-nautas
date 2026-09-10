@@ -1706,6 +1706,13 @@ body.embed-mode {
   --topic-body-width: 100%;
 }
 
+// The forum's 18–23px root (top of this file + mobile-stuff.scss) is sized for
+// full-screen reading; in the blog's comments iframe it dwarfs the article.
+// :has() outranks the plain html rules, so no media-query ordering to fight.
+html:has(body.embed-mode) {
+  font-size: 16px;
+}
+
 /* height */
 body.embed-mode .topic-post:first-child {
   display: none !important;
