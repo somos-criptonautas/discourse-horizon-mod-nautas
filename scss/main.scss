@@ -186,6 +186,14 @@ body:not(.has-sidebar-page) #main-outlet-wrapper {
   }
 }
 
+// Tablets can't fit both sidebars next to the content: the left one wins.
+// xl rather than lg so iPads in landscape (1180px) are included.
+@include viewport.until(xl) {
+  body.has-sidebar-page .tc-right-sidebar {
+    display: none;
+  }
+}
+
 body:not(.has-full-page-chat, .wizard) {
   @media (width >=1200px) {
     background-color: var(--background-color);
@@ -401,10 +409,9 @@ body.category .navigation-controls,
   display: none !important;
 }
 
-// Fix weird CSS color icons
-.category-glosario .sidebar-section-link-wrapper .sidebar-section-link-prefix.icon,
-.category-glossary .sidebar-section-link-wrapper .sidebar-section-link-prefix.icon,
-.category-wiki .sidebar-section-link-wrapper .sidebar-section-link-prefix.icon {
+// Fix weird CSS color icons on every docs category, not a hardcoded slug list.
+// The docs plugin's sidebar panel only renders inside docs categories.
+body:has(.discourse-docs-sidebar-panel) .sidebar-section-link-wrapper .sidebar-section-link-prefix.icon {
   display: none;
 }
 
@@ -1404,6 +1411,19 @@ body.category-curso .more-topics__container {
   margin: 0 0.5em;
 }
 
+// On a real iPad the header search grows over the other header items (dev tools
+// emulation doesn't reproduce it). Let it shrink, and cap it on tablet widths.
+@include viewport.until(xl) {
+  .floating-search-input-wrapper {
+    min-width: 0;
+  }
+
+  .header-search-input {
+    min-width: 0;
+    max-width: 16em;
+  }
+}
+
 // -----------------------------------------------------------------------
 // Banners (welcome / campaign)
 // -----------------------------------------------------------------------
@@ -1842,6 +1862,12 @@ body.embed-mode .topic-post:first-child {
 
 .nested-view .first-reply-statement-wrapper {
   display: none;
+}
+
+// Disable weird floating composer in IA Bot
+.docked-composer.ai-bot-docked-composer.docked-composer--keyboard-open {
+  position: unset;
+  
 }
 
 //Style the anonist (IA Bot) main chat page
