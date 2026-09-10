@@ -1542,6 +1542,12 @@ ul.ai-helper-options li[data-value="replace_dates"] {
   display: none;
 }
 
+// Translate slot runs a custom agent for "Ask AI" on posts only;
+// composer Translate comes from the relabeled markdown_table slot
+.ai-composer-helper-menu ul.ai-helper-options li[data-value="translate"] {
+  display: none;
+}
+
 .ai-custom-prompt__input[type="text"] {
   width: 100%;
 }
