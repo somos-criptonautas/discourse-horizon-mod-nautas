@@ -1,10 +1,10 @@
-<!-- Follow the blog's light/dark theme when Discourse runs inside the blog's
-  comments iframe.
+<!-- Discourse inside the blog's comments iframe: follow the blog's light/dark
+  theme and report our height so the iframe shows the whole thread.
 
-  The blog half lives in ghost-headline-theme-nautas, assets/js/discourse-theme.js:
+  The blog half lives in ghost-headline-theme-nautas, assets/js/discourse-embed.js:
   it waits for the "discourse-embed-ready" ping below, keeps the event.source,
-  and posts {theme: "light"|"dark"} on every change - both from the toggle and
-  from its own prefers-color-scheme listener.
+  posts {theme: "light"|"dark"} on every change, and sizes the iframe from the
+  {type: "nautas-embed-height"} reports.
 
   This lived in common/embedded_header.html first, which was silently doing
   nothing: that field only renders on the lightweight /embed/comments page,
@@ -34,6 +34,36 @@
       announce();
     } else {
       window.addEventListener("load", announce);
+    }
+
+    // Report the content height so the blog sizes the iframe to the whole
+    // thread instead of a fixed box with an inner scrollbar. Once the iframe is
+    // that tall the post stream's bottom sentinel is in view, so Discourse
+    // keeps loading until every reply is shown. "*" for the same reason as
+    // announce(): a height is not sensitive.
+    //
+    // Grows but never shrinks: the document is always at least as tall as the
+    // iframe viewport, so scrollHeight cannot drop below the current height.
+    var lastHeight = 0;
+    function reportHeight() {
+      var height = document.documentElement.scrollHeight;
+      if (Math.abs(height - lastHeight) < 2) {
+        return;
+      }
+      lastHeight = height;
+      window.parent.postMessage({ type: "nautas-embed-height", height: height }, "*");
+    }
+
+    function observeHeight() {
+      new ResizeObserver(reportHeight).observe(document.body);
+      reportHeight();
+    }
+
+    // head_tag runs before <body> exists.
+    if (document.body) {
+      observeHeight();
+    } else {
+      document.addEventListener("DOMContentLoaded", observeHeight);
     }
 
     window.addEventListener("message", function (event) {
