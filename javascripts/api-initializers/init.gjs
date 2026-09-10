@@ -218,6 +218,17 @@ export default apiInitializer((api) => {
   api.replaceIcon("discobot", "ph-dt-anonist");
   api.replaceIcon("far-discobot", "ph-dt-anonist");
 
+  // AI helper slots repurposed via site settings; icons are hardcoded
+  // server-side, so swap them per mode instead of replacing them globally
+  const AI_HELPER_ICONS = {
+    translate: "ph-dt-magnifying-glass", // Ask AI: forum search agent
+    markdown_table: "ph-dt-translate", // composer: built-in Translator
+    replace_dates: "ph-dt-markdown", // composer: Markdown formatter
+  };
+  api.getCurrentUser()?.ai_helper_prompts?.forEach((prompt) => {
+    prompt.icon = AI_HELPER_ICONS[prompt.name] ?? prompt.icon;
+  });
+
   // Do not display closed groups buttons
   const hideClosedButtons = () => {
     document.querySelectorAll(".group-membership-button").forEach((button) => {
