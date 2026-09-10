@@ -1412,15 +1412,16 @@ body.category-curso .more-topics__container {
 }
 
 // On a real iPad the header search grows over the other header items (dev tools
-// emulation doesn't reproduce it). Let it shrink, and cap it on tablet widths.
+// emulation doesn't reproduce it). Core sizes .floating-search-input at 60% of a
+// flex-grow wrapper, so the cap goes there. 27ch is the NN/g minimum that fits
+// ~90% of queries; go no lower than ~20ch if the header is still crowded.
 @include viewport.until(xl) {
   .floating-search-input-wrapper {
     min-width: 0;
   }
 
-  .header-search-input {
-    min-width: 0;
-    max-width: 16em;
+  .floating-search-input {
+    max-width: 27ch;
   }
 }
 
