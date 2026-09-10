@@ -6,12 +6,11 @@
   and posts {theme: "light"|"dark"} on every change - both from the toggle and
   from its own prefers-color-scheme listener.
 
-  This duplicates common/embedded_header.html on purpose. That field only
-  renders on the lightweight /embed/comments page, and the blog sets
-  fullApp: true, which loads the whole app instead - so head_tag is the field
-  that actually runs there. Discourse gives no way to share one file between
-  two theme fields. Keep both in sync, or drop embedded_header.html if
-  fullApp is permanent. -->
+  This lived in common/embedded_header.html first, which was silently doing
+  nothing: that field only renders on the lightweight /embed/comments page,
+  and the blog sets fullApp: true, so the iframe loads the whole app instead.
+  head_tag is the field that runs there. If fullApp is ever dropped, this has
+  to move back. -->
 <script>
   (function () {
     var BLOG_ORIGIN = "https://criptonautas.co";

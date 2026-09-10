@@ -4,7 +4,11 @@
 // the default light palette until these custom properties are restated.
 //
 // Two triggers: the visitor's OS by default, and data-theme when the parent page
-// tells us what it is (see embedded_header.html).
+// tells us what it is (that handshake now lives in common/head_tag.html).
+//
+// Inert while the blog embeds with fullApp: true - that loads the whole app, not
+// /embed/comments, so neither this file nor embedded_header ever renders. Kept
+// for the day fullApp is dropped.
 @mixin dark-embed {
   // Base colours — mirrors the Dark palette in about.json.
   --secondary: #1c1c1c;
