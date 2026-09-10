@@ -1,0 +1,52 @@
+<!-- Follow the blog's light/dark theme when Discourse runs inside the blog's
+  comments iframe.
+
+  The blog half lives in ghost-headline-theme-nautas, assets/js/discourse-theme.js:
+  it waits for the "discourse-embed-ready" ping below, keeps the event.source,
+  and posts {theme: "light"|"dark"} on every change - both from the toggle and
+  from its own prefers-color-scheme listener.
+
+  This duplicates common/embedded_header.html on purpose. That field only
+  renders on the lightweight /embed/comments page, and the blog sets
+  fullApp: true, which loads the whole app instead - so head_tag is the field
+  that actually runs there. Discourse gives no way to share one file between
+  two theme fields. Keep both in sync, or drop embedded_header.html if
+  fullApp is permanent. -->
+<script>
+  (function () {
+    var BLOG_ORIGIN = "https://criptonautas.co";
+
+    // head_tag renders on every forum page, so do nothing unless we are framed.
+    if (window.parent === window) {
+      return;
+    }
+
+    function announce() {
+      // Target origin stays "*": the payload is a fixed, non-sensitive string,
+      // and pinning it would silently break the handshake if the embed is ever
+      // served from another allowed host (www, staging). The security boundary
+      // is the incoming check below, where the data actually matters.
+      window.parent.postMessage("discourse-embed-ready", "*");
+    }
+
+    // Guard the race: if this runs after load has already fired, a plain
+    // addEventListener("load") never runs and the blog never learns we exist.
+    if (document.readyState === "complete") {
+      announce();
+    } else {
+      window.addEventListener("load", announce);
+    }
+
+    window.addEventListener("message", function (event) {
+      // Without this, any page that frames Discourse can drive its theme.
+      if (event.origin !== BLOG_ORIGIN) {
+        return;
+      }
+
+      var theme = event.data && event.data.theme;
+      if (theme === "dark" || theme === "light") {
+        document.documentElement.setAttribute("data-theme", theme);
+      }
+    });
+  })();
+</script>
