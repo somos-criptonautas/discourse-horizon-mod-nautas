@@ -1731,6 +1731,12 @@ body.embed-mode {
   --topic-body-width: 100%;
 }
 
+// The iframe runs edge to edge in the blog's article column, so the thread
+// needs its own inner room or the text runs into the rounded border.
+body.embed-mode #main-outlet {
+  padding: 1.5rem;
+}
+
 // The forum's 18–23px root (top of this file + mobile-stuff.scss) is sized for
 // full-screen reading; in the blog's comments iframe it dwarfs the article.
 // :has() outranks the plain html rules, so no media-query ordering to fight.
