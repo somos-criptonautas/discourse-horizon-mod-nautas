@@ -1727,8 +1727,15 @@ body.embed-mode #main-outlet-wrapper {
   display: block !important;
 }
 
+// Core sizes each post as .topic-body { width: calc(var(--topic-body-width) +
+// var(--topic-body-width-padding) * 2) } next to the avatar column, so a plain
+// 100% made every post row 100% + padding + avatar wide and the embed scrolled
+// sideways. Subtract both so the row fits the iframe exactly; core's max-width
+// rules add them back onto this variable, so those still total 100%.
 body.embed-mode {
-  --topic-body-width: 100%;
+  --topic-body-width: calc(
+    100% - var(--topic-avatar-width) - (var(--topic-body-width-padding) * 2)
+  );
 }
 
 // The iframe runs edge to edge in the blog's article column, so the thread
