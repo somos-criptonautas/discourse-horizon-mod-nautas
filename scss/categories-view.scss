@@ -166,10 +166,12 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
     display: inherit !important;
     font-size: 0.95rem !important;
 }
-// Subcategory boxes inside a (sub)category page. body.category is only set on
-// category routes, so the all-categories page keeps its own layout.
-body.category {
+// Subcategory boxes inside a (sub)category page. .navigation-category is only set
+// on category routes (/categories is .navigation-categories), so the
+// all-categories page keeps its own layout.
+.navigation-category {
     // Outranks the "Recover category descriptions" !important above.
+    .category-boxes .category .description,
     .category-boxes-with-topics .category .description {
         display: none !important;
     }
@@ -184,7 +186,11 @@ body.category {
         width: 50%;
     }
 
-    .category-boxes {
-        grid-template-columns: repeat(auto-fit, minmax(var(--category-boxes-min-width), var(--category-boxes-max-width)));
+    // Core's 15em minimum (18em with topics) is wider than half a phone at this
+    // theme's 22px root, so auto-fit collapsed to one column. Capping the minimum
+    // at half the row keeps at least two per row; wider screens still fit more.
+    .category-boxes,
+    .category-boxes-with-topics {
+        grid-template-columns: repeat(auto-fit, minmax(min(var(--category-boxes-min-width), calc(50% - var(--d-category-boxes-gap, 1em))), var(--category-boxes-max-width)));
     }
 }

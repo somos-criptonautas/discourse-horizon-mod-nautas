@@ -1288,7 +1288,10 @@ body.category-preguntas li:has(.tag-drop) {
   padding-top: 1rem;
 }
 
-// Hiding topics outside docs categories
+// Hiding topics outside docs categories, on every docs category. The docs panel
+// only renders while the sidebar is showing (not on phones with it closed), so the
+// slugs stay as a fallback — same detection as isDocCategoryPage() in init.gjs.
+body:has(.discourse-docs-sidebar-panel) .more-topics__container,
 body.category-glosario .more-topics__container,
 body.category-wiki .more-topics__container,
 body.category-curso .more-topics__container {
