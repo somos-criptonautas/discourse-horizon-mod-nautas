@@ -1737,6 +1737,19 @@ body.embed-mode #main-outlet {
   padding: 1.5rem;
 }
 
+// The embed is the conversation only; the forum keeps the tools. No system
+// notices (visible, unlisted, closed...), time gaps, topic footer buttons or
+// suggested topics. Post-menu buttons and the topic map are trimmed in
+// javascripts/api-initializers/embed-comments.gjs.
+body.embed-mode {
+  .small-action,
+  .time-gap,
+  #topic-footer-buttons,
+  .more-topics__container {
+    display: none;
+  }
+}
+
 // The forum's 18–23px root (top of this file + mobile-stuff.scss) is sized for
 // full-screen reading; in the blog's comments iframe it dwarfs the article.
 // :has() outranks the plain html rules, so no media-query ordering to fight.
