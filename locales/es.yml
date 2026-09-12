@@ -16,6 +16,7 @@ es:
     traders:
       title: "Disponible para traders"
       message: "Sector dedicado para @traders. Se desbloquea con participación sostenida o a través de un ticket (suscripción mensual)."
+  category_back: "← Volver"
   podium_note: "Cada uno recibe 3% del total de suscripciones (en Monero)."
   btcpay_pos:
     title: "Punto de venta BTCPay"

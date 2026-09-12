@@ -893,13 +893,13 @@ nav.c-footer .c-footer__item {
   margin-top: 1rem;
 }
 
-// Hide stuff on profile
-.user-preferences .form-vertical .control-group .user-title,
-.user-preferences .form-vertical .control-group .user-flair,
-.user-preferences .form-vertical .control-group .pref-email-settings,
-.user-preferences .form-vertical .control-group .pref-associated-accounts,
-.user-preferences .form-vertical .control-group .pref-flair,
-.user-preferences .form-vertical .control-group .pref-flair .control-group .upcoming-changes {
+// Hide stuff on profile. The pref-* classes sit ON the .control-group, not
+// inside it, so the old `.control-group .pref-flair` descendant selectors never
+// matched anything. Core also gives each block an id — the shortest handle.
+#user-associated-accounts,
+#user-title,
+#user-flair,
+.user-preferences .form-vertical .control-group.pref-email-settings {
   display: none;
 }
 
@@ -918,7 +918,7 @@ nav.c-footer .c-footer__item {
   width: auto !important;
   min-width: 0;
   min-height: 82px;
-  padding: 0.65rem;
+  padding: 0.85rem;
   border: 0 !important;
   border-radius: var(--d-border-radius);
   background: var(--primary-50);
@@ -948,7 +948,7 @@ nav.c-footer .c-footer__item {
 
 @include viewport.until(sm) {
   .user-main .stats-section>ul {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -992,8 +992,10 @@ nav.c-footer .c-footer__item {
   margin-top: 0.5rem;
 }
 
+// `button.active::after:hover` was invalid (pseudo-class after pseudo-element),
+// which killed the whole rule — the active underline never rendered at all.
 .user-navigation-secondary__horizontal-nav .nav-pills>li a.active::after,
-.user-navigation-secondary__horizontal-nav .nav-pills>li button.active::after:hover {
+.user-navigation-secondary__horizontal-nav .nav-pills>li button.active::after {
   content: "";
   position: absolute;
   left: 0;
@@ -1023,8 +1025,10 @@ nav.c-footer .c-footer__item {
   outline: none;
 }
 
-.new-user-content-wrapper .nav-pills>li>a:hover::after,
-.new-user-content-wrapper .nav-pills>li button:hover::after {
+// Hover drops the underline only on inactive pills; the active one keeps its
+// marker in the link colour instead of flickering away under the cursor.
+.new-user-content-wrapper .nav-pills>li>a:not(.active):hover::after,
+.new-user-content-wrapper .nav-pills>li button:not(.active):hover::after {
   display: none;
 }
 
@@ -1520,7 +1524,6 @@ aside.onebox {
 .user-nav__activity-read,
 .user-nav__activity,
 .control-group[data-setting-name="user-color-scheme"],
-.control-group[data-setting-name="pref-title"],
 .controls[data-setting-name="user-enable-markdown-monospace-font"],
 .controls[data-setting-name="user-dynamic-favicon"],
 .category-quienes-somos .top-lists,
@@ -1826,6 +1829,13 @@ body.embed-mode .topic-post:first-child {
   }
 }
 
+// The search chip in the header sits taller than the input it belongs to.
+// Core buttons are `padding: $vpad $hpad` with $vpad: 0.5em, so 0.35em is ~30%
+// off the vertical only — sides and every other button untouched.
+.btn.search-context {
+  padding-block: 0.35em;
+}
+
 // Esc preview on similar topic aligment
 .composer-popup .btn.close {
   top: 1.25em;
@@ -1846,6 +1856,14 @@ body.embed-mode .topic-post:first-child {
 // Hiding last selectors on MP (we do not use trust_level defaults)
 .messages-dropdown-content .dropdown-menu li:nth-last-of-type(-n+2) {
   display: none;
+}
+
+// The messages dropdown collapses to its longest label on desktop, where there
+// is room for a steady width. Left alone on mobile, which wants the narrow menu.
+@include viewport.from(lg) {
+  .messages-dropdown-content .dropdown-menu {
+    min-width: 240px;
+  }
 }
 
 // Hiding text on gists (theme component) button

@@ -16,6 +16,7 @@ en:
     traders:
       title: "Available for traders"
       message: "This section is reserved for @traders ghetto. It unlocks with sustained participation in the community."
+  category_back: "← Back"
   podium_note: "Each one receives 3% of our total paid subscriptions (in Monero)."
   btcpay_pos:
     title: "BTCPay point of sale"

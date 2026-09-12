@@ -160,6 +160,13 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
     display: none !important;
 }
 
+// Go back link from javascripts/api-initializers/category-back.gjs
+.category-back-link {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    font-size: var(--font-down-1);
+}
+
 // Recover category descriptions on Horizon
 .category-boxes .category .description,
 .category-boxes-with-topics .category .description {

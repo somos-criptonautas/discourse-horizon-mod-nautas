@@ -67,6 +67,13 @@ body.user-activity-page .user-navigation .user-navigation-secondary {
         margin: 0 1.7rem;
     }
 
+    // Same alignment on the rest of the vertical nav (preferences, profile):
+    // the rule above only matches .messages-nav. Three classes deep so it
+    // outranks whatever centers them.
+    .new-user-wrapper .user-navigation-secondary .nav-pills li a {
+        justify-content: left;
+    }
+
     // Removing padding on column dirty hacked profile page
     .new-user-wrapper .empty-state {
         margin: 0 0 1em 0;
