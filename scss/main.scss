@@ -1236,6 +1236,8 @@ body.category-preguntas li:has(.tag-drop) {
   margin-bottom: 1rem;
   --category-banner-background: transparent !important;
   --category-banner-color: unset !important;
+  border: 1px solid var(--primary-200);
+  border-radius: var(--d-border-radius-large);
 }
 
 // Font-size adjust in Docs categories sidebar
@@ -2084,4 +2086,74 @@ ul li.has-checkbox .list-item-checkbox {
 .post-info .wiki,
 .post-info .last-wiki-edit {
   color: unset !important;
+}
+
+/* Styling for Markdown tables */
+
+.md-table {
+  margin: 1.25em 0;
+  overflow-x: auto;
+  border: 1px solid var(--primary-low);
+  border-radius: var(--d-border-radius, 8px);
+}
+
+.md-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-down-1);
+  background: var(--secondary);
+}
+
+.md-table thead th {
+  background: var(--primary-very-low);
+  color: var(--primary);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.6em 0.9em;
+  border-bottom: 2px solid var(--primary-low-mid);
+  white-space: nowrap;
+}
+
+.md-table tbody td {
+  padding: 0.55em 0.9em;
+  border-bottom: 1px solid var(--primary-low);
+  color: var(--primary-high);
+}
+
+.md-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.md-table tbody tr:nth-child(even) {
+  background: var(--primary-very-low);
+}
+
+.md-table tbody tr:hover {
+  background: var(--primary-low);
+}
+
+/* Total / summary row (bold cells) */
+.md-table tbody tr:has(td > strong) {
+  background: var(--tertiary-very-low);
+}
+
+.md-table tbody tr:has(td > strong) td {
+  border-top: 2px solid var(--primary-low-mid);
+  color: var(--primary);
+}
+
+/* Edit button overlay */
+.fullscreen-table-wrapper__buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.25em 0.4em 0;
+}
+
+.fullscreen-table-wrapper__buttons .btn-edit-table {
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+}
+
+.fullscreen-table-wrapper__buttons .btn-edit-table:hover {
+  opacity: 1;
 }
