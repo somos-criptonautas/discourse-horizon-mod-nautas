@@ -1573,9 +1573,6 @@ aside.onebox {
 img.emoji {
   width: 23px;
   height: 23px;
-  padding-bottom: 3px;
-  padding-left: 3px;
-  vertical-align: unset;
 }
 
 [data-wrap="button"] {
@@ -2073,4 +2070,18 @@ sidebar-section-link-prefix d-icon-ph-dt-shield-star {
 ul li.has-checkbox .list-item-checkbox {
   margin-left: -1em;
   padding-right: 0.17rem;
+}
+
+// Wiki edits styling
+.topic-meta-data .post-infos {
+  padding-top: 0.25rem;
+}
+
+.post-info .edits .btn {
+  padding: 0.45rem 1.1rem;
+}
+
+.post-info .wiki,
+.post-info .last-wiki-edit {
+  color: unset !important;
 }
