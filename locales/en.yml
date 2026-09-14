@@ -20,3 +20,16 @@ en:
   podium_note: "Each one receives 3% of our total paid subscriptions (in Monero)."
   btcpay_pos:
     title: "BTCPay point of sale"
+  category_intros:
+    ghettos:
+      title: "ghettos"
+      description: "Discover ghettos by earning karma and completing challenges."
+    retos:
+      title: "challenges"
+      description: "Complete challenges and unlock our ghettos."
+    karma:
+      title: "karma"
+      description: "Monthly score based on contributions — unlocks ghettos and sections."
+    costumbres:
+      title: "customs"
+      description: "Who we are and how we relate to each other."

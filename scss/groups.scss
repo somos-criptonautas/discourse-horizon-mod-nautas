@@ -54,6 +54,12 @@
     order: -1;
 }
 
+// Hide not-unlisted and believers
+.group-box[data-group-name="no-delistados"],
+.group-box[data-group-name="creyentes"] {
+    display: none;
+}
+
 // More sizing on groups icons and descriptions
 .group-box .group-avatar-flair .avatar-flair .d-icon {
     width: 1.5rem !important;

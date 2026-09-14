@@ -50,6 +50,9 @@ imported once in `common/common.scss`. Raw `@media` is kept only for off-grid wi
   `fetch('/latest.json').then(r=>r.json()).then(d=>console.log(
   d.topic_list.topics.filter(t=>'ai_topic_gist' in t).length))`.
 - **`translated-texts.gjs`** — appends the translated note under the leaderboard podium.
+- **`category-intro.gjs`** — overwrites the category banner titles and descriptions
+  rendered from `after_header.html` with the locale-appropriate strings from
+  `locales/*.yml` via `i18n(themePrefix(…))`.
 - **`connectors/custom-homepage`** — placeholder outlet for the custom homepage.
 
 ### Markup and assets

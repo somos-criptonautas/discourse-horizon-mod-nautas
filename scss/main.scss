@@ -387,6 +387,18 @@ body.category .navigation-controls,
   }
 }
 
+// Fix padding in search chat button on sidebar
+.sidebar-section-link-wrapper [data-list-item-name="chat-search"] {
+  padding-top: 0.25rem;
+}
+
+// [EXPERIMENTAL] Padding to chat header (pairing with custom top nav padding)
+@media (width >=40rem) {
+  .full-page-chat .c-navbar-container {
+    margin-top: 0.75rem;
+  }
+}
+
 // Disable original header on leaderboard
 .leaderboard .page__header {
   display: none;
@@ -1630,7 +1642,10 @@ img.emoji {
   counter-reset: item;
   list-style: none;
   padding-left: 0;
-  font-family: system-ui, sans-serif;
+
+  li::marker {
+    content: "→  ";
+  }
 }
 
 .post-content ol li {
@@ -1736,9 +1751,7 @@ body.embed-mode #main-outlet-wrapper {
 // sideways. Subtract both so the row fits the iframe exactly; core's max-width
 // rules add them back onto this variable, so those still total 100%.
 body.embed-mode {
-  --topic-body-width: calc(
-    100% - var(--topic-avatar-width) - (var(--topic-body-width-padding) * 2)
-  );
+  --topic-body-width: calc(100% - var(--topic-avatar-width) - (var(--topic-body-width-padding) * 2));
 }
 
 // The iframe runs edge to edge in the blog's article column, so the thread
@@ -1752,6 +1765,7 @@ body.embed-mode #main-outlet {
 // suggested topics. Post-menu buttons and the topic map are trimmed in
 // javascripts/api-initializers/embed-comments.gjs.
 body.embed-mode {
+
   .small-action,
   .time-gap,
   #topic-footer-buttons,
@@ -1916,7 +1930,7 @@ body.embed-mode .topic-post:first-child {
 // Disable weird floating composer in IA Bot
 .docked-composer.ai-bot-docked-composer.docked-composer--keyboard-open {
   position: unset;
-  
+
 }
 
 //Style the anonist (IA Bot) main chat page
@@ -2034,4 +2048,29 @@ body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn
 
 #category-events-calendar .fc-toolbar {
   display: none;
+}
+
+// [EXPERIMENTAL] TO SCOPE -> Not shield icons on boxes and overall site
+.badge-category.restricted .d-icon-ph-dt-shield-star {
+  display: none;
+}
+
+sidebar-section-link-prefix d-icon-ph-dt-shield-star {
+  display: none;
+}
+
+// Discourse to the right
+.powered-by-discourse {
+  justify-self: end;
+}
+
+// No icon — it is not in phosphor duotone set
+.powered-by-discourse .d-icon-fab-discourse {
+  display: none;
+}
+
+// Margin fix on checkboxes
+ul li.has-checkbox .list-item-checkbox {
+  margin-left: -1em;
+  padding-right: 0.17rem;
 }
