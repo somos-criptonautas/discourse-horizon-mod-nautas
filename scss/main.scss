@@ -251,7 +251,7 @@ body:not(.has-full-page-chat, .wizard) {
 
 // Sidebar new topic full width button
 .sidebar-new-topic-button__wrapper {
-  padding-bottom: 0.3rem;
+  margin-bottom: 0.3rem;
   width: 93% !important;
 }
 
@@ -308,6 +308,11 @@ body.category .navigation-controls,
 // -----------------------------------------------------------------------
 // Header (local overrides — see also header.scss)
 // -----------------------------------------------------------------------
+
+// Hide header links on custom page
+.full-width-enabled .custom-header-links {
+  display: none !important;
+}
 
 // Hide header links on tablet and mobile
 @include viewport.until(lg) {
@@ -1625,7 +1630,7 @@ img.emoji {
   padding: 0.45em 0.65em;
 }
 
-// Remove ul spacing
+// Remove ul spacing, add li padding
 .cooked ul,
 .d-editor-preview ul,
 .d-editor-preview ol {
@@ -1633,6 +1638,13 @@ img.emoji {
   list-style-type: "– ";
 
 }
+
+.cooked ul li,
+.d-editor-preview ul li {
+  padding-bottom: 0.5rem;
+
+}
+
 
 // Update ol types
 .cooked ol,
@@ -2079,12 +2091,17 @@ ul li.has-checkbox .list-item-checkbox {
   padding-top: 0.25rem;
 }
 
-.post-info .edits .btn {
+.post-info .wiki,
+.post-info .last-wiki-edit {
   padding: 0.45rem 1.1rem;
 }
 
 .post-info .wiki,
-.post-info .last-wiki-edit {
+.post-info .last-wiki-edit,
+.heatmap-high,
+.heatmap-high a,
+.heatmap-high .d-icon,
+.heatmap-high .d-button-label {
   color: unset !important;
 }
 
@@ -2156,4 +2173,15 @@ ul li.has-checkbox .list-item-checkbox {
 
 .fullscreen-table-wrapper__buttons .btn-edit-table:hover {
   opacity: 1;
+}
+
+// Subtle highlight to anonist
+d-icon-far-discobot {
+  color: var(--primary-700);
+}
+
+// Hiding repeated blocks in /about
+.about__admins,
+.about__admins {
+  display: none;
 }

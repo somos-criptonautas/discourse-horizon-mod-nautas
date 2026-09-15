@@ -191,9 +191,12 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
     }
 
     // Boxes of categories: 4 in desktop — 2 in mobile
-    .navigation-category .category-boxes,
-    .navigation-category .category-boxes-with-topics {
-        grid-template-columns: repeat(auto-fit, minmax(min(var(--category-boxes-min-width), 25% - var(--d-category-boxes-gap, 1em)), var(--category-boxes-max-width)));
+    @media (width >40rem) {
+
+        .navigation-category .category-boxes,
+        .navigation-category .category-boxes-with-topics {
+            grid-template-columns: repeat(auto-fit, minmax(min(var(--category-boxes-min-width), 25% - var(--d-category-boxes-gap, 1em)), var(--category-boxes-max-width)));
+        }
     }
 
     @media (width <=40rem) {
