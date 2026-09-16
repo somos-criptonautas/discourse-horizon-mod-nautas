@@ -640,1061 +640,1067 @@ button [title="similares"] .d-button-label {
 }
 
 // Hide category breadcrumb in mobile, keep it on support and Q&A categories
-@include viewport.until(sm) {
-  .navigation-container .category-breadcrumb {
+@media (width < 40rem) {
+
+  body:not(.category-soporte):not(.category-preguntas) #main-outlet .list-controls .navigation-container .category-breadcrumb.hidden,
+  body:not(.category-soporte):not(.category-preguntas) #main-outlet .list-controls .navigation-container .category-breadcrumb {
     display: none !important;
   }
-}
 
-body:not(.category-soporte):not(.category-preguntas) .navigation-container .category-breadcrumb {
-  display: none;
-}
-
-// Disable hiding top header in custom nav mobile
-body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.has-full-page-chat) .d-header-wrap {
-  transform: unset !important;
-  opacity: unset !important;
-  transition: unset !important;
-}
-
-// Rearrange search button on custom nav mobile
-@include viewport.until(md) {
-  .d-header .search-dropdown {
-    grid-area: unset !important;
+  #main-outlet .list-controls .navigation-container {
+    gap: unset;
   }
-}
 
-// Disable image on no new topics
-.empty-state__image {
-  display: none;
-}
+  // Disable hiding top header in custom nav mobile
+  body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.has-full-page-chat) .d-header-wrap {
+    transform: unset !important;
+    opacity: unset !important;
+    transition: unset !important;
+  }
 
-.empty-state__container {
-  padding-top: 1.5rem;
-}
+  // Rearrange search button on custom nav mobile
+  @include viewport.until(md) {
+    .d-header .search-dropdown {
+      grid-area: unset !important;
+    }
+  }
 
-// Navigation in one row
-.navigation-controls {
-  flex-wrap: unset;
-}
-
-#user-content .topic-list-data .views .sortable .num,
-#user-content .num .views .topic-list-data {
-  display: none;
-}
-
-// Hide view on MPs table display
-@include viewport.until(lg) {
-
-  .topic-list .topic-list-data.num.posts,
-  .topic-list .topic-list-data.num.views {
+  // Disable image on no new topics
+  .empty-state__image {
     display: none;
   }
-}
 
-@include viewport.from(sm) {
-  .topic-avatar {
-    padding-top: var(--space-2);
+  .empty-state__container {
+    padding-top: 1.5rem;
   }
-}
 
-// Padding on <hr> elements
-.cooked hr {
-  margin: 2.1rem;
-}
-
-// No repeated notifications button
-#topic-footer-buttons .pinned-button .reason,
-#topic-footer-buttons .topic-notifications-button .reason {
-  display: none;
-}
-
-// Better margins on timeline 
-
-@media (width >=925px) {
-  .container.posts .topic-navigation {
-    margin-bottom: 2.5rem;
+  // Navigation in one row
+  .navigation-controls {
+    flex-wrap: unset;
   }
-}
 
-// No redundant not-dropdowns in topic lists
-.topic-replies-toggle-wrapper {
-  display: none;
-}
+  #user-content .topic-list-data .views .sortable .num,
+  #user-content .num .views .topic-list-data {
+    display: none;
+  }
 
-// -----------------------------------------------------------------------
-// TOC
-// -----------------------------------------------------------------------
+  // Hide view on MPs table display
+  @include viewport.until(lg) {
 
-.d-toc-main #d-toc li.d-toc-item {
-  padding-left: 0.33em;
-}
+    .topic-list .topic-list-data.num.posts,
+    .topic-list .topic-list-data.num.views {
+      display: none;
+    }
+  }
 
-.d-toc-main #d-toc li.d-toc-item.direct-active>a::before {
-  width: 2px;
-}
+  @include viewport.from(sm) {
+    .topic-avatar {
+      padding-top: var(--space-2);
+    }
+  }
 
-.d-toc-main #d-toc>ul>li>ul li.direct-active>a::before {
-  margin-left: -5px;
-}
+  // Padding on <hr> elements
+  .cooked hr {
+    margin: 2.1rem;
+  }
 
-.d-toc-heading:not(:first-child) {
-  padding-top: 0.33em;
-}
+  // No repeated notifications button
+  #topic-footer-buttons .pinned-button .reason,
+  #topic-footer-buttons .topic-notifications-button .reason {
+    display: none;
+  }
 
-// -----------------------------------------------------------------------
-// Chat
-// -----------------------------------------------------------------------
+  // Better margins on timeline 
 
-.chat-drawer-content {
-  font-size: var(--font-down-1);
-}
+  @media (width >=925px) {
+    .container.posts .topic-navigation {
+      margin-bottom: 2.5rem;
+    }
+  }
 
-.c-navbar__title-text {
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: var(--font-down-1);
-  font-family: var(--heading-font-family);
-}
+  // No redundant not-dropdowns in topic lists
+  .topic-replies-toggle-wrapper {
+    display: none;
+  }
 
-/* 
+  // -----------------------------------------------------------------------
+  // TOC
+  // -----------------------------------------------------------------------
+
+  .d-toc-main #d-toc li.d-toc-item {
+    padding-left: 0.33em;
+  }
+
+  .d-toc-main #d-toc li.d-toc-item.direct-active>a::before {
+    width: 2px;
+  }
+
+  .d-toc-main #d-toc>ul>li>ul li.direct-active>a::before {
+    margin-left: -5px;
+  }
+
+  .d-toc-heading:not(:first-child) {
+    padding-top: 0.33em;
+  }
+
+  // -----------------------------------------------------------------------
+  // Chat
+  // -----------------------------------------------------------------------
+
+  .chat-drawer-content {
+    font-size: var(--font-down-1);
+  }
+
+  .c-navbar__title-text {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: var(--font-down-1);
+    font-family: var(--heading-font-family);
+  }
+
+  /* 
 // Moved to .c-navbar and reduced 25% (0.53em/0.11em -> 0.4em/0.08em)
 .chat-drawer-container .c-navbar {
   padding: 0.4em 0 0.08em 0.4em;
 } */
 
-.c-navbar {
-  align-items: center;
-  height: 2.75rem;
-}
-
-.chat-message-separator-date .chat-message-separator__text-container {
-  top: 0.3rem;
-}
-
-.chat-composer__wrapper {
-  padding: var(--space-3) 0 env(safe-area-inset-bottom) 0;
-}
-
-.chat-channel-divider {
-  display: none;
-}
-
-.chat-channel-row {
-  height: 2.75rem;
-}
-
-.c-footer__item .d-button-label {
-  display: none;
-}
-
-nav.c-footer .c-footer__item {
-  height: 2.8rem;
-}
-
-.c-footer {
-  border-top: 1px solid var(--primary-low);
-  background-color: var(--header_background);
-}
-
-.c-user-thread .chat__thread-title__name {
-  font-size: 1em;
-  font-weight: bold;
-}
-
-.c-user-thread .chat-message-thread-indicator {
-  font-size: var(--font-down-1);
-}
-
-.chat-message-actions {
-  font-size: var(--font-down-1-rem);
-}
-
-.chat-composer__outer-container {
-  padding-inline: 0.63em;
-}
-
-.chat-message-separator-date+.chat-message-separator__line-container .chat-message-separator__line {
-  border-top: none;
-}
-
-.d-templates-chat-insert-template-btn {
-  display: none;
-}
-
-// Chat styling
-.is-expanded .chat-drawer-container {
-  box-shadow: 0 0 0 2px var(--primary-300);
-}
-
-.chat-composer .chat-composer-button,
-.chat-composer .chat-composer-separator,
-.chat-composer-button__wrapper {
-  align-self: unset;
-}
-
-// Subtler chat message / transcript hover & active background
-.no-touch .chat-message-container:hover,
-.no-touch .chat-transcript:hover,
-.no-touch .chat-message-container.-active,
-.no-touch .-active.chat-transcript {
-  background-color: var(--d-hover-subtle);
-}
-
-// -----------------------------------------------------------------------
-// User profile / user menu / groups
-// -----------------------------------------------------------------------
-
-.user-card .badge-section {
-  display: none !important;
-}
-
-.collapsed-info-panel dl div:last-child,
-.collapsed-info-panel dd.trust-level,
-.collapsed-info-panel dl.trust-level,
-.user-content .badges-section {
-  display: none !important;
-}
-
-.collapsed-info-panel dd.groups a.ember-view {
-  display: none !important;
-}
-
-// Hidding noise from user profiles
-.pref-new-user-tips,
-.pref-reset-seen-user-tips {
-  display: none !important;
-}
-
-.message-panel__inboxes .message-panel__inbox:nth-last-child {
-  display: none;
-}
-
-// Prevent weird spacing on user menu
-.custom-user-menu-content .fk-d-menu__profile-tab li.preferences {
-  padding-bottom: 0;
-}
-
-// Hide default trust_levels (all going into tl1 -> 'nuevos')
-.group-box[data-group-name="tl0"],
-.group-box[data-group-name="tl2"],
-.group-box[data-group-name="tl3"],
-.group-box[data-group-name="tl4"] {
-  display: none !important;
-}
-
-// Hide redundant groups
-.group-box [data-group-name="moderadores"],
-.group-box [data-group-name="admins"] {
-  display: none !important;
-}
-
-// Hide them in selectors
-.select-kit .select-kit-row[data-name="tl0"],
-.select-kit .select-kit-row[data-name="tl2"],
-.select-kit .select-kit-row[data-name="tl3"],
-.select-kit .select-kit-row[data-name="tl4"],
-.select-kit .select-kit-row[data-name="moderadores"],
-.select-kit .select-kit-row[data-name="admins"] {
-  display: none !important;
-}
-
-// Hiding some profile card info
-.user-main .about .secondary.trust-level,
-.user-main .about .secondary.groups {
-  display: none;
-}
-
-// [EXPERIMENTAL] Margin on top of invitations buttons
-.user-invite-buttons {
-  margin-top: 1rem;
-}
-
-// Hide stuff on profile. The pref-* classes sit ON the .control-group, not
-// inside it, so the old `.control-group .pref-flair` descendant selectors never
-// matched anything. Core also gives each block an id — the shortest handle.
-#user-associated-accounts,
-#user-title,
-#user-flair,
-.user-preferences .form-vertical .control-group.pref-email-settings {
-  display: none;
-}
-
-// Less primary icon size
-.user-profile-names__primary .d-icon {
-  font-size: .75em;
-}
-
-// Group naming ordering [EXPERIMENTAL]
-.group-info-mention-name {
-  display: none;
-}
-
-// Styling from Oniel Flat Theme
-.user-main .stats-section>ul>li {
-  width: auto !important;
-  min-width: 0;
-  min-height: 82px;
-  padding: 0.85rem;
-  border: 0 !important;
-  border-radius: var(--d-border-radius);
-  background: var(--primary-50);
-  box-shadow: none !important;
-}
-
-.user-content .stats-section ul li .user-stat,
-#user-summary .stats-section ul li .user-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.user-content .stats-section ul,
-#user-summary .stats-section ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: var(--mf-space-3);
-}
-
-.user-main .stats-section>ul {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-@include viewport.until(sm) {
-  .user-main .stats-section>ul {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .c-navbar {
+    align-items: center;
+    height: 2.75rem;
   }
-}
 
-.user-content .top-section,
-#user-summary .top-section {
-  background: rgba(0, 0, 0, 0);
-  border: none;
-  border-radius: 0;
-  padding: 0;
-}
+  .chat-message-separator-date .chat-message-separator__text-container {
+    top: 0.3rem;
+  }
 
-.user-main .top-section,
-.user-main .user-stream .item,
-.user-main .user-stream-item,
-.user-main .user-content,
-.user-main .user-content-wrapper {
-  border: 0 !important;
-  box-shadow: none !important;
-}
+  .chat-composer__wrapper {
+    padding: var(--space-3) 0 env(safe-area-inset-bottom) 0;
+  }
 
-.user-stream-item,
-.top-section,
-.details,
-.block-hero__chip,
-.category-box {
-  box-shadow: none !important;
-}
+  .chat-channel-divider {
+    display: none;
+  }
 
-// More room between blocks on profile
-.top-section {
-  margin-bottom: 1rem;
-}
+  .chat-channel-row {
+    height: 2.75rem;
+  }
 
-.top-sub-section {
-  margin-bottom: none;
-}
+  .c-footer__item .d-button-label {
+    display: none;
+  }
 
-// Styling on MPs
-#new-private-message-btn {
-  width: 100%;
-  margin-top: 0.5rem;
-}
+  nav.c-footer .c-footer__item {
+    height: 2.8rem;
+  }
 
-// `button.active::after:hover` was invalid (pseudo-class after pseudo-element),
-// which killed the whole rule — the active underline never rendered at all.
-.user-navigation-secondary__horizontal-nav .nav-pills>li a.active::after,
-.user-navigation-secondary__horizontal-nav .nav-pills>li button.active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: var(--d-nav-underline-height);
-  background: var(--d-nav-color--active);
-}
+  .c-footer {
+    border-top: 1px solid var(--primary-low);
+    background-color: var(--header_background);
+  }
 
-.new-user-content-wrapper .user-navigation {
-  border-bottom: unset;
-}
+  .c-user-thread .chat__thread-title__name {
+    font-size: 1em;
+    font-weight: bold;
+  }
 
-.new-user-content-wrapper .nav-pills>li>a {
-  border-radius: 0.3rem;
-}
+  .c-user-thread .chat-message-thread-indicator {
+    font-size: var(--font-down-1);
+  }
 
-.new-user-content-wrapper .nav-pills>li>a:hover .d-icon,
-.nav-pills>li button:hover .d-icon {
-  color: unset;
-}
+  .chat-message-actions {
+    font-size: var(--font-down-1-rem);
+  }
 
-.new-user-content-wrapper .nav-pills>li>a:hover,
-.new-user-content-wrapper .nav-pills>li button:hover {
-  background: var(--d-sidebar-highlight-background);
-  color: var(--d-sidebar-highlight-color);
-  outline: none;
-}
+  .chat-composer__outer-container {
+    padding-inline: 0.63em;
+  }
 
-// Hover drops the underline only on inactive pills; the active one keeps its
-// marker in the link colour instead of flickering away under the cursor.
-.new-user-content-wrapper .nav-pills>li>a:not(.active):hover::after,
-.new-user-content-wrapper .nav-pills>li button:not(.active):hover::after {
-  display: none;
-}
+  .chat-message-separator-date+.chat-message-separator__line-container .chat-message-separator__line {
+    border-top: none;
+  }
 
-// -----------------------------------------------------------------------
-// Badges
-// -----------------------------------------------------------------------
+  .d-templates-chat-insert-template-btn {
+    display: none;
+  }
 
-// Disable heading for enabling banner one
-.container.badges h1 {
-  display: none;
-}
+  // Chat styling
+  .is-expanded .chat-drawer-container {
+    box-shadow: 0 0 0 2px var(--primary-300);
+  }
 
-// Not competitive leaderboard adjustments
-.leaderboard .winner.-position1 {
-  width: inherit;
-  order: unset;
-}
+  .chat-composer .chat-composer-button,
+  .chat-composer .chat-composer-separator,
+  .chat-composer-button__wrapper {
+    align-self: unset;
+  }
 
-// Styling leaderboard
-.leaderboard .user {
-  margin-bottom: 1rem;
-}
+  // Subtler chat message / transcript hover & active background
+  .no-touch .chat-message-container:hover,
+  .no-touch .chat-transcript:hover,
+  .no-touch .chat-message-container.-active,
+  .no-touch .-active.chat-transcript {
+    background-color: var(--d-hover-subtle);
+  }
 
-.leaderboard .ranking {
-  font-size: 0.9rem;
-}
+  // -----------------------------------------------------------------------
+  // User profile / user menu / groups
+  // -----------------------------------------------------------------------
 
-.leaderboard .winner.-position1 .winner__crown,
-.leaderboard .ranking-col-names {
-  display: none;
-}
+  .user-card .badge-section {
+    display: none !important;
+  }
 
-@include viewport.from(sm) {
+  .collapsed-info-panel dl div:last-child,
+  .collapsed-info-panel dd.trust-level,
+  .collapsed-info-panel dl.trust-level,
+  .user-content .badges-section {
+    display: none !important;
+  }
+
+  .collapsed-info-panel dd.groups a.ember-view {
+    display: none !important;
+  }
+
+  // Hidding noise from user profiles
+  .pref-new-user-tips,
+  .pref-reset-seen-user-tips {
+    display: none !important;
+  }
+
+  .message-panel__inboxes .message-panel__inbox:nth-last-child {
+    display: none;
+  }
+
+  // Prevent weird spacing on user menu
+  .custom-user-menu-content .fk-d-menu__profile-tab li.preferences {
+    padding-bottom: 0;
+  }
+
+  // Hide default trust_levels (all going into tl1 -> 'nuevos')
+  .group-box[data-group-name="tl0"],
+  .group-box[data-group-name="tl2"],
+  .group-box[data-group-name="tl3"],
+  .group-box[data-group-name="tl4"] {
+    display: none !important;
+  }
+
+  // Hide redundant groups
+  .group-box [data-group-name="moderadores"],
+  .group-box [data-group-name="admins"] {
+    display: none !important;
+  }
+
+  // Hide them in selectors
+  .select-kit .select-kit-row[data-name="tl0"],
+  .select-kit .select-kit-row[data-name="tl2"],
+  .select-kit .select-kit-row[data-name="tl3"],
+  .select-kit .select-kit-row[data-name="tl4"],
+  .select-kit .select-kit-row[data-name="moderadores"],
+  .select-kit .select-kit-row[data-name="admins"] {
+    display: none !important;
+  }
+
+  // Hiding some profile card info
+  .user-main .about .secondary.trust-level,
+  .user-main .about .secondary.groups {
+    display: none;
+  }
+
+  // [EXPERIMENTAL] Margin on top of invitations buttons
+  .user-invite-buttons {
+    margin-top: 1rem;
+  }
+
+  // Hide stuff on profile. The pref-* classes sit ON the .control-group, not
+  // inside it, so the old `.control-group .pref-flair` descendant selectors never
+  // matched anything. Core also gives each block an id — the shortest handle.
+  #user-associated-accounts,
+  #user-title,
+  #user-flair,
+  .user-preferences .form-vertical .control-group.pref-email-settings {
+    display: none;
+  }
+
+  // Less primary icon size
+  .user-profile-names__primary .d-icon {
+    font-size: .75em;
+  }
+
+  // Group naming ordering [EXPERIMENTAL]
+  .group-info-mention-name {
+    display: none;
+  }
+
+  // Styling from Oniel Flat Theme
+  .user-main .stats-section>ul>li {
+    width: auto !important;
+    min-width: 0;
+    min-height: 82px;
+    padding: 0.85rem;
+    border: 0 !important;
+    border-radius: var(--d-border-radius);
+    background: var(--primary-50);
+    box-shadow: none !important;
+  }
+
+  .user-content .stats-section ul li .user-stat,
+  #user-summary .stats-section ul li .user-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .user-content .stats-section ul,
+  #user-summary .stats-section ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--mf-space-3);
+  }
+
+  .user-main .stats-section>ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @include viewport.until(sm) {
+    .user-main .stats-section>ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .user-content .top-section,
+  #user-summary .top-section {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .user-main .top-section,
+  .user-main .user-stream .item,
+  .user-main .user-stream-item,
+  .user-main .user-content,
+  .user-main .user-content-wrapper {
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .user-stream-item,
+  .top-section,
+  .details,
+  .block-hero__chip,
+  .category-box {
+    box-shadow: none !important;
+  }
+
+  // More room between blocks on profile
+  .top-section {
+    margin-bottom: 1rem;
+  }
+
+  .top-sub-section {
+    margin-bottom: none;
+  }
+
+  // Styling on MPs
+  #new-private-message-btn {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  // `button.active::after:hover` was invalid (pseudo-class after pseudo-element),
+  // which killed the whole rule — the active underline never rendered at all.
+  .user-navigation-secondary__horizontal-nav .nav-pills>li a.active::after,
+  .user-navigation-secondary__horizontal-nav .nav-pills>li button.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: var(--d-nav-underline-height);
+    background: var(--d-nav-color--active);
+  }
+
+  .new-user-content-wrapper .user-navigation {
+    border-bottom: unset;
+  }
+
+  .new-user-content-wrapper .nav-pills>li>a {
+    border-radius: 0.3rem;
+  }
+
+  .new-user-content-wrapper .nav-pills>li>a:hover .d-icon,
+  .nav-pills>li button:hover .d-icon {
+    color: unset;
+  }
+
+  .new-user-content-wrapper .nav-pills>li>a:hover,
+  .new-user-content-wrapper .nav-pills>li button:hover {
+    background: var(--d-sidebar-highlight-background);
+    color: var(--d-sidebar-highlight-color);
+    outline: none;
+  }
+
+  // Hover drops the underline only on inactive pills; the active one keeps its
+  // marker in the link colour instead of flickering away under the cursor.
+  .new-user-content-wrapper .nav-pills>li>a:not(.active):hover::after,
+  .new-user-content-wrapper .nav-pills>li button:not(.active):hover::after {
+    display: none;
+  }
+
+  // -----------------------------------------------------------------------
+  // Badges
+  // -----------------------------------------------------------------------
+
+  // Disable heading for enabling banner one
+  .container.badges h1 {
+    display: none;
+  }
+
+  // Not competitive leaderboard adjustments
+  .leaderboard .winner.-position1 {
+    width: inherit;
+    order: unset;
+  }
+
+  // Styling leaderboard
+  .leaderboard .user {
+    margin-bottom: 1rem;
+  }
+
+  .leaderboard .ranking {
+    font-size: 0.9rem;
+  }
+
+  .leaderboard .winner.-position1 .winner__crown,
+  .leaderboard .ranking-col-names {
+    display: none;
+  }
+
+  @include viewport.from(sm) {
+    .leaderboard .podium__wrapper {
+      width: 75%;
+    }
+
+    .podium-note {
+      max-width: 35vw;
+      font-size: 1.1em;
+    }
+  }
+
+  @include viewport.until(sm) {
+    .leaderboard .podium {
+      width: 90% !important;
+    }
+  }
+
   .leaderboard .podium__wrapper {
-    width: 75%;
+    border-radius: var(--d-border-radius-large);
+
+    margin: 1rem auto 3rem;
+  }
+
+  .leaderboard .podium {
+    padding-bottom: 1.5rem;
+    width: 65%;
+    margin: auto;
+  }
+
+  .leaderboard .winner {
+    width: inherit;
+  }
+
+  .leaderboard .winner.-position2,
+  .leaderboard .winner.-position3 {
+    transform: unset;
   }
 
   .podium-note {
-    max-width: 35vw;
-    font-size: 1.1em;
+    margin: auto;
+    text-align: center;
+    line-height: 1.6;
+    padding: 0.5rem 1rem 1.5rem;
   }
-}
 
-@include viewport.until(sm) {
-  .leaderboard .podium {
-    width: 90% !important;
+  .podium-note::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 303px;
+    border-top: 1px solid var(--primary-300);
   }
-}
 
-.leaderboard .podium__wrapper {
-  border-radius: var(--d-border-radius-large);
+  // Leading leaderboard with no styling
+  .leaderboard .winner.-position1 .winner__avatar img,
+  .leaderboard .winner.-position2 .winner__avatar img,
+  .leaderboard .winner.-position3 .winner__avatar img {
+    border-color: var(--primary-300);
+    background-color: var(--primary-low);
+  }
 
-  margin: 1rem auto 3rem;
-}
+  .leaderboard .winner.-position1 .winner__rank,
+  .leaderboard .winner.-position2 .winner__rank,
+  .leaderboard .winner.-position3 .winner__rank {
+    background-color: var(--primary-300);
+    color: var(--primary);
+  }
 
-.leaderboard .podium {
-  padding-bottom: 1.5rem;
-  width: 65%;
-  margin: auto;
-}
+  .leaderboard .winner {
+    margin: 0.33rem;
+  }
 
-.leaderboard .winner {
-  width: inherit;
-}
+  // Hiding leaderboard options
+  .leaderboard__controls {
+    display: none;
+  }
 
-.leaderboard .winner.-position2,
-.leaderboard .winner.-position3 {
-  transform: unset;
-}
+  // Change earned badge styling
 
-.podium-note {
-  margin: auto;
-  text-align: center;
-  line-height: 1.6;
-  padding: 0.5rem 1rem 1.5rem;
-}
+  .badge-card {
+    border: 1px solid var(--primary-300);
+  }
 
-.podium-note::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 303px;
-  border-top: 1px solid var(--primary-300);
-}
+  .badge-card [id^="badge-awarded-"] svg.d-icon-check {
+    height: 1.25rem !important;
+    width: 1.25rem !important;
+  }
 
-// Leading leaderboard with no styling
-.leaderboard .winner.-position1 .winner__avatar img,
-.leaderboard .winner.-position2 .winner__avatar img,
-.leaderboard .winner.-position3 .winner__avatar img {
-  border-color: var(--primary-300);
-  background-color: var(--primary-low);
-}
+  .check-display {
+    border-radius: 0.15rem !important;
+  }
 
-.leaderboard .winner.-position1 .winner__rank,
-.leaderboard .winner.-position2 .winner__rank,
-.leaderboard .winner.-position3 .winner__rank {
-  background-color: var(--primary-300);
-  color: var(--primary);
-}
+  .check-display.status-checked .check-display .d-icon {
+    font-size: var(--font-up-2-rem) !important;
+    color: var(--primary) !important;
+  }
 
-.leaderboard .winner {
-  margin: 0.33rem;
-}
+  .badge-card .check-display {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+  }
 
-// Hiding leaderboard options
-.leaderboard__controls {
-  display: none;
-}
-
-// Change earned badge styling
-
-.badge-card {
-  border: 1px solid var(--primary-300);
-}
-
-.badge-card [id^="badge-awarded-"] svg.d-icon-check {
-  height: 1.25rem !important;
-  width: 1.25rem !important;
-}
-
-.check-display {
-  border-radius: 0.15rem !important;
-}
-
-.check-display.status-checked .check-display .d-icon {
-  font-size: var(--font-up-2-rem) !important;
-  color: var(--primary) !important;
-}
-
-.badge-card .check-display {
-  position: absolute;
-  right: 0.5rem;
-  top: 0.5rem;
-}
-
-/* 
+  /* 
 .groups-boxes.group-box .group-membership .is-group-owner,
 .groups-boxes.group-box .group-membership .is-group-member {
   color: unset !important;
 }
  */
-.is-group-member .svg-icon {
-  vertical-align: -0.2em !important;
-}
-
-// Badges order + hide title choice
-.badge-groups {
-  display: flex;
-  flex-direction: column;
-}
-
-.badge-grouping>div:has(h2#ogs) {
-  order: 6;
-}
-
-.badge-grant-info {
-  display: none;
-}
-
-// -----------------------------------------------------------------------
-// Categories & Docs plugin
-// -----------------------------------------------------------------------
-
-// [EXPERIMENTAL] Disable border
-.topic-list-item,
-tbody tr {
-  border-bottom: none;
-}
-
-// Disable nav in fancy categories page
-.categories-list .navigation-container {
-  display: none;
-}
-
-// Padding on Docs
-.discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link {
-  padding: 0.3rem 0;
-}
-
-body.doc-simple-mode .topic-post[data-post-number="1"] .cooked {
-  padding-top: revert-rule;
-}
-
-// Hide tags on questions
-body.category-preguntas li:has(.tag-drop) {
-  display: none;
-}
-
-// Margin after header category + banner transparent
-.category-title-header {
-  margin-bottom: 1rem;
-  --category-banner-background: transparent !important;
-  --category-banner-color: unset !important;
-  border: 1px solid var(--primary-200);
-  border-radius: var(--d-border-radius-large);
-}
-
-// Font-size adjust in Docs categories sidebar
-.discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link-content-text {
-  font-size: var(--font-down-1);
-  padding-left: 0.3rem;
-}
-
-@include viewport.from(sm) {
-  #main-outlet div[class*="category-title-header"] {
-    max-width: 100%;
-  }
-}
-
-// Show comments in [EXP] unified docs feature
-.post__topic-map.topic-map.--op {
-  display: flex !important;
-}
-
-// No border on the topic-map shown at the bottom of a topic
-.topic-map.--bottom {
-  border: none;
-}
-
-.topic-post[data-post-number="1"] {
-  .like {
-    display: block !important;
-  }
-}
-
-.topic-list.doc-simple-mode .link-bottom-line .badge-category__wrapper,
-.topic-list.doc-simple-mode .topic-excerpt {
-  display: inline-flex !important;
-}
-
-// Fix different font in category groups
-.custom-category-group .badge-category__wrapper {
-  font-size: var(--font-down-1);
-}
-
-// Hiding topic-list data on Docs Categories
-.category-wiki .topic-list .topic-list-data.num,
-.category-glosario .topic-list .topic-list-data.num {
-  display: none;
-}
-
-// No topic order in specific categories
-.category-wiki #navigation-bar,
-.category-glosario #navigation-bar,
-.category-curso #navigation-bar {
-  display: none;
-}
-
-// No borders on top but padding
-.topic-list-item .category-glosario,
-.topic-list-item .category-wiki {
-  border-bottom: 0;
-}
-
-.category-wiki tbody.topic-list-body .category-glosario tbody.topic-list-body {
-  border-top: 0;
-}
-
-.category-wiki .list-container,
-.category-glosario .list-container {
-  padding-top: 1rem;
-}
-
-// Hiding topics outside docs categories, on every docs category. The docs panel
-// only renders while the sidebar is showing (not on phones with it closed), so the
-// slugs stay as a fallback — same detection as isDocCategoryPage() in init.gjs.
-body:has(.discourse-docs-sidebar-panel) .more-topics__container,
-body.category-glosario .more-topics__container,
-body.category-wiki .more-topics__container,
-body.category-curso .more-topics__container {
-  display: none;
-}
-
-// Grid gap was missing, so wrapped category boxes looked stuck together.
-.category-boxes-with-topics {
-  grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
-  gap: 1em;
-  margin-top: 0.6rem;
-}
-
-// Categories info only on banners
-.cooked.d-wrap[data-wrap="info-canal"] {
-  display: none;
-}
-
-// Hidden until the A-Z sort adds .docs-sorted; the animation reveals it regardless.
-.topic-list.doc-simple-mode .topic-list-body {
-  opacity: 0;
-  animation: docs-list-reveal 0.5s ease-out 0.3s forwards;
-
-  &.docs-sorted {
-    animation: docs-list-reveal 0.15s ease-out forwards;
-  }
-}
-
-@keyframes docs-list-reveal {
-  to {
-    opacity: 1;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .topic-list.doc-simple-mode .topic-list-body {
-    opacity: 1;
-    animation: none;
-  }
-}
-
-// Better subcategories button styling
-.category-boxes .category .description,
-.category-boxes-with-topics .category .description {
-  display: none;
-}
-
-@include viewport.from(sm) {
-
-  .category-boxes .category-box-heading .badge-category__name,
-  .category-boxes-with-topics .category-box-heading .badge-category__name {
-    font-size: 1rem;
+  .is-group-member .svg-icon {
+    vertical-align: -0.2em !important;
   }
 
-  .category-boxes .category-details,
-  .category-boxes-with-topics .category-details {
-    height: 7.5vh;
-  }
-}
-
-// -----------------------------------------------------------------------
-// Search
-// -----------------------------------------------------------------------
-
-// Invert search-box on search page + Hide button to home (icon do it) //
-
-.not-found-container .title_wrapper btn,
-.not-found-container .recent-topics a.btn {
-  display: none;
-}
-
-@include viewport.until(sm) {
-  .not-found-container .recent-topics {
-    max-width: 50%;
-    flex-basis: unset;
-  }
-}
-
-.page-not-found #main-outlet {
-  max-height: 100% !important;
-}
-
-.page-not-found .btn.--home {
-  display: none !important
-}
-
-.page-not-found row {
-  display: flex;
-}
-
-.page-not-found {
-  display: flex;
-  flex-flow: column;
-}
-
-.page-not-found-search {
-  order: 2;
-  margin: 20px 0;
-}
-
-.page-not-found-topics {
-  order: 3;
-}
-
-// Padding to search button
-.btn .search-icon {
-  padding-bottom: 0.11rem;
-}
-
-@include viewport.from(sm) {
-
-  .header-search--enabled .floating-search-input-wrapper,
-  .search-header--visible .floating-search-input-wrapper {
-    justify-content: unset;
-  }
-}
-
-// Fix searchbar with header links
-.floating-search-input-wrapper {
-  margin: 0 0.5em;
-}
-
-// On a real iPad the header search grows over the other header items (dev tools
-// emulation doesn't reproduce it). Core sizes .floating-search-input at 60% of a
-// flex-grow wrapper, so the cap goes there. 27ch is the NN/g minimum that fits
-// ~90% of queries; go no lower than ~20ch if the header is still crowded.
-@include viewport.until(xl) {
-  .floating-search-input-wrapper {
-    min-width: 0;
+  // Badges order + hide title choice
+  .badge-groups {
+    display: flex;
+    flex-direction: column;
   }
 
-  .floating-search-input {
-    max-width: 27ch;
+  .badge-grouping>div:has(h2#ogs) {
+    order: 6;
   }
-}
 
-// -----------------------------------------------------------------------
-// Banners (welcome / campaign)
-// -----------------------------------------------------------------------
-
-@include viewport.until(sm) {
-  .welcome-banner {
+  .badge-grant-info {
     display: none;
   }
-}
 
-.campaign-banner-info svg {
-  display: none !important;
-}
+  // -----------------------------------------------------------------------
+  // Categories & Docs plugin
+  // -----------------------------------------------------------------------
 
-// Big button on Subscriptions campaigns
-.campaign-banner .btn.close {
-  top: 0.5rem !important;
-  right: 0.5rem !important;
-  font-size: 1.3rem !important;
-}
-
-// Styling links on Welcome Banner — the theme's own light hover tint.
-.banner-featured-links__link,
-.banner-featured-links__link:visited {
-  color: var(--accent-text-color);
-  border-radius: var(--d-border-radius-large)
-}
-
-.banner-featured-links__link:hover {
-  background-color: var(--tertiary);
-  box-shadow: 0 0 0 4px var(--button-box-shadow);
-  color: var(--accent-text-color);
-}
-
-// Icons on Welcome Banner (EXPERIMENTAL)
-.welcome-banner__wrap {
-  flex-wrap: wrap;
-  border-bottom: none;
-}
-
-.banner-featured-links__wrapper {
-  flex-basis: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.welcome-banner__wrap .search-menu,
-.welcome-banner__title {
-  flex: 1;
-}
-
-.welcome-banner__title {
-  font-weight: 800;
-}
-
-// -----------------------------------------------------------------------
-// Misc utility (emoji, [data-wrap] blocks, buttons, plugins)
-// -----------------------------------------------------------------------
-
-// "Billing" -> "suscripción" on Spanish pages; font-size: 0 hides the original.
-html:lang(es) a[href*="/billing/subscriptions"] .item-label {
-  font-size: 0;
-
-  &::after {
-    content: "suscripción";
-    font-size: 1rem;
+  // [EXPERIMENTAL] Disable border
+  .topic-list-item,
+  tbody tr {
+    border-bottom: none;
   }
-}
 
-aside.onebox {
-  background-color: var(--d-content-background);
-}
-
-.d-editor-preview-wrapper {
-  border-radius: var(--d-border-radius);
-  padding: 1em;
-  background-color: var(--d-content-background);
-}
-
-// Mod edits //
-.signup-progress-bar,
-#user-menu-button-other-notifications,
-.user-nav__notifications,
-.user-nav__badges,
-.collapsed-info-panel:last-child,
-.sidebar-section-wrapper .sidebar-section-header-global-indicator .d-icon,
-.groups-header-filters,
-.user-nav__preferences-navigation-menu,
-.user-nav__preferences-ai,
-.user-nav__activity-read,
-.user-nav__activity,
-.control-group[data-setting-name="user-color-scheme"],
-.controls[data-setting-name="user-enable-markdown-monospace-font"],
-.controls[data-setting-name="user-dynamic-favicon"],
-.category-quienes-somos .top-lists,
-.sidebar-section-link-wrapper [data-list-item-name="activity-pub-about"] {
-  display: none !important;
-}
-
-#reply-control.draft {
-  padding: 0.5rem 0;
-}
-
-.signup-fullpage .signup-body {
-  max-width: 850px;
-}
-
-.install-theme-item input:checked+label {
-  border-radius: 0.23rem;
-}
-
-// Translate slot runs a custom agent for "Ask AI" on posts only;
-// composer Translate comes from the relabeled markdown_table slot
-.ai-composer-helper-menu ul.ai-helper-options li[data-value="translate"] {
-  display: none;
-}
-
-.ai-custom-prompt__input[type="text"] {
-  width: 100%;
-}
-
-.ai-helper-options__button kbd {
-  display: none;
-}
-
-// More stuff
-img.emoji {
-  width: 23px;
-  height: 23px;
-}
-
-[data-wrap="button"] {
-  text-align: center;
-  padding-top: 0.3rem;
-}
-
-[data-wrap="button"] a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  font-weight: normal;
-  border-radius: var(--d-button-border-radius);
-  transition: var(--d-button-transition);
-  cursor: pointer;
-  font-size: var(--font-0);
-  line-height: normal;
-  box-sizing: border-box;
-  padding: 0.5em 0.65em;
-  border: var(--d-button-border);
-  background-color: var(--accent-color);
-  color: var(--accent-text-color);
-}
-
-[data-wrap="button"] a:hover {
-  background: light-dark(oklch(from var(--accent-color) 40% c h),
-      oklch(from var(--accent-color) 50% c h));
-}
-
-// Centered videos
-[data-wrap="centered-video"] {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-// Restrict max-width if vertical video is too tall
-[data-wrap="centered-video"] video,
-[data-wrap="centered-video"] iframe {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
-}
-
-.select-kit .select-kit-header {
-  padding: 0.45em 0.65em;
-}
-
-// Remove ul spacing, add li padding
-.cooked ul,
-.d-editor-preview ul,
-.d-editor-preview ol {
-  padding-inline-start: 0;
-  list-style-type: "– ";
-
-}
-
-.cooked ul li,
-.d-editor-preview ul li {
-  padding-bottom: 0.5rem;
-
-}
-
-
-// Update ol types
-.cooked ol,
-.d-editor-preview ol {
-  padding-inline-start: 0;
-  counter-reset: item;
-  list-style: none;
-  padding-left: 0;
-
-  li::marker {
-    content: "→  ";
+  // Disable nav in fancy categories page
+  .categories-list .navigation-container {
+    display: none;
   }
-}
 
-.post-content ol li {
-  counter-increment: item;
-  display: flex;
-  align-items: center;
-  gap: 0.6em;
-  padding: 0.2em 0;
-}
-
-.post-content ol li::before {
-  content: counter(item);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.6em;
-  height: 1.6em;
-  border-radius: 50%;
-  border: 1px solid var(--tertiary);
-  background: transparent;
-  font-size: 0.75em;
-  color: var(--primary);
-  flex-shrink: 0;
-}
-
-// Blog styling plugin (scale down)
-.blog-post .regular {
-  font-size: var(--font-down-1);
-}
-
-// Heading adapting heading font-size
-@include viewport.from(sm) {
-  .login-welcome-header .login-title {
-    font-size: var(--font-up-5);
+  // Padding on Docs
+  .discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link {
+    padding: 0.3rem 0;
   }
-}
 
-/* // Progress-button numbers/icon were unreadable in dark mode
+  body.doc-simple-mode .topic-post[data-post-number="1"] .cooked {
+    padding-top: revert-rule;
+  }
+
+  // Hide tags on questions
+  body.category-preguntas li:has(.tag-drop) {
+    display: none;
+  }
+
+  // Margin after header category + banner transparent
+  .category-title-header {
+    margin-bottom: 1rem;
+    --category-banner-background: transparent !important;
+    --category-banner-color: unset !important;
+    border: 1px solid var(--primary-200);
+    border-radius: var(--d-border-radius-large);
+  }
+
+  // Font-size adjust in Docs categories sidebar
+  .discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link-content-text {
+    font-size: var(--font-down-1);
+    padding-left: 0.3rem;
+  }
+
+  @include viewport.from(sm) {
+    #main-outlet div[class*="category-title-header"] {
+      max-width: 100%;
+    }
+  }
+
+  // Show comments in [EXP] unified docs feature
+  .post__topic-map.topic-map.--op {
+    display: flex !important;
+  }
+
+  // No border on the topic-map shown at the bottom of a topic
+  .topic-map.--bottom {
+    border: none;
+  }
+
+  .topic-post[data-post-number="1"] {
+    .like {
+      display: block !important;
+    }
+  }
+
+  .topic-list.doc-simple-mode .link-bottom-line .badge-category__wrapper,
+  .topic-list.doc-simple-mode .topic-excerpt {
+    display: inline-flex !important;
+  }
+
+  // Fix different font in category groups
+  .custom-category-group .badge-category__wrapper {
+    font-size: var(--font-down-1);
+  }
+
+  // Hiding topic-list data on Docs Categories
+  .category-wiki .topic-list .topic-list-data.num,
+  .category-glosario .topic-list .topic-list-data.num {
+    display: none;
+  }
+
+  // Hide reply in glosario
+  .category-glosario .topic-footer-button {
+    display: none;
+  }
+
+  // No topic order in specific categories
+  .category-wiki #navigation-bar,
+  .category-glosario #navigation-bar,
+  .category-curso #navigation-bar {
+    display: none;
+  }
+
+  // No borders on top but padding
+  .topic-list-item .category-glosario,
+  .topic-list-item .category-wiki {
+    border-bottom: 0;
+  }
+
+  .category-wiki tbody.topic-list-body .category-glosario tbody.topic-list-body {
+    border-top: 0;
+  }
+
+  .category-wiki .list-container,
+  .category-glosario .list-container {
+    padding-top: 1rem;
+  }
+
+  // Hiding topics outside docs categories, on every docs category. The docs panel
+  // only renders while the sidebar is showing (not on phones with it closed), so the
+  // slugs stay as a fallback — same detection as isDocCategoryPage() in init.gjs.
+  body:has(.discourse-docs-sidebar-panel) .more-topics__container,
+  body.category-glosario .more-topics__container,
+  body.category-wiki .more-topics__container,
+  body.category-curso .more-topics__container {
+    display: none;
+  }
+
+  // Grid gap was missing, so wrapped category boxes looked stuck together.
+  .category-boxes-with-topics {
+    grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+    gap: 1em;
+    margin-top: 0.6rem;
+  }
+
+  // Categories info only on banners
+  .cooked.d-wrap[data-wrap="info-canal"] {
+    display: none;
+  }
+
+  // Hidden until the A-Z sort adds .docs-sorted; the animation reveals it regardless.
+  .topic-list.doc-simple-mode .topic-list-body {
+    opacity: 0;
+    animation: docs-list-reveal 0.5s ease-out 0.3s forwards;
+
+    &.docs-sorted {
+      animation: docs-list-reveal 0.15s ease-out forwards;
+    }
+  }
+
+  @keyframes docs-list-reveal {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .topic-list.doc-simple-mode .topic-list-body {
+      opacity: 1;
+      animation: none;
+    }
+  }
+
+  // Better subcategories button styling
+  .category-boxes .category .description,
+  .category-boxes-with-topics .category .description {
+    display: none;
+  }
+
+  @include viewport.from(sm) {
+
+    .category-boxes .category-box-heading .badge-category__name,
+    .category-boxes-with-topics .category-box-heading .badge-category__name {
+      font-size: 1rem;
+    }
+
+    .category-boxes .category-details,
+    .category-boxes-with-topics .category-details {
+      height: 7.5vh;
+    }
+  }
+
+  // -----------------------------------------------------------------------
+  // Search
+  // -----------------------------------------------------------------------
+
+  // Invert search-box on search page + Hide button to home (icon do it) //
+
+  .not-found-container .title_wrapper btn,
+  .not-found-container .recent-topics a.btn {
+    display: none;
+  }
+
+  @include viewport.until(sm) {
+    .not-found-container .recent-topics {
+      max-width: 50%;
+      flex-basis: unset;
+    }
+  }
+
+  .page-not-found #main-outlet {
+    max-height: 100% !important;
+  }
+
+  .page-not-found .btn.--home {
+    display: none !important
+  }
+
+  .page-not-found row {
+    display: flex;
+  }
+
+  .page-not-found {
+    display: flex;
+    flex-flow: column;
+  }
+
+  .page-not-found-search {
+    order: 2;
+    margin: 20px 0;
+  }
+
+  .page-not-found-topics {
+    order: 3;
+  }
+
+  // Padding to search button
+  .btn .search-icon {
+    padding-bottom: 0.11rem;
+  }
+
+  @include viewport.from(sm) {
+
+    .header-search--enabled .floating-search-input-wrapper,
+    .search-header--visible .floating-search-input-wrapper {
+      justify-content: unset;
+    }
+  }
+
+  // Fix searchbar with header links
+  .floating-search-input-wrapper {
+    margin: 0 0.5em;
+  }
+
+  // On a real iPad the header search grows over the other header items (dev tools
+  // emulation doesn't reproduce it). Core sizes .floating-search-input at 60% of a
+  // flex-grow wrapper, so the cap goes there. 27ch is the NN/g minimum that fits
+  // ~90% of queries; go no lower than ~20ch if the header is still crowded.
+  @include viewport.until(xl) {
+    .floating-search-input-wrapper {
+      min-width: 0;
+    }
+
+    .floating-search-input {
+      max-width: 27ch;
+    }
+  }
+
+  // -----------------------------------------------------------------------
+  // Banners (welcome / campaign)
+  // -----------------------------------------------------------------------
+
+  @include viewport.until(sm) {
+    .welcome-banner {
+      display: none;
+    }
+  }
+
+  .campaign-banner-info svg {
+    display: none !important;
+  }
+
+  // Big button on Subscriptions campaigns
+  .campaign-banner .btn.close {
+    top: 0.5rem !important;
+    right: 0.5rem !important;
+    font-size: 1.3rem !important;
+  }
+
+  // Styling links on Welcome Banner — the theme's own light hover tint.
+  .banner-featured-links__link,
+  .banner-featured-links__link:visited {
+    color: var(--accent-text-color);
+    border-radius: var(--d-border-radius-large)
+  }
+
+  .banner-featured-links__link:hover {
+    background-color: var(--tertiary);
+    box-shadow: 0 0 0 4px var(--button-box-shadow);
+    color: var(--accent-text-color);
+  }
+
+  // Icons on Welcome Banner (EXPERIMENTAL)
+  .welcome-banner__wrap {
+    flex-wrap: wrap;
+    border-bottom: none;
+  }
+
+  .banner-featured-links__wrapper {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .welcome-banner__wrap .search-menu,
+  .welcome-banner__title {
+    flex: 1;
+  }
+
+  .welcome-banner__title {
+    font-weight: 800;
+  }
+
+  // -----------------------------------------------------------------------
+  // Misc utility (emoji, [data-wrap] blocks, buttons, plugins)
+  // -----------------------------------------------------------------------
+
+  // "Billing" -> "suscripción" on Spanish pages; font-size: 0 hides the original.
+  html:lang(es) a[href*="/billing/subscriptions"] .item-label {
+    font-size: 0;
+
+    &::after {
+      content: "suscripción";
+      font-size: 1rem;
+    }
+  }
+
+  aside.onebox {
+    background-color: var(--d-content-background);
+  }
+
+  .d-editor-preview-wrapper {
+    border-radius: var(--d-border-radius);
+    padding: 1em;
+    background-color: var(--d-content-background);
+  }
+
+  // Mod edits //
+  .signup-progress-bar,
+  #user-menu-button-other-notifications,
+  .user-nav__notifications,
+  .user-nav__badges,
+  .collapsed-info-panel:last-child,
+  .sidebar-section-wrapper .sidebar-section-header-global-indicator .d-icon,
+  .groups-header-filters,
+  .user-nav__preferences-navigation-menu,
+  .user-nav__preferences-ai,
+  .user-nav__activity-read,
+  .user-nav__activity,
+  .control-group[data-setting-name="user-color-scheme"],
+  .controls[data-setting-name="user-enable-markdown-monospace-font"],
+  .controls[data-setting-name="user-dynamic-favicon"],
+  .category-quienes-somos .top-lists,
+  .sidebar-section-link-wrapper [data-list-item-name="activity-pub-about"] {
+    display: none !important;
+  }
+
+  #reply-control.draft {
+    padding: 0.5rem 0;
+  }
+
+  .signup-fullpage .signup-body {
+    max-width: 850px;
+  }
+
+  .install-theme-item input:checked+label {
+    border-radius: 0.23rem;
+  }
+
+  // Translate slot runs a custom agent for "Ask AI" on posts only;
+  // composer Translate comes from the relabeled markdown_table slot
+  .ai-composer-helper-menu ul.ai-helper-options li[data-value="translate"] {
+    display: none;
+  }
+
+  .ai-custom-prompt__input[type="text"] {
+    width: 100%;
+  }
+
+  .ai-helper-options__button kbd {
+    display: none;
+  }
+
+  // More stuff
+  img.emoji {
+    width: 23px;
+    height: 23px;
+  }
+
+  [data-wrap="button"] {
+    text-align: center;
+    padding-top: 0.3rem;
+  }
+
+  [data-wrap="button"] a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-weight: normal;
+    border-radius: var(--d-button-border-radius);
+    transition: var(--d-button-transition);
+    cursor: pointer;
+    font-size: var(--font-0);
+    line-height: normal;
+    box-sizing: border-box;
+    padding: 0.5em 0.65em;
+    border: var(--d-button-border);
+    background-color: var(--accent-color);
+    color: var(--accent-text-color);
+  }
+
+  [data-wrap="button"] a:hover {
+    background: light-dark(oklch(from var(--accent-color) 40% c h),
+        oklch(from var(--accent-color) 50% c h));
+  }
+
+  // Centered videos
+  [data-wrap="centered-video"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  // Restrict max-width if vertical video is too tall
+  [data-wrap="centered-video"] video,
+  [data-wrap="centered-video"] iframe {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .select-kit .select-kit-header {
+    padding: 0.45em 0.65em;
+  }
+
+  // Remove ul spacing, add li padding
+  .cooked ul,
+  .d-editor-preview ul,
+  .d-editor-preview ol {
+    padding-inline-start: 0;
+    list-style-type: "– ";
+
+  }
+
+  .cooked ul li,
+  .d-editor-preview ul li {
+    padding-bottom: 0.5rem;
+
+  }
+
+
+  // Update ol types
+  .cooked ol,
+  .d-editor-preview ol {
+    padding-inline-start: 0;
+    counter-reset: item;
+    list-style: none;
+    padding-left: 0;
+
+    li::marker {
+      content: "→  ";
+    }
+  }
+
+  .post-content ol li {
+    counter-increment: item;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    padding: 0.2em 0;
+  }
+
+  .post-content ol li::before {
+    content: counter(item);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.6em;
+    height: 1.6em;
+    border-radius: 50%;
+    border: 1px solid var(--tertiary);
+    background: transparent;
+    font-size: 0.75em;
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+
+  // Blog styling plugin (scale down)
+  .blog-post .regular {
+    font-size: var(--font-down-1);
+  }
+
+  // Heading adapting heading font-size
+  @include viewport.from(sm) {
+    .login-welcome-header .login-title {
+      font-size: var(--font-up-5);
+    }
+  }
+
+  /* // Progress-button numbers/icon were unreadable in dark mode
 .topic-progress-wrapper,
 .topic-progress,
 #topic-progress-wrapper {
@@ -1705,483 +1711,483 @@ img.emoji {
   }
 } */
 
-// Visible progress bar in tiny screens
-@media (width <=400px) {
-  .with-topic-progress {
-    bottom: calc(env(safe-area-inset-bottom) + var(--composer-height, 0px) + var(--d-border-radius-large)*3.3);
+  // Visible progress bar in tiny screens
+  @media (width <=400px) {
+    .with-topic-progress {
+      bottom: calc(env(safe-area-inset-bottom) + var(--composer-height, 0px) + var(--d-border-radius-large)*3.3);
+    }
   }
-}
 
-// Less height for progress bar 
-.topic-progress-wrapper {
-  height: 2.5rem;
-}
-
-// Less padding on progress bar
-.topic-progress {
-  padding: .35rem 1em;
-}
-
-@include viewport.from(md) {
-
-  // Extra breathing room above the progress button
-  .topic-progress-wrapper,
-  #topic-progress-wrapper {
-    padding: 1rem 0;
+  // Less height for progress bar 
+  .topic-progress-wrapper {
+    height: 2.5rem;
   }
-}
 
-// Less height in progress bar
-#topic-progress-wrapper #topic-progress {
-  padding: .44rem 0.75em;
-}
-
-// Intro text for groups/badges pages, rendered from after_header.html.
-.custom-page-intro {
-  display: none !important;
-}
-
-body.groups-page .category-banner-groups,
-body.badges-page .category-banner-badges,
-body.leaderboard-page .category-banner-leaderboard,
-body.static-guidelines .category-banner-guidelines {
-  display: flex !important;
-}
-
-// -----------------------------------------------------------------------
-// Embed comments
-// -----------------------------------------------------------------------
-
-body.embed-mode #main-outlet-wrapper {
-  display: block !important;
-}
-
-// Core sizes each post as .topic-body { width: calc(var(--topic-body-width) +
-// var(--topic-body-width-padding) * 2) } next to the avatar column, so a plain
-// 100% made every post row 100% + padding + avatar wide and the embed scrolled
-// sideways. Subtract both so the row fits the iframe exactly; core's max-width
-// rules add them back onto this variable, so those still total 100%.
-body.embed-mode {
-  --topic-body-width: calc(100% - var(--topic-avatar-width) - (var(--topic-body-width-padding) * 2));
-}
-
-// The iframe runs edge to edge in the blog's article column, so the thread
-// needs its own inner room or the text runs into the rounded border.
-body.embed-mode #main-outlet {
-  padding: 1.5rem;
-}
-
-// The embed is the conversation only; the forum keeps the tools. No system
-// notices (visible, unlisted, closed...), time gaps, topic footer buttons or
-// suggested topics. Post-menu buttons and the topic map are trimmed in
-// javascripts/api-initializers/embed-comments.gjs.
-body.embed-mode {
-
-  .small-action,
-  .time-gap,
-  #topic-footer-buttons,
-  .more-topics__container {
-    display: none;
+  // Less padding on progress bar
+  .topic-progress {
+    padding: .35rem 1em;
   }
-}
 
-// The forum's 18–23px root (top of this file + mobile-stuff.scss) is sized for
-// full-screen reading; in the blog's comments iframe it dwarfs the article.
-// :has() outranks the plain html rules, so no media-query ordering to fight.
-html:has(body.embed-mode) {
-  font-size: 16px;
-}
+  @include viewport.from(md) {
 
-/* height */
-body.embed-mode .topic-post:first-child {
-  display: none !important;
-}
+    // Extra breathing room above the progress button
+    .topic-progress-wrapper,
+    #topic-progress-wrapper {
+      padding: 1rem 0;
+    }
+  }
 
-/* flicker */
-.post-stream--cloaked {
-  min-height: 0 !important;
-}
+  // Less height in progress bar
+  #topic-progress-wrapper #topic-progress {
+    padding: .44rem 0.75em;
+  }
 
-// -----------------------------------------------------------------------
-// Experimental / unverified / inactive
-// -----------------------------------------------------------------------
+  // Intro text for groups/badges pages, rendered from after_header.html.
+  .custom-page-intro {
+    display: none !important;
+  }
 
-/* // Fix chat thread title size
+  body.groups-page .category-banner-groups,
+  body.badges-page .category-banner-badges,
+  body.leaderboard-page .category-banner-leaderboard,
+  body.static-guidelines .category-banner-guidelines {
+    display: flex !important;
+  }
+
+  // -----------------------------------------------------------------------
+  // Embed comments
+  // -----------------------------------------------------------------------
+
+  body.embed-mode #main-outlet-wrapper {
+    display: block !important;
+  }
+
+  // Core sizes each post as .topic-body { width: calc(var(--topic-body-width) +
+  // var(--topic-body-width-padding) * 2) } next to the avatar column, so a plain
+  // 100% made every post row 100% + padding + avatar wide and the embed scrolled
+  // sideways. Subtract both so the row fits the iframe exactly; core's max-width
+  // rules add them back onto this variable, so those still total 100%.
+  body.embed-mode {
+    --topic-body-width: calc(100% - var(--topic-avatar-width) - (var(--topic-body-width-padding) * 2));
+  }
+
+  // The iframe runs edge to edge in the blog's article column, so the thread
+  // needs its own inner room or the text runs into the rounded border.
+  body.embed-mode #main-outlet {
+    padding: 1.5rem;
+  }
+
+  // The embed is the conversation only; the forum keeps the tools. No system
+  // notices (visible, unlisted, closed...), time gaps, topic footer buttons or
+  // suggested topics. Post-menu buttons and the topic map are trimmed in
+  // javascripts/api-initializers/embed-comments.gjs.
+  body.embed-mode {
+
+    .small-action,
+    .time-gap,
+    #topic-footer-buttons,
+    .more-topics__container {
+      display: none;
+    }
+  }
+
+  // The forum's 18–23px root (top of this file + mobile-stuff.scss) is sized for
+  // full-screen reading; in the blog's comments iframe it dwarfs the article.
+  // :has() outranks the plain html rules, so no media-query ordering to fight.
+  html:has(body.embed-mode) {
+    font-size: 16px;
+  }
+
+  /* height */
+  body.embed-mode .topic-post:first-child {
+    display: none !important;
+  }
+
+  /* flicker */
+  .post-stream--cloaked {
+    min-height: 0 !important;
+  }
+
+  // -----------------------------------------------------------------------
+  // Experimental / unverified / inactive
+  // -----------------------------------------------------------------------
+
+  /* // Fix chat thread title size
 .c-user-thread .chat__thread-title__name {
   font-size: var(--font-up-1);
 } */
 
-// National flags re-styling
-.about .nationalflag-usersummary {
-  width: 1.2rem;
-  border-radius: 0.15rem;
-  padding-bottom: 0.45rem;
-}
+  // National flags re-styling
+  .about .nationalflag-usersummary {
+    width: 1.2rem;
+    border-radius: 0.15rem;
+    padding-bottom: 0.45rem;
+  }
 
-.about:not(.collapsed-info) .nationalflag-usersummary {
-  display: none;
-}
+  .about:not(.collapsed-info) .nationalflag-usersummary {
+    display: none;
+  }
 
-// More padding on composer
-.ProseMirror p:first-child {
-  padding-top: 0.75rem;
-}
+  // More padding on composer
+  .ProseMirror p:first-child {
+    padding-top: 0.75rem;
+  }
 
-// Showing wrap selectors on composer only to staff
-.group-nuevos:not(.group-team):not(.group-agoristas):not(.group-lideres) [data-name="toggle-wrap"] {
-  display: none;
-}
+  // Showing wrap selectors on composer only to staff
+  .group-nuevos:not(.group-team):not(.group-agoristas):not(.group-lideres) [data-name="toggle-wrap"] {
+    display: none;
+  }
 
-// Hiding unnecessary text
-.composer-whisper-indicator span {
-  display: none;
-}
+  // Hiding unnecessary text
+  .composer-whisper-indicator span {
+    display: none;
+  }
 
-// [DESKTOP] 25% more size on SVG icons and their titles
-.svg-icon,
-.svg-icon-title {
-  height: 1.25em;
-  width: 1.25em;
-}
-
-// [MOBILE] 10% more size on SVG icons and their titles
-@include viewport.until(sm) {
-
+  // [DESKTOP] 25% more size on SVG icons and their titles
   .svg-icon,
   .svg-icon-title {
-    height: 1.1em;
-    width: 1.1em;
+    height: 1.25em;
+    width: 1.25em;
   }
-}
 
-// The search chip in the header sits taller than the input it belongs to.
-// Core buttons are `padding: $vpad $hpad` with $vpad: 0.5em, so 0.35em is ~30%
-// off the vertical only — sides and every other button untouched.
-.btn.search-context {
-  padding-block: 0.35em;
-}
+  // [MOBILE] 10% more size on SVG icons and their titles
+  @include viewport.until(sm) {
 
-// Esc preview on similar topic aligment
-.composer-popup .btn.close {
-  top: 1.25em;
-  right: 0.75em;
-}
-
-// Hiding hidden wraps
-.cooked .d-wrap[data-wrap="hidden"] {
-  display: none;
-}
-
-// Hiding some tags on category pages
-.hc-topic-card__tags [data-tag-name="resuelto"],
-.hc-topic-card__tags [data-tag-name="abierto"] {
-  display: none;
-}
-
-// Hiding last selectors on MP (we do not use trust_level defaults)
-.messages-dropdown-content .dropdown-menu li:nth-last-of-type(-n+2) {
-  display: none;
-}
-
-// The messages dropdown collapses to its longest label on desktop, where there
-// is room for a steady width. Left alone on mobile, which wants the narrow menu.
-@include viewport.from(lg) {
-  .messages-dropdown-content .dropdown-menu {
-    min-width: 240px;
+    .svg-icon,
+    .svg-icon-title {
+      height: 1.1em;
+      width: 1.1em;
+    }
   }
-}
 
-// Hiding text on gists (theme component) button
-.excerpts-gists-toggle-btn span {
-  display: none;
-}
+  // The search chip in the header sits taller than the input it belongs to.
+  // Core buttons are `padding: $vpad $hpad` with $vpad: 0.5em, so 0.35em is ~30%
+  // off the vertical only — sides and every other button untouched.
+  .btn.search-context {
+    padding-block: 0.35em;
+  }
 
-// Hiding activitypub useless navigation and texts
-.activity-pub-navigation,
-.topic-map__activity-pub {
-  display: none !important;
-}
+  // Esc preview on similar topic aligment
+  .composer-popup .btn.close {
+    top: 1.25em;
+    right: 0.75em;
+  }
 
-// Hiding more topics navigation (disabled) on mobile
-@include viewport.until(sm) {
-  .more-topics__container .more-topics__list .topic-list-header.--has-tabs {
+  // Hiding hidden wraps
+  .cooked .d-wrap[data-wrap="hidden"] {
+    display: none;
+  }
+
+  // Hiding some tags on category pages
+  .hc-topic-card__tags [data-tag-name="resuelto"],
+  .hc-topic-card__tags [data-tag-name="abierto"] {
+    display: none;
+  }
+
+  // Hiding last selectors on MP (we do not use trust_level defaults)
+  .messages-dropdown-content .dropdown-menu li:nth-last-of-type(-n+2) {
+    display: none;
+  }
+
+  // The messages dropdown collapses to its longest label on desktop, where there
+  // is room for a steady width. Left alone on mobile, which wants the narrow menu.
+  @include viewport.from(lg) {
+    .messages-dropdown-content .dropdown-menu {
+      min-width: 240px;
+    }
+  }
+
+  // Hiding text on gists (theme component) button
+  .excerpts-gists-toggle-btn span {
+    display: none;
+  }
+
+  // Hiding activitypub useless navigation and texts
+  .activity-pub-navigation,
+  .topic-map__activity-pub {
     display: none !important;
   }
-}
 
-// More room for title in mobile
-#topic-title h1 {
-  padding: 0.5rem 0;
-}
+  // Hiding more topics navigation (disabled) on mobile
+  @include viewport.until(sm) {
+    .more-topics__container .more-topics__list .topic-list-header.--has-tabs {
+      display: none !important;
+    }
+  }
 
-// Nested floating fixed (overlaps with custom bottom mobile navigation)
-.nested-view__floating-actions {
-  position: relative;
-  z-index: unset;
-}
+  // More room for title in mobile
+  #topic-title h1 {
+    padding: 0.5rem 0;
+  }
 
-// Nested styling
-.nested-view {
-  background: unset;
-}
+  // Nested floating fixed (overlaps with custom bottom mobile navigation)
+  .nested-view__floating-actions {
+    position: relative;
+    z-index: unset;
+  }
 
-.nested-view:not(.nested-context-view)>.nested-view__controls {
-  z-index: unset;
-  padding: .47rem 1rem;
-}
+  // Nested styling
+  .nested-view {
+    background: unset;
+  }
 
-.nested-view__controls-left {
-  order: 2;
-}
+  .nested-view:not(.nested-context-view)>.nested-view__controls {
+    z-index: unset;
+    padding: .47rem 1rem;
+  }
 
-.nested-view .first-reply-statement-wrapper {
-  display: none;
-}
+  .nested-view__controls-left {
+    order: 2;
+  }
 
-// Disable weird floating composer in IA Bot
-.docked-composer.ai-bot-docked-composer.docked-composer--keyboard-open {
-  position: unset;
+  .nested-view .first-reply-statement-wrapper {
+    display: none;
+  }
 
-}
+  // Disable weird floating composer in IA Bot
+  .docked-composer.ai-bot-docked-composer.docked-composer--keyboard-open {
+    position: unset;
 
-//Style the anonist (IA Bot) main chat page
-body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector__selection-wrapper label {
-  display: none;
-}
+  }
 
-body.has-ai-conversations-sidebar .ai-bot-conversations__input-container {
-  width: 70%;
-  flex-direction: column-reverse;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-}
+  //Style the anonist (IA Bot) main chat page
+  body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector__selection-wrapper label {
+    display: none;
+  }
 
-@include viewport.until(sm) {
   body.has-ai-conversations-sidebar .ai-bot-conversations__input-container {
-    width: 100% !important;
-    height: 4rem;
+    width: 70%;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
   }
-}
 
-body.has-ai-conversations-sidebar .ai-bot-conversations__input-wrapper #ai-bot-conversations-input {
-  padding-left: 0.5rem;
-}
-
-body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector__selection-wrapper .name {
-  text-transform: uppercase;
-  font-size: var(--font-up-1);
-}
-
-body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn {
-  background-color: var(--primary-50);
-  font-weight: bold;
-  padding: 0.55rem 0.85rem;
-  border-radius: var(--d-border-radius-large);
-}
-
-body.has-ai-conversations-sidebar .ai-bot-conversations__input-wrapper {
-  border-radius: 1rem;
-}
-
-body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn:hover,
-body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn:focus {
-  background: unset;
-}
-
-// Fix to login buttons with searchbar for anons
-@media (width >=1400px) {
-  .anon .d-header .panel {
-    grid-column-start: unset;
+  @include viewport.until(sm) {
+    body.has-ai-conversations-sidebar .ai-bot-conversations__input-container {
+      width: 100% !important;
+      height: 4rem;
+    }
   }
-}
 
-// Re-enable good styling (composer-redesign core experiment)
-@include viewport.until(sm) {
-
-  :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel .btn.btn-primary,
-  :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel .d-modal.json-schema-editor-modal .je-ready .btn-primary.json-editor-btn-add,
-  .d-modal.json-schema-editor-modal .je-ready :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel .btn-primary.json-editor-btn-add,
-  :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel .d-modal.json-schema-editor-modal .je-ready button.btn-primary,
-  .d-modal.json-schema-editor-modal .je-ready :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel button.btn-primary {
-    background-color: var(--accent-color) !important;
-    color: var(--accent-text-color) !important;
-    font-weight: unset !important;
+  body.has-ai-conversations-sidebar .ai-bot-conversations__input-wrapper #ai-bot-conversations-input {
+    padding-left: 0.5rem;
   }
-}
 
-// Fix weird paddings (composer-redesign core experiment)
-@include viewport.until(sm) {
-  :where(.uc-enable-composer-redesign) .composer-footer .submit-panel {
-    padding: var(--space-2) var(--space-4) !important;
+  body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector__selection-wrapper .name {
+    text-transform: uppercase;
+    font-size: var(--font-up-1);
   }
-}
 
-@include viewport.until(sm) {
-  :where(.uc-enable-composer-redesign) .reply-to {
-    padding: var(--space-2) var(--space-3) !important;
+  body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn {
+    background-color: var(--primary-50);
+    font-weight: bold;
+    padding: 0.55rem 0.85rem;
+    border-radius: var(--d-border-radius-large);
   }
-}
 
-// Fix weird color text on core experimentations
-:root body .ai-bot-conversations__title,
-:root body .ai-bot-conversations__header .ai-bot-conversations__title,
-:root body .discourse-ai .ai-bot-conversations__title {
-  color: unset !important;
-}
-
-// Fix absolute button positioning
-.ai-bot-scroll-indicator {
-  bottom: calc(85% + .75em);
-}
-
-// Bad margin in hard stylished border
-@include viewport.until(sm) {
-  .archetype-private_message .regular.contents {
-    margin-top: 1rem;
+  body.has-ai-conversations-sidebar .ai-bot-conversations__input-wrapper {
+    border-radius: 1rem;
   }
-}
 
-// Hiding locked icons
-.restricted .d-icon-lock {
-  display: none;
-}
+  body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn:hover,
+  body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn:focus {
+    background: unset;
+  }
 
-// Hide top navbar on coaching/events
-.category-feedback-coaching .ct-nav-scroller {
-  display: none;
-}
+  // Fix to login buttons with searchbar for anons
+  @media (width >=1400px) {
+    .anon .d-header .panel {
+      grid-column-start: unset;
+    }
+  }
 
-// Simple calendar events
-#category-events-calendar {
-  margin-top: 0.5rem;
-}
+  // Re-enable good styling (composer-redesign core experiment)
+  @include viewport.until(sm) {
 
-#category-events-calendar .fc-toolbar {
-  display: none;
-}
+    :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel .btn.btn-primary,
+    :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel .d-modal.json-schema-editor-modal .je-ready .btn-primary.json-editor-btn-add,
+    .d-modal.json-schema-editor-modal .je-ready :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel .btn-primary.json-editor-btn-add,
+    :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel .d-modal.json-schema-editor-modal .je-ready button.btn-primary,
+    .d-modal.json-schema-editor-modal .je-ready :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel button.btn-primary {
+      background-color: var(--accent-color) !important;
+      color: var(--accent-text-color) !important;
+      font-weight: unset !important;
+    }
+  }
 
-// [EXPERIMENTAL] TO SCOPE -> Not shield icons on boxes and overall site
-.badge-category.restricted .d-icon-ph-dt-shield-star {
-  display: none;
-}
+  // Fix weird paddings (composer-redesign core experiment)
+  @include viewport.until(sm) {
+    :where(.uc-enable-composer-redesign) .composer-footer .submit-panel {
+      padding: var(--space-2) var(--space-4) !important;
+    }
+  }
 
-sidebar-section-link-prefix d-icon-ph-dt-shield-star {
-  display: none;
-}
+  @include viewport.until(sm) {
+    :where(.uc-enable-composer-redesign) .reply-to {
+      padding: var(--space-2) var(--space-3) !important;
+    }
+  }
 
-// Discourse to the right
-.powered-by-discourse {
-  justify-self: end;
-}
+  // Fix weird color text on core experimentations
+  :root body .ai-bot-conversations__title,
+  :root body .ai-bot-conversations__header .ai-bot-conversations__title,
+  :root body .discourse-ai .ai-bot-conversations__title {
+    color: unset !important;
+  }
 
-// No icon — it is not in phosphor duotone set
-.powered-by-discourse .d-icon-fab-discourse {
-  display: none;
-}
+  // Fix absolute button positioning
+  .ai-bot-scroll-indicator {
+    bottom: calc(85% + .75em);
+  }
 
-// Margin fix on checkboxes
-ul li.has-checkbox .list-item-checkbox {
-  margin-left: -1em;
-  padding-right: 0.17rem;
-}
+  // Bad margin in hard stylished border
+  @include viewport.until(sm) {
+    .archetype-private_message .regular.contents {
+      margin-top: 1rem;
+    }
+  }
 
-// Wiki edits styling
-.topic-meta-data .post-infos {
-  padding-top: 0.25rem;
-}
+  // Hiding locked icons
+  .restricted .d-icon-lock {
+    display: none;
+  }
 
-.post-info .wiki,
-.post-info .last-wiki-edit {
-  padding: 0.45rem 1.1rem;
-}
+  // Hide top navbar on coaching/events
+  .category-feedback-coaching .ct-nav-scroller {
+    display: none;
+  }
 
-.post-info .wiki,
-.post-info .last-wiki-edit,
-.heatmap-high,
-.heatmap-high a,
-.heatmap-high .d-icon,
-.heatmap-high .d-button-label {
-  color: unset !important;
-}
+  // Simple calendar events
+  #category-events-calendar {
+    margin-top: 0.5rem;
+  }
 
-/* Styling for Markdown tables */
+  #category-events-calendar .fc-toolbar {
+    display: none;
+  }
 
-.md-table {
-  margin: 1.25em 0;
-  overflow-x: auto;
-  border: 1px solid var(--primary-low);
-  border-radius: var(--d-border-radius, 8px);
-}
+  // [EXPERIMENTAL] TO SCOPE -> Not shield icons on boxes and overall site
+  .badge-category.restricted .d-icon-ph-dt-shield-star {
+    display: none;
+  }
 
-.md-table table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: var(--font-down-1);
-  background: var(--secondary);
-}
+  sidebar-section-link-prefix d-icon-ph-dt-shield-star {
+    display: none;
+  }
 
-.md-table thead th {
-  background: var(--primary-very-low);
-  color: var(--primary);
-  font-weight: 600;
-  text-align: left;
-  padding: 0.6em 0.9em;
-  border-bottom: 2px solid var(--primary-low-mid);
-  white-space: nowrap;
-}
+  // Discourse to the right
+  .powered-by-discourse {
+    justify-self: end;
+  }
 
-.md-table tbody td {
-  padding: 0.55em 0.9em;
-  border-bottom: 1px solid var(--primary-low);
-  color: var(--primary-high);
-}
+  // No icon — it is not in phosphor duotone set
+  .powered-by-discourse .d-icon-fab-discourse {
+    display: none;
+  }
 
-.md-table tbody tr:last-child td {
-  border-bottom: none;
-}
+  // Margin fix on checkboxes
+  ul li.has-checkbox .list-item-checkbox {
+    margin-left: -1em;
+    padding-right: 0.17rem;
+  }
 
-.md-table tbody tr:nth-child(even) {
-  background: var(--primary-very-low);
-}
+  // Wiki edits styling
+  .topic-meta-data .post-infos {
+    padding-top: 0.25rem;
+  }
 
-.md-table tbody tr:hover {
-  background: var(--primary-low);
-}
+  .post-info .wiki,
+  .post-info .last-wiki-edit {
+    padding: 0.45rem 1.1rem;
+  }
 
-/* Total / summary row (bold cells) */
-.md-table tbody tr:has(td > strong) {
-  background: var(--tertiary-very-low);
-}
+  .post-info .wiki,
+  .post-info .last-wiki-edit,
+  .heatmap-high,
+  .heatmap-high a,
+  .heatmap-high .d-icon,
+  .heatmap-high .d-button-label {
+    color: unset !important;
+  }
 
-.md-table tbody tr:has(td > strong) td {
-  border-top: 2px solid var(--primary-low-mid);
-  color: var(--primary);
-}
+  /* Styling for Markdown tables */
 
-/* Edit button overlay */
-.fullscreen-table-wrapper__buttons {
-  display: flex;
-  justify-content: flex-end;
-  padding: 0.25em 0.4em 0;
-}
+  .md-table {
+    margin: 1.25em 0;
+    overflow-x: auto;
+    border: 1px solid var(--primary-low);
+    border-radius: var(--d-border-radius, 8px);
+  }
 
-.fullscreen-table-wrapper__buttons .btn-edit-table {
-  opacity: 0.5;
-  transition: opacity 0.15s ease;
-}
+  .md-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-down-1);
+    background: var(--secondary);
+  }
 
-.fullscreen-table-wrapper__buttons .btn-edit-table:hover {
-  opacity: 1;
-}
+  .md-table thead th {
+    background: var(--primary-very-low);
+    color: var(--primary);
+    font-weight: 600;
+    text-align: left;
+    padding: 0.6em 0.9em;
+    border-bottom: 2px solid var(--primary-low-mid);
+    white-space: nowrap;
+  }
 
-// Subtle highlight to anonist
-d-icon-far-discobot {
-  color: var(--primary-700);
-}
+  .md-table tbody td {
+    padding: 0.55em 0.9em;
+    border-bottom: 1px solid var(--primary-low);
+    color: var(--primary-high);
+  }
 
-// Hiding repeated blocks in /about
-.about__admins,
-.about__admins {
-  display: none;
-}
+  .md-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .md-table tbody tr:nth-child(even) {
+    background: var(--primary-very-low);
+  }
+
+  .md-table tbody tr:hover {
+    background: var(--primary-low);
+  }
+
+  /* Total / summary row (bold cells) */
+  .md-table tbody tr:has(td > strong) {
+    background: var(--tertiary-very-low);
+  }
+
+  .md-table tbody tr:has(td > strong) td {
+    border-top: 2px solid var(--primary-low-mid);
+    color: var(--primary);
+  }
+
+  /* Edit button overlay */
+  .fullscreen-table-wrapper__buttons {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.25em 0.4em 0;
+  }
+
+  .fullscreen-table-wrapper__buttons .btn-edit-table {
+    opacity: 0.5;
+    transition: opacity 0.15s ease;
+  }
+
+  .fullscreen-table-wrapper__buttons .btn-edit-table:hover {
+    opacity: 1;
+  }
+
+  // Subtle highlight to anonist
+  d-icon-far-discobot {
+    color: var(--primary-700);
+  }
+
+  // Hiding repeated blocks in /about
+  .about__admins,
+  .about__admins {
+    display: none;
+  }

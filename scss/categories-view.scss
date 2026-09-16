@@ -190,24 +190,44 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
         background: none;
     }
 
-    // Boxes of categories: 4 in desktop — 2 in mobile
-    @media (width >40rem) {
+    // The description is hidden above, so the icon carries the box: stacked
+    // over the name and centered. .badge-category holds both the icon and
+    // .badge-category__name, so one flex-direction does the whole layout.
+    // 2.25em is the knob — it scales with the box font-size.
+    .category-boxes .category-box-heading,
+    .category-boxes-with-topics .category-box-heading {
+        text-align: center;
 
-        .navigation-category .category-boxes,
-        .navigation-category .category-boxes-with-topics {
-            grid-template-columns: repeat(auto-fit, minmax(min(var(--category-boxes-min-width), 25% - var(--d-category-boxes-gap, 1em)), var(--category-boxes-max-width)));
+        .badge-category__wrapper {
+            justify-content: center;
+        }
+
+        .badge-category {
+            flex-direction: column;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .badge-category .d-icon {
+            height: 2.25em;
+            width: 2.25em;
         }
     }
 
-    @media (width <=40rem) {
-        grid-template-columns: repeat(auto-fit, minmax(min(var(--category-boxes-min-width), 50% - var(--d-category-boxes-gap, 1em)), var(--category-boxes-max-width)));
-    }
-
-    // Core's 15em minimum (18em with topics) is wider than half a phone at this
-    // theme's 22px root, so auto-fit collapsed to one column. Capping the minimum
-    // at half the row keeps at least two per row; wider screens still fit more.
+    // Boxes of categories: 4 on desktop, 2 on mobile. Core's 15em minimum (18em
+    // with topics) is wider than a quarter — or half a phone at this theme's
+    // 22px root — so auto-fit collapsed the row. Capping the track minimum at
+    // one Nth of the row (gaps subtracted) pins the count; the min-width
+    // variable still wins whenever it is the smaller of the two.
+    // sm is 640px = the same 40rem: media-query rem ignores the theme root.
     .category-boxes,
     .category-boxes-with-topics {
-        grid-template-columns: repeat(auto-fit, minmax(min(var(--category-boxes-min-width), calc(50% - var(--d-category-boxes-gap, 1em))), var(--category-boxes-max-width)));
+        @include viewport.from(sm) {
+            grid-template-columns: repeat(auto-fit, minmax(min(var(--category-boxes-min-width), calc((100% - 3 * var(--d-category-boxes-gap, 1em)) / 4)), var(--category-boxes-max-width)));
+        }
+
+        @include viewport.until(sm) {
+            grid-template-columns: repeat(auto-fit, minmax(min(var(--category-boxes-min-width), calc((100% - var(--d-category-boxes-gap, 1em)) / 2)), var(--category-boxes-max-width)));
+        }
     }
 }
