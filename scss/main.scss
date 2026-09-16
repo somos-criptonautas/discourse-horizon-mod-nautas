@@ -1209,6 +1209,15 @@ color: unset !important;
   display: none;
 }
 
+// Karma addition style
+.badge-summary strong {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  color: var(--primary-600);
+  cursor: pointer;
+}
+
 // -----------------------------------------------------------------------
 // Categories & Docs plugin
 // -----------------------------------------------------------------------
