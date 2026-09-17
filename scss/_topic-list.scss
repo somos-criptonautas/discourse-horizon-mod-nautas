@@ -7,21 +7,26 @@
     }
 
 // AI gists (discourse-ai). Rendered by our own outlet since Horizon drops the ones
-// discourse-ai uses — see javascripts/api-initializers/ai-gist-horizon.gjs
+// discourse-ai uses — see javascripts/discourse/api-initializers/ai-gist-horizon.gjs
 
 // Horizon's card excerpt and the gist say the same thing — keep the gist.
-// :has() scopes this to cards that actually got one; the rest keep their excerpt.
-.hc-topic-card:has(.horizon-ai-gist) .hc-topic-card__excerpt {
+// Target .topic-excerpt, NOT Horizon's .hc-topic-card__excerpt: core's TopicExcerpt
+// has no ...attributes, so the class Horizon passes it is dropped and never lands in
+// the DOM. :has() on __content scopes this to cards that actually got a gist.
+.hc-topic-card__content:has(.horizon-ai-gist) .topic-excerpt {
     display: none;
 }
 
-// Mirrors Horizon's own `.topic-excerpt` under `.--high-context` so it reads as native.
-// font-weight/-style are resets: the outlet sits inside .hc-topic-card__title, which is
-// bold and font-up-1-rem, and those inherit.
+// The outlet sits inside .hc-topic-card__title, so the gist inherits the title's bold
+// --font-up-1-rem and misses the --space-2 gap that __content puts between the title
+// and the excerpt. Reset both so it reads as the excerpt it replaces.
+// Horizon's own .topic-excerpt uses --font-0; --font-down-1 here is a deliberate
+// step down — swap if you want to match Horizon exactly.
 .horizon-ai-gist {
     width: 100%;
+    margin-top: var(--space-2);
     color: var(--primary-high);
-    font-size: var(--font-0);
+    font-size: var(--font-down-1);
     font-weight: normal;
     line-height: 1.25;
     overflow-wrap: anywhere;
