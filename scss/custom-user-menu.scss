@@ -33,3 +33,19 @@
     padding: 0 calc(var(--d-sidebar-row-horizontal-padding)*2);
     border-radius: var(--d-border-radius);
 }
+// Monthly karma line, appended below the username by user-menu-karma.js.
+// Upstream lays this block out with named areas, so the extra row has to be
+// declared here or the line lands under the avatar.
+.custom-user-menu-content .fk-d-menu__user-info {
+    grid-template-areas:
+        "avatar name"
+        "avatar username"
+        "avatar karma";
+    grid-template-rows: auto auto auto;
+}
+
+.custom-user-menu-content .fk-d-menu__monthly-karma {
+    grid-area: karma;
+    font-size: var(--font-down-2);
+    color: var(--primary-medium);
+}
