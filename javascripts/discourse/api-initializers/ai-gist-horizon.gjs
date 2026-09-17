@@ -1,3 +1,5 @@
+import Component from "@glimmer/component";
+import { service } from "@ember/service";
 import { apiInitializer } from "discourse/lib/api";
 
 // Horizon's high-context card deletes core's TopicCell, taking with it both outlets
@@ -7,12 +9,11 @@ import { apiInitializer } from "discourse/lib/api";
 // registration covers every layout.
 //
 // SERVER-SIDE GATE (read this before debugging "why is nothing showing"):
-// reading ai_topic_gist here does NOT bypass discourse-ai's serializer guard —
+// the attribute only exists when discourse-ai's serializer guard passes —
 //   add_to_serializer(:topic_list_item, :ai_topic_gist,
 //     include_condition: -> { scope.can_see_gists? })
-// If that guard fails server-side, the attribute is left out of latest.json entirely
-// (not null — omitted), so the #if below is simply false and nothing renders, with no
-// console or server error. Confirm with, on /latest:
+// If it fails, the attribute is omitted from latest.json entirely (not null), so the
+// #if below is simply false and nothing renders, with no console or server error:
 //   fetch('/latest.json').then(r=>r.json()).then(d=>
 //     console.log(d.topic_list.topics.filter(t=>'ai_topic_gist' in t).length))
 //
@@ -23,31 +24,46 @@ import { apiInitializer } from "discourse/lib/api";
 // healthy gists while every payload omits the attribute. An empty allowed_group_ids
 // hides them from everyone.
 //
-// There is no client-side fix for a missing attribute — the site must satisfy the
-// guard, or a plugin must re-serialize the attribute with its own include-condition.
-//
-// No site-setting guard needed on our side: the attribute is only serialized when
-// Guardian#can_see_gists? passes, so the #if already covers plugin/gists enabled,
-// agent resolution, and per-group access.
-//
 // The gist is plain text, not HTML: discourse-ai prints it with a plain double-stache
 // and reserves trustHTML for its excerpt fallback. Keep it escaped — it is LLM output,
-// and unescaping it would make it an injection surface. (This note lives out here on
-// purpose: a {{! }} template comment ends at its first closing braces, so writing
-// mustache syntax inside one spills the rest of the comment into the page.)
+// and unescaping it would make it an injection surface. (Note deliberately kept out of
+// the template: a {{! }} comment ends at its first closing braces, so mustache syntax
+// inside one spills the rest of the comment onto the page.)
 //
 // aria-hidden: this outlet sits inside Horizon's `role="heading"` title div, whose
 // accessible name is computed from its contents — an unhidden gist would append the
 // whole summary to every topic heading. The gist is supplementary (the topic it
 // summarizes is linked right above it), so hiding it from AT is the lesser cost.
+
+class HorizonAiGist extends Component {
+  // May not exist if discourse-ai is disabled, hence the optional chaining below. This
+  // is the same pattern core itself uses for a possibly-absent service — discourse-ai's
+  // own topic-list-gist-toggle injects `topicThumbnails` and optional-chains it.
+  @service gists;
+
+  // discourse-ai's toggle writes "table" (compact) or "table-ai" to localStorage and
+  // leaves it unset until the user picks one. Unset counts as show, making the toggle
+  // an opt-OUT: nobody loses gists they already see just by never touching it.
+  get show() {
+    return this.gists?.currentPreference !== "table";
+  }
+
+  <template>
+    {{#if this.show}}
+      <div class="horizon-ai-gist" aria-hidden="true">{{@topic.ai_topic_gist}}</div>
+    {{/if}}
+  </template>
+}
+
+// Registered as a bare template on purpose: this form is known to receive @outletArgs.
+// The topic is then passed explicitly into the class component above, so the service
+// lives in a component whose argument shape we control.
 export default apiInitializer((api) => {
   api.renderInOutlet(
     "topic-list-after-title",
     <template>
       {{#if @outletArgs.topic.ai_topic_gist}}
-        <div class="horizon-ai-gist" aria-hidden="true">
-          {{@outletArgs.topic.ai_topic_gist}}
-        </div>
+        <HorizonAiGist @topic={{@outletArgs.topic}} />
       {{/if}}
     </template>
   );
