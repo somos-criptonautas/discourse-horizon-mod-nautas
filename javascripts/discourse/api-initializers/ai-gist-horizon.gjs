@@ -30,6 +30,12 @@ import { apiInitializer } from "discourse/lib/api";
 // Guardian#can_see_gists? passes, so the #if already covers plugin/gists enabled,
 // agent resolution, and per-group access.
 //
+// The gist is plain text, not HTML: discourse-ai prints it with a plain double-stache
+// and reserves trustHTML for its excerpt fallback. Keep it escaped — it is LLM output,
+// and unescaping it would make it an injection surface. (This note lives out here on
+// purpose: a {{! }} template comment ends at its first closing braces, so writing
+// mustache syntax inside one spills the rest of the comment into the page.)
+//
 // aria-hidden: this outlet sits inside Horizon's `role="heading"` title div, whose
 // accessible name is computed from its contents — an unhidden gist would append the
 // whole summary to every topic heading. The gist is supplementary (the topic it
@@ -39,9 +45,6 @@ export default apiInitializer((api) => {
     "topic-list-after-title",
     <template>
       {{#if @outletArgs.topic.ai_topic_gist}}
-        {{! Plain text, not HTML: discourse-ai renders the gist with a plain {{this.gist}}
-            and reserves trustHTML for its excerpt fallback. Keep it escaped — this is
-            LLM output, and unescaping it would make it an injection surface. }}
         <div class="horizon-ai-gist" aria-hidden="true">
           {{@outletArgs.topic.ai_topic_gist}}
         </div>
