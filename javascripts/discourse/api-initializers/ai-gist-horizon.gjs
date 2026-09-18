@@ -1,5 +1,6 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
+import bodyClass from "discourse/helpers/body-class";
 import { apiInitializer } from "discourse/lib/api";
 
 // Horizon's high-context card deletes core's TopicCell, taking with it both outlets
@@ -55,10 +56,45 @@ class HorizonAiGist extends Component {
   </template>
 }
 
+// Three modes, driven by the "Topic Excerpts & AI Gists Button" component:
+//   Compact  → gists "table",    prefersExcerpt false → titles only (class below)
+//   Excerpts → gists "table",    prefersExcerpt true  → Horizon's excerpt, no gist
+//   AI       → gists "table-ai", prefersExcerpt false → gist; excerpt only where no gist
+// Horizon always renders its excerpt, so Compact is the one mode that needs CSS help.
+// Both services are tracked, so this re-renders when the button flips either one.
+class TopicListMode extends Component {
+  @service gists;
+  @service excerptState;
+
+  get titlesOnly() {
+    return (
+      this.gists?.currentPreference === "table" &&
+      !this.excerptState.prefersExcerpt
+    );
+  }
+
+  <template>
+    {{#if this.titlesOnly}}
+      {{bodyClass "horizon-titles-only"}}
+    {{/if}}
+  </template>
+}
+
 // Registered as a bare template on purpose: this form is known to receive @outletArgs.
 // The topic is then passed explicitly into the class component above, so the service
 // lives in a component whose argument shape we control.
 export default apiInitializer((api) => {
+  // Gists are on by default here, but the button only labels a state "AI" when the
+  // stored preference is literally "table-ai" — unset reads as Compact while gists
+  // show. Persist the default so the label matches. Note: this also makes gists the
+  // default on non-Horizon lists for that browser, which is the intended semantics.
+  const gists = api.container.lookup("service:gists");
+  if (gists && !gists.currentPreference) {
+    gists.setPreference("table-ai");
+  }
+
+  api.renderInOutlet("before-topic-list-body", TopicListMode);
+
   api.renderInOutlet(
     "topic-list-after-title",
     <template>

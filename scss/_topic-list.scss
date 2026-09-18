@@ -39,3 +39,10 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+// Compact mode of the excerpts/gists button: titles only. Body class comes from
+// TopicListMode in ai-gist-horizon.gjs. Same (0,3,0) tie with Horizon's excerpt rule as
+// above, so the .--high-context step is what makes this win.
+.horizon-titles-only .--high-context .hc-topic-card .topic-excerpt {
+    display: none;
+}
