@@ -2175,10 +2175,6 @@ ul li.has-checkbox .list-item-checkbox {
   background: var(--primary-very-low);
 }
 
-.md-table tbody tr:hover {
-  background: var(--primary-low);
-}
-
 /* Total / summary row (bold cells) */
 .md-table tbody tr:has(td > strong) {
   background: var(--tertiary-very-low);

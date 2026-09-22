@@ -26,6 +26,54 @@ body.f-nav-hidden:not(.has-full-page-chat) .f-nav {
   fill: var(--accent-color);
 }
 
+// --- Hairlines: sticky header (mobile) + f-nav top edge ------------------
+// 1px solid var(--primary-low): the line Discourse uses for content borders
+// (--content-border-color) and f-nav's own stylesheet uses on its top edge.
+
+@include viewport.until(sm) {
+  .d-header {
+    border-bottom: 1px solid var(--primary-low);
+  }
+}
+
+// f-nav's stylesheet drops border-top (and the safe-area padding) whenever it
+// toggles body.f-nav-hidden, while our transform:none pin above keeps the bar
+// on screen. Re-assert both; html/body out-specifies the component's
+// `body.f-nav-hidden .f-nav` reset regardless of CSS source order.
+html body .f-nav,
+html body.f-nav-hidden .f-nav {
+  border-top: 1px solid var(--primary-low);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+// --- f-nav never covers page-bottom elements ------------------------------
+// The component only clears #main-outlet for logged-in users
+// (html:not(.anon)), never clears the site footer below it, and retracts its
+// bottom lifts as soon as it toggles body.f-nav-hidden. Out-specify all three
+// from here; :has(.f-nav) keeps this inert when the bar is not rendered.
+
+// Document end (footer + last outlet rows) scrolls clear of the bar.
+body:has(.f-nav):not(.hide-nav-in-topic):not(.has-full-page-chat) {
+  padding-bottom: calc(var(--f-nav-height, 3.66em) + env(safe-area-inset-bottom));
+}
+
+// Bottom-anchored topic widgets stay lifted above the bar, regardless of
+// f-nav-hidden or anonymous state.
+html body:has(.f-nav):not(.hide-nav-in-topic):not(.has-full-page-chat) {
+  .d-toc-toggle,
+  .posts-filtered-notice,
+  #topic-progress-wrapper:not(.docked),
+  .topic-navigation.with-topic-progress,
+  div.with-topic-progress.ember-view.topic-navigation {
+    bottom: calc(var(--f-nav-height, 3.66em) + env(safe-area-inset-bottom));
+  }
+
+  #reply-control.draft,
+  #reply-control.saving {
+    transform: translateY(calc(var(--f-nav-height, 3.66em) * -1));
+  }
+}
+
 /* 
 // Hide navigation (desktop on mobile) on scrolling
 body.f-nav-hidden:not(.archetype-regular,
