@@ -724,6 +724,11 @@ button [title="similares"] .d-button-label {
   display: none;
 }
 
+// Display all moderator tools (less size)
+.topic-admin-menu-content {
+  font-size: var(--font-down-1)
+}
+
 // -----------------------------------------------------------------------
 // TOC
 // -----------------------------------------------------------------------
@@ -1905,6 +1910,15 @@ font-size: var(--font-up-1);
   .messages-dropdown-content .dropdown-menu {
     min-width: 240px;
   }
+}
+
+// The excerpts/gists button toggles Horizon card excerpts. Only glosario and wiki hide
+// their gists entirely, so only there does the button have nothing to act on.
+// !important: it is a core .btn.btn-icon-text, and the component's own stylesheet can
+// outrank a bare class.
+body.category-glosario .excerpts-gists-toggle-btn,
+body.category-wiki .excerpts-gists-toggle-btn {
+  display: none !important;
 }
 
 // Hiding text on gists (theme component) button

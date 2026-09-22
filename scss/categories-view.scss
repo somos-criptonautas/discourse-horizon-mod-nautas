@@ -99,6 +99,11 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
     padding-left: 0.5rem;
 }
 
+// Hide redundant tags on category header
+.category-title-header .tag-banner-container {
+    display: none;
+}
+
 // Fix for sticking tags on categories
 .custom-category-group .category-details .subcategories {
     gap: 0.25rem;

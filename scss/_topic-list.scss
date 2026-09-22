@@ -22,8 +22,25 @@
 
 // The outlet sits inside .hc-topic-card__title, so the gist inherits the title's bold
 // --font-up-1-rem and misses the --space-2 gap __content puts between title and excerpt.
+//
+// Fix: the outlet renders before TopicPostBadges in source order, but __title is a plain
+// block div — the gist's block-level display pushes badges onto their own line (below the
+// gist instead of inline after the title). Flex-wrap lets badges keep flowing beside the
+// title link while the gist gets its own full-width row. The existing margin-top stays
+// as the gap between the title line and the gist.
+.hc-topic-card__title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+
+.hc-topic-card__title .topic-post-badges {
+    order: 1;
+}
+
 .horizon-ai-gist {
-    width: 100%;
+    flex: 0 0 100%;
+    order: 2;
     margin-top: var(--space-2);
     color: var(--primary-high);
     // rem, NOT em. Every --font-* token is em-based (--font-0 is 1em, --font-down-1 is
@@ -44,5 +61,25 @@
 // TopicListMode in ai-gist-horizon.gjs. Same (0,3,0) tie with Horizon's excerpt rule as
 // above, so the .--high-context step is what makes this win.
 .horizon-titles-only .--high-context .hc-topic-card .topic-excerpt {
+    display: none;
+}
+
+// The docs table is core's layout — no .hc-topic-card__content — and there core renders
+// its excerpt as <a class="excerpt">, not .topic-excerpt. So neither the rule above nor
+// Horizon's own card rule reaches it, and a row carrying a gist shows the same sentence
+// twice: once in the gist, once in the excerpt. Where a gist exists, drop the excerpt —
+// same choice Horizon's card list already makes at line 19.
+.topic-list.doc-simple-mode .topic-list-item:has(.horizon-ai-gist) .link-bottom-line .excerpt {
+    display: none;
+}
+
+// glosario and wiki rows are a plain A-Z index where the gist only restates the title.
+// Both halves go: hiding the gist alone hands the text to the excerpt, and hiding the
+// excerpt alone hands it to the gist. Scoped to .doc-simple-mode so topic pages inside
+// these categories keep their gist.
+body.category-glosario .topic-list.doc-simple-mode .horizon-ai-gist,
+body.category-glosario .topic-list.doc-simple-mode .link-bottom-line .excerpt,
+body.category-wiki .topic-list.doc-simple-mode .horizon-ai-gist,
+body.category-wiki .topic-list.doc-simple-mode .link-bottom-line .excerpt {
     display: none;
 }
