@@ -3,7 +3,7 @@
   "description": "Criptonautas customizations on top of Horizon: styling, palettes, docs categories and gated sidebar sections.",
   "authors": "satonotdead",
   "about_url": "https://meta.discourse.org/t/horizon-theme/360486",
-  "license_url": "https://github.com/discourse/horizon/blob/main/LICENSE",
+  "license_url": "https://github.com/somos-criptonautas/discourse-horizon-mod-nautas/blob/main/LICENSE",
   "learn_more": "https://meta.discourse.org/t/installing-a-theme-or-theme-component/63682",
   "theme_version": "0.0.1",
   "component": true,

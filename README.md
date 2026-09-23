@@ -64,6 +64,22 @@ imported once in `common/common.scss`. Raw `@media` is kept only for off-grid wi
 
 ## Known limits
 
+- **`blocked_sections` is navigation UX, not authorization.** It dims or hides sidebar
+  links and intercepts clicks on them — all client-side. Direct URLs, links from
+  anywhere else, and JSON endpoints (`/c/<id>/latest.json`) bypass it entirely, and it
+  grants no access it could leak. Real access control for the configured categories has
+  to come from the server: Discourse category security groups, or the
+  `discourse-category-lockdown` plugin. Verify a gated category as a non-member by
+  requesting `/c/<id>/latest.json` directly.
+- **Lock state is read once at boot.** `block-sidebar.gjs` computes the locked tiers
+  when the initializer runs, so a visitor who logs in without a page reload keeps the
+  anonymous gating until they refresh.
+- **Selectors that depend on core/Horizon markup.** No outlet exists for these, so a
+  Discourse or Horizon upgrade can silently disable them: the sidebar-toggle chain and
+  the `"closed"`/`"cerrado"` button text match (`init.gjs`), the docs topic-list
+  reordering (`init.gjs`), and the user-menu karma line (`user-menu-karma.js`). Each
+  degrades to a no-op, so smoke-test the four after every upgrade.
+
 - **Docs A–Z is client-side.** Discourse cannot order a topic list by title server-side
   (`TopicQuery::SORTABLE_MAPPING` has no `title`), so `init.gjs` exhausts the paginated
   list (`loadMore()`, capped at `MAX_DOC_PAGES`) and then sorts. Two consequences: entering
