@@ -34,12 +34,28 @@ export function parentPath(url) {
 // shape as translated-texts.gjs. Every miss leaves the page untouched.
 const LINK_CLASS = "category-back-link";
 
+// Docs categories only: elsewhere the breadcrumbs already say where you are.
+// Same detection as isDocCategoryPage() in init.gjs, duplicated rather than imported
+// — no file in this theme imports from another, and a bad import shape takes the whole
+// theme bundle down. The docs panel only renders while the sidebar is showing, so the
+// slugs stay as the fallback for a phone with the menu closed.
+const DOC_CATEGORY_SLUGS = ["glosario", "wiki", "curso"];
+
+function isDocCategoryPage() {
+  return (
+    !!document.querySelector(".discourse-docs-sidebar-panel") ||
+    DOC_CATEGORY_SLUGS.some((slug) =>
+      document.body.classList.contains(`category-${slug}`)
+    )
+  );
+}
+
 function place() {
   const existing = document.querySelector(`.${LINK_CLASS}`);
   const href = parentPath(window.location.pathname);
 
-  if (!href) {
-    existing?.remove(); // left over from the category page we came from
+  if (!href || !isDocCategoryPage()) {
+    existing?.remove(); // left over from the docs category we came from
     return;
   }
 

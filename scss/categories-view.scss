@@ -166,29 +166,42 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
 }
 
 // Go back link from javascripts/discourse/api-initializers/category-back.js, which
-// prepends it inside .list-controls .navigation-container so it rides Horizon's
-// sticky bar. Quiet by default — Horizon's own muted text plus its accent on hover,
-// no border, so it reads as navigation and not as a button competing with the pills.
+// prepends it inside .list-controls .navigation-container (docs categories only) so it
+// rides Horizon's sticky bar. Framed like the selectors beside it rather than styled as
+// its own kind of button.
 .navigation-container .category-back-link {
     order: -1; // ahead of the breadcrumbs, whatever order Horizon gives them
     align-self: center;
     display: inline-flex;
     align-items: center;
     flex: 0 0 auto;
-    padding: var(--space-half) var(--space-2);
-    border-radius: var(--d-border-radius-small);
+    box-sizing: border-box;
+    // Same frame Horizon gives .list-controls .combo-box .combo-box-header, so the
+    // link reads as a sibling of the category/tag selectors instead of bare text.
+    // --d-control-height is this theme's own control height (:root in main.scss).
+    height: var(--d-control-height);
+    padding-inline: var(--space-2);
+    border: 1px solid var(--primary-300);
+    border-radius: var(--d-border-radius);
+    background: var(--secondary);
     color: var(--primary-high);
     font-size: var(--font-down-1);
     line-height: 1;
     white-space: nowrap;
     text-decoration: none;
 
+    // Horizon's .navigation-container gap is 1rem, which reads as a gulf between this
+    // and the selector beside it. Pull half of it back here rather than shrinking the
+    // gap for every item in the bar.
+    margin-right: calc(var(--space-2) * -1);
+
     &:visited {
         color: var(--primary-high);
     }
 
+    // Same hover as the combo-box header next to it.
     .discourse-no-touch &:hover {
-        background: var(--d-hover);
+        border-color: var(--accent-color);
         color: var(--accent-color);
     }
 }

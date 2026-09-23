@@ -2121,6 +2121,15 @@ ul li.has-checkbox .list-item-checkbox {
   padding-right: 0.17rem;
 }
 
+// Ticked task-list lines read as done. The label is a bare text node next to the
+// input, so the <li> carries the decoration — an input renders no text of its own,
+// so the box itself is untouched. A nested list under a ticked item inherits the
+// line: text-decoration cannot be cancelled on a descendant.
+ul li.has-checkbox:has(> .list-item-checkbox:checked) {
+  text-decoration: line-through;
+  color: var(--primary-medium);
+}
+
 // Wiki edits styling
 .topic-meta-data .post-infos {
   padding-top: 0.25rem;
@@ -2222,4 +2231,9 @@ blockquote .discourse-automation {
   padding: unset;
   background: unset;
   border-left: unset;
+}
+
+// Hide confusing search icon in search 404 pages
+.page-not-found .search-input__icon {
+  display: none;
 }
