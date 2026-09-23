@@ -18,11 +18,21 @@ overrides or extends Horizon, nothing stands alone.
 | `mobile-stuff.scss` | Responsive font sizes, sidebar backgrounds, docs categories on mobile |
 | `user.scss`, `new-user.scss` | Profile and messages pages |
 | `custom-user-menu.scss`, `d-combo-button.scss`, `groups.scss` | User menu, dropdowns, group pages |
+| `ghost-cards.scss` | Ghost bookmark and callout cards inside embedded blog topics |
 | `compatibility.scss` | Overrides that must land after everything else |
 
 Breakpoints use core's viewport library (`@include viewport.from/until(sm|md|lg)`),
 imported once in `common/common.scss`. Raw `@media` is kept only for off-grid widths
 (400px, 470px, 925px, 1200px, 1400px) and `prefers-reduced-motion`.
+
+Ghost card styling needs the `kg-*` classnames appended to the `allowed embed classnames`
+site setting (it defaults to `emoji` — append, don't replace). Discourse strips unlisted
+classes while scraping the blog post, and does it at import time, so the setting and any
+change to it only affect newly imported topics:
+
+```
+kg-card kg-bookmark-card kg-bookmark-container kg-bookmark-content kg-bookmark-title kg-bookmark-description kg-bookmark-metadata kg-bookmark-icon kg-bookmark-author kg-bookmark-publisher kg-bookmark-thumbnail kg-callout-card kg-callout-emoji kg-callout-text kg-callout-card-grey kg-callout-card-white kg-callout-card-blue kg-callout-card-green kg-callout-card-yellow kg-callout-card-red kg-callout-card-pink kg-callout-card-purple kg-callout-card-accent
+```
 
 ### Behaviour (`javascripts/`)
 

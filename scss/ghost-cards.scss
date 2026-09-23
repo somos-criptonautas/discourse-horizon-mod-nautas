@@ -1,0 +1,146 @@
+// Ghost CMS cards inside embedded topics (blog posts scraped by the Embedding
+// feature), styled to match the forum instead of arriving as unstyled divs.
+//
+// Requires the kg-* classnames in the `allowed embed classnames` site setting —
+// see README. Discourse strips every class not listed there while scraping, and
+// it does so at import time, so only new imports are affected.
+
+// --- Bookmark cards: read like a onebox -------------------------------------
+.cooked {
+  .kg-bookmark-card {
+    margin: var(--space-4) 0;
+  }
+
+  .kg-bookmark-container {
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    border: 1px solid var(--primary-low);
+    border-radius: var(--d-border-radius);
+    background: var(--secondary);
+    color: var(--primary);
+    text-decoration: none;
+
+    &:hover {
+      background: var(--primary-very-low);
+    }
+
+    @include viewport.until(sm) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  .kg-bookmark-content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: var(--space-1);
+    min-width: 0;
+    padding: var(--space-3);
+  }
+
+  .kg-bookmark-title {
+    color: var(--tertiary);
+    font-weight: 700;
+  }
+
+  .kg-bookmark-description {
+    display: -webkit-box;
+    overflow: hidden;
+    color: var(--primary-high);
+    font-size: var(--font-down-1);
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .kg-bookmark-metadata {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    margin-top: auto;
+    padding-top: var(--space-2);
+    color: var(--primary-medium);
+    font-size: var(--font-down-2);
+  }
+
+  .kg-bookmark-icon {
+    width: 1.2em;
+    height: 1.2em;
+    object-fit: contain;
+  }
+
+  .kg-bookmark-author:not(:last-child)::after {
+    content: "•";
+    margin-inline-start: var(--space-1);
+  }
+
+  .kg-bookmark-thumbnail {
+    flex: 0 0 8em;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @include viewport.until(sm) {
+      flex-basis: 10em;
+    }
+  }
+}
+
+// --- Callout cards: mapped onto the forum palette ----------------------------
+// Ghost's colours carry no semantics, so the mapping is by hue. Ghost's own
+// emoji stays as the icon, which keeps them recognisable next to the
+// Quote Callouts component used in forum posts.
+$ghost-callout-backgrounds: (
+  "grey": var(--primary-low),
+  "blue": var(--tertiary-low),
+  "green": var(--success-low),
+  "yellow": var(--highlight-low),
+  "red": var(--danger-low),
+  "pink": var(--danger-low),
+  "purple": var(--tertiary-low),
+  "accent": var(--tertiary-low),
+);
+
+.cooked {
+  .kg-callout-card {
+    display: flex;
+    gap: var(--space-3);
+    margin: var(--space-4) 0;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--d-border-radius);
+    background: var(--primary-low);
+
+    @each $name, $background in $ghost-callout-backgrounds {
+      &.kg-callout-card-#{$name} {
+        background: #{$background};
+      }
+    }
+
+    // Ghost's "white" is a bordered card rather than a tinted one.
+    &.kg-callout-card-white {
+      border: 1px solid var(--primary-low);
+      background: var(--secondary);
+    }
+  }
+
+  .kg-callout-emoji {
+    flex: 0 0 auto;
+
+    // The emoji is optional in Ghost; don't leave a gap behind.
+    &:empty {
+      display: none;
+    }
+  }
+
+  .kg-callout-text {
+    min-width: 0;
+
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
