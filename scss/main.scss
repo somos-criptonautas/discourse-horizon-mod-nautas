@@ -244,9 +244,13 @@ body:not(.has-full-page-chat, .wizard) {
   }
 }
 
-// One line on navigation
-.navigation-container {
-  flex-wrap: nowrap;
+// One line on navigation. Desktop only: on mobile Horizon gives .category-breadcrumb
+// flex-basis: 100% with a row-gap, i.e. it is MEANT to wrap onto its own line, and
+// forcing nowrap here pushed the tag pills out of the sticky bar's line box.
+@include viewport.from(sm) {
+  .navigation-container {
+    flex-wrap: nowrap;
+  }
 }
 
 // Sidebar new topic full width button
@@ -621,11 +625,16 @@ button [title="similares"] .d-button-label {
   display: none;
 }
 
-// Invert categories and tags order - Publish to right
-.navigation-container .category-breadcrumb {
-  order: unset !important;
-  column-gap: unset !important;
-  flex-wrap: nowrap;
+// Invert categories and tags order - Publish to right.
+// Desktop only, same reason as above: `column-gap: unset !important` was also wiping
+// the --spacing-inline-m Horizon puts between the mobile tag pills, leaving them
+// glued together on the line they wrap onto.
+@include viewport.from(sm) {
+  .navigation-container .category-breadcrumb {
+    order: unset !important;
+    column-gap: unset !important;
+    flex-wrap: nowrap;
+  }
 }
 
 .list-controls .select-kit .select-kit-collection {
@@ -645,10 +654,6 @@ button [title="similares"] .d-button-label {
   body:not(.category-soporte):not(.category-preguntas) #main-outlet .list-controls .navigation-container .category-breadcrumb.hidden,
   body:not(.category-soporte):not(.category-preguntas) #main-outlet .list-controls .navigation-container .category-breadcrumb {
     display: none !important;
-  }
-
-  #main-outlet .list-controls .navigation-container {
-    gap: unset;
   }
 
   // Disable hiding top header in custom nav mobile
@@ -2210,4 +2215,11 @@ d-icon-far-discobot {
 .about__admins,
 .about__admins {
   display: none;
+}
+
+// No styling in automation quotes (verified by X)
+blockquote .discourse-automation {
+  padding: unset;
+  background: unset;
+  border-left: unset;
 }

@@ -49,6 +49,11 @@ imported once in `common/common.scss`. Raw `@media` is kept only for off-grid wi
   attribute is missing the outlet renders nothing, silently — check with
   `fetch('/latest.json').then(r=>r.json()).then(d=>console.log(
   d.topic_list.topics.filter(t=>'ai_topic_gist' in t).length))`.
+- **`category-back.js`** — prepends a "go back" link into `.list-controls
+  .navigation-container` on category pages (parent category, or `/categories` from a
+  top-level one), so it rides Horizon's sticky bar ahead of the breadcrumbs. The target
+  comes from the URL path, not the route model; no outlet exists inside that bar, so the
+  insert is a DOM one on page change and is skipped when the bar is absent.
 - **`bot-display-name.js`** — shows the `anonist_*` bot accounts under one label
   (`anonist`). Visible link text only: hrefs, quote attributions, markdown mentions,
   search and emails keep the real username, and a post rendered after the page change

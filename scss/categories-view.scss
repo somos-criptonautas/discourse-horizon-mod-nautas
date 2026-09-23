@@ -165,11 +165,32 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
     display: none !important;
 }
 
-// Go back link from javascripts/api-initializers/category-back.gjs
-.category-back-link {
-    display: inline-block;
-    margin-bottom: 0.5rem;
+// Go back link from javascripts/discourse/api-initializers/category-back.js, which
+// prepends it inside .list-controls .navigation-container so it rides Horizon's
+// sticky bar. Quiet by default — Horizon's own muted text plus its accent on hover,
+// no border, so it reads as navigation and not as a button competing with the pills.
+.navigation-container .category-back-link {
+    order: -1; // ahead of the breadcrumbs, whatever order Horizon gives them
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    padding: var(--space-half) var(--space-2);
+    border-radius: var(--d-border-radius-small);
+    color: var(--primary-high);
     font-size: var(--font-down-1);
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+
+    &:visited {
+        color: var(--primary-high);
+    }
+
+    .discourse-no-touch &:hover {
+        background: var(--d-hover);
+        color: var(--accent-color);
+    }
 }
 
 // Recover category descriptions on Horizon
