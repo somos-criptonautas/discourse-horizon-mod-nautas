@@ -98,3 +98,19 @@ body.category-wiki .topic-list.doc-simple-mode .horizon-ai-gist,
 body.category-wiki .topic-list.doc-simple-mode .link-bottom-line .excerpt {
     display: none;
 }
+
+// Only Horizon's high-context card drops discourse-ai's own outlets, so only there do we
+// stand in for them. Simple cards (suggested / related lists) keep core's TopicCell,
+// where discourse-ai renders its own gist — without this we'd add a second one.
+.topic-list-item:not(.--high-context) .horizon-ai-gist {
+    display: none;
+}
+
+// Docs lists show a title-only index, and `.topic-list.doc-simple-mode .topic-excerpt`
+// force-shows the excerpt with !important, so a gist here is a second blurb saying the
+// same thing. Matches the toggle already hidden for these categories in main.scss.
+.topic-list.doc-simple-mode .horizon-ai-gist,
+body.category-glosario .horizon-ai-gist,
+body.category-wiki .horizon-ai-gist {
+    display: none;
+}
