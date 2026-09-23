@@ -59,6 +59,9 @@ kg-card kg-bookmark-card kg-bookmark-container kg-bookmark-content kg-bookmark-t
   attribute is missing the outlet renders nothing, silently — check with
   `fetch('/latest.json').then(r=>r.json()).then(d=>console.log(
   d.topic_list.topics.filter(t=>'ai_topic_gist' in t).length))`.
+- **`checklist-strike.js`** — strikes the label of a ticked inline `[x]` (core's checklist
+  plugin) by wrapping it in core's own `span.chcklst-stroked`. CSS alone cannot: the label
+  is a bare text node and lines are `<br>`-separated inside one paragraph.
 - **`category-back.js`** — prepends a "go back" link into `.list-controls
   .navigation-container` on category pages (parent category, or `/categories` from a
   top-level one), so it rides Horizon's sticky bar ahead of the breadcrumbs. The target
