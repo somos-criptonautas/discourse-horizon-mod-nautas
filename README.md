@@ -49,6 +49,10 @@ imported once in `common/common.scss`. Raw `@media` is kept only for off-grid wi
   attribute is missing the outlet renders nothing, silently — check with
   `fetch('/latest.json').then(r=>r.json()).then(d=>console.log(
   d.topic_list.topics.filter(t=>'ai_topic_gist' in t).length))`.
+- **`bot-display-name.js`** — shows the `anonist_*` bot accounts under one label
+  (`anonist`). Visible link text only: hrefs, quote attributions, markdown mentions,
+  search and emails keep the real username, and a post rendered after the page change
+  shows the real one until the next navigation. New bots need a line in `BOT_LABELS`.
 - **`translated-texts.gjs`** — appends the translated note under the leaderboard podium.
 - **`category-intro.gjs`** — overwrites the category banner titles and descriptions
   rendered from `after_header.html` with the locale-appropriate strings from

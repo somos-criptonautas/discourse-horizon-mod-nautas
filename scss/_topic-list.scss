@@ -73,6 +73,21 @@
     display: none;
 }
 
+// The "last visit" marker in docs lists.
+// Horizon (its scss/topic-cards.scss) hides core's .topic-list-item-separator — the row
+// that carries the "last visit" label — and redraws the marker as a border-bottom on the
+// last-visited row, recoloured to --accent-color on :hover. In a docs category that reads
+// as a stray line that lights up under the cursor.
+//
+// Removed rather than restored to core: init.gjs reorders these rows A-Z, and the
+// separator is not a .topic-list-item so the sort leaves it behind — the label would end
+// up marking an arbitrary position. Horizon's version stays on every other list.
+// One declaration is enough: Horizon's :hover rule only sets border-color, which cannot
+// render once the bottom border is gone.
+.topic-list.doc-simple-mode > .topic-list-body > .topic-list-item.last-visit {
+    border-bottom: none;
+}
+
 // glosario and wiki rows are a plain A-Z index where the gist only restates the title.
 // Both halves go: hiding the gist alone hands the text to the excerpt, and hiding the
 // excerpt alone hands it to the gist. Scoped to .doc-simple-mode so topic pages inside

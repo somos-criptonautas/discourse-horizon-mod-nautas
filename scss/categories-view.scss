@@ -219,20 +219,21 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
         }
     }
 
-    // Boxes of categories: 4 on desktop, 2 on mobile. Core's 15em minimum (18em
-    // with topics) is wider than a quarter — or half a phone at this theme's
-    // 22px root — so auto-fit collapsed the row. Capping the track minimum at
-    // one Nth of the row (gaps subtracted) pins the count; the min-width
-    // variable still wins whenever it is the smaller of the two.
-    // sm is 640px = the same 40rem: media-query rem ignores the theme root.
+    // Boxes of categories: 4 on desktop, 2 on mobile.
+    // A fixed count, NOT core's auto-fit: core's track max is
+    // --category-boxes-max-width (1fr), so auto-fit collapses the empty tracks
+    // and one or two subcategories stretch across the whole row. Fixed columns
+    // keep every box a quarter (or half) wide whatever the count, and
+    // minmax(0, 1fr) lets a long name shrink its box instead of overflowing.
+    // sm is 640px = 40rem: media-query rem ignores the theme's 22-23px root.
     .category-boxes,
     .category-boxes-with-topics {
         @include viewport.from(sm) {
-            grid-template-columns: repeat(auto-fit, minmax(min(var(--category-boxes-min-width), calc((100% - 3 * var(--d-category-boxes-gap, 1em)) / 4)), var(--category-boxes-max-width)));
+            grid-template-columns: repeat(4, minmax(0, 1fr));
         }
 
         @include viewport.until(sm) {
-            grid-template-columns: repeat(auto-fit, minmax(min(var(--category-boxes-min-width), calc((100% - var(--d-category-boxes-gap, 1em)) / 2)), var(--category-boxes-max-width)));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
         }
     }
 }
