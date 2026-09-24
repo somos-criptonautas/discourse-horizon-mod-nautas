@@ -41,3 +41,8 @@ blocked_sections:
 disable_discourse_keyboard_shortcuts:
   type: bool
   default: false
+
+gist_hidden_categories:
+  type: list
+  list_type: category
+  default: ""

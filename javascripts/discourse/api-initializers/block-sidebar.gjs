@@ -43,7 +43,13 @@ function selectorsFor(tier) {
 export default apiInitializer("1.8.0", (api) => {
   const tiers = settings.blocked_sections || [];
   const user = api.getCurrentUser();
-  const myGroups = new Set((user?.groups || []).map((g) => g.id));
+  // visibleGroups replaces groups (deprecation id: discourse.user.groups, 2026.8);
+  // `groups` stays as the fallback for older Discourse. Both are client-side lists that
+  // may omit hidden memberships — fine here, because this gating is navigation UX only
+  // (see README "Known limits"), never an access decision.
+  const myGroups = new Set(
+    (user?.visibleGroups || user?.groups || []).map((g) => g.id)
+  );
 
   // Anonymous visitors are in no group, so every tier applies to them.
   const locked = tiers.filter(

@@ -114,3 +114,11 @@ body.category-glosario .horizon-ai-gist,
 body.category-wiki .horizon-ai-gist {
     display: none;
 }
+
+// Simple cards are a fixed grid (grid-template-areas: creator/title/status + category/
+// activity). discourse-ai's gist reaches that grid as `a.excerpt` via
+// `td.main-link .link-bottom-line { display: contents }` and has no grid-area, so it is
+// auto-placed into new rows and wrecks the card. Our own gist is already hidden here.
+.topic-list-item:not(.--high-context) .excerpt {
+    display: none;
+}

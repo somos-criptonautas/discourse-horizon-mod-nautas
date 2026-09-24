@@ -1189,10 +1189,24 @@ nav.c-footer .c-footer__item {
   color: var(--primary) !important;
 }
 
+// Awarded marker as a corner ribbon: welded to the card's top-right corner, sharing
+// the card's radius on the outside and curved on the inside edge. inset instead of
+// right/top offsets so there is no gap; overflow: hidden on the card clips it to the
+// rounded corner.
+.badge-card {
+  position: relative;
+  overflow: hidden;
+}
+
 .badge-card .check-display {
   position: absolute;
-  right: 0.5rem;
-  top: 0.5rem;
+  inset: 0 0 auto auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.45rem;
+  border-radius: 0 var(--d-border-radius) 0 var(--d-border-radius-large);
+  background: var(--primary-100);
 }
 
 /* 
@@ -1219,11 +1233,12 @@ color: unset !important;
   display: none;
 }
 
-// Karma addition style
+// Cheerpoints granted per badge. In flow, NOT absolute: pinned to the card's
+// bottom-right it sat on top of the description as soon as the text wrapped to more
+// lines, which is every card on a phone. Its own line keeps it clear at any width.
 .badge-summary strong {
-  position: absolute;
-  right: 1rem;
-  bottom: 1rem;
+  display: block;
+  margin-top: 0.5rem;
   color: var(--primary-600);
   cursor: pointer;
 }
@@ -1297,6 +1312,21 @@ body.category-preguntas li:has(.tag-drop) {
 .topic-list.doc-simple-mode .link-bottom-line .badge-category__wrapper,
 .topic-list.doc-simple-mode .topic-excerpt {
   display: inline-flex !important;
+}
+
+// ...except in the A-Z index categories, where the row is a title and nothing else.
+// This has to out-!important the rule right above it, which is why it repeats the
+// selector instead of scoping it: both excerpt classes appear, .topic-excerpt in
+// Horizon's markup and .excerpt in core's docs table.
+body.category-glosario,
+body.category-wiki,
+body.category-curso {
+
+  .topic-list.doc-simple-mode .topic-excerpt,
+  .topic-list.doc-simple-mode .link-bottom-line .excerpt,
+  .horizon-ai-gist {
+    display: none !important;
+  }
 }
 
 // Fix different font in category groups

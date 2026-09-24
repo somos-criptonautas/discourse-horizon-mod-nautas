@@ -36,6 +36,16 @@ import { apiInitializer } from "discourse/lib/api";
 // whole summary to every topic heading. The gist is supplementary (the topic it
 // summarizes is linked right above it), so hiding it from AT is the lesser cost.
 
+// Categories whose topics never show a gist. Client-side only: the attribute is still
+// serialized into every topic list payload and backfill still generates it — discourse-ai
+// has no per-category scoping, so this suppresses rendering, not cost.
+const HIDDEN_CATEGORIES = new Set(
+  (settings.gist_hidden_categories || "")
+    .split("|")
+    .filter(Boolean)
+    .map(Number)
+);
+
 class HorizonAiGist extends Component {
   // May not exist if discourse-ai is disabled, hence the optional chaining below. This
   // is the same pattern core itself uses for a possibly-absent service — discourse-ai's
@@ -46,6 +56,9 @@ class HorizonAiGist extends Component {
   // leaves it unset until the user picks one. Unset counts as show, making the toggle
   // an opt-OUT: nobody loses gists they already see just by never touching it.
   get show() {
+    if (HIDDEN_CATEGORIES.has(this.args.topic?.category_id)) {
+      return false;
+    }
     return this.gists?.currentPreference !== "table";
   }
 

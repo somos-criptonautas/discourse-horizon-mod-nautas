@@ -5,6 +5,7 @@ en:
   theme_metadata:
     description: "Criptonautas customizations on top of Horizon: styling and palette overrides, alphabetical docs categories, AI gists on topic cards, and group-gated sidebar sections."
     settings:
+      gist_hidden_categories: \"Categories whose topics never show an AI gist. Cosmetic only: the gist is still generated and still sent in the topic list payload.\"
       disable_discourse_keyboard_shortcuts: "Disables Discourse's own keyboard shortcuts (j/k navigation, ?, g-sequences). Native browser and OS keys are never affected."
       blocked_sections: "One row per tier. `key` links the row to its title/message in the translations tab. Leave `allowed_groups` empty and the tier applies to everyone. `paths` is a comma-separated list of link paths for anything that isn't a category. `cta_url` empty hides the second button."
   blocked_sidebar:
