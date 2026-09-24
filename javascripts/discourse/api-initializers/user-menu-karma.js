@@ -3,7 +3,7 @@ import { ajax } from "discourse/lib/ajax";
 import { i18n } from "discourse-i18n";
 import { themePrefix } from "virtual:theme";
 
-const CLASS = "fk-d-menu__monthly-karma";
+const CLASS = "fk-d-menu__total-karma";
 
 // The custom-user-menu component exposes no plugin outlet, and its content is
 // teleported into a float-kit portal only after the avatar is clicked — so the
@@ -16,12 +16,23 @@ export default apiInitializer((api) => {
     return;
   }
 
-  // One request per page load: the score barely moves and the menu gets opened
-  // over and over.
+  // Total cheer points, read from the user card — the only place gamification
+  // serializes it: discourse-gamification's plugin.rb does
+  // `add_to_serializer(:user_card, :gamification_score)` and nothing adds it to the
+  // current-user payload. The previous version asked /leaderboard for a monthly
+  // figure, got a shape it could not read, and silently removed its own line.
+  //
+  // One request per page load: the score barely moves and the menu gets opened over
+  // and over.
   let scoreRequest;
-  function monthlyScore() {
-    scoreRequest ||= ajax("/leaderboard", { data: { period: "monthly" } })
-      .then((json) => json?.personal?.user?.total_score ?? null)
+  function totalScore() {
+    const username = api.getCurrentUser()?.username;
+    if (!username) {
+      return Promise.resolve(null);
+    }
+
+    scoreRequest ||= ajax(`/u/${encodeURIComponent(username)}/card.json`)
+      .then((json) => json?.user?.gamification_score ?? null)
       .catch(() => null);
     return scoreRequest;
   }
@@ -35,7 +46,7 @@ export default apiInitializer((api) => {
     line.className = CLASS;
     userInfo.append(line);
 
-    const score = await monthlyScore();
+    const score = await totalScore();
 
     if (!line.isConnected) {
       return; // menu was closed while the request was in flight
@@ -48,7 +59,7 @@ export default apiInitializer((api) => {
       return;
     }
 
-    line.textContent = i18n(themePrefix("monthly_karma"), {
+    line.textContent = i18n(themePrefix("total_karma"), {
       score: score.toLocaleString(),
     });
   }

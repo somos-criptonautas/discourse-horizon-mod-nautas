@@ -15,6 +15,7 @@ overrides or extends Horizon, nothing stands alone.
 | `topic.scss` | Topic max-widths and body width |
 | `_topic-list.scss` | Topic-list density + AI gist styling, docs-table gist/excerpt dedupe |
 | `categories-view.scss` | Category boxes and title headers |
+| `nav-scroller.scss` | Scrollable topic nav strip and its arrows |
 | `mobile-stuff.scss` | Responsive font sizes, sidebar backgrounds, docs categories on mobile |
 | `user.scss`, `new-user.scss` | Profile and messages pages |
 | `custom-user-menu.scss`, `d-combo-button.scss`, `groups.scss` | User menu, dropdowns, group pages |
@@ -62,15 +63,23 @@ kg-card kg-bookmark-card kg-bookmark-container kg-bookmark-content kg-bookmark-t
 - **`checklist-strike.js`** — strikes the label of a ticked inline `[x]` (core's checklist
   plugin) by wrapping it in core's own `span.chcklst-stroked`. CSS alone cannot: the label
   is a bare text node and lines are `<br>`-separated inside one paragraph.
+- **`nav-scroller.js`** — wraps `#navigation-bar` in a horizontal scroller with edge
+  arrows (YouTube-style topic nav), merged in from the standalone "youtube style menu
+  scrollable" component so the two stop fighting over `.navigation-container` and the
+  `navigation-bar-dropdown-mode` transformer. **Uninstall that component** after
+  deploying this. Styles in `scss/nav-scroller.scss`.
 - **`category-back.js`** — prepends a "go back" link into `.list-controls
   .navigation-container` on category pages (parent category, or `/categories` from a
   top-level one), so it rides Horizon's sticky bar ahead of the breadcrumbs. The target
   comes from the URL path, not the route model; no outlet exists inside that bar, so the
   insert is a DOM one on page change and is skipped when the bar is absent.
 - **`bot-display-name.js`** — shows the `anonist_*` bot accounts under one label
-  (`anonist`). Visible link text only: hrefs, quote attributions, markdown mentions,
-  search and emails keep the real username, and a post rendered after the page change
-  shows the real one until the next navigation. New bots need a line in `BOT_LABELS`.
+  (`anonist`) and hides their `.compose-pm` buttons. Visible text only: hrefs, quote
+  attributions, markdown mentions, search and emails keep the real username. Covers
+  links plus the plain `.username` / `.name` spans core uses in search, menus,
+  reviewables, the PM map and profiles; runs on page change and on the frame after a
+  click, since cards and popups open without a route change. New bots need a line in
+  `BOT_LABELS`.
 - **`translated-texts.gjs`** — appends the translated note under the leaderboard podium.
 - **`category-intro.gjs`** — overwrites the category banner titles and descriptions
   rendered from `after_header.html` with the locale-appropriate strings from

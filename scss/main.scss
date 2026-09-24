@@ -882,9 +882,11 @@ nav.c-footer .c-footer__item {
   display: none;
 }
 
-// Prevent weird spacing on user menu
-.custom-user-menu-content .fk-d-menu__profile-tab li.preferences {
-  padding-bottom: 0;
+// Prevent weird spacing on user menu. The gap before "salir" belongs to whatever is
+// last above it — the anonymous-mode item added by the custom user menu component,
+// not preferences.
+.custom-user-menu-content .fk-d-menu__profile-tab li.enable-anonymous {
+  padding-bottom: 1rem;
 }
 
 // Hide default trust_levels (all going into tl1 -> 'nuevos')
@@ -1180,7 +1182,8 @@ nav.c-footer .c-footer__item {
   width: 1.25rem !important;
 }
 
-.check-display {
+// Everywhere except badge cards, which get the disc above.
+.check-display:not(.badge-card .check-display) {
   border-radius: 0.15rem !important;
 }
 
@@ -1189,24 +1192,32 @@ nav.c-footer .c-footer__item {
   color: var(--primary) !important;
 }
 
-// Awarded marker as a corner ribbon: welded to the card's top-right corner, sharing
-// the card's radius on the outside and curved on the inside edge. inset instead of
-// right/top offsets so there is no gap; overflow: hidden on the card clips it to the
-// rounded corner.
+// Awarded marker: a disc riding the card's top-right corner. Round, not the boxy
+// core default, and filled with --tertiary so the tick reads at a glance; the tick
+// itself is forced to --secondary since core colours it --primary, which would sit
+// dark-on-dark here. Padding-bottom on the card keeps the content clear of it.
 .badge-card {
   position: relative;
-  overflow: hidden;
+  padding-bottom: 1rem;
 }
 
 .badge-card .check-display {
   position: absolute;
-  inset: 0 0 auto auto;
+  top: 0.4rem;
+  right: 0.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.25rem 0.45rem;
-  border-radius: 0 var(--d-border-radius) 0 var(--d-border-radius-large);
-  background: var(--primary-100);
+  box-sizing: border-box;
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--tertiary);
+}
+
+.badge-card .check-display .d-icon {
+  color: var(--secondary) !important; // core paints it --primary, invisible on the disc
 }
 
 /* 

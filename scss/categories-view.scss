@@ -204,6 +204,32 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
         border-color: var(--accent-color);
         color: var(--accent-color);
     }
+
+    .category-back-link__arrow {
+        line-height: 1;
+    }
+
+    .category-back-link__label {
+        margin-left: 0.3rem;
+
+        // Arrow only on phones: the sticky bar has to fit the nav pills and the tag
+        // selector too. The link keeps its accessible name from this text, so it is
+        // moved out of sight rather than removed.
+        @include viewport.until(sm) {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+        }
+    }
+
+    @include viewport.until(sm) {
+        padding-inline: var(--space-1);
+    }
 }
 
 // Recover category descriptions on Horizon

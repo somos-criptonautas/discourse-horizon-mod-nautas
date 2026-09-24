@@ -1,8 +1,31 @@
-// Fix for subscriptions and profile and user-preferences-page with column display
-.user-billing-page .new-user-content-wrapper .user-content,
-.user-preferences-page .new-user-content-wrapper .user-content {
-    padding-left: 2rem;
-    margin-top: 1rem;
+// Core's user sidebar panel (discourse#44050): preferences first, profile last.
+// Sections not listed keep order 10, i.e. they follow the five below in their own
+// order. .sidebar-sections is already a flex column in core, so `order` is all it takes.
+.sidebar-sections.user-nav-panel {
+
+    .sidebar-section-wrapper {
+        order: 10;
+    }
+
+    [data-section-name="user-nav-preferences"] {
+        order: 1;
+    }
+
+    [data-section-name="user-nav-messages"] {
+        order: 2;
+    }
+
+    [data-section-name="user-nav-notifications"] {
+        order: 3;
+    }
+
+    [data-section-name="user-nav-invites"] {
+        order: 4;
+    }
+
+    [data-section-name="user-nav-profile"] {
+        order: 5;
+    }
 }
 
 // Style user profile page

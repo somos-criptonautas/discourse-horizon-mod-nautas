@@ -1,3 +1,4 @@
+import { schedule } from "@ember/runloop";
 import { apiInitializer } from "discourse/lib/api";
 
 // Strike the label of a ticked inline checkbox ([x] from core's checklist plugin).
@@ -46,10 +47,15 @@ function strikeLabel(box) {
 }
 
 export default apiInitializer((api) => {
-  api.decorateCookedElement(
-    (element) => {
-      element.querySelectorAll(".chcklst-box.checked").forEach(strikeLabel);
-    },
-    { id: "horizon-mods-checklist-strike" }
-  );
+  // onPageChange over the rendered post, not decorateCookedElement: the decorator
+  // never fired here (a ticked box stayed unwrapped in the DOM), and this is the
+  // pattern the rest of this theme already relies on. strikeLabel() skips boxes it has
+  // already wrapped, so running it again on the same posts costs a querySelectorAll.
+  api.onPageChange(() => {
+    schedule("afterRender", () => {
+      document
+        .querySelectorAll(".cooked .chcklst-box.checked")
+        .forEach(strikeLabel);
+    });
+  });
 });

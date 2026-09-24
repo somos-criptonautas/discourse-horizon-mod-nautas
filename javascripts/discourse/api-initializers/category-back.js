@@ -78,8 +78,20 @@ function place() {
   const link = document.createElement("a");
   link.className = LINK_CLASS;
   link.setAttribute("href", href);
-  // textContent, not innerHTML: the label is a translation string.
-  link.textContent = i18n(themePrefix("category_back"));
+
+  // Arrow and word as separate elements so the sticky bar can drop the word on a
+  // phone and keep the arrow (scss/categories-view.scss). Built node by node with
+  // textContent — never innerHTML — so the translation cannot carry markup.
+  const arrow = document.createElement("span");
+  arrow.className = `${LINK_CLASS}__arrow`;
+  arrow.setAttribute("aria-hidden", "true");
+  arrow.textContent = "←";
+
+  const label = document.createElement("span");
+  label.className = `${LINK_CLASS}__label`;
+  label.textContent = i18n(themePrefix("category_back"));
+
+  link.append(arrow, label);
   container.prepend(link);
 }
 

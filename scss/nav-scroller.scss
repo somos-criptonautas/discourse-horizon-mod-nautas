@@ -1,0 +1,201 @@
+// YouTube-style scrollable topic navigation.
+//
+// Merged in from the standalone "youtube style menu scrollable" component: both it and
+// this theme styled .navigation-container and both registered the
+// navigation-bar-dropdown-mode transformer, so the two fought over the same strip on
+// every change. Uninstall that component after deploying this.
+//
+// Paired with javascripts/discourse/api-initializers/nav-scroller.js.
+
+.navigation-container {
+    min-width: 0;
+
+    // The strip is one row of pills and nothing else. Without a cap it grew to fit the
+    // tag selector and the solved dropdown on their own lines, which is the two/three
+    // line header: the bar is a flex row, so an item that cannot shrink wraps instead.
+    max-height: 2.1rem;
+}
+
+// Wrapper injected by the initializer; positioning context for the arrows.
+.ct-nav-scroller {
+    position: relative;
+    display: flex;
+    // Shrinkable, and capped so the pills never claim the whole bar: the breadcrumbs
+    // and the solved/tag selectors need their share of the row.
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
+}
+
+// #navigation-bar is the .nav-pills element and the scrolling container.
+// Single id-level selector so nothing here fights core on specificity.
+.navigation-container #navigation-bar {
+    border: none;
+    background: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+}
+
+.navigation-container #navigation-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.discourse-no-touch .navigation-container #navigation-bar:hover {
+    border: none;
+}
+
+// YouTube-style pills
+.navigation-container .nav-pills>li>a {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: auto !important;
+    height: 100% !important;
+    min-width: max-content;
+    margin: 0 !important;
+    padding: 0.35rem 0.75rem !important;
+    border: 1px solid var(--primary-low);
+    border-radius: var(--d-border-radius);
+    background: var(--secondary);
+    color: var(--primary-900);
+    font-size: var(--font-down-1);
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap !important;
+}
+
+// Remove any underline added by the current theme
+.navigation-container .nav-pills>li>a::after {
+    display: none !important;
+}
+
+// Hover and current tab share the sidebar-active look
+.navigation-container .nav-pills>li>a:hover,
+.navigation-container .nav-pills>li>a.active,
+.navigation-container .nav-pills>li.active>a {
+    border-color: var(--d-sidebar-active-background) !important;
+    background: var(--d-sidebar-active-background) !important;
+    color: var(--d-sidebar-active-color) !important;
+    font-weight: var(--d-sidebar-active-font-weight);
+}
+
+// Scroll arrows: square-on-strip-height, pinned to the scroller's edges
+.ct-nav-arrow {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    height: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--secondary);
+    color: var(--primary);
+    box-shadow: 0 1px 6px rgb(0 0 0 / 25%);
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        opacity 0.15s ease,
+        visibility 0.15s ease;
+}
+
+// Fade between the arrow and the pills it sits next to
+.ct-nav-arrow::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 24px;
+    pointer-events: none;
+}
+
+.ct-nav-arrow-left {
+    left: 0;
+}
+
+.ct-nav-arrow-left::after {
+    left: 100%;
+    background: linear-gradient(to right, var(--secondary), transparent);
+}
+
+.ct-nav-arrow-right {
+    right: 0;
+}
+
+.ct-nav-arrow-right::after {
+    right: 100%;
+    background: linear-gradient(to left, var(--secondary), transparent);
+}
+
+.ct-nav-arrow:hover {
+    background: var(--primary-low);
+}
+
+.ct-nav-arrow.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+// Swipe-only on phones and small tablets: no room for arrows over the pills.
+@include viewport.until(md) {
+    .ct-nav-arrow {
+        display: none;
+    }
+}
+
+// Breadcrumbs keep their own width instead of claiming a full row of the bar.
+.list-controls .navigation-container .category-breadcrumb {
+    flex-basis: unset !important;
+    padding-right: 0.1rem;
+}
+
+// The strip scrolls horizontally on phones instead of stacking.
+@include viewport.until(sm) {
+    .list-controls .navigation-container .nav-pills {
+        display: flex !important;
+        flex-flow: row nowrap !important;
+        justify-content: flex-start !important;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        scroll-snap-type: none !important;
+        padding-left: 0 !important;
+        transform: none !important;
+    }
+
+    .list-controls .navigation-container .nav-pills>li {
+        display: block;
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: max-content;
+        border: 0 !important;
+
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+
+    .list-controls .navigation-container .nav-pills>li>a {
+        width: auto !important;
+        min-width: max-content;
+        white-space: nowrap !important;
+    }
+}
+
+// Fix foundation new styling incompatible with Horizon
+:where(.uc-modernize-foundation-theme) .navigation-container .nav-pills>li>a {
+    height: unset;
+}

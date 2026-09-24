@@ -1,8 +1,10 @@
-
-.new-user-wrapper.user-navigation-secondary.navigation-controls {
-    flex-direction: column;
-    padding: 0 0.5rem;
-}
+// Profile / messages pages.
+//
+// The vertical-navigation hacks that used to live here are gone: core's experimental
+// user sidebar (discourse#44050, ac93ba0) renders .sidebar-sections.user-nav-panel and
+// hides .user-navigation-secondary under body.user-nav-panel-active, so every rule that
+// turned that element into a column had no element left to style. Ordering moved to the
+// new panel, in scss/user.scss. What stays here is content, not navigation layout.
 
 // Styling better on mobile
 @include viewport.until(sm) {
@@ -16,31 +18,13 @@
     display: none;
 }
 
-// Remove weird border top in MPs (for vertical nav)
+// Remove weird border top in MPs
 .user-messages-page .paginated-topics-list .topic-list tbody.topic-list-body {
     border-top: unset !important;
 }
 
-.new-user-wrapper.user-navigation-secondary .messages-dropdown-trigger,
-.new-user-wrapper.user-navigation-secondary .navigation-controls .btn-primary .new-private-message {
-    width: 100%;
-    max-width: 100%;
-    height: 1.8rem;
-    margin: 0 0.5rem;
-}
-
 .post__topic-map.topic-map.--op {
     font-size: var(--font-down-1);
-}
-
-// Same font-size than other profile navbars
-.new-user-wrapper .user-navigation-secondary {
-    font-size: unset !important;
-}
-
-// [EXPERIMENTAL] Hiding activity switch for MPs vertical navbar design
-body.user-activity-page .user-navigation .user-navigation-secondary {
-    display: none !important;
 }
 
 // Hide gists on MPs
@@ -48,33 +32,7 @@ body.user-activity-page .user-navigation .user-navigation-secondary {
     display: none;
 }
 
-// Workaround on MP messages for new User UI
 @include viewport.from(sm) {
-    body.user-messages-page .new-user-wrapper .user-navigation-secondary {
-        display: unset;
-    }
-
-    // More width in (vertical display)
-    .new-user-wrapper .user-navigation-secondary .messages-dropdown-trigger,
-    .new-user-wrapper .user-navigation-secondary .category-breadcrumb li {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    // Padding and alignment for vertical nav pills
-    .nav-pills.action-list.messages-nav.nav-pills li a {
-        justify-content: left;
-        margin: 0 1.7rem;
-    }
-
-    // Same alignment on the rest of the vertical nav (preferences, profile):
-    // the rule above only matches .messages-nav. Three classes deep so it
-    // outranks whatever centers them.
-    .new-user-wrapper .user-navigation-secondary .nav-pills li a {
-        justify-content: left;
-    }
-
-    // Removing padding on column dirty hacked profile page
     .new-user-wrapper .empty-state {
         margin: 0 0 1em 0;
     }
@@ -82,59 +40,4 @@ body.user-activity-page .user-navigation .user-navigation-secondary {
     .user-invites-page .user-content {
         margin: 0 auto 0 auto;
     }
-
-    // Vertical MP navbar only on mobile
-    .new-user-wrapper .user-navigation-secondary .nav-pills {
-        flex-direction: column;
-    }
-
-    // Style and fix wrap on Profile MP
-    #user-navigation-secondary__horizontal-nav .new-user-wrapper .user-navigation .nav-pills li a,
-    #user-navigation-secondary__horizontal-nav .new-user-content-wrapper .user-navigation .nav-pills li a {
-        flex-wrap: wrap-reverse;
-        justify-content: left;
-    }
-
-    // Re-order in profile nav preferences (to the top)
-    .user-nav-preferences-activity-pub {
-        order: -2;
-    }
-
-    .user-nav__preferences-calendar-subscriptions {
-        order: -3;
-    }
-
-    .user-nav__preferences-account {
-        order: -5;
-    }
-
-    .user-nav__preferences-security {
-        order: -1;
-    }
-
-    .user-nav__preferences-profile {
-        order: -4;
-    }
-
-    // Vertical flex display adjustment
-    .new-user-wrapper .user-navigation-secondary .nav-pills li {
-        flex: 1 1 auto !important;
-    }
-
-    // Vertical navbar on profile
-    :not(.user-messages-page).new-user-content-wrapper {
-        display: flex;
-    }
-
-    .user-navigation-secondary {
-        margin: 1.5rem 1.5rem 0.5rem 0.5rem;
-        font-size: var(--font-0);
-        min-width: 27%;
-    }
-
-    .new-user-wrapper .user-navigation-secondary {
-        height: 100%;
-        min-width: 27%;
-    }
-
 }
