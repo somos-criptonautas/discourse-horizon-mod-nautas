@@ -5,7 +5,7 @@ es:
   theme_metadata:
     description: "Personalizaciones de Criptonautas sobre Horizon: estilos y paletas, categorías de documentación en orden alfabético, resúmenes de IA en las tarjetas de tema y secciones de la barra lateral restringidas por grupo."
     settings:
-      gist_hidden_categories: \"Categorías cuyos temas nunca muestran un resumen IA. Solo cosmético: el resumen se sigue generando y enviando en la lista de temas.\"
+      gist_hidden_categories: "Categorías cuyos temas nunca muestran un resumen IA. Solo cosmético: el resumen se sigue generando y enviando en la lista de temas."
       disable_discourse_keyboard_shortcuts: "Desactiva los atajos de teclado propios de Discourse (navegación j/k, ?, secuencias con g). Las teclas nativas del navegador y del sistema no se ven afectadas."
       blocked_sections: "Una fila por nivel. `key` enlaza la fila con su título/mensaje en la pestaña de traducciones. Si `allowed_groups` queda vacío, el nivel aplica a todos. `paths` es una lista separada por comas de rutas para lo que no sea una categoría. Si `cta_url` queda vacío se oculta el segundo botón."
   blocked_sidebar:
