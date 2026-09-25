@@ -1,0 +1,42 @@
+// AI bot conversations: like / flag become thumbs up / thumbs down, the shape people
+// expect from an LLM chat (the same choice ask.discourse.com makes).
+//
+// Scoped by body.has-ai-conversations-sidebar, which discourse-ai sets on those routes
+// only, so post menus everywhere else keep the heart and the flag.
+//
+// Why masks and not api.replaceIcon(): replaceIcon is a global registry keyed by icon
+// name, so remapping `flag` would change every flag in the forum. Core offers a
+// transformer for the like icon (post-menu-like-button-icon) but passes it no post or
+// route context, and the flag button hardcodes @icon="flag" with no hook at all. CSS
+// cannot rewrite a sprite's <use href>, so the sprite glyph is hidden and the same
+// element repainted with a mask - the technique already used for the header toggles in
+// scss/header.scss, where the reasoning is spelled out in full.
+//
+// Alpha masking keeps the duotone: Phosphor's opacity="0.2" layer lands at 20% of
+// currentColor, so hover, the liked state (core colours .has-like with --love) and
+// light/dark all keep working.
+//
+// Glyphs copied from the sprite in discourse-phosphor-duotone-icons
+// (ph-dt-thumbs-up / ph-dt-thumbs-down); swap either URL for another encoded SVG.
+$ai-thumbs-up: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M80,104V208H32a8,8,0,0,1-8-8V112a8,8,0,0,1,8-8Z' opacity='0.2'/%3E%3Cpath d='M234,80.12A24,24,0,0,0,216,72H160V56a40,40,0,0,0-40-40,8,8,0,0,0-7.16,4.42L75.06,96H32a16,16,0,0,0-16,16v88a16,16,0,0,0,16,16H204a24,24,0,0,0,23.82-21l12-96A24,24,0,0,0,234,80.12ZM32,112H72v88H32ZM223.94,97l-12,96a8,8,0,0,1-7.94,7H88V105.89l36.71-73.43A24,24,0,0,1,144,56V80a8,8,0,0,0,8,8h64a8,8,0,0,1,7.94,9Z'/%3E%3C/svg%3E");
+$ai-thumbs-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M80,48V152H32a8,8,0,0,1-8-8V56a8,8,0,0,1,8-8Z' opacity='0.2'/%3E%3Cpath d='M239.82,157l-12-96A24,24,0,0,0,204,40H32A16,16,0,0,0,16,56v88a16,16,0,0,0,16,16H75.06l37.78,75.58A8,8,0,0,0,120,240a40,40,0,0,0,40-40V184h56a24,24,0,0,0,23.82-27ZM72,144H32V56H72Zm150,21.29a7.88,7.88,0,0,1-6,2.71H152a8,8,0,0,0-8,8v24a24,24,0,0,1-19.29,23.54L88,150.11V56H204a8,8,0,0,1,7.94,7l12,96A7.87,7.87,0,0,1,222,165.29Z'/%3E%3C/svg%3E");
+
+body.has-ai-conversations-sidebar {
+
+    .post-action-menu__like .d-icon,
+    .post-action-menu__flag .d-icon {
+        background-color: currentColor;
+
+        use {
+            display: none;
+        }
+    }
+
+    .post-action-menu__like .d-icon {
+        mask: $ai-thumbs-up center / contain no-repeat;
+    }
+
+    .post-action-menu__flag .d-icon {
+        mask: $ai-thumbs-down center / contain no-repeat;
+    }
+}

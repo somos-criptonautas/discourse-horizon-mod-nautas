@@ -15,34 +15,80 @@ import { apiInitializer } from "discourse/lib/api";
 // Unticking re-cooks the post, which rebuilds the paragraph and drops the wrapper.
 const STROKE_CLASS = "chcklst-stroked";
 
-// The label ends at the next line break, the next checkbox, or the end of the block.
-function endsLine(node) {
+function isBox(node) {
   return (
-    node.nodeName === "BR" ||
-    (node.nodeType === Node.ELEMENT_NODE &&
-      node.classList.contains("chcklst-box"))
+    node.nodeType === Node.ELEMENT_NODE &&
+    (node.classList.contains("chcklst-box") ||
+      !!node.querySelector?.(".chcklst-box"))
   );
 }
 
+// A "line" is what sits between two <br>s (or the block's edges): the plugin puts every
+// item of an inline checklist in one paragraph separated by breaks.
+function lineNodes(box, direction) {
+  const nodes = [];
+  let node = direction === "forward" ? box.nextSibling : box.previousSibling;
+
+  while (node && node.nodeName !== "BR") {
+    nodes.push(node);
+    node = direction === "forward" ? node.nextSibling : node.previousSibling;
+  }
+
+  return nodes;
+}
+
 function strikeLabel(box) {
-  // Already wrapped (a second decoration pass would nest wrappers).
-  if (box.nextSibling?.nodeType === Node.ELEMENT_NODE &&
-      box.nextSibling.classList.contains(STROKE_CLASS)) {
+  // Already wrapped (a second pass would nest wrappers).
+  if (
+    box.nextSibling?.nodeType === Node.ELEMENT_NODE &&
+    box.nextSibling.classList.contains(STROKE_CLASS)
+  ) {
+    return;
+  }
+
+  const after = lineNodes(box, "forward");
+
+  // Leave the line alone when it carries another checkbox, before or after this one:
+  // the label of one box cannot be told apart from the label of the next, so striking
+  // would cross out text that belongs to a different item.
+  if (after.some(isBox) || lineNodes(box, "backward").some(isBox)) {
     return;
   }
 
   const wrapper = document.createElement("span");
   wrapper.className = STROKE_CLASS;
 
-  let node = box.nextSibling;
-  while (node && !endsLine(node)) {
-    const next = node.nextSibling;
+  for (const node of after) {
     wrapper.append(node); // moves the existing node, never re-parses HTML
-    node = next;
   }
 
-  if (wrapper.childNodes.length > 0) {
-    box.after(wrapper);
+  if (wrapper.childNodes.length === 0) {
+    return;
+  }
+
+  box.after(wrapper);
+
+  // The strike starts at the label, not at the space that follows the box — otherwise
+  // the line reads as crossing the box itself. Leading whitespace is moved back out,
+  // in front of the wrapper.
+  while (wrapper.firstChild?.nodeType === Node.TEXT_NODE) {
+    const text = wrapper.firstChild;
+    const spaces = text.data.length - text.data.trimStart().length;
+
+    if (spaces === 0) {
+      break;
+    }
+
+    if (spaces < text.data.length) {
+      // splitText keeps the spaces in `text` and leaves the label in a new sibling
+      // inside the wrapper, so only `text` has to move out.
+      text.splitText(spaces);
+      wrapper.before(text);
+      break;
+    }
+
+    // Whitespace-only node: move it out, then look at the next one.
+    wrapper.before(text);
   }
 }
 
