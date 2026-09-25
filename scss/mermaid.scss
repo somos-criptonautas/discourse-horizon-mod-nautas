@@ -57,3 +57,20 @@
         width: auto;
     }
 }
+
+// Fullscreen modal: fill the screen, not just cover it.
+//
+// The component only resizes the svg once its zoom state is on
+// (.mermaid-diagram.zoomed > svg), so without zooming the diagram opens at its
+// intrinsic width inside a 95vw modal — bigger frame, same small graph. Same inline
+// max-width as above is what pins it, hence !important again.
+//
+// :not(.zoomed) so the component's own zoomed sizing still wins when the user zooms.
+// width + height with the svg's viewBox means preserveAspectRatio scales it to fit the
+// modal in whichever dimension runs out first, so a tall narrow graph finally uses the
+// full height.
+.d-modal.mermaid-fullscreen .mermaid-diagram:not(.zoomed)>svg {
+    max-width: none !important;
+    width: 100%;
+    height: 100%;
+}
