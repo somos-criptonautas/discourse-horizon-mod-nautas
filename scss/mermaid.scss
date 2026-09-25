@@ -1,0 +1,59 @@
+// Mermaid diagrams: let a tall, narrow graph use the post's width.
+//
+// Markup comes from the official component (discourse-mermaid-theme-component):
+//   .mermaid-wrapper > .mermaid-diagram-controls + .mermaid-diagram > svg
+//
+// Two things made a `flowchart TD` render tiny on desktop:
+//
+// 1. .mermaid-wrapper is `aspect-ratio: 16 / 9` in the component's common.scss, so a
+//    tall graph is squeezed into a wide, short box whatever its real proportions.
+// 2. mermaid runs with useMaxWidth on (its default; the component calls
+//    mermaid.initialize() without touching it), which writes style="max-width: NNNpx"
+//    INLINE on the svg, NNN being the diagram's intrinsic width. A stylesheet can only
+//    beat an inline declaration with !important — hence the one below, which is the
+//    whole reason this works without JS. If it ever stops working, the minimal
+//    alternative is `useMaxWidth: false` in the component's mermaid config, or a few
+//    lines of JS removing the inline style after render; CSS is preferred and is what
+//    this does.
+//
+// Everything is scoped to .cooked so the component's fullscreen modal keeps its own
+// `.mermaid-diagram.zoomed > svg` sizing, and so no other d-wrap, image or table is
+// touched.
+
+.cooked .mermaid-wrapper {
+    // The graph decides the height, not a 16/9 frame.
+    aspect-ratio: auto;
+    height: auto;
+}
+
+.cooked .mermaid-diagram {
+    height: auto;
+
+    // Wide graphs scroll instead of being scaled down to unreadable text.
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    >svg {
+        width: 100%;
+        height: auto;
+
+        // Beats mermaid's inline max-width; without it the svg never grows past its
+        // intrinsic width and a narrow graph stays a stamp in a wide box.
+        max-width: none !important;
+
+        // The text floor: min-content on a replaced element is its intrinsic width, so
+        // the svg scales UP to fill the post but never DOWN. mermaid's base font is
+        // 16px, so no downscale means no label under 16px — comfortably over the ~14px
+        // asked for — and anything wider than the post scrolls (rule above).
+        min-width: min-content;
+    }
+}
+
+// Phones and small tablets: keep the diagram at its natural size and scroll it, rather
+// than stretching a tall graph to a narrow screen (which would shrink nothing, but
+// would make a wide one unreadable if it were allowed to fit).
+@include viewport.until(md) {
+    .cooked .mermaid-diagram>svg {
+        width: auto;
+    }
+}

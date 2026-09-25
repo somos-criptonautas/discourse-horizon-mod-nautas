@@ -16,6 +16,7 @@ overrides or extends Horizon, nothing stands alone.
 | `_topic-list.scss` | Topic-list density + AI gist styling, docs-table gist/excerpt dedupe |
 | `categories-view.scss` | Category boxes and title headers |
 | `nav-scroller.scss` | Scrollable topic nav strip and its arrows |
+| `mermaid.scss` | Mermaid diagrams scale to the post width instead of their intrinsic size |
 | `mobile-stuff.scss` | Responsive font sizes, sidebar backgrounds, docs categories on mobile |
 | `user.scss`, `new-user.scss` | Profile and messages pages |
 | `custom-user-menu.scss`, `d-combo-button.scss`, `groups.scss` | User menu, dropdowns, group pages |
