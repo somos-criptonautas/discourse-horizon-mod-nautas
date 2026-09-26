@@ -3,9 +3,9 @@
 
 es:
   theme_metadata:
-    description: "Personalizaciones de Criptonautas sobre Horizon: estilos y paletas, categorías de documentación en orden alfabético, resúmenes de IA en las tarjetas de tema y secciones de la barra lateral restringidas por grupo."
+    description: "Personalizaciones de Criptonautas sobre Horizon: estilos y paletas, categorías de documentación en orden alfabético, resúmenes de IA en las tarjetas de historia y secciones de la barra lateral restringidas por grupo."
     settings:
-      gist_hidden_categories: "Categorías cuyos temas nunca muestran un resumen IA. Solo cosmético: el resumen se sigue generando y enviando en la lista de temas."
+      gist_hidden_categories: "Categorías cuyas historias nunca muestran un resumen IA. Solo cosmético: el resumen se sigue generando y enviando en la lista de historias."
       disable_discourse_keyboard_shortcuts: "Desactiva los atajos de teclado propios de Discourse (navegación j/k, ?, secuencias con g). Las teclas nativas del navegador y del sistema no se ven afectadas."
       blocked_sections: "Una fila por nivel. `key` enlaza la fila con su título/mensaje en la pestaña de traducciones. Si `allowed_groups` queda vacío, el nivel aplica a todos. `paths` es una lista separada por comas de rutas para lo que no sea una categoría. Si `cta_url` queda vacío se oculta el segundo botón."
   blocked_sidebar:
@@ -13,22 +13,22 @@ es:
     cta: "entrar ahora"
     nautas:
       title: "Disponible para nautas"
-      message: "Sección exclusiva para @nautas. Participa en la comunidad o consigue un ticket suscribiéndote."
+      message: "Sección exclusiva para @nautas. Se desbloquea participando en la comunidad o con un ticket (suscripción)."
     traders:
       title: "Disponible para traders"
       message: "Sector dedicado para @traders. Se desbloquea con participación sostenida o a través de un ticket (suscripción mensual)."
   total_karma: "karma: %{score}"
   category_back: "Volver"
-  podium_note: "Cada uno recibe 3% del total de suscripciones (en Monero)."
+  podium_note: "Cada puesto recibe 3% del total de suscripciones (en Monero)."
   btcpay_pos:
     title: "Punto de venta BTCPay"
   category_intros:
     ghettos:
       title: "ghettos"
-      description: "Descubre ghettos generando karma y completando retos."
+      description: "Los ghettos se descubren generando karma y completando retos."
     retos:
       title: "retos"
-      description: "Completa desafíos y accede a nuestros ghettos."
+      description: "Retos que dan acceso a nuestros ghettos."
     karma:
       title: "karma"
       description: "Puntuación mensual basada en aportes — habilita ghettos y secciones."
