@@ -49,3 +49,41 @@
     font-size: var(--font-down-2);
     color: var(--primary-medium);
 }
+
+// Mobile: the profile menu as a right-hand panel, like core's user menu.
+//
+// The component leaves float-kit's @modalForMobile commented out, so on a phone the
+// profile menu opens as a small floating card anchored to the avatar while the
+// notifications menu (core's) slides in as a full panel — two different shapes for two
+// halves of the same header. This makes the floating one match the panel.
+//
+// float-kit writes position/top/left/transform INLINE on the outer element (the one
+// carrying both .fk-d-menu and <identifier>-content), so pinning it needs !important;
+// the corner radii mirror what mobile-stuff.scss gives .menu-panel, and 80vw matches
+// the .menu-panel.slide-in width so both halves of the header open the same size.
+@include viewport.until(sm) {
+    .fk-d-menu.custom-user-menu-content {
+        position: fixed !important;
+        top: var(--header-offset, 0) !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        left: auto !important;
+        transform: none !important;
+        width: 80vw;
+        max-width: 22rem;
+        max-height: none;
+    }
+
+    .custom-user-menu-content .fk-d-menu__inner-content {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        max-height: none;
+        overflow-y: auto;
+        background: var(--secondary);
+        border-top-left-radius: var(--d-border-radius-large);
+        border-bottom-left-radius: var(--d-border-radius-large);
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
