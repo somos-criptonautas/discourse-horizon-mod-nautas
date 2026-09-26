@@ -1320,34 +1320,26 @@ body.category-preguntas li:has(.tag-drop) {
   }
 }
 
-.topic-list.doc-simple-mode .link-bottom-line .badge-category__wrapper,
-.topic-list.doc-simple-mode .topic-excerpt {
+.topic-list.doc-simple-mode .link-bottom-line .badge-category__wrapper {
   display: inline-flex !important;
 }
 
-// ...except in the A-Z index categories, where the row is a title and nothing else.
-// This has to out-!important the rule right above it, which is why it repeats the
-// selector instead of scoping it: both excerpt classes appear, .topic-excerpt in
-// Horizon's markup and .excerpt in core's docs table.
-body.category-glosario,
-body.category-wiki,
-body.category-curso {
-
-  .topic-list.doc-simple-mode .topic-excerpt,
-  .topic-list.doc-simple-mode .link-bottom-line .excerpt,
-  .horizon-ai-gist {
-    display: none !important;
-  }
-}
+// The excerpt used to be force-shown here too, which contradicted the rule that hides it
+// in docs lists — two !important declarations decided by import order. The hide is the
+// intent, so the force-show is gone: scss/_topic-list.scss owns excerpts and gists in
+// .doc-simple-mode, in one block, for every docs category.
 
 // Fix different font in category groups
 .custom-category-group .badge-category__wrapper {
   font-size: var(--font-down-1);
 }
 
-// Hiding topic-list data on Docs Categories
-.category-wiki .topic-list .topic-list-data.num,
-.category-glosario .topic-list .topic-list-data.num {
+// Hiding topic-list data on Docs Categories.
+// Scoped to the docs list itself, NOT to the category's body class: page-wide, this also
+// stripped the num cells from the related/suggested topic list on topic pages inside
+// those categories, while their header cells stayed — hence columns that did not line up
+// and a table wide enough to scroll sideways. .doc-simple-mode also drops the slug list.
+.topic-list.doc-simple-mode .topic-list-data.num {
   display: none;
 }
 
@@ -1363,13 +1355,12 @@ body.category-curso {
   display: none;
 }
 
-// No borders on top but padding
-.topic-list-item .category-glosario,
-.topic-list-item .category-wiki {
+// No borders on top but padding. Docs list only, same reason as the num cells above.
+.topic-list.doc-simple-mode .topic-list-item {
   border-bottom: 0;
 }
 
-.category-wiki tbody.topic-list-body .category-glosario tbody.topic-list-body {
+.topic-list.doc-simple-mode tbody.topic-list-body {
   border-top: 0;
 }
 
@@ -1958,12 +1949,12 @@ font-size: var(--font-up-1);
   }
 }
 
-// The excerpts/gists button toggles Horizon card excerpts. Only glosario and wiki hide
-// their gists entirely, so only there does the button have nothing to act on.
+// The excerpts/gists button toggles Horizon card excerpts. A docs list hides both the
+// excerpt and the gist, so there the button has nothing to act on. :has() keys it off
+// the list being on the page rather than a hardcoded slug.
 // !important: it is a core .btn.btn-icon-text, and the component's own stylesheet can
 // outrank a bare class.
-body.category-glosario .excerpts-gists-toggle-btn,
-body.category-wiki .excerpts-gists-toggle-btn {
+body:has(.topic-list.doc-simple-mode) .excerpts-gists-toggle-btn {
   display: none !important;
 }
 
