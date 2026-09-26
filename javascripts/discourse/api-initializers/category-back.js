@@ -51,7 +51,12 @@ function isDocCategoryPage() {
 }
 
 function place() {
-  const existing = document.querySelector(`.${LINK_CLASS}`);
+  // querySelectorAll, not querySelector: a stray link left behind by a re-render would
+  // otherwise stay forever, since the single-element lookup only ever found the first.
+  const links = [...document.querySelectorAll(`.${LINK_CLASS}`)];
+  const existing = links.shift() ?? null;
+  links.forEach((link) => link.remove());
+
   const href = parentPath(window.location.pathname);
 
   if (!href || !isDocCategoryPage()) {
@@ -89,7 +94,13 @@ function place() {
 
   const label = document.createElement("span");
   label.className = `${LINK_CLASS}__label`;
-  label.textContent = i18n(themePrefix("category_back"));
+  // The arrow is markup now, so strip one from the translation if it carries its own:
+  // an override saved in Admin -> Customize -> Themes -> Edit translations keeps the
+  // old "<- Back" string in the database, which rendered two arrows side by side.
+  label.textContent = i18n(themePrefix("category_back")).replace(
+    /^\s*[←⬅<-]+\s*/u,
+    ""
+  );
 
   link.append(arrow, label);
   container.prepend(link);
