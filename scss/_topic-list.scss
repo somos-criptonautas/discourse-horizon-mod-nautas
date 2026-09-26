@@ -120,3 +120,23 @@ body.category-glosario .topic-list.doc-simple-mode {
 .topic-list-item:not(.--high-context) .excerpt {
     display: none;
 }
+
+// Single-letter tags are internal bookkeeping, so no topic list shows them.
+//
+// CSS cannot match "a tag whose name is one character long", so the names are
+// enumerated from a Sass list — lowercase because Discourse downcases every tag, plus ñ
+// which its slug rules allow. Add a character here if a new one-letter tag appears.
+//
+// Scoped to the lists only: the composer's tag chooser (select-kit, .mini-tag-chooser)
+// and the tag pages live outside these containers, so those keep every tag selectable.
+$internal-single-letter-tags: a b c d e f g h i j k l m n ñ o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9;
+
+@each $tag in $internal-single-letter-tags {
+
+    .topic-list [data-tag-name="#{$tag}"],
+    .topic-list-item [data-tag-name="#{$tag}"],
+    .hc-topic-card__tags [data-tag-name="#{$tag}"],
+    .more-topics__container [data-tag-name="#{$tag}"] {
+        display: none !important;
+    }
+}

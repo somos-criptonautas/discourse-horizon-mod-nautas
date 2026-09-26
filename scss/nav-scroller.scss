@@ -199,3 +199,40 @@
 :where(.uc-modernize-foundation-theme) .navigation-container .nav-pills>li>a {
     height: unset;
 }
+
+// Selectors in the nav bar size to their label instead of clipping it.
+//
+// select-kit headers ship `overflow: hidden` + `text-overflow: ellipsis` on the selected
+// name and a max-width from --select-kit-width, which is what cut the first selector's
+// text once the strip started sharing the row with the pills. In this bar there is
+// nothing to protect: the strip already scrolls, so a wider header is fine.
+.list-controls .navigation-container .select-kit .select-kit-header {
+    max-width: none;
+    width: auto;
+
+    .selected-name,
+    .name {
+        max-width: none;
+        overflow: visible;
+        text-overflow: clip;
+    }
+}
+
+// Pills keep a real height on phones.
+//
+// `height: 100% !important` on the link only works while something above it defines a
+// height; on a phone the li collapses to the text box and the pills came out tiny. An
+// explicit min-height on the link, with height: auto to release the inherited 100%.
+@include viewport.until(sm) {
+    // Raised, not removed: the cap is what keeps the bar to one row, so it only grows
+    // enough to fit the taller pills (2rem + padding).
+    .navigation-container {
+        max-height: 2.8rem;
+    }
+
+    .navigation-container .nav-pills>li>a {
+        height: auto !important;
+        min-height: 2rem;
+        padding: 0.45rem 0.8rem !important;
+    }
+}
