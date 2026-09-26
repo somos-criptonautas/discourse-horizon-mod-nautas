@@ -87,19 +87,24 @@
     display: none;
 }
 
-// Docs lists are a title-only A-Z index: a gist or an excerpt there is a second blurb
-// restating the title. Both excerpt classes appear — .topic-excerpt in Horizon's markup,
-// .excerpt in core's docs table — and hiding only one hands the text to the other.
+// Docs lists: one blurb per row, never two.
 //
-// THIS IS THE ONLY PLACE that hides them for docs. It replaces three overlapping blocks
-// (two here, one in main.scss) that listed glosario/wiki/curso by hand and disagreed
-// about scope. Keyed on .doc-simple-mode instead, so it covers every docs category
-// including ones added later, and leaves topic pages inside them alone.
+// A row can get its text twice — once from our gist outlet (.horizon-ai-gist) and once
+// from the docs table's own excerpt, which core renders as <a class="excerpt"> — and that
+// duplication was the actual bug. Where the gist is present the excerpt is the copy, so
+// the excerpt goes and the gist stays. Rows with no gist keep their excerpt.
+.topic-list.doc-simple-mode .topic-list-item:has(.horizon-ai-gist) .link-bottom-line .excerpt {
+    display: none !important;
+}
+
+// glosario is the exception: a pure A-Z index of titles, no blurb at all. Hiding only one
+// of the two hands the text to the other, so gist and both excerpt classes go together
+// (.topic-excerpt in Horizon's markup, .excerpt in the docs table).
 //
-// !important stays because Horizon and core both declare these with weight of their
-// own (.--high-context .hc-topic-card .topic-excerpt, and the docs table's own rules);
-// one plain declaration here lost to them.
-.topic-list.doc-simple-mode {
+// Every other docs category — wiki, curso, anything added later — shows its gist once.
+// !important because Horizon and core declare these with weight of their own
+// (.--high-context .hc-topic-card .topic-excerpt, plus the docs table's rules).
+body.category-glosario .topic-list.doc-simple-mode {
 
     .horizon-ai-gist,
     .topic-excerpt,
