@@ -1929,11 +1929,8 @@ font-size: var(--font-up-1);
   display: none;
 }
 
-// Hiding some tags on category pages
-.hc-topic-card__tags [data-tag-name="resuelto"],
-.hc-topic-card__tags [data-tag-name="abierto"] {
-  display: none;
-}
+// Tags hidden from topic lists — resuelto/abierto included — live in one block in
+// scss/_topic-list.scss, so there is a single list to edit when one is added.
 
 // Hiding last selectors on MP (we do not use trust_level defaults)
 .messages-dropdown-content .dropdown-menu li:nth-last-of-type(-n+2) {

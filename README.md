@@ -13,7 +13,7 @@ overrides or extends Horizon, nothing stands alone.
 | `main.scss` | Base font scale, `--d-*` overrides, grid/sidebar layout, category colour reset, topic lists, docs categories, search, leaderboard, banners, composer-redesign fixes |
 | `header.scss` | Header layout with custom nav, mobile logo/avatar visibility |
 | `topic.scss` | Topic max-widths and body width |
-| `_topic-list.scss` | Topic-list density + AI gist styling, docs-table gist/excerpt dedupe |
+| `_topic-list.scss` | Topic-list density, AI gist styling, docs-list blurbs, tags hidden from lists |
 | `categories-view.scss` | Category boxes and title headers |
 | `nav-scroller.scss` | Scrollable topic nav strip and its arrows |
 | `mermaid.scss` | Mermaid diagrams scale to the post width instead of their intrinsic size |

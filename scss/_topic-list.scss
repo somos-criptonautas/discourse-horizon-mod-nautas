@@ -121,17 +121,24 @@ body.category-glosario .topic-list.doc-simple-mode {
     display: none;
 }
 
-// Single-letter tags are internal bookkeeping, so no topic list shows them.
+// Tags hidden from topic lists.
 //
-// CSS cannot match "a tag whose name is one character long", so the names are
-// enumerated from a Sass list — lowercase because Discourse downcases every tag, plus ñ
-// which its slug rules allow. Add a character here if a new one-letter tag appears.
+// ONE place for all of them. Two groups, same treatment:
 //
-// Scoped to the lists only: the composer's tag chooser (select-kit, .mini-tag-chooser)
-// and the tag pages live outside these containers, so those keep every tag selectable.
+//   $internal-single-letter-tags  one-character tags we use for internal bookkeeping.
+//                                 CSS cannot match "a name one character long", so they
+//                                 are enumerated: lowercase (Discourse downcases every
+//                                 tag) plus ñ, which its slug rules allow.
+//   $internal-status-tags         status tags whose state the list already shows.
+//
+// Scoped to the lists: the composer's tag chooser (select-kit, .mini-tag-chooser), the
+// tag pages and the topic header keep every tag, so tagging still works normally. This
+// is unrelated to discourse-docs-categories-tags, which hides one configurable tag in
+// its own target list and that tag's hashtag inside posts.
 $internal-single-letter-tags: a b c d e f g h i j k l m n ñ o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9;
+$internal-status-tags: resuelto abierto;
 
-@each $tag in $internal-single-letter-tags {
+@each $tag in join($internal-single-letter-tags, $internal-status-tags) {
 
     .topic-list [data-tag-name="#{$tag}"],
     .topic-list-item [data-tag-name="#{$tag}"],
