@@ -23,14 +23,14 @@ sobrescribe o extiende Horizon, nada funciona por sí solo.
 | `mobile-stuff.scss` | Tamaños de fuente adaptables, fondos de la barra lateral, categorías de docs en móvil |
 | `user.scss`, `new-user.scss` | Páginas de perfil y de mensajes |
 | `custom-user-menu.scss`, `d-combo-button.scss`, `groups.scss` | Menú de usuario, desplegables, páginas de grupos |
-| `ghost-cards.scss` | Tarjetas de marcador y de aviso (callout) de Ghost dentro de temas de blog incrustados |
+| `ghost-cards.scss` | Tarjetas de marcador (bookmark) de Ghost dentro de temas de blog incrustados |
 | `compatibility.scss` | Sobrescrituras que deben aplicarse después de todo lo demás |
 
 Los puntos de corte usan la librería de viewport del núcleo (`@include viewport.from/until(sm|md|lg)`),
 importada una vez en `common/common.scss`. El `@media` directo solo se mantiene para anchos fuera de la cuadrícula
 (400px, 470px, 925px, 1200px, 1400px) y `prefers-reduced-motion`.
 
-El estilo de las tarjetas de Ghost necesita que las clases `kg-*` se añadan al ajuste del sitio
+Ambas funciones de Ghost (las tarjetas de arriba y los avisos de abajo) necesitan que las clases `kg-*` se añadan al ajuste del sitio
 `allowed embed classnames` (por defecto es `emoji`: añade, no reemplaces). Discourse elimina las
 clases no listadas al extraer el post del blog, y lo hace en el momento de la importación, así que el ajuste y cualquier
 cambio en él solo afectan a los temas importados después:
@@ -88,6 +88,13 @@ kg-card kg-bookmark-card kg-bookmark-container kg-bookmark-content kg-bookmark-t
   renderizados desde `after_header.html` con los textos adecuados al idioma de
   `locales/*.yml` mediante `i18n(themePrefix(…))`.
 - **`connectors/custom-homepage`**: outlet de reserva para la página de inicio personalizada.
+- **`ghost-callouts.js`**: convierte las tarjetas de aviso (callout) de Ghost de los temas
+  incrustados en citas `[!tipo]`, para que el componente Quote Callouts las renderice igual
+  que cualquier otro aviso del foro. Actúa en el getter `cooked`, antes de cualquier
+  decorador de contenido, así que no depende de qué componente se cargue primero. La
+  correspondencia color → tipo está al principio del archivo: un color sin asignar cae en
+  `note`, y un tipo que este foro ya no defina cae en el `callout_fallback_type` del propio
+  Quote Callouts. El emoji de Ghost se descarta en favor del icono del aviso.
 
 ### Marcado y recursos
 
