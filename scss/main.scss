@@ -1849,6 +1849,48 @@ html:has(body.embed-mode) {
   font-size: 16px;
 }
 
+// The composer trapping the scroll on a phone.
+//
+// Core pins #reply-control with position: fixed, which inside an iframe pins it to the
+// IFRAME's viewport — and the blog sizes that iframe to the whole thread, so the panel
+// covers the embed instead of sitting at the bottom of a window. A touch that lands on it
+// scrolls its own editor area, and an overscroll there does not chain out to the blog
+// page, so the page stops moving.
+//
+// Put it back in the flow: it becomes the last block of the thread, nothing overlays the
+// embed, and every touch outside the textarea scrolls the page normally. transform: none
+// because core slides the fixed panel in from the bottom, which in flow would just offset
+// it; inset: auto drops the fixed anchoring.
+body.embed-mode {
+  #reply-control {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    transform: none;
+  }
+
+  // A swipe that reaches the end of the editor keeps going into the page.
+  #reply-control .d-editor-input,
+  #reply-control .d-editor-preview-wrapper {
+    overscroll-behavior: auto;
+  }
+
+  // That padding existed to clear a composer floating over the thread; in flow it is
+  // just a gap. The composer brings its own spacing.
+  html.composer-open & #main-outlet {
+    padding-bottom: 1.5rem;
+  }
+}
+
+// Core locks the document while the composer is open on mobile. Harmless in a window,
+// but here the "document" is the iframe and the lock is what the blog's scroll hits.
+html:has(body.embed-mode).composer-open,
+html:has(body.embed-mode).composer-open body {
+  overflow: visible;
+}
+
 /* height */
 body.embed-mode .topic-post:first-child {
   display: none !important;
