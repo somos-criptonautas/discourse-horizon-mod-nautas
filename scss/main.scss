@@ -464,25 +464,11 @@ body:has(.discourse-docs-sidebar-panel) .sidebar-section-link-wrapper .sidebar-s
 // Topic list & topic body
 // -----------------------------------------------------------------------
 
-#list-area {
-  .show-more.has-topics {
-    @include viewport.from(sm) {
-      width: auto;
-      right: 50%;
-      transform: translateX(50%);
-
-      .alert {
-        padding: var(--spacing-block-sm) var(--spacing-inline-m);
-        border-radius: var(--d-border-radius-large);
-        font-size: var(--font-down-1-rem);
-      }
-    }
-  }
-
-  .topic-list-body {
-    padding-top: var(--spacing-block-m);
-  }
-}
+// The "new topics" pill and the list's top padding are Horizon's own (its scss/main.scss
+// #list-area block) — nothing to restate here. What used to sit in this spot was that
+// block copied verbatim except for the breakpoint (from(sm) instead of from(lg)), which
+// centred and shrank the pill on tablets where Horizon leaves it alone, and a second rule
+// further down hardcoded its padding and radius on every size.
 
 // Hiding radius on mobile
 @include viewport.until(sm) {
@@ -576,11 +562,9 @@ button [title="similares"] .d-button-label {
   font-size: var(--font-down-2-rem);
 }
 
-// Update posts message
-#list-area .show-more .alert {
-  padding: 0.65rem 1.15rem;
-  border-radius: 0.5rem;
-}
+// The refresh pill keeps Horizon's padding and radius (--spacing-block-sm /
+// --spacing-inline-m / --d-border-radius-large). The hardcoded 0.65rem 1.15rem + 0.5rem
+// that used to be here applied at every width and was what made it look off.
 
 // Hide redundant dropdowns on new posts
 .dropdown-menu__item [data-name="quote"],
