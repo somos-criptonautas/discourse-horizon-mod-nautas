@@ -1,5 +1,7 @@
 # Horizon Mods Nautas
 
+**ENGLISH** | [ESPAÑOL](README.es.md)
+
 Theme component for **comunidad.criptonautas.co**. Child of the
 [Horizon](https://meta.discourse.org/t/horizon-theme/360486) theme — everything here
 overrides or extends Horizon, nothing stands alone.
@@ -127,3 +129,7 @@ kg-card kg-bookmark-card kg-bookmark-container kg-bookmark-content kg-bookmark-t
 
 Edits are local. Deploy via **Admin → Appearance → Themes → Install → From your device**,
 or import from the git remote. See `CLAUDE.MD` for conventions.
+
+## License
+
+GPL-3.0. See [LICENSE](LICENSE).

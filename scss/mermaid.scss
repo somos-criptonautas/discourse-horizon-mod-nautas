@@ -71,6 +71,13 @@
 // full height.
 .d-modal.mermaid-fullscreen .mermaid-diagram:not(.zoomed)>svg {
     max-width: none !important;
+
+    // width: 100% scales a small diagram up to the modal; height: auto keeps its
+    // proportions. The earlier height: 100% was the mistake — .d-modal__body resolves
+    // to its content height here, not the viewport, so 100% of it came out far taller
+    // than the screen and the diagram blew up. max-height clamps it to the viewport
+    // instead: lower the 85vh if it still feels too big.
     width: 100%;
-    height: 100%;
+    height: auto;
+    max-height: 85vh;
 }

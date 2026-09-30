@@ -60,7 +60,17 @@
     grid-template-areas:
         "logo title      "
         "logo description";
-    grid-template-columns: auto 1fr;
+    // minmax(0, 1fr) instead of a bare 1fr: grid tracks default to min-width auto, so
+    // the nowrap badge in the title column widened the track (and the header with it)
+    // and scrolled the page sideways on a phone. The column now clamps to its share.
+    grid-template-columns: auto minmax(0, 1fr);
+}
+
+// Core gives .badge-category__wrapper white-space: nowrap, which is what lets a long
+// title claim its full single-line width. Wrapping keeps the title at its normal size
+// and inside the clamped column above, instead of truncating or scrolling.
+.category-title-contents .category-title .badge-category__wrapper {
+    white-space: normal;
 }
 
 
