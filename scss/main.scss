@@ -1176,10 +1176,13 @@ nav.c-footer .c-footer__item {
   color: var(--primary) !important;
 }
 
-// Awarded marker: a disc riding the card's top-right corner. Round, not the boxy
-// core default, and filled with --tertiary so the tick reads at a glance; the tick
-// itself is forced to --secondary since core colours it --primary, which would sit
-// dark-on-dark here. Padding-bottom on the card keeps the content clear of it.
+// Awarded marker: a small spot near the top-right corner of the card.
+//
+// Not --tertiary (the accent): that read as a coloured sticker stuck onto the card.
+// The primary ramp is what the badge design already uses, and it flips with the scheme
+// on its own — light spot on the dark card in the dark theme, dark spot on the light
+// card in the light one — with the tick taking the opposite end of the same ramp so the
+// contrast holds either way. Padding-bottom on the card keeps the content clear of it.
 .badge-card {
   position: relative;
   padding-bottom: 1rem;
@@ -1187,21 +1190,23 @@ nav.c-footer .c-footer__item {
 
 .badge-card .check-display {
   position: absolute;
-  top: 0.4rem;
-  right: 0.4rem;
+  top: 0.45rem;
+  right: 0.45rem;
   display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: 1.9rem;
-  height: 1.9rem;
+  width: 1.5rem;
+  height: 1.5rem;
   padding: 0;
   border-radius: 50%;
-  background: var(--tertiary);
+  background: var(--primary);
 }
 
 .badge-card .check-display .d-icon {
-  color: var(--secondary) !important; // core paints it --primary, invisible on the disc
+  color: var(--secondary) !important; // core paints it --primary: same colour as the spot
+  height: 0.85rem;
+  width: 0.85rem;
 }
 
 /* 
