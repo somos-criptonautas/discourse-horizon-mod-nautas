@@ -23,14 +23,14 @@ overrides or extends Horizon, nothing stands alone.
 | `mobile-stuff.scss` | Responsive font sizes, sidebar backgrounds, docs categories on mobile |
 | `user.scss`, `new-user.scss` | Profile and messages pages |
 | `custom-user-menu.scss`, `d-combo-button.scss`, `groups.scss` | User menu, dropdowns, group pages |
-| `ghost-cards.scss` | Ghost bookmark and callout cards inside embedded blog topics |
+| `ghost-cards.scss` | Ghost bookmark cards inside embedded blog topics |
 | `compatibility.scss` | Overrides that must land after everything else |
 
 Breakpoints use core's viewport library (`@include viewport.from/until(sm|md|lg)`),
 imported once in `common/common.scss`. Raw `@media` is kept only for off-grid widths
 (400px, 470px, 925px, 1200px, 1400px) and `prefers-reduced-motion`.
 
-Ghost card styling needs the `kg-*` classnames appended to the `allowed embed classnames`
+Both Ghost features (cards above, callouts below) need the `kg-*` classnames appended to the `allowed embed classnames`
 site setting (it defaults to `emoji` — append, don't replace). Discourse strips unlisted
 classes while scraping the blog post, and does it at import time, so the setting and any
 change to it only affect newly imported topics:
@@ -89,6 +89,13 @@ kg-card kg-bookmark-card kg-bookmark-container kg-bookmark-content kg-bookmark-t
   rendered from `after_header.html` with the locale-appropriate strings from
   `locales/*.yml` via `i18n(themePrefix(…))`.
 - **`connectors/custom-homepage`** — placeholder outlet for the custom homepage.
+- **`ghost-callouts.js`** — rewrites Ghost callout cards in embedded topics into
+  `[!type]` blockquotes, so the Quote Callouts component renders them like any other
+  callout on the forum. Runs in the `cooked` getter, before any cooked decorator, so it
+  does not depend on which component loaded first. The colour → type mapping is at the top
+  of the file: an unmapped colour falls back to `note`, and a type this forum no longer
+  defines falls back to Quote Callouts' own `callout_fallback_type`. Ghost's emoji is
+  dropped in favour of the callout's icon.
 
 ### Markup and assets
 

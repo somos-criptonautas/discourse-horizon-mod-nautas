@@ -1,5 +1,8 @@
-// Ghost CMS cards inside embedded topics (blog posts scraped by the Embedding
-// feature), styled to match the forum instead of arriving as unstyled divs.
+// Ghost CMS bookmark cards inside embedded topics (blog posts scraped by the
+// Embedding feature), styled to match the forum instead of arriving as unstyled
+// divs. Ghost's callout cards are not styled here: they are rewritten into
+// `[!type]` blockquotes in api-initializers/ghost-callouts.js and rendered by
+// the Quote Callouts component.
 //
 // Requires the kg-* classnames in the `allowed embed classnames` site setting —
 // see README. Discourse strips every class not listed there while scraping, and
@@ -86,61 +89,6 @@
 
     @include viewport.until(sm) {
       flex-basis: 10em;
-    }
-  }
-}
-
-// --- Callout cards: mapped onto the forum palette ----------------------------
-// Ghost's colours carry no semantics, so the mapping is by hue. Ghost's own
-// emoji stays as the icon, which keeps them recognisable next to the
-// Quote Callouts component used in forum posts.
-$ghost-callout-backgrounds: (
-  "grey": var(--primary-low),
-  "blue": var(--tertiary-low),
-  "green": var(--success-low),
-  "yellow": var(--highlight-low),
-  "red": var(--danger-low),
-  "pink": var(--danger-low),
-  "purple": var(--tertiary-low),
-  "accent": var(--tertiary-low),
-);
-
-.cooked {
-  .kg-callout-card {
-    display: flex;
-    gap: var(--space-3);
-    margin: var(--space-4) 0;
-    padding: var(--space-3) var(--space-4);
-    border-radius: var(--d-border-radius);
-    background: var(--primary-low);
-
-    @each $name, $background in $ghost-callout-backgrounds {
-      &.kg-callout-card-#{$name} {
-        background: #{$background};
-      }
-    }
-
-    // Ghost's "white" is a bordered card rather than a tinted one.
-    &.kg-callout-card-white {
-      border: 1px solid var(--primary-low);
-      background: var(--secondary);
-    }
-  }
-
-  .kg-callout-emoji {
-    flex: 0 0 auto;
-
-    // The emoji is optional in Ghost; don't leave a gap behind.
-    &:empty {
-      display: none;
-    }
-  }
-
-  .kg-callout-text {
-    min-width: 0;
-
-    > *:last-child {
-      margin-bottom: 0;
     }
   }
 }
