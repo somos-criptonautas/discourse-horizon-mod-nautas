@@ -9,11 +9,26 @@
 
 .navigation-container {
     min-width: 0;
+}
 
-    // The strip is one row of pills and nothing else. Without a cap it grew to fit the
-    // tag selector and the solved dropdown on their own lines, which is the two/three
-    // line header: the bar is a flex row, so an item that cannot shrink wraps instead.
-    max-height: 2.1rem;
+// The open dropdown floats instead of pushing the bar open.
+//
+// select-kit is native <details>/<summary> here, so .select-kit-body expands INSIDE its
+// <li>, in the flow: opening the category, tag or solved filter made the bar grow to fit
+// the list — the two/three line header — and on a phone the expanded panel collided with
+// everything around it. Absolute takes it out of the flow, so the bar keeps its height
+// and the list is drawn over the page like a menu; position: relative on the <details>
+// is what it anchors to.
+.navigation-container .category-breadcrumb .select-kit {
+    position: relative;
+}
+
+.navigation-container .category-breadcrumb .select-kit>.select-kit-body {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+    min-width: max-content;
 }
 
 // Wrapper injected by the initializer; positioning context for the arrows.
@@ -224,12 +239,6 @@
 // height; on a phone the li collapses to the text box and the pills came out tiny. An
 // explicit min-height on the link, with height: auto to release the inherited 100%.
 @include viewport.until(sm) {
-    // Raised, not removed: the cap is what keeps the bar to one row, so it only grows
-    // enough to fit the taller pills (2rem + padding).
-    .navigation-container {
-        max-height: 2.8rem;
-    }
-
     .navigation-container .nav-pills>li>a {
         height: auto !important;
         min-height: 2rem;
