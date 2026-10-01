@@ -1187,35 +1187,42 @@ nav.c-footer .c-footer__item {
   color: var(--primary) !important;
 }
 
-// Awarded marker: a small spot near the top-right corner of the card.
+// Awarded marker: a filled corner, not a dot floating over the card.
 //
-// Not --tertiary (the accent): that read as a coloured sticker stuck onto the card.
-// The primary ramp is what the badge design already uses, and it flips with the scheme
-// on its own — light spot on the dark card in the dark theme, dark spot on the light
-// card in the light one — with the tick taking the opposite end of the same ramp so the
-// contrast holds either way. Padding-bottom on the card keeps the content clear of it.
+// Shape: a quarter disc welded into the top-left corner — square against the card's two
+// outer edges, curved on the inside (border-radius: 0 0 100% 0). overflow: hidden on the
+// card is what makes the outer side follow the card's own rounded corner instead of
+// poking out of it, so no radius has to be repeated here.
+//
+// Colour: the card's border colour, var(--primary-300), so the patch reads as part of
+// the frame rather than as a sticker. The tick takes var(--primary) — the far end of the
+// same ramp — because primary-300 sits near the background in both schemes, so only the
+// text colour is guaranteed to contrast with it in light AND dark.
+//
+// The tick is centred in the box minus a bottom-right inset, which pushes it into the
+// solid part of the wedge instead of the thin curve.
 .badge-card {
   position: relative;
+  overflow: hidden;
   padding-bottom: 1rem;
 }
 
 .badge-card .check-display {
   position: absolute;
-  top: 0.45rem;
-  right: 0.45rem;
+  inset: 0 auto auto 0;
   display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: 1.5rem;
-  height: 1.5rem;
-  padding: 0;
-  border-radius: 50%;
-  background: var(--primary);
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0 0.9rem 0.9rem 0;
+  border-radius: 0 0 100% 0;
+  background: var(--primary-300);
 }
 
 .badge-card .check-display .d-icon {
-  color: var(--secondary) !important; // core paints it --primary: same colour as the spot
+  color: var(--primary) !important; // core paints it --primary-low, lost on this fill
   height: 0.85rem;
   width: 0.85rem;
 }
