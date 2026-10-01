@@ -88,6 +88,11 @@ marcada y después oculta igual aparece en el post.
   scrollable" para que ambos dejen de pelear por `.navigation-container` y por el
   transformer `navigation-bar-dropdown-mode`. **Desinstala ese componente** después de
   desplegar este. Estilos en `scss/nav-scroller.scss`.
+- **`profile-drafts-link.js`**: copia la entrada "borradores" desde la sección de
+  actividad a la de perfil del panel lateral de usuario, que es lo primero que se ve. Es
+  una copia, no un traslado, para no tocar la lista que renderiza Glimmer; el original se
+  oculta en `scss/user.scss` y la copia se rehace en cada cambio de página para que el
+  contador de borradores no quede viejo.
 - **`category-back.js`**: antepone un enlace "volver" en `.list-controls
   .navigation-container` en las páginas de categoría (categoría padre, o `/categories` desde una
   de primer nivel), de modo que viaja en la barra fija de Horizon antes de las migas de pan. El destino

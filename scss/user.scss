@@ -39,6 +39,14 @@
         }
     }
 
+    // "Borradores" is copied into the profile section by
+    // javascripts/discourse/api-initializers/profile-drafts-link.js, so the original in
+    // the activity section would be a duplicate. Scoped to that section's own list, or
+    // this would hide the copy too.
+    #sidebar-section-content-user-nav-activity [data-list-item-name="user-nav-activity-drafts"] {
+        display: none;
+    }
+
     // Entries we do not use. The <li> carries data-list-item-name (the <a> inside
     // carries data-link-name), so the wrapper is what goes, not just the link.
     [data-list-item-name="user-nav-messages-new"],

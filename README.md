@@ -89,6 +89,11 @@ hidden still shows up in the post.
   scrollable" component so the two stop fighting over `.navigation-container` and the
   `navigation-bar-dropdown-mode` transformer. **Uninstall that component** after
   deploying this. Styles in `scss/nav-scroller.scss`.
+- **`profile-drafts-link.js`** — copies the "drafts" entry from the activity section into
+  the profile section of core's user sidebar, where it is the first thing a user sees. A
+  clone, not a move, so the list Glimmer renders is left alone; the original is hidden in
+  `scss/user.scss`, and the copy is rebuilt on each page change so its draft count stays
+  current.
 - **`category-back.js`** — prepends a "go back" link into `.list-controls
   .navigation-container` on category pages (parent category, or `/categories` from a
   top-level one), so it rides Horizon's sticky bar ahead of the breadcrumbs. The target
