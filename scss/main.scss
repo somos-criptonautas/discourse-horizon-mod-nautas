@@ -577,11 +577,36 @@ button [title="similares"] .d-button-label {
 // --spacing-inline-m / --d-border-radius-large). The hardcoded 0.65rem 1.15rem + 0.5rem
 // that used to be here applied at every width and was what made it look off.
 
-// Hide redundant dropdowns on new posts
-.dropdown-menu__item [data-name="quote"],
-.dropdown-menu__item [data-name="toggle-whisper"],
+// Composer "more options" menu: entries this forum does not use.
+//
+// Keyed on data-name where core provides one, and on the icon otherwise — the icon is
+// stable, while `title` is a translated string that changes with the locale (two entries
+// here are even titled "Insertar tabla" and "insertar tabla"). :has() hides the whole
+// <li> so the menu has no blank rows left behind.
+//
+// The icons map to: d-icon-align-left -> the second "insertar tabla",
+// d-icon-diagram-project -> "gráfico mermaid", d-icon-chart-line -> "Build Chart",
+// d-icon-file -> "campos a completar".
+.dropdown-menu__item:has([data-name="quote"]),
+.dropdown-menu__item:has([data-name="toggle-whisper"]),
+.dropdown-menu__item:has(.d-icon-align-left),
+.dropdown-menu__item:has(.d-icon-diagram-project),
+.dropdown-menu__item:has(.d-icon-chart-line) {
+  display: none;
+}
+
 .dropdown-menu .shortcut {
   display: none;
+}
+
+// Kept only for @agoristas and @team; init.gjs puts the class on <body>. Cosmetic: the
+// markup is still writable by hand, so this hides a shortcut, it does not restrict.
+body:not(.horizon-advanced-composer) {
+
+  .dropdown-menu__item:has(.d-icon-file),
+  .dropdown-menu__item:has([data-name="toggle-wrap"]) {
+    display: none;
+  }
 }
 
 // Hide redundant notifications options

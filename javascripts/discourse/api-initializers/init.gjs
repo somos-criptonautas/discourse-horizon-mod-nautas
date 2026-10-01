@@ -298,4 +298,23 @@ export default apiInitializer((api) => {
     });
   });
 
+  // Composer entries that only these groups keep (scss/main.scss hides the rest for
+  // everyone else). Set once: group membership does not change mid-session.
+  //
+  // visibleGroups is a client-side list and may omit hidden memberships, so this is
+  // cosmetic only — hiding a button is not a permission. Anyone can still write the
+  // markup by hand, and the server decides what it accepts.
+  const ADVANCED_COMPOSER_GROUPS = ["agoristas", "team"];
+
+  const myGroupNames = (
+    api.getCurrentUser()?.visibleGroups ||
+    api.getCurrentUser()?.groups ||
+    []
+  ).map((group) => group.name?.toLowerCase());
+
+  document.body.classList.toggle(
+    "horizon-advanced-composer",
+    ADVANCED_COMPOSER_GROUPS.some((name) => myGroupNames.includes(name))
+  );
+
 });
