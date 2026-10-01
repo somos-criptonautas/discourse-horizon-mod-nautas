@@ -24,6 +24,7 @@ overrides or extends Horizon, nothing stands alone.
 | `user.scss`, `new-user.scss` | Profile and messages pages |
 | `custom-user-menu.scss`, `d-combo-button.scss`, `groups.scss` | User menu, dropdowns, group pages |
 | `ghost-cards.scss` | Ghost bookmark cards inside embedded blog topics |
+| `form-templates.scss` | Form template checklist headings, and a checklist that swaps with a dropdown (CSS only — form templates have no heading type and no conditional logic) |
 | `compatibility.scss` | Overrides that must land after everything else |
 
 Breakpoints use core's viewport library (`@include viewport.from/until(sm|md|lg)`),

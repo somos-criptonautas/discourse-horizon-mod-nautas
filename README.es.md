@@ -24,6 +24,7 @@ sobrescribe o extiende Horizon, nada funciona por sí solo.
 | `user.scss`, `new-user.scss` | Páginas de perfil y de mensajes |
 | `custom-user-menu.scss`, `d-combo-button.scss`, `groups.scss` | Menú de usuario, desplegables, páginas de grupos |
 | `ghost-cards.scss` | Tarjetas de marcador (bookmark) de Ghost dentro de temas de blog incrustados |
+| `form-templates.scss` | Títulos de checklist en plantillas de formulario, y un checklist que cambia con un desplegable (solo CSS — las plantillas no tienen tipo título ni lógica condicional) |
 | `compatibility.scss` | Sobrescrituras que deben aplicarse después de todo lo demás |
 
 Los puntos de corte usan la librería de viewport del núcleo (`@include viewport.from/until(sm|md|lg)`),
