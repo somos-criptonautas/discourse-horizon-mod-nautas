@@ -12,7 +12,7 @@ sobrescribe o extiende Horizon, nada funciona por sí solo.
 
 | Archivo | Alcance |
 |---|---|
-| `main.scss` | Escala de fuentes base, sobrescrituras `--d-*`, diseño de cuadrícula/barra lateral, reinicio de colores de categoría, listas de temas, categorías de documentación, búsqueda, ranking, banners, correcciones del rediseño del editor |
+| `main.scss` | Escala de fuentes base, sobrescrituras `--d-*`, diseño de cuadrícula/barra lateral, reinicio de colores de categoría, listas de temas, categorías de documentación, búsqueda, ranking, banners, tarjetas de reto y su marca de obtenido, página 404, el embed del blog, correcciones del rediseño del editor |
 | `header.scss` | Diseño de la cabecera con navegación personalizada, visibilidad de logo/avatar en móvil |
 | `topic.scss` | Anchos máximos del tema y ancho del cuerpo |
 | `_topic-list.scss` | Densidad de la lista de temas, estilo de resúmenes (gist) de IA, textos breves en listas de docs, etiquetas ocultas en listas |
@@ -21,7 +21,7 @@ sobrescribe o extiende Horizon, nada funciona por sí solo.
 | `mermaid.scss` | Los diagramas Mermaid se ajustan al ancho del post en lugar de su tamaño intrínseco |
 | `ai-bot.scss` | Pulgar arriba/abajo en lugar de me gusta/reportar dentro de las conversaciones con el bot de IA |
 | `mobile-stuff.scss` | Tamaños de fuente adaptables, fondos de la barra lateral, categorías de docs en móvil |
-| `user.scss`, `new-user.scss` | Páginas de perfil y de mensajes |
+| `user.scss`, `new-user.scss` | Páginas de perfil y de mensajes, y el orden del panel lateral de usuario del núcleo |
 | `custom-user-menu.scss`, `d-combo-button.scss`, `groups.scss` | Menú de usuario, desplegables, páginas de grupos |
 | `ghost-cards.scss` | Tarjetas de marcador (bookmark) de Ghost dentro de temas de blog incrustados |
 | `form-templates.scss` | Títulos de checklist y checklist conmutado por desplegable en plantillas de formulario |

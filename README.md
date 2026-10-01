@@ -12,7 +12,7 @@ overrides or extends Horizon, nothing stands alone.
 
 | File | Scope |
 |---|---|
-| `main.scss` | Base font scale, `--d-*` overrides, grid/sidebar layout, category colour reset, topic lists, docs categories, search, leaderboard, banners, composer-redesign fixes |
+| `main.scss` | Base font scale, `--d-*` overrides, grid/sidebar layout, category colour reset, topic lists, docs categories, search, leaderboard, banners, badge cards and their award marker, the 404 page, the blog embed, composer-redesign fixes |
 | `header.scss` | Header layout with custom nav, mobile logo/avatar visibility |
 | `topic.scss` | Topic max-widths and body width |
 | `_topic-list.scss` | Topic-list density, AI gist styling, docs-list blurbs, tags hidden from lists |
@@ -21,7 +21,7 @@ overrides or extends Horizon, nothing stands alone.
 | `mermaid.scss` | Mermaid diagrams scale to the post width instead of their intrinsic size |
 | `ai-bot.scss` | Thumbs up/down instead of like/flag inside AI bot conversations |
 | `mobile-stuff.scss` | Responsive font sizes, sidebar backgrounds, docs categories on mobile |
-| `user.scss`, `new-user.scss` | Profile and messages pages |
+| `user.scss`, `new-user.scss` | Profile and messages pages, and the order of core's user sidebar panel |
 | `custom-user-menu.scss`, `d-combo-button.scss`, `groups.scss` | User menu, dropdowns, group pages |
 | `ghost-cards.scss` | Ghost bookmark cards inside embedded blog topics |
 | `form-templates.scss` | Checklist headings and a dropdown-swapped checklist in form templates |

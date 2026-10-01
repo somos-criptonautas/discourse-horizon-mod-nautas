@@ -1200,9 +1200,11 @@ nav.c-footer .c-footer__item {
 // of the frame. The tick takes var(--primary) — primary-300 sits near the background in
 // both schemes, so only the text colour is guaranteed to contrast with it either way.
 //
-// Size: 2.9rem, about an eighth of a card, with the tick held off the card's edges by
-// the asymmetric padding (the bottom-left side is the thin part of the wave, so the
-// padding there is what keeps the glyph in the solid area).
+// Size: 3.6rem. The tick sat on the thinning part of the wave at the previous 2.9rem and
+// looked clipped by it; a quarter more fill puts the whole glyph on solid colour. The
+// padding is asymmetric for the same reason — the bottom-left side is where the wave
+// thins out, so the larger inset there keeps the glyph in the solid area while the outer
+// insets hold it off the card's edges.
 $badge-corner-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' preserveAspectRatio='none'%3E%3Cpath d='M0,0 H64 V64 C 52,58 50,45 43,36 C 35,26 17,22 9,14 C 5,10 2,6 0,0 Z' fill='%23000'/%3E%3C/svg%3E");
 
 .badge-card {
@@ -1218,9 +1220,9 @@ $badge-corner-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: 2.9rem;
-  height: 2.9rem;
-  padding: 0.5rem 0.5rem 1.15rem 1.15rem;
+  width: 3.6rem;
+  height: 3.6rem;
+  padding: 0.65rem 0.65rem 1.5rem 1.5rem;
   border-radius: 0; // the mask draws the shape
   background: var(--primary-300);
   mask: $badge-corner-wave center / contain no-repeat;
