@@ -26,6 +26,26 @@
     [data-section-name="user-nav-profile"] {
         order: 5;
     }
+
+    // Inside the profile section, "perfil" (user-nav-summary) leads. The list is a
+    // plain <ul>, so it needs to be a flex column before order means anything.
+    #sidebar-section-content-user-nav-profile {
+        display: flex;
+        flex-direction: column;
+
+        [data-list-item-name="user-nav-summary"] {
+            order: -1;
+        }
+    }
+
+    // Entries we do not use. The <li> carries data-list-item-name (the <a> inside
+    // carries data-link-name), so the wrapper is what goes, not just the link.
+    [data-list-item-name="user-nav-messages-new"],
+    [data-list-item-name="user-nav-notifications-links"],
+    [data-list-item-name="user-nav-activity-read"],
+    [data-list-item-name="user-nav-activity-likes"] {
+        display: none;
+    }
 }
 
 // Style user profile page

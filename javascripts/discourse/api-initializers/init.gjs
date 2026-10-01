@@ -268,4 +268,34 @@ export default apiInitializer((api) => {
   document.body.classList.toggle("leaderboard-page", isLeaderboard);
   });
 
+  // Categories whose lists are a title-only index. The gist itself is already gated per
+  // topic in ai-gist-horizon.gjs; this adds the other half — the excerpt — by putting a
+  // class on <body>, which scss/_topic-list.scss keys on. Same setting for both, so one
+  // entry in Admin covers the whole behaviour.
+  //
+  // The setting stores category ids, and a category URL is /c/<slug>/.../<id>, so the
+  // id comes from the path (the same read category-back.js does) rather than from a
+  // route model.
+  const noGistCategoryIds = new Set(
+    (settings.gist_hidden_categories || "").split("|").filter(Boolean)
+  );
+
+  function currentCategoryId() {
+    const segments = window.location.pathname.split("/").filter(Boolean);
+    if (segments[0] !== "c") {
+      return null;
+    }
+    return segments.find((segment) => /^\d+$/.test(segment)) ?? null;
+  }
+
+  api.onPageChange(() => {
+    schedule("afterRender", () => {
+      const id = currentCategoryId();
+      document.body.classList.toggle(
+        "horizon-no-gists",
+        !!id && noGistCategoryIds.has(id)
+      );
+    });
+  });
+
 });

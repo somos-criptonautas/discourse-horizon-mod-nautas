@@ -97,14 +97,20 @@
     display: none !important;
 }
 
-// glosario is the exception: a pure A-Z index of titles, no blurb at all. Hiding only one
-// of the two hands the text to the other, so gist and both excerpt classes go together
-// (.topic-excerpt in Horizon's markup, .excerpt in the docs table).
+// Index categories: a list of titles and nothing else. Which ones is the
+// gist_hidden_categories setting — the same one ai-gist-horizon.gjs uses to suppress the
+// gist per topic; init.gjs turns it into body.horizon-no-gists so the excerpt goes too.
+// Empty by default: add the category in Admin for this to apply anywhere. Hiding only one of the two hands the text to the other, so gist
+// and both excerpt classes go together (.topic-excerpt in Horizon's markup, .excerpt in
+// the docs table).
 //
-// Every other docs category — wiki, curso, anything added later — shows its gist once.
+// NOT scoped to .doc-simple-mode any more: that class only exists while the docs plugin's
+// simple mode is on for the category, so turning it off quietly brought the gists back.
+// Every other category — wiki, curso, anything else — shows its gist once.
+//
 // !important because Horizon and core declare these with weight of their own
 // (.--high-context .hc-topic-card .topic-excerpt, plus the docs table's rules).
-body.category-glosario .topic-list.doc-simple-mode {
+body.horizon-no-gists .topic-list {
 
     .horizon-ai-gist,
     .topic-excerpt,

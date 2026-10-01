@@ -503,9 +503,20 @@ button [title="similares"] .d-button-label {
 }
 
 // Explicit gap so wrapped tag pills don't stick together.
+// One line that scrolls, like core/Horizon, instead of wrapping onto a second row and
+// making the sticky header taller mid-scroll. nowrap is the fix; the rest keeps the
+// overflow usable and hides the scrollbar.
 .extra-info-wrapper .topic-header-extra .discourse-tags {
   display: inline-flex;
+  flex-wrap: nowrap;
   gap: var(--space-1);
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 // Border + radius to tags
@@ -1427,15 +1438,21 @@ body.category-curso .more-topics__container {
 
 // Invert search-box on search page + Hide button to home (icon do it) //
 
-.not-found-container .title_wrapper btn,
-.not-found-container .recent-topics a.btn {
-  display: none;
-}
+// The 404 keeps the buttons core gives it. They used to be hidden here (along with
+// .btn.--home below), which is why the page offered nothing but a search box.
 
+// Recent topics use the full width on a phone. The 50% cap that was here is what made
+// them render in half the screen; desktop was never capped.
 @include viewport.until(sm) {
   .not-found-container .recent-topics {
-    max-width: 50%;
+    max-width: 100%;
     flex-basis: unset;
+  }
+
+  // Half the horizontal room back for the content.
+  .not-found-container,
+  .page-not-found {
+    padding-inline: 0.5rem;
   }
 }
 
@@ -1443,9 +1460,6 @@ body.category-curso .more-topics__container {
   max-height: 100% !important;
 }
 
-.page-not-found .btn.--home {
-  display: none !important
-}
 
 .page-not-found row {
   display: flex;
@@ -1481,6 +1495,20 @@ body.category-curso .more-topics__container {
 // Fix searchbar with header links
 .floating-search-input-wrapper {
   margin: 0 0.5em;
+}
+
+// One height in every browser. Nothing sets the header search box's height, so it came
+// out of the <input>'s own metrics — and Firefox and Chrome disagree about those, which
+// is why it looked taller in one and cramped in the other. --d-control-height is the
+// same token the rest of this theme's controls use.
+.search-input.search-input--header {
+  box-sizing: border-box;
+  min-height: var(--d-control-height);
+
+  input {
+    height: 100%;
+    min-height: var(--d-control-height);
+  }
 }
 
 // On a real iPad the header search grows over the other header items (dev tools
@@ -1981,7 +2009,7 @@ font-size: var(--font-up-1);
 // act on — every other docs category still shows its gist and keeps the button.
 // !important: it is a core .btn.btn-icon-text, and the component's own stylesheet can
 // outrank a bare class.
-body.category-glosario .excerpts-gists-toggle-btn {
+body.horizon-no-gists .excerpts-gists-toggle-btn {
   display: none !important;
 }
 
