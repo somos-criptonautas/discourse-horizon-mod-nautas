@@ -288,17 +288,6 @@ export default apiInitializer((api) => {
     return segments.find((segment) => /^\d+$/.test(segment)) ?? null;
   }
 
-  // A category URL is /c/<slug>/.../<id>: more than one slug before the id means a
-  // subcategory. Used for the docs sidebar below, which the plugin hands down the tree.
-  function isSubcategory() {
-    const segments = window.location.pathname.split("/").filter(Boolean);
-    if (segments[0] !== "c") {
-      return false;
-    }
-    const idIndex = segments.findIndex((segment) => /^\d+$/.test(segment));
-    return idIndex > 2; // "c" + two or more slugs
-  }
-
   api.onPageChange(() => {
     schedule("afterRender", () => {
       const id = currentCategoryId();
@@ -306,13 +295,6 @@ export default apiInitializer((api) => {
         "horizon-no-gists",
         !!id && noGistCategoryIds.has(id)
       );
-
-      // The docs plugin walks UP the tree — doc-category-sidebar.js
-      // #findIndexForActiveCategory() keeps checking parentCategory until it finds an
-      // index — so every subcategory of a docs category inherits its sidebar. The
-      // plugin offers no way to stop that, so the panel is hidden here instead
-      // (scss/main.scss keys on this class).
-      document.body.classList.toggle("horizon-subcategory", isSubcategory());
     });
   });
 

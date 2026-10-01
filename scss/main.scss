@@ -431,13 +431,6 @@ body.category .navigation-controls,
 }
 
 // Fix weird CSS color icons on every docs category, not a hardcoded slug list.
-// A subcategory of a docs category inherits the parent's index, so the plugin shows the
-// docs sidebar there too. Only the docs category itself should have it — the body class
-// comes from init.gjs, which reads it off the URL.
-body.horizon-subcategory .discourse-docs-sidebar-panel {
-  display: none;
-}
-
 // The docs plugin's sidebar panel only renders inside docs categories.
 body:has(.discourse-docs-sidebar-panel) .sidebar-section-link-wrapper .sidebar-section-link-prefix.icon {
   display: none;
