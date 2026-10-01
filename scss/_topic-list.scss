@@ -119,12 +119,48 @@ body.horizon-no-gists .topic-list {
     }
 }
 
-// Simple cards are a fixed grid (grid-template-areas: creator/title/status + category/
-// activity). discourse-ai's gist reaches that grid as `a.excerpt` via
-// `td.main-link .link-bottom-line { display: contents }` and has no grid-area, so it is
-// auto-placed into new rows and wrecks the card. Our own gist is already hidden here.
-.topic-list-item:not(.--high-context) .excerpt {
-    display: none;
+// Simple cards (related / suggested lists) are a fixed grid: Horizon's topic-cards.scss
+// gives .topic-list-item `display: grid` with areas for creator/title/status and
+// category/activity, and every child needs one. Core renders the list's text as
+// <a class="excerpt">, a name Horizon never places (it styles .topic-excerpt), so that
+// anchor was auto-placed into implicit rows and the card stacked into a column.
+//
+// Hiding it — the previous fix — straightened the card but took the text out of every
+// related and suggested list. So it gets an area instead, plus the extra template row
+// Horizon itself uses for .excerpt-expanded, which is where `excerpt` is defined.
+//
+// Only non-high-context rows: Horizon's own high-context card handles its excerpt.
+.topic-list-body .topic-list-item:not(.--high-context) {
+
+    .excerpt {
+        grid-area: excerpt;
+        margin: 0;
+        font-size: var(--font-down-2);
+    }
+
+    &.has-excerpt {
+        @include viewport.from(sm) {
+            grid-template-areas:
+                "creator title title title status"
+                ". category activity activity ."
+                ". excerpt excerpt excerpt excerpt";
+
+            &.has-replies {
+                grid-template-areas:
+                    "creator title title title status"
+                    ". category likes-replies activity ."
+                    ". excerpt excerpt excerpt excerpt";
+            }
+        }
+
+        // Phones: Horizon drops the excerpt from its own expanded card for room, and a
+        // third row in a card that narrow reads as clutter. Same choice here.
+        @include viewport.until(sm) {
+            .excerpt {
+                display: none;
+            }
+        }
+    }
 }
 
 // Tags hidden from topic lists.
