@@ -9,6 +9,13 @@
 
 .navigation-container {
     min-width: 0;
+
+    // One row, at every width. The pills scroll horizontally inside .ct-nav-scroller, so
+    // nothing here needs a second line: without this the bar is free to wrap and the
+    // breadcrumbs or the pills drop below, which is the two-line header. main.scss sets
+    // the same nowrap from sm up; this covers phones, where Horizon's own layout wants
+    // .category-breadcrumb on its own line — a layout the scroller replaces.
+    flex-wrap: nowrap;
 }
 
 // The open dropdown floats instead of pushing the bar open.
