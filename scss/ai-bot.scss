@@ -47,3 +47,17 @@ body.has-ai-conversations-sidebar {
         mask: $ai-thumbs-down center / contain no-repeat;
     }
 }
+
+// The thumb is a like, not a reaction menu.
+//
+// With discourse-reactions installed, that button is the plugin's own
+// (.discourse-reactions-reaction-button) and hovering or holding it opens the emoji
+// picker — out of place in an LLM chat, where the thumb means one thing. Hiding the
+// picker leaves the button's own toggle working: a tap still likes the reply.
+body.has-ai-conversations-sidebar {
+
+    .discourse-reactions-picker,
+    .discourse-reactions-actions .discourse-reactions-secondary-actions {
+        display: none !important;
+    }
+}

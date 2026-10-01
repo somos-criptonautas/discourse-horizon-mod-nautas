@@ -186,11 +186,15 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
     align-items: center;
     flex: 0 0 auto;
     box-sizing: border-box;
-    // Same frame Horizon gives .list-controls .combo-box .combo-box-header, so the
-    // link reads as a sibling of the category/tag selectors instead of bare text.
-    // --d-control-height is this theme's own control height (:root in main.scss).
-    height: var(--d-control-height);
-    padding-inline: var(--space-2);
+    // Same frame Horizon gives .list-controls .combo-box .combo-box-header, so the link
+    // reads as a sibling of the category/tag selectors instead of bare text.
+    //
+    // Height comes from the row, not from --d-control-height: that token is taller than
+    // the nav pills and the tag selector, so the link stood out as the one oversized
+    // item. The padding matches scss/nav-scroller.scss's pills.
+    height: auto;
+    align-self: stretch;
+    padding: 0.35rem 0.75rem;
     border: 1px solid var(--primary-300);
     border-radius: var(--d-border-radius);
     background: var(--secondary);
@@ -238,7 +242,9 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
     }
 
     @include viewport.until(sm) {
-        padding-inline: var(--space-1);
+        // Same floor the pills get on a phone, for the same reason.
+        min-height: 2rem;
+        padding: 0.45rem 0.6rem;
     }
 }
 
