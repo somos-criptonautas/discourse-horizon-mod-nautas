@@ -24,7 +24,7 @@ overrides or extends Horizon, nothing stands alone.
 | `user.scss`, `new-user.scss` | Profile and messages pages |
 | `custom-user-menu.scss`, `d-combo-button.scss`, `groups.scss` | User menu, dropdowns, group pages |
 | `ghost-cards.scss` | Ghost bookmark cards inside embedded blog topics |
-| `form-templates.scss` | Form template checklist headings, and a checklist that swaps with a dropdown (CSS only — form templates have no heading type and no conditional logic) |
+| `form-templates.scss` | Checklist headings and a dropdown-swapped checklist in form templates |
 | `compatibility.scss` | Overrides that must land after everything else |
 
 Breakpoints use core's viewport library (`@include viewport.from/until(sm|md|lg)`),
@@ -39,6 +39,22 @@ change to it only affect newly imported topics:
 ```
 kg-card kg-bookmark-card kg-bookmark-container kg-bookmark-content kg-bookmark-title kg-bookmark-description kg-bookmark-metadata kg-bookmark-icon kg-bookmark-author kg-bookmark-publisher kg-bookmark-thumbnail kg-callout-card kg-callout-emoji kg-callout-text kg-callout-card-grey kg-callout-card-white kg-callout-card-blue kg-callout-card-green kg-callout-card-yellow kg-callout-card-red kg-callout-card-pink kg-callout-card-purple kg-callout-card-accent
 ```
+
+### Form templates (`scss/form-templates.scss`)
+
+Adds two things form templates cannot do by themselves: a heading above a group of
+checkboxes, and a checklist that is swapped by a dropdown — the `metodo` field picks
+either the `inversion-*` or the `trading-*` boxes, and the other group disappears.
+CSS only, no JS: every field is a sibling inside `.form-template-form__wrapper` and the
+dropdowns are still native `<select>`, so `:has()` + `option:checked` reads the choice
+live. A field's YAML `id` arrives as the input's `name` — there is no `data-field-id`
+attribute, `name` is the only hook, so the selectors are tied to the ids of this
+forum's templates.
+
+Two rules when editing it: never `required: true` on a field this CSS can hide (a hidden
+invalid field makes the composer refuse to post, with no message and nothing to focus),
+and the post body is built from `FormData`, which ignores the CSS — a box ticked and then
+hidden still shows up in the post.
 
 ### Behaviour (`javascripts/`)
 

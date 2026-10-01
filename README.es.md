@@ -24,7 +24,7 @@ sobrescribe o extiende Horizon, nada funciona por sí solo.
 | `user.scss`, `new-user.scss` | Páginas de perfil y de mensajes |
 | `custom-user-menu.scss`, `d-combo-button.scss`, `groups.scss` | Menú de usuario, desplegables, páginas de grupos |
 | `ghost-cards.scss` | Tarjetas de marcador (bookmark) de Ghost dentro de temas de blog incrustados |
-| `form-templates.scss` | Títulos de checklist en plantillas de formulario, y un checklist que cambia con un desplegable (solo CSS — las plantillas no tienen tipo título ni lógica condicional) |
+| `form-templates.scss` | Títulos de checklist y checklist conmutado por desplegable en plantillas de formulario |
 | `compatibility.scss` | Sobrescrituras que deben aplicarse después de todo lo demás |
 
 Los puntos de corte usan la librería de viewport del núcleo (`@include viewport.from/until(sm|md|lg)`),
@@ -39,6 +39,22 @@ cambio en él solo afectan a los temas importados después:
 ```
 kg-card kg-bookmark-card kg-bookmark-container kg-bookmark-content kg-bookmark-title kg-bookmark-description kg-bookmark-metadata kg-bookmark-icon kg-bookmark-author kg-bookmark-publisher kg-bookmark-thumbnail kg-callout-card kg-callout-emoji kg-callout-text kg-callout-card-grey kg-callout-card-white kg-callout-card-blue kg-callout-card-green kg-callout-card-yellow kg-callout-card-red kg-callout-card-pink kg-callout-card-purple kg-callout-card-accent
 ```
+
+### Plantillas de formulario (`scss/form-templates.scss`)
+
+Agrega dos cosas que las plantillas de formulario no pueden hacer solas: un título sobre
+un grupo de casillas, y un checklist que cambia según un desplegable — el campo `metodo`
+elige las casillas `inversion-*` o las `trading-*`, y el otro grupo desaparece. Solo CSS,
+sin JS: todos los campos son hermanos dentro de `.form-template-form__wrapper` y los
+desplegables siguen siendo `<select>` nativos, así que `:has()` + `option:checked` lee la
+elección en vivo. El `id` del YAML de un campo llega como el `name` del input — no existe
+un atributo `data-field-id`, `name` es el único punto de anclaje, por lo que los
+selectores quedan atados a los ids de las plantillas de este foro.
+
+Dos reglas al editarlo: nunca `required: true` en un campo que este CSS pueda ocultar (un
+campo oculto e inválido hace que el editor se niegue a publicar, sin mensaje y sin nada
+que enfocar), y el cuerpo del post se arma con `FormData`, que ignora el CSS — una casilla
+marcada y después oculta igual aparece en el post.
 
 ### Comportamiento (`javascripts/`)
 
