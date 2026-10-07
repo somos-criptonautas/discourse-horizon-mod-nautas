@@ -66,10 +66,14 @@
     }
 }
 
-// Wrapper injected by the initializer; positioning context for the arrows.
+// Wrapper injected by the initializer. A flex row: arrow, strip, arrow.
 .ct-nav-scroller {
-    position: relative;
     display: flex;
+    align-items: center;
+
+    // Breathing room between an arrow and the pills beside it, now that it no longer
+    // sits on top of them.
+    gap: 0.4rem;
     // Shrinkable, and capped so the pills never claim the whole bar: the breadcrumbs
     // and the solved/tag selectors need their share of the row.
     flex: 1 1 auto;
@@ -135,17 +139,28 @@
     font-weight: var(--d-sidebar-active-font-weight);
 }
 
-// Scroll arrows: square-on-strip-height, pinned to the scroller's edges
+// Scroll arrows: round buttons flanking the strip, OUTSIDE the pills.
+//
+// They used to be `position: absolute` at the scroller's edges, which laid them over
+// the first and last pill — a pill you could read but not click, and the arrow itself
+// read as floating junk on top of the bar. In the flow they take a slot of their own at
+// either end instead. `order` is what puts the left one first: the initializer appends
+// both arrows after the strip, so DOM order alone would put them both on the right.
+//
+// The gradient fades that used to sit on ::after went with the overlap — there is
+// nothing left to fade between.
 .ct-nav-arrow {
-    position: absolute;
-    z-index: 10;
-    top: 0;
-    height: 100%;
-    aspect-ratio: 1;
+    flex: 0 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
+
+    // content-box so the padding is real room around the chevron instead of being eaten
+    // out of the width: at `padding: 0` the glyph sat against the circle's edge.
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: 0.4rem;
     border: 0;
     border-radius: 50%;
     background: var(--secondary);
@@ -154,47 +169,22 @@
     font-size: 1.25rem;
     line-height: 1;
     cursor: pointer;
-    transition:
-        opacity 0.15s ease,
-        visibility 0.15s ease;
-}
-
-// Fade between the arrow and the pills it sits next to
-.ct-nav-arrow::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 24px;
-    pointer-events: none;
 }
 
 .ct-nav-arrow-left {
-    left: 0;
-}
-
-.ct-nav-arrow-left::after {
-    left: 100%;
-    background: linear-gradient(to right, var(--secondary), transparent);
-}
-
-.ct-nav-arrow-right {
-    right: 0;
-}
-
-.ct-nav-arrow-right::after {
-    right: 100%;
-    background: linear-gradient(to left, var(--secondary), transparent);
+    order: -1;
 }
 
 .ct-nav-arrow:hover {
     background: var(--primary-low);
 }
 
+// display, not the visibility/opacity pair this used to use: in the flow a
+// hidden-but-present arrow still holds its slot, so a strip that does not even overflow
+// would give up both ends of the bar to two invisible buttons. Hiding an arrow only ever
+// gives the strip MORE room, so this settles instead of flip-flopping.
 .ct-nav-arrow.is-hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+    display: none;
 }
 
 // Swipe-only on phones and small tablets: no room for arrows over the pills.
@@ -278,5 +268,26 @@
         height: auto !important;
         min-height: 2rem;
         padding: 0.45rem 0.8rem !important;
+    }
+}
+
+// custom_glosario / custom_wiki belong to the front page, not to every list.
+//
+// They are shortcuts INTO two docs categories, so inside a category (or on /categories,
+// or on a tag page) they are either noise or a link to where you already are. Core puts
+// `navigation-topics` on <body> only for the category-less, tag-less discovery routes —
+// latest, hot, new, unread, top, bookmarks (Discovery::Navigation#bodyClass, which
+// returns navigation-category / navigation-categories / tags-page for the rest) — so
+// that one class is exactly the set we want to keep them on.
+//
+// Keyed on the class core builds from the nav item's name (`nav-item_<name>` in
+// navigation-bar.gjs) and left unqualified by element: the same class lands on the <li>
+// in the pill strip and on the entry inside the dropdown when the bar is in
+// dropdown mode, and both should go.
+body:not(.navigation-topics) {
+
+    .nav-item_custom_glosario,
+    .nav-item_custom_wiki {
+        display: none;
     }
 }

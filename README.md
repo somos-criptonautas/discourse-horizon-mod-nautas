@@ -17,7 +17,7 @@ overrides or extends Horizon, nothing stands alone.
 | `topic.scss` | Topic max-widths and body width |
 | `_topic-list.scss` | Topic-list density, AI gist styling, docs-list blurbs, tags hidden from lists |
 | `categories-view.scss` | Category boxes and title headers |
-| `nav-scroller.scss` | Scrollable topic nav strip and its arrows |
+| `nav-scroller.scss` | Scrollable topic nav strip and its arrows; keeps the glosario/wiki nav items off category and tag lists |
 | `mermaid.scss` | Mermaid diagrams scale to the post width instead of their intrinsic size |
 | `ai-bot.scss` | Thumbs up/down instead of like/flag inside AI bot conversations |
 | `mobile-stuff.scss` | Responsive font sizes, sidebar backgrounds, docs categories on mobile |

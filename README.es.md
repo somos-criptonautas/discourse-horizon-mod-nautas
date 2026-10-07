@@ -17,7 +17,7 @@ sobrescribe o extiende Horizon, nada funciona por sí solo.
 | `topic.scss` | Anchos máximos del tema y ancho del cuerpo |
 | `_topic-list.scss` | Densidad de la lista de temas, estilo de resúmenes (gist) de IA, textos breves en listas de docs, etiquetas ocultas en listas |
 | `categories-view.scss` | Cajas de categorías y cabeceras de título |
-| `nav-scroller.scss` | Franja de navegación de temas desplazable y sus flechas |
+| `nav-scroller.scss` | Franja de navegación de temas desplazable y sus flechas; mantiene los ítems glosario/wiki fuera de las listas de categorías y etiquetas |
 | `mermaid.scss` | Los diagramas Mermaid se ajustan al ancho del post en lugar de su tamaño intrínseco |
 | `ai-bot.scss` | Pulgar arriba/abajo en lugar de me gusta/reportar dentro de las conversaciones con el bot de IA |
 | `mobile-stuff.scss` | Tamaños de fuente adaptables, fondos de la barra lateral, categorías de docs en móvil |

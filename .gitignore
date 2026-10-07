@@ -2,3 +2,4 @@
 .devcontainer/*
 .claude/*
 CLAUDE.MD
+node_modules

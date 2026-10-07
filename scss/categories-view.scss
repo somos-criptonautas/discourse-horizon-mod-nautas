@@ -242,9 +242,18 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
     }
 
     @include viewport.until(sm) {
-        // Same floor the pills get on a phone, for the same reason.
+        // Phone metrics come from the pills, because on a phone the pills are all that
+        // is left beside this link: main.scss hides .category-breadcrumb outright under
+        // 40rem, so there is no selector in the bar to match heights with, and the
+        // desktop "take the height of the row" trick has nothing sane to measure.
+        //
+        // align-self releases that stretch. With it the link grew to the tallest item in
+        // the flex line instead of settling on the 2rem floor below, which is what made
+        // it the one oversized control on the bar. Padding is the pills' own
+        // (scss/nav-scroller.scss), so the two read as the same kind of thing.
+        align-self: center;
         min-height: 2rem;
-        padding: 0.45rem 0.6rem;
+        padding: 0.45rem 0.8rem;
     }
 }
 

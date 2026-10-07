@@ -83,7 +83,14 @@
 // Only Horizon's high-context card drops discourse-ai's own outlets, so only there do we
 // stand in for them. Simple cards (suggested / related lists) keep core's TopicCell,
 // where discourse-ai renders its own gist — without this we'd add a second one.
-.topic-list-item:not(.--high-context) .horizon-ai-gist {
+//
+// EXCEPT the docs table, hence `:not(.doc-simple-mode)`. Its rows are not
+// `--high-context` either, so this rule used to hide our gist there as well — and the
+// rule right below hides the docs excerpt on `:has(.horizon-ai-gist)`, which matches on
+// the element being PRESENT, not on it being visible. The two together left docs rows
+// with no blurb at all: gist hidden here, excerpt hidden there. Docs lists keep our
+// gist, so the one below has something to stand in for.
+.topic-list:not(.doc-simple-mode) .topic-list-item:not(.--high-context) .horizon-ai-gist {
     display: none;
 }
 
