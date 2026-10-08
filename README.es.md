@@ -98,6 +98,9 @@ marcada y después oculta igual aparece en el post.
   de primer nivel), de modo que viaja en la barra fija de Horizon antes de las migas de pan. El destino
   sale de la ruta de la URL, no del modelo de la ruta; no existe outlet dentro de esa barra, así que
   la inserción es en el DOM al cambiar de página y se omite cuando la barra no está.
+- **`ai-thumbs-down.gjs`**: en las conversaciones con bots de IA, reemplaza el botón de
+  denuncia por un pulgar abajo que alterna la reacción `-1` (discourse-reactions) en vez
+  de abrir el modal de denuncia. `-1` debe estar en `discourse_reactions_enabled_reactions`.
 - **`bot-display-name.js`**: muestra las cuentas de bot `anonist_*` bajo una sola etiqueta
   (`anonist`) y oculta sus botones `.compose-pm`. Solo el texto visible: los href, las atribuciones
   de citas, las menciones en markdown, la búsqueda y los correos conservan el nombre de usuario real. Cubre

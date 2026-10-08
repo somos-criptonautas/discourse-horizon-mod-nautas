@@ -19,6 +19,7 @@ es:
       message: "Sector dedicado para @traders. Se desbloquea con participación sostenida o a través de un ticket (suscripción mensual)."
   total_karma: "karma: %{score}"
   category_back: "Volver"
+  ai_thumbs_down: "No me sirvió"
   podium_note: "Cada puesto recibe 3% del total de suscripciones (en Monero)."
   btcpay_pos:
     title: "Punto de venta BTCPay"

@@ -99,6 +99,9 @@ hidden still shows up in the post.
   top-level one), so it rides Horizon's sticky bar ahead of the breadcrumbs. The target
   comes from the URL path, not the route model; no outlet exists inside that bar, so the
   insert is a DOM one on page change and is skipped when the bar is absent.
+- **`ai-thumbs-down.gjs`** — in AI bot conversations, replaces the flag button with a
+  thumbs down that toggles the `-1` reaction (discourse-reactions) instead of opening the
+  flag modal. `-1` must be in `discourse_reactions_enabled_reactions`.
 - **`bot-display-name.js`** — shows the `anonist_*` bot accounts under one label
   (`anonist`) and hides their `.compose-pm` buttons. Visible text only: hrefs, quote
   attributions, markdown mentions, search and emails keep the real username. Covers

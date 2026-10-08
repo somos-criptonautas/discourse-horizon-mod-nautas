@@ -24,7 +24,6 @@ $ai-thumbs-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 body.has-ai-conversations-sidebar {
 
     .post-action-menu__like .d-icon,
-    .post-action-menu__flag .d-icon,
     .discourse-reactions-reaction-button .d-icon {
         background-color: currentColor;
 
@@ -43,9 +42,23 @@ body.has-ai-conversations-sidebar {
         mask: $ai-thumbs-up center / contain no-repeat;
     }
 
-    .post-action-menu__flag .d-icon {
-        mask: $ai-thumbs-down center / contain no-repeat;
+}
+
+// Thumbs down: our own button (ai-thumbs-down.gjs), which replaces the flag in bot PMs
+// so it toggles a reaction instead of opening the flag modal. Unscoped: the button
+// only exists there. Same mask treatment, so it matches the thumbs up whatever glyph
+// the sprite has for its icon.
+.post-action-menu__ai-thumbs-down .d-icon {
+    background-color: currentColor;
+    mask: $ai-thumbs-down center / contain no-repeat;
+
+    use {
+        display: none;
     }
+}
+
+.post-action-menu__ai-thumbs-down.is-active .d-icon {
+    color: var(--danger);
 }
 
 // The thumb is a like, not a reaction menu.
@@ -57,6 +70,7 @@ body.has-ai-conversations-sidebar {
 body.has-ai-conversations-sidebar {
 
     .discourse-reactions-picker,
+    .discourse-reactions-state-panel,
     .discourse-reactions-actions .discourse-reactions-secondary-actions {
         display: none !important;
     }

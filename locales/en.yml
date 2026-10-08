@@ -19,6 +19,7 @@ en:
       message: "This section is reserved for @traders ghetto. It unlocks with sustained participation, or with a ticket (monthly subscription)."
   total_karma: "karma: %{score}"
   category_back: "Back"
+  ai_thumbs_down: "Not helpful"
   podium_note: "Each one receives 3% of our total paid subscriptions (in Monero)."
   btcpay_pos:
     title: "BTCPay point of sale"
