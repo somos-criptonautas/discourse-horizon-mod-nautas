@@ -61,6 +61,13 @@ body.has-ai-conversations-sidebar {
     color: var(--danger);
 }
 
+// The plugin only accepts reactions listed in discourse_reactions_enabled_reactions,
+// so -1 has to be enabled for the button above. Drop it from the picker everywhere
+// so it never becomes a forum reaction.
+.discourse-reactions-picker .pickable-reaction[data-reaction="-1"] {
+    display: none;
+}
+
 // The thumb is a like, not a reaction menu.
 //
 // With discourse-reactions installed, that button is the plugin's own
