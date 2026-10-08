@@ -69,7 +69,6 @@
 // Wrapper injected by the initializer. A flex row: arrow, strip, arrow.
 .ct-nav-scroller {
     display: flex;
-    align-items: center;
 
     // Breathing room between an arrow and the pills beside it, now that it no longer
     // sits on top of them.
@@ -151,6 +150,12 @@
 // nothing left to fade between.
 .ct-nav-arrow {
     flex: 0 0 auto;
+
+    // Centred on its own, NOT through align-items on .ct-nav-scroller: the strip must
+    // keep the default stretch, because the pills' `height: 100%` resolves against
+    // #navigation-bar — centring the row shrank the strip to its text and the pills
+    // with it.
+    align-self: center;
     display: flex;
     align-items: center;
     justify-content: center;

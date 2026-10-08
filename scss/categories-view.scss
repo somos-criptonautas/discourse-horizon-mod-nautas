@@ -204,10 +204,9 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
     white-space: nowrap;
     text-decoration: none;
 
-    // Horizon's .navigation-container gap is 1rem, which reads as a gulf between this
-    // and the selector beside it. Pull half of it back here rather than shrinking the
-    // gap for every item in the bar.
-    margin-right: calc(var(--space-2) * -1);
+    // A margin of its own instead of relying on the bar's gap: the negative margin
+    // that used to trim that gap left the link glued to whatever came next.
+    margin-right: 0.5rem;
 
     &:visited {
         color: var(--primary-high);
