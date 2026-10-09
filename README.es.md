@@ -2,6 +2,8 @@
 
 [ENGLISH](README.md) | **ESPAÑOL**
 
+Mantenido por Criptonautas. Sin afiliación ni respaldo de Discourse (Civilized Discourse Construction Kit, Inc.).
+
 Componente de tema para **comunidad.criptonautas.co**. Hijo del tema
 [Horizon](https://meta.discourse.org/t/horizon-theme/360486): todo lo que hay aquí
 sobrescribe o extiende Horizon, nada funciona por sí solo.

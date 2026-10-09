@@ -2,6 +2,8 @@
 
 **ENGLISH** | [ESPAÑOL](README.es.md)
 
+Maintained by Criptonautas. Not affiliated with or endorsed by Discourse (Civilized Discourse Construction Kit, Inc.).
+
 Theme component for **comunidad.criptonautas.co**. Child of the
 [Horizon](https://meta.discourse.org/t/horizon-theme/360486) theme — everything here
 overrides or extends Horizon, nothing stands alone.
