@@ -1,7 +1,6 @@
 .env
 .devcontainer/*
 .claude/*
-CLAUDE.MD
 node_modules
 .discourse-site
 .eslintcache
