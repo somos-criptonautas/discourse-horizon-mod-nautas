@@ -22,26 +22,24 @@ $ai-thumbs-up: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'
 $ai-thumbs-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M80,48V152H32a8,8,0,0,1-8-8V56a8,8,0,0,1,8-8Z' opacity='0.2'/%3E%3Cpath d='M239.82,157l-12-96A24,24,0,0,0,204,40H32A16,16,0,0,0,16,56v88a16,16,0,0,0,16,16H75.06l37.78,75.58A8,8,0,0,0,120,240a40,40,0,0,0,40-40V184h56a24,24,0,0,0,23.82-27ZM72,144H32V56H72Zm150,21.29a7.88,7.88,0,0,1-6,2.71H152a8,8,0,0,0-8,8v24a24,24,0,0,1-19.29,23.54L88,150.11V56H204a8,8,0,0,1,7.94,7l12,96A7.87,7.87,0,0,1,222,165.29Z'/%3E%3C/svg%3E");
 
 body.has-ai-conversations-sidebar {
+  .post-action-menu__like .d-icon,
+  .discourse-reactions-reaction-button .d-icon {
+    background-color: currentcolor;
 
-    .post-action-menu__like .d-icon,
-    .discourse-reactions-reaction-button .d-icon {
-        background-color: currentColor;
-
-        use {
-            display: none;
-        }
+    use {
+      display: none;
     }
+  }
 
-    // Two like buttons to cover: core's, and the one discourse-reactions swaps in when
-    // the plugin is enabled (button.btn-toggle-reaction-like, which is why the core
-    // selector alone did nothing here). A post the user reacted to with an emoji shows
-    // <img class="btn-toggle-reaction-emoji"> instead of an icon — that is a picture,
-    // not a glyph, so it keeps the emoji.
-    .post-action-menu__like .d-icon,
-    .discourse-reactions-reaction-button .d-icon {
-        mask: $ai-thumbs-up center / contain no-repeat;
-    }
-
+  // Two like buttons to cover: core's, and the one discourse-reactions swaps in when
+  // the plugin is enabled (button.btn-toggle-reaction-like, which is why the core
+  // selector alone did nothing here). A post the user reacted to with an emoji shows
+  // <img class="btn-toggle-reaction-emoji"> instead of an icon — that is a picture,
+  // not a glyph, so it keeps the emoji.
+  .post-action-menu__like .d-icon,
+  .discourse-reactions-reaction-button .d-icon {
+    mask: $ai-thumbs-up center / contain no-repeat;
+  }
 }
 
 // Thumbs down: our own button (ai-thumbs-down.gjs), which replaces the flag in bot PMs
@@ -49,23 +47,23 @@ body.has-ai-conversations-sidebar {
 // only exists there. Same mask treatment, so it matches the thumbs up whatever glyph
 // the sprite has for its icon.
 .post-action-menu__ai-thumbs-down .d-icon {
-    background-color: currentColor;
-    mask: $ai-thumbs-down center / contain no-repeat;
+  background-color: currentcolor;
+  mask: $ai-thumbs-down center / contain no-repeat;
 
-    use {
-        display: none;
-    }
+  use {
+    display: none;
+  }
 }
 
 .post-action-menu__ai-thumbs-down.is-active .d-icon {
-    color: var(--danger);
+  color: var(--danger);
 }
 
 // The plugin only accepts reactions listed in discourse_reactions_enabled_reactions,
 // so -1 has to be enabled for the button above. Drop it from the picker everywhere
 // so it never becomes a forum reaction.
 .discourse-reactions-picker .pickable-reaction[data-reaction="-1"] {
-    display: none;
+  display: none;
 }
 
 // The thumb is a like, not a reaction menu.
@@ -75,10 +73,9 @@ body.has-ai-conversations-sidebar {
 // picker — out of place in an LLM chat, where the thumb means one thing. Hiding the
 // picker leaves the button's own toggle working: a tap still likes the reply.
 body.has-ai-conversations-sidebar {
-
-    .discourse-reactions-picker,
-    .discourse-reactions-state-panel,
-    .discourse-reactions-actions .discourse-reactions-secondary-actions {
-        display: none !important;
-    }
+  .discourse-reactions-picker,
+  .discourse-reactions-state-panel,
+  .discourse-reactions-actions .discourse-reactions-secondary-actions {
+    display: none !important;
+  }
 }

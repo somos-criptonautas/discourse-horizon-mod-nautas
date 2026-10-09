@@ -169,45 +169,95 @@ function sortDocCategoryTopicLists() {
   const locale = docSortLocale();
 
   // Not a flex/grid container, so reordering must move DOM nodes — CSS `order` is ignored.
-  document.querySelectorAll(".topic-list.doc-simple-mode .topic-list-body").forEach((body) => {
-    // try/finally so the list is always revealed even if sorting throws.
-    try {
-      sortDocTopicList(body, locale);
-    } finally {
-      body.classList.add("docs-sorted");
-    }
-
-    // Sort only once loading goes quiet — mid-load reordering stalled the loader.
-    let settleTimer = null;
-    const observer = new MutationObserver(() => {
-      window.clearTimeout(settleTimer);
-      settleTimer = window.setTimeout(() => {
+  document
+    .querySelectorAll(".topic-list.doc-simple-mode .topic-list-body")
+    .forEach((body) => {
+      // try/finally so the list is always revealed even if sorting throws.
+      try {
         sortDocTopicList(body, locale);
-      }, 400);
+      } finally {
+        body.classList.add("docs-sorted");
+      }
+
+      // Sort only once loading goes quiet — mid-load reordering stalled the loader.
+      let settleTimer = null;
+      const observer = new MutationObserver(() => {
+        window.clearTimeout(settleTimer);
+        settleTimer = window.setTimeout(() => {
+          sortDocTopicList(body, locale);
+        }, 400);
+      });
+      observer.observe(body, { childList: true });
+      docSortObservers.set(body, observer);
     });
-    observer.observe(body, { childList: true });
-    docSortObservers.set(body, observer);
-  });
 }
 
 // Mirrors core's DEFAULT_BINDINGS, minus ones intentionally left enabled or global.
 const DISCOURSE_ONLY_SHORTCUTS = [
-  "!", "#", "/", "=", "?", ".",
-  "a", "b", "c", "shift+c",
-  "command+left", "command+[", "command+right", "command+]",
-  "d", "e", "end", "command+down", "f",
-  "g h", "g l", "g n", "g u", "g y", "g c", "g t", "g b", "g p", "g m", "g d",
-  "g s", "g j", "g k",
-  "home", "command+up", "j", "k", "l",
-  "m m", "m r", "m t", "m w",
-  "tab", "p", "q", "r", "s",
-  "shift+j", "shift+k", "shift+p", "shift+r", "shift+s", "shift+l",
-  "shift+z shift+z", "shift+u", "shift+a", "shift+b",
-  "t", "u", "x", "shift+d",
+  "!",
+  "#",
+  "/",
+  "=",
+  "?",
+  ".",
+  "a",
+  "b",
+  "c",
+  "shift+c",
+  "command+left",
+  "command+[",
+  "command+right",
+  "command+]",
+  "d",
+  "e",
+  "end",
+  "command+down",
+  "f",
+  "g h",
+  "g l",
+  "g n",
+  "g u",
+  "g y",
+  "g c",
+  "g t",
+  "g b",
+  "g p",
+  "g m",
+  "g d",
+  "g s",
+  "g j",
+  "g k",
+  "home",
+  "command+up",
+  "j",
+  "k",
+  "l",
+  "m m",
+  "m r",
+  "m t",
+  "m w",
+  "tab",
+  "p",
+  "q",
+  "r",
+  "s",
+  "shift+j",
+  "shift+k",
+  "shift+p",
+  "shift+r",
+  "shift+s",
+  "shift+l",
+  "shift+z shift+z",
+  "shift+u",
+  "shift+a",
+  "shift+b",
+  "t",
+  "u",
+  "x",
+  "shift+d",
 ];
 
 export default apiInitializer((api) => {
-
   if (settings.disable_discourse_keyboard_shortcuts) {
     api.container
       .lookup("service:keyboard-shortcuts")
@@ -264,8 +314,8 @@ export default apiInitializer((api) => {
 
   // Add leaderboard page CSS body class
   api.onPageChange((url) => {
-  const isLeaderboard = url.startsWith("/leaderboard");
-  document.body.classList.toggle("leaderboard-page", isLeaderboard);
+    const isLeaderboard = url.startsWith("/leaderboard");
+    document.body.classList.toggle("leaderboard-page", isLeaderboard);
   });
 
   // Categories whose lists are a title-only index. The gist itself is already gated per
@@ -316,5 +366,4 @@ export default apiInitializer((api) => {
     "horizon-advanced-composer",
     ADVANCED_COMPOSER_GROUPS.some((name) => myGroupNames.includes(name))
   );
-
 });

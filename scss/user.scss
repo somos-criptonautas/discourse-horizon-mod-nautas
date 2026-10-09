@@ -3,103 +3,102 @@
 // listed keep order 10, so they follow these five in their own order. .sidebar-sections
 // is already a flex column in core, so `order` is all it takes.
 .sidebar-sections.user-nav-panel {
+  .sidebar-section-wrapper {
+    order: 10;
+  }
 
-    .sidebar-section-wrapper {
-        order: 10;
+  [data-section-name="user-nav-profile"] {
+    order: 1;
+  }
+
+  [data-section-name="user-nav-preferences"] {
+    order: 2;
+  }
+
+  [data-section-name="user-nav-messages"] {
+    order: 3;
+  }
+
+  [data-section-name="user-nav-notifications"] {
+    order: 4;
+  }
+
+  [data-section-name="user-nav-invites"] {
+    order: 5;
+  }
+
+  // Inside the profile section, "perfil" (user-nav-summary) leads. The list is a
+  // plain <ul>, so it needs to be a flex column before order means anything.
+  #sidebar-section-content-user-nav-profile {
+    display: flex;
+    flex-direction: column;
+
+    [data-list-item-name="user-nav-summary"] {
+      order: -1;
     }
+  }
 
-    [data-section-name="user-nav-profile"] {
-        order: 1;
-    }
+  // "Borradores" is copied into the profile section by
+  // javascripts/discourse/api-initializers/profile-drafts-link.js, so the original in
+  // the activity section would be a duplicate. Scoped to that section's own list, or
+  // this would hide the copy too.
+  #sidebar-section-content-user-nav-activity
+    [data-list-item-name="user-nav-activity-drafts"] {
+    display: none;
+  }
 
-    [data-section-name="user-nav-preferences"] {
-        order: 2;
-    }
-
-    [data-section-name="user-nav-messages"] {
-        order: 3;
-    }
-
-    [data-section-name="user-nav-notifications"] {
-        order: 4;
-    }
-
-    [data-section-name="user-nav-invites"] {
-        order: 5;
-    }
-
-    // Inside the profile section, "perfil" (user-nav-summary) leads. The list is a
-    // plain <ul>, so it needs to be a flex column before order means anything.
-    #sidebar-section-content-user-nav-profile {
-        display: flex;
-        flex-direction: column;
-
-        [data-list-item-name="user-nav-summary"] {
-            order: -1;
-        }
-    }
-
-    // "Borradores" is copied into the profile section by
-    // javascripts/discourse/api-initializers/profile-drafts-link.js, so the original in
-    // the activity section would be a duplicate. Scoped to that section's own list, or
-    // this would hide the copy too.
-    #sidebar-section-content-user-nav-activity [data-list-item-name="user-nav-activity-drafts"] {
-        display: none;
-    }
-
-    // Entries we do not use. The <li> carries data-list-item-name (the <a> inside
-    // carries data-link-name), so the wrapper is what goes, not just the link.
-    [data-list-item-name="user-nav-messages-new"],
-    [data-list-item-name="user-nav-notifications-links"],
-    [data-list-item-name="user-nav-activity-read"],
-    [data-list-item-name="user-nav-activity-likes"] {
-        display: none;
-    }
+  // Entries we do not use. The <li> carries data-list-item-name (the <a> inside
+  // carries data-link-name), so the wrapper is what goes, not just the link.
+  [data-list-item-name="user-nav-messages-new"],
+  [data-list-item-name="user-nav-notifications-links"],
+  [data-list-item-name="user-nav-activity-read"],
+  [data-list-item-name="user-nav-activity-likes"] {
+    display: none;
+  }
 }
 
 // Style user profile page
 .user-content {
-    max-width: unset;
-    display: flex;
-    flex-direction: column;
+  max-width: unset;
+  display: flex;
+  flex-direction: column;
 }
 
 .replied-section {
-    display: none !important;
+  display: none !important;
 }
 
 .top-section {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .top-section .top-categories-section,
 .top-section .links-and-replied-to-section {
-    width: 100%;
+  width: 100%;
 }
 
 .top-section .top-categories-section {
-    order: 3 !important;
+  order: 3 !important;
 }
 
 .top-sub-section {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 // Disable activity for Github
 .approval-given-button,
 .approval-pending-button {
-    display: none;
+  display: none;
 }
 
 @media (width <=390px) {
-
-    .top-sub-section.topics-section,
-    .top-sub-section.replies-section {
-        float: none;
-        width: 100%;
-    }
+  .top-sub-section.topics-section,
+  .top-sub-section.replies-section {
+    float: none;
+    width: 100%;
+  }
 }
 
 // Compound classes on the same element as top-sub-section — no descendant space.
@@ -108,79 +107,79 @@
 .top-sub-section.liked-by-section,
 .top-sub-section.liked-section,
 .top-sub-section.most-liked-section {
-    width: 50%;
+  width: 50%;
 }
 
 .top-sub-section.links-section,
 .top-sub-section.summary-category-list,
 .top-sub-section.summary-category-list table {
-    width: 100% !important;
+  width: 100% !important;
 }
 
 .top-sub-section {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .top-sub-section li {
-    margin: 0.75rem 0;
+  margin: 0.75rem 0;
 }
 
 .top-sub-section .ember-view.more {
-    display: none;
+  display: none;
 }
 
 .stats-title {
-    font-size: var(--font-up-3);
-    font-weight: 800;
-    text-transform: uppercase;
+  font-size: var(--font-up-3);
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .user-info .user-detail .details {
-    display: flex;
+  display: flex;
 }
 
 @include viewport.until(sm) {
-    .stats-title {
-        font-size: var(--font-up-2);
-    }
+  .stats-title {
+    font-size: var(--font-up-2);
+  }
 
-    .user-info .user-detail .details {
-        flex-direction: column;
-    }
+  .user-info .user-detail .details {
+    flex-direction: column;
+  }
 
-    .top-sub-section.most-liked-section {
-        align-items: center;
-        flex-wrap: nowrap;
-        gap: 1rem;
-    }
+  .top-sub-section.most-liked-section {
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 1rem;
+  }
 
-    .top-sub-section .user-info .user-detail .name-line .username {
-        display: none;
-    }
+  .top-sub-section .user-info .user-detail .name-line .username {
+    display: none;
+  }
 
-    .user-content .d-icon-heart {
-        height: 1.5rem;
-        width: 1.5rem;
-    }
+  .user-content .d-icon-heart {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
 }
 
 // Hiding lot of groups from profile
 #collapsed-info-panel.secondary dl div:nth-child(7) {
-    display: none;
+  display: none;
 }
 
 // Bold in karma (profile)
 #collapsed-info-panel.secondary dl div:nth-child(8) {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 // Align website icon
 .user-profile-website {
-    display: initial !important;
+  display: initial !important;
 }
 
 // Padding to profile box
 .user-main .about .details {
-    padding: 1rem !important;
-    margin-bottom: 1rem;
+  padding: 1rem !important;
+  margin-bottom: 1rem;
 }

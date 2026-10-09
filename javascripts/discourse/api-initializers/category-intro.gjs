@@ -18,9 +18,7 @@ const BANNER_CLASS_TO_KEY = {
 export default apiInitializer((api) => {
   api.onPageChange(() => {
     for (const [className, key] of Object.entries(BANNER_CLASS_TO_KEY)) {
-      const banner = document.querySelector(
-        `.custom-page-intro.${className}`
-      );
+      const banner = document.querySelector(`.custom-page-intro.${className}`);
       if (!banner) {
         continue;
       }

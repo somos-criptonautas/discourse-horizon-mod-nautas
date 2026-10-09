@@ -19,43 +19,42 @@
 // Everything is scoped to .cooked so the component's fullscreen modal keeps its own
 // `.mermaid-diagram.zoomed > svg` sizing, and so no other d-wrap, image or table is
 // touched.
-
 .cooked .mermaid-wrapper {
-    // The graph decides the height, not a 16/9 frame.
-    aspect-ratio: auto;
-    height: auto;
+  // The graph decides the height, not a 16/9 frame.
+  aspect-ratio: auto;
+  height: auto;
 }
 
 .cooked .mermaid-diagram {
+  height: auto;
+
+  // Wide graphs scroll instead of being scaled down to unreadable text.
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  > svg {
+    width: 100%;
     height: auto;
 
-    // Wide graphs scroll instead of being scaled down to unreadable text.
-    overflow-x: auto;
-    overflow-y: hidden;
+    // Beats mermaid's inline max-width; without it the svg never grows past its
+    // intrinsic width and a narrow graph stays a stamp in a wide box.
+    max-width: none !important;
 
-    >svg {
-        width: 100%;
-        height: auto;
-
-        // Beats mermaid's inline max-width; without it the svg never grows past its
-        // intrinsic width and a narrow graph stays a stamp in a wide box.
-        max-width: none !important;
-
-        // The text floor: min-content on a replaced element is its intrinsic width, so
-        // the svg scales UP to fill the post but never DOWN. mermaid's base font is
-        // 16px, so no downscale means no label under 16px — comfortably over the ~14px
-        // asked for — and anything wider than the post scrolls (rule above).
-        min-width: min-content;
-    }
+    // The text floor: min-content on a replaced element is its intrinsic width, so
+    // the svg scales UP to fill the post but never DOWN. mermaid's base font is
+    // 16px, so no downscale means no label under 16px — comfortably over the ~14px
+    // asked for — and anything wider than the post scrolls (rule above).
+    min-width: min-content;
+  }
 }
 
 // Phones and small tablets: keep the diagram at its natural size and scroll it, rather
 // than stretching a tall graph to a narrow screen (which would shrink nothing, but
 // would make a wide one unreadable if it were allowed to fit).
 @include viewport.until(md) {
-    .cooked .mermaid-diagram>svg {
-        width: auto;
-    }
+  .cooked .mermaid-diagram > svg {
+    width: auto;
+  }
 }
 
 // Fullscreen modal: fill the screen, not just cover it.
@@ -69,15 +68,15 @@
 // width + height with the svg's viewBox means preserveAspectRatio scales it to fit the
 // modal in whichever dimension runs out first, so a tall narrow graph finally uses the
 // full height.
-.d-modal.mermaid-fullscreen .mermaid-diagram:not(.zoomed)>svg {
-    max-width: none !important;
+.d-modal.mermaid-fullscreen .mermaid-diagram:not(.zoomed) > svg {
+  max-width: none !important;
 
-    // width: 100% scales a small diagram up to the modal; height: auto keeps its
-    // proportions. The earlier height: 100% was the mistake — .d-modal__body resolves
-    // to its content height here, not the viewport, so 100% of it came out far taller
-    // than the screen and the diagram blew up. max-height clamps it to the viewport
-    // instead: lower the 85vh if it still feels too big.
-    width: 100%;
-    height: auto;
-    max-height: 85vh;
+  // width: 100% scales a small diagram up to the modal; height: auto keeps its
+  // proportions. The earlier height: 100% was the mistake — .d-modal__body resolves
+  // to its content height here, not the viewport, so 100% of it came out far taller
+  // than the screen and the diagram blew up. max-height clamps it to the viewport
+  // instead: lower the 85vh if it still feels too big.
+  width: 100%;
+  height: auto;
+  max-height: 85vh;
 }

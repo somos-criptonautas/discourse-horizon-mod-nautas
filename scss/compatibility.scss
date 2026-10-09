@@ -1,5 +1,5 @@
 @include viewport.from(sm) {
-    #main-outlet div[class*="category-title-header"] {
-        max-width: calc(1250px - 3rem) !important;
-    }
+  #main-outlet div[class*="category-title-header"] {
+    max-width: calc(1250px - 3rem) !important;
+  }
 }

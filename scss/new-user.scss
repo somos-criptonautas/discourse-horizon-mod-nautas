@@ -8,36 +8,36 @@
 
 // Styling better on mobile
 @include viewport.until(sm) {
-    .user-messages-page .user-content {
-        margin: 0.25rem 0 0 0;
-    }
+  .user-messages-page .user-content {
+    margin: 0.25rem 0 0 0;
+  }
 }
 
 // Remove redundant AI chats on messages for better navigation
 .user-nav__messages-ai-bot-chats {
-    display: none;
+  display: none;
 }
 
 // Remove weird border top in MPs
 .user-messages-page .paginated-topics-list .topic-list tbody.topic-list-body {
-    border-top: unset !important;
+  border-top: unset !important;
 }
 
 .post__topic-map.topic-map.--op {
-    font-size: var(--font-down-1);
+  font-size: var(--font-down-1);
 }
 
 // Hide gists on MPs
 .new-user-content-wrapper .excerpts-gists-toggle-btn {
-    display: none;
+  display: none;
 }
 
 @include viewport.from(sm) {
-    .new-user-wrapper .empty-state {
-        margin: 0 0 1em 0;
-    }
+  .new-user-wrapper .empty-state {
+    margin: 0 0 1em 0;
+  }
 
-    .user-invites-page .user-content {
-        margin: 0 auto 0 auto;
-    }
+  .user-invites-page .user-content {
+    margin: 0 auto 0 auto;
+  }
 }

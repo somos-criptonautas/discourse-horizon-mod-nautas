@@ -1,10 +1,13 @@
-    // More padding in table on MPs profile (vertical display)
-    @include viewport.until(sm) {
-        .topic-list .topic-list-data {
-            padding: 0.74rem 0;
-            max-width: 300px;
-        }
-    }
+@use "sass:list";
+@use "lib/viewport";
+
+// More padding in table on MPs profile (vertical display)
+@include viewport.until(sm) {
+  .topic-list .topic-list-data {
+    padding: 0.74rem 0;
+    max-width: 300px;
+  }
+}
 
 // AI gists (discourse-ai). Rendered by our own outlet since Horizon drops the ones
 // discourse-ai uses — see javascripts/discourse/api-initializers/ai-gist-horizon.gjs
@@ -17,7 +20,7 @@
 // which our previous selector tied and lost to on source order. This reaches (0,4,0)
 // and wins outright, without an !important.
 .--high-context .hc-topic-card__content:has(.horizon-ai-gist) .topic-excerpt {
-    display: none;
+  display: none;
 }
 
 // The outlet sits inside .hc-topic-card__title, so the gist inherits the title's bold
@@ -29,39 +32,40 @@
 // title link while the gist gets its own full-width row. The existing margin-top stays
 // as the gap between the title line and the gist.
 .hc-topic-card__title {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
 }
 
 .hc-topic-card__title .topic-post-badges {
-    order: 1;
+  order: 1;
 }
 
 .horizon-ai-gist {
-    flex: 0 0 100%;
-    order: 2;
-    margin-top: var(--space-2);
-    color: var(--primary-high);
-    // rem, NOT em. Every --font-* token is em-based (--font-0 is 1em, --font-down-1 is
-    // 0.8706em) and would be multiplied by the title's inflated size — --font-down-1
-    // still computed to 23px here. Horizon's own excerpt gets --font-0 relative to
-    // __content, i.e. normal body size, which is what this matches.
-    font-size: var(--font-0-rem, 1rem);
-    font-weight: normal;
-    line-height: 1.25;
-    overflow-wrap: anywhere;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  flex: 0 0 100%;
+  order: 2;
+  margin-top: var(--space-2);
+  color: var(--primary-high);
+
+  // rem, NOT em. Every --font-* token is em-based (--font-0 is 1em, --font-down-1 is
+  // 0.8706em) and would be multiplied by the title's inflated size — --font-down-1
+  // still computed to 23px here. Horizon's own excerpt gets --font-0 relative to
+  // __content, i.e. normal body size, which is what this matches.
+  font-size: var(--font-0-rem, 1rem);
+  font-weight: normal;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 // Compact mode of the excerpts/gists button: titles only. Body class comes from
 // TopicListMode in ai-gist-horizon.gjs. Same (0,3,0) tie with Horizon's excerpt rule as
 // above, so the .--high-context step is what makes this win.
 .horizon-titles-only .--high-context .hc-topic-card .topic-excerpt {
-    display: none;
+  display: none;
 }
 
 // The "last visit" marker in docs lists.
@@ -76,9 +80,8 @@
 // One declaration is enough: Horizon's :hover rule only sets border-color, which cannot
 // render once the bottom border is gone.
 .topic-list.doc-simple-mode > .topic-list-body > .topic-list-item.last-visit {
-    border-bottom: none;
+  border-bottom: none;
 }
-
 
 // Only Horizon's high-context card drops discourse-ai's own outlets, so only there do we
 // stand in for them. Simple cards (suggested / related lists) keep core's TopicCell,
@@ -90,8 +93,10 @@
 // the element being PRESENT, not on it being visible. The two together left docs rows
 // with no blurb at all: gist hidden here, excerpt hidden there. Docs lists keep our
 // gist, so the one below has something to stand in for.
-.topic-list:not(.doc-simple-mode) .topic-list-item:not(.--high-context) .horizon-ai-gist {
-    display: none;
+.topic-list:not(.doc-simple-mode)
+  .topic-list-item:not(.--high-context)
+  .horizon-ai-gist {
+  display: none;
 }
 
 // Docs lists: one blurb per row, never two.
@@ -100,8 +105,11 @@
 // from the docs table's own excerpt, which core renders as <a class="excerpt"> — and that
 // duplication was the actual bug. Where the gist is present the excerpt is the copy, so
 // the excerpt goes and the gist stays. Rows with no gist keep their excerpt.
-.topic-list.doc-simple-mode .topic-list-item:has(.horizon-ai-gist) .link-bottom-line .excerpt {
-    display: none !important;
+.topic-list.doc-simple-mode
+  .topic-list-item:has(.horizon-ai-gist)
+  .link-bottom-line
+  .excerpt {
+  display: none !important;
 }
 
 // Index categories: a list of titles and nothing else. Which ones is the
@@ -118,12 +126,11 @@
 // !important because Horizon and core declare these with weight of their own
 // (.--high-context .hc-topic-card .topic-excerpt, plus the docs table's rules).
 body.horizon-no-gists .topic-list {
-
-    .horizon-ai-gist,
-    .topic-excerpt,
-    .link-bottom-line .excerpt {
-        display: none !important;
-    }
+  .horizon-ai-gist,
+  .topic-excerpt,
+  .link-bottom-line .excerpt {
+    display: none !important;
+  }
 }
 
 // Simple cards (related / suggested lists) are a fixed grid: Horizon's topic-cards.scss
@@ -138,36 +145,35 @@ body.horizon-no-gists .topic-list {
 //
 // Only non-high-context rows: Horizon's own high-context card handles its excerpt.
 .topic-list-body .topic-list-item:not(.--high-context) {
+  .excerpt {
+    grid-area: excerpt;
+    margin: 0;
+    font-size: var(--font-down-2);
+  }
 
-    .excerpt {
-        grid-area: excerpt;
-        margin: 0;
-        font-size: var(--font-down-2);
+  &.has-excerpt {
+    @include viewport.from(sm) {
+      grid-template-areas:
+        "creator title title title status"
+        ". category activity activity ."
+        ". excerpt excerpt excerpt excerpt";
+
+      &.has-replies {
+        grid-template-areas:
+          "creator title title title status"
+          ". category likes-replies activity ."
+          ". excerpt excerpt excerpt excerpt";
+      }
     }
 
-    &.has-excerpt {
-        @include viewport.from(sm) {
-            grid-template-areas:
-                "creator title title title status"
-                ". category activity activity ."
-                ". excerpt excerpt excerpt excerpt";
-
-            &.has-replies {
-                grid-template-areas:
-                    "creator title title title status"
-                    ". category likes-replies activity ."
-                    ". excerpt excerpt excerpt excerpt";
-            }
-        }
-
-        // Phones: Horizon drops the excerpt from its own expanded card for room, and a
-        // third row in a card that narrow reads as clutter. Same choice here.
-        @include viewport.until(sm) {
-            .excerpt {
-                display: none;
-            }
-        }
+    // Phones: Horizon drops the excerpt from its own expanded card for room, and a
+    // third row in a card that narrow reads as clutter. Same choice here.
+    @include viewport.until(sm) {
+      .excerpt {
+        display: none;
+      }
     }
+  }
 }
 
 // Tags hidden from topic lists.
@@ -184,15 +190,15 @@ body.horizon-no-gists .topic-list {
 // tag pages and the topic header keep every tag, so tagging still works normally. This
 // is unrelated to discourse-docs-categories-tags, which hides one configurable tag in
 // its own target list and that tag's hashtag inside posts.
-$internal-single-letter-tags: a b c d e f g h i j k l m n ñ o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9;
+$internal-single-letter-tags: a b c d e f g h i j k l m n ñ o p q r s t u v w x
+  y z 0 1 2 3 4 5 6 7 8 9;
 $internal-status-tags: resuelto abierto;
 
-@each $tag in join($internal-single-letter-tags, $internal-status-tags) {
-
-    .topic-list [data-tag-name="#{$tag}"],
-    .topic-list-item [data-tag-name="#{$tag}"],
-    .hc-topic-card__tags [data-tag-name="#{$tag}"],
-    .more-topics__container [data-tag-name="#{$tag}"] {
-        display: none !important;
-    }
+@each $tag in list.join($internal-single-letter-tags, $internal-status-tags) {
+  .topic-list [data-tag-name="#{$tag}"],
+  .topic-list-item [data-tag-name="#{$tag}"],
+  .hc-topic-card__tags [data-tag-name="#{$tag}"],
+  .more-topics__container [data-tag-name="#{$tag}"] {
+    display: none !important;
+  }
 }

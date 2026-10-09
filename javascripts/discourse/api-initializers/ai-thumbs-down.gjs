@@ -89,7 +89,9 @@ class AiThumbsDownButton extends Component {
 
 export default apiInitializer((api) => {
   // Without discourse-reactions there is no endpoint to call; the flag stays a flag.
-  if (!api.container.lookup("service:site-settings").discourse_reactions_enabled) {
+  if (
+    !api.container.lookup("service:site-settings").discourse_reactions_enabled
+  ) {
     return;
   }
 

@@ -3,10 +3,22 @@
 }
 
 .welcome-banner__wrap .btn.search-icon,
-.welcome-banner__wrap .d-modal.json-schema-editor-modal .je-ready button.search-icon,
-.d-modal.json-schema-editor-modal .je-ready .welcome-banner__wrap button.search-icon,
-.welcome-banner__wrap .d-modal.json-schema-editor-modal .je-ready .search-icon.json-editor-btn-add,
-.d-modal.json-schema-editor-modal .je-ready .welcome-banner__wrap .search-icon.json-editor-btn-add {
+.welcome-banner__wrap
+  .d-modal.json-schema-editor-modal
+  .je-ready
+  button.search-icon,
+.d-modal.json-schema-editor-modal
+  .je-ready
+  .welcome-banner__wrap
+  button.search-icon,
+.welcome-banner__wrap
+  .d-modal.json-schema-editor-modal
+  .je-ready
+  .search-icon.json-editor-btn-add,
+.d-modal.json-schema-editor-modal
+  .je-ready
+  .welcome-banner__wrap
+  .search-icon.json-editor-btn-add {
   z-index: 1;
 }
 
@@ -21,13 +33,23 @@
 }
 
 @include viewport.from(sm) {
-  body:not(.has-full-page-chat, .wizard) #main-outlet-wrapper #main-outlet> :not(.experimental-screen, .activate-account, .discourse-kanban-board-viewer) {
+  body:not(.has-full-page-chat, .wizard)
+    #main-outlet-wrapper
+    #main-outlet
+    > :not(
+      .experimental-screen,
+      .activate-account,
+      .discourse-kanban-board-viewer
+    ) {
     max-width: var(--d-max-width-topic) !important;
   }
 }
 
 @include viewport.from(lg) {
-  body:not(.has-full-page-chat, .wizard) #main-outlet-wrapper #main-outlet> :not(.experimental-screen, .activate-account) {
+  body:not(.has-full-page-chat, .wizard)
+    #main-outlet-wrapper
+    #main-outlet
+    > :not(.experimental-screen, .activate-account) {
     max-width: var(--d-max-width-topic) !important;
   }
 }

@@ -1,53 +1,54 @@
 // Custom user menu adjustments
 .custom-user-menu-content .fk-d-menu__inner-content {
-    min-width: 15.5rem;
+  min-width: 15.5rem;
 }
 
 .custom-user-menu-content .fk-d-menu__user-info {
-    grid-template-columns: 2rem 1fr;
+  grid-template-columns: 2rem 1fr;
 }
 
 .fk-d-menu__profile-tab {
-    font-size: 0.97rem;
+  font-size: 0.97rem;
 }
 
 .custom-user-menu-content .fk-d-menu__profile-tab {
-    padding: 0.56rem 0;
+  padding: 0.56rem 0;
 }
 
 .fk-d-menu__profile-tab hr {
-    margin: 0.56rem;
+  margin: 0.56rem;
 }
 
 .custom-user-menu-content .fk-d-menu__profile-tab li.logout {
-    padding-top: 0.56rem;
+  padding-top: 0.56rem;
 }
 
 .fk-d-menu__profile-tab ul li:not([class]) {
-    padding-bottom: 0.56rem;
+  padding-bottom: 0.56rem;
 }
 
 .custom-user-menu-content .fk-d-menu__inner-content a,
 .custom-user-menu-content .fk-d-menu__inner-content button {
-    margin: 0 0.56rem;
-    padding: 0 calc(var(--d-sidebar-row-horizontal-padding)*2);
-    border-radius: var(--d-border-radius);
+  margin: 0 0.56rem;
+  padding: 0 calc(var(--d-sidebar-row-horizontal-padding) * 2);
+  border-radius: var(--d-border-radius);
 }
+
 // Karma line, appended below the username by user-menu-karma.js.
 // Upstream lays this block out with named areas, so the extra row has to be
 // declared here or the line lands under the avatar.
 .custom-user-menu-content .fk-d-menu__user-info {
-    grid-template-areas:
-        "avatar name"
-        "avatar username"
-        "avatar karma";
-    grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "avatar name"
+    "avatar username"
+    "avatar karma";
+  grid-template-rows: auto auto auto;
 }
 
 .custom-user-menu-content .fk-d-menu__total-karma {
-    grid-area: karma;
-    font-size: var(--font-down-2);
-    color: var(--primary-medium);
+  grid-area: karma;
+  font-size: var(--font-down-2);
+  color: var(--primary-medium);
 }
 
 // Mobile: the profile menu as a right-hand panel, like core's user menu.
@@ -62,28 +63,28 @@
 // the corner radii mirror what mobile-stuff.scss gives .menu-panel, and 80vw matches
 // the .menu-panel.slide-in width so both halves of the header open the same size.
 @include viewport.until(sm) {
-    .fk-d-menu.custom-user-menu-content {
-        position: fixed !important;
-        top: var(--header-offset, 0) !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        left: auto !important;
-        transform: none !important;
-        width: 80vw;
-        max-width: 22rem;
-        max-height: none;
-    }
+  .fk-d-menu.custom-user-menu-content {
+    position: fixed !important;
+    top: var(--header-offset, 0) !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: auto !important;
+    transform: none !important;
+    width: 80vw;
+    max-width: 22rem;
+    max-height: none;
+  }
 
-    .custom-user-menu-content .fk-d-menu__inner-content {
-        box-sizing: border-box;
-        width: 100%;
-        height: 100%;
-        max-height: none;
-        overflow-y: auto;
-        background: var(--secondary);
-        border-top-left-radius: var(--d-border-radius-large);
-        border-bottom-left-radius: var(--d-border-radius-large);
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-    }
+  .custom-user-menu-content .fk-d-menu__inner-content {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    overflow-y: auto;
+    background: var(--secondary);
+    border-top-left-radius: var(--d-border-radius-large);
+    border-bottom-left-radius: var(--d-border-radius-large);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 }

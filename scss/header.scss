@@ -1,17 +1,21 @@
-
 // Hide user menu panel on mobile
 .d-header-icons .header-dropdown-toggle [data-identifier="avatar-profile"] {
   display: none !important;
 }
 
 // Show on mobile nav custom notifications
-html:not(.anon) .d-header-icons .header-dropdown-toggle #toggle-current-user:not(.avatar-profile-trigger) {
+html:not(.anon)
+  .d-header-icons
+  .header-dropdown-toggle
+  #toggle-current-user:not(.avatar-profile-trigger) {
   display: inherit !important;
 }
 
 // Fix header with mods
-.d-header>.wrap .contents {
-  grid-template-columns: minmax(auto, 1fr) auto minmax(0, calc(var(--d-max-width))) auto minmax(auto, 1fr) !important;
+.d-header > .wrap .contents {
+  grid-template-columns:
+    minmax(auto, 1fr) auto minmax(0, calc(var(--d-max-width)))
+    auto minmax(auto, 1fr) !important;
 }
 
 // Logo and anonist icons hidden on mobile
@@ -21,8 +25,14 @@ html:not(.anon) .d-header-icons .header-dropdown-toggle #toggle-current-user:not
   }
 
   // Shown only while the title is in the header, so both change in one paint.
-  body.archetype-regular .d-header:has(.extra-info-wrapper, .header-title, .topic-link) .title a,
-  body.archetype-private_message .d-header:has(.extra-info-wrapper, .header-title, .topic-link) .title a {
+  body.archetype-regular
+    .d-header:has(.extra-info-wrapper, .header-title, .topic-link)
+    .title
+    a,
+  body.archetype-private_message
+    .d-header:has(.extra-info-wrapper, .header-title, .topic-link)
+    .title
+    a {
     visibility: visible;
   }
 
@@ -38,8 +48,10 @@ html:not(.anon) .d-header-icons .header-dropdown-toggle #toggle-current-user:not
 
 // Forces the login button hover to a brand-tertiary shade instead of core's default color.
 .login-button:hover {
-  background-color: light-dark(oklch(from var(--tertiary) 40% c h),
-      oklch(from var(--tertiary) 60% c h));
+  background-color: light-dark(
+    oklch(from var(--tertiary) 40% c h),
+    oklch(from var(--tertiary) 60% c h)
+  );
 }
 
 // Profile header to the right, compatible with other tweaks
@@ -49,7 +61,10 @@ html:not(.anon) .d-header-icons .header-dropdown-toggle #toggle-current-user:not
 
 // Less size on top right user header icons (larger global svgs compatibility)
 :where(.uc-modernize-foundation-theme) .header-sidebar-toggle button .d-icon,
-:where(.uc-modernize-foundation-theme) .d-header-icons .header-dropdown-toggle:not(.user-menu-panel, .language-switcher) .d-icon,
+:where(.uc-modernize-foundation-theme)
+  .d-header-icons
+  .header-dropdown-toggle:not(.user-menu-panel, .language-switcher)
+  .d-icon,
 .d-header-icons .d-icon {
   font-size: var(--font-up-2);
 }
@@ -83,7 +98,7 @@ $hamburger-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 
 .header-sidebar-toggle .btn-sidebar-toggle .d-icon,
 #toggle-hamburger-menu .d-icon {
-  background-color: currentColor;
+  background-color: currentcolor;
   mask: $hamburger-icon center / contain no-repeat;
 
   use {

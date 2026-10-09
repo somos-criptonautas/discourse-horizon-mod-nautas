@@ -26,53 +26,52 @@
 // Field ids are specific to this site's templates, so the headings are hardcoded
 // next to them rather than exposed in settings.yml — a setting for the text without
 // a setting for the ids would only half-move the coupling.
-
 .form-template-form__wrapper {
-    // --- Checklist headings --------------------------------------------------
-    //
-    // ::before on the first checkbox of each group. The checkbox field is a block
-    // whose only child is the <label>, so this lands above it.
-    .form-template-field:has(input[name="check-disp"]),
-    .form-template-field:has(input[name="inversion-tendencia"]),
-    .form-template-field:has(input[name="trading-retesteos"]) {
-        margin-top: 1.5em;
+  // --- Checklist headings --------------------------------------------------
+  //
+  // ::before on the first checkbox of each group. The checkbox field is a block
+  // whose only child is the <label>, so this lands above it.
+  .form-template-field:has(input[name="check-disp"]),
+  .form-template-field:has(input[name="inversion-tendencia"]),
+  .form-template-field:has(input[name="trading-retesteos"]) {
+    margin-top: 1.5em;
 
-        &::before {
-            display: block;
-            margin-bottom: 0.5em;
-            font-weight: bold;
-            color: var(--primary);
-        }
+    &::before {
+      display: block;
+      margin-bottom: 0.5em;
+      font-weight: bold;
+      color: var(--primary);
     }
+  }
 
-    .form-template-field:has(input[name="check-disp"])::before {
-        content: "Antes de enviar";
-    }
+  .form-template-field:has(input[name="check-disp"])::before {
+    content: "Antes de enviar";
+  }
 
-    .form-template-field:has(input[name="inversion-tendencia"])::before {
-        content: "Inversión";
-    }
+  .form-template-field:has(input[name="inversion-tendencia"])::before {
+    content: "Inversión";
+  }
 
-    .form-template-field:has(input[name="trading-retesteos"])::before {
-        content: "Trading";
-    }
+  .form-template-field:has(input[name="trading-retesteos"])::before {
+    content: "Trading";
+  }
 
-    // --- Checklist condicional -----------------------------------------------
-    //
-    // Both groups start hidden; the `metodo` dropdown reveals one. Hiding the first
-    // checkbox of a group hides its heading too, since the heading is its ::before.
-    .form-template-field:has(input[name^="inversion-"]),
+  // --- Checklist condicional -----------------------------------------------
+  //
+  // Both groups start hidden; the `metodo` dropdown reveals one. Hiding the first
+  // checkbox of a group hides its heading too, since the heading is its ::before.
+  .form-template-field:has(input[name^="inversion-"]),
+  .form-template-field:has(input[name^="trading-"]) {
+    display: none;
+  }
+
+  &:has(select[name="metodo"] option[value="Inversión"]:checked)
+    .form-template-field:has(input[name^="inversion-"]) {
+    display: block;
+  }
+
+  &:has(select[name="metodo"] option[value="Trading"]:checked)
     .form-template-field:has(input[name^="trading-"]) {
-        display: none;
-    }
-
-    &:has(select[name="metodo"] option[value="Inversión"]:checked)
-        .form-template-field:has(input[name^="inversion-"]) {
-        display: block;
-    }
-
-    &:has(select[name="metodo"] option[value="Trading"]:checked)
-        .form-template-field:has(input[name^="trading-"]) {
-        display: block;
-    }
+    display: block;
+  }
 }

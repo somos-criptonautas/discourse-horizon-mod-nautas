@@ -1,71 +1,70 @@
 // -----------------------------------------------------------------------
 // Groups
 // -----------------------------------------------------------------------
-
 .groups-boxes {
-    padding-bottom: 2rem;
+  padding-bottom: 2rem;
 }
 
 // Group boxes styling
 .group-boxes .group-box {
-    background-color: var(--primary-25);
-    box-shadow: 0 0 6px 1px var(--topic-card-shadow);
+  background-color: var(--primary-25);
+  box-shadow: 0 0 6px 1px var(--topic-card-shadow);
 }
 
 .group-boxes .group-box:hover {
-    background-color: var(--primary-50);
+  background-color: var(--primary-50);
 }
 
 // We use a team group so hide redundancy
 .group-box[data-group-name="admins"],
 .group-box[data-group-name="moderadores"] {
-    display: none;
+  display: none;
 }
 
 .group-box[data-group-name="nuevos"] {
-    order: -8;
+  order: -8;
 }
 
 .group-box[data-group-name="anons"] {
-    order: -7;
+  order: -7;
 }
 
 .group-box[data-group-name="nautas"] {
-    order: -6;
+  order: -6;
 }
 
 .group-box[data-group-name="traders"] {
-    order: -5;
+  order: -5;
 }
 
 .group-box[data-group-name="lideres"] {
-    order: -4;
+  order: -4;
 }
 
 .group-box[data-group-name="agoristas"] {
-    order: -3;
+  order: -3;
 }
 
 .group-box[data-group-name="team"] {
-    order: -2;
+  order: -2;
 }
 
 .group-box[data-group-name="delistados"] {
-    order: -1;
+  order: -1;
 }
 
 // Hide not-unlisted and believers
 .group-box[data-group-name="no-delistados"],
 .group-box[data-group-name="creyentes"] {
-    display: none;
+  display: none;
 }
 
 // More sizing on groups icons and descriptions
 .group-box .group-avatar-flair .avatar-flair .d-icon {
-    width: 1.5rem !important;
-    height: 1.5rem !important;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
 }
 
 .group-box .group-box-inner .group-description {
-    padding-top: 0.5rem;
+  padding-top: 0.5rem;
 }

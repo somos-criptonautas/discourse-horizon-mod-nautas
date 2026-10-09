@@ -22,7 +22,9 @@ export function parentPath(url) {
   }
 
   const slugs = segments.slice(1, idIndex);
-  return slugs.length > 1 ? `/c/${slugs.slice(0, -1).join("/")}` : "/categories";
+  return slugs.length > 1
+    ? `/c/${slugs.slice(0, -1).join("/")}`
+    : "/categories";
 }
 
 // Placed by hand rather than through discovery-list-container-top, which renders

@@ -1,11 +1,11 @@
 // -----------------------------------------------------------------------
 // Base & root variables
 // -----------------------------------------------------------------------
-
 html {
   font-size: 23px;
-  text-size-adjust: 100%;
+  // stylelint-disable-next-line property-no-vendor-prefix -- iOS Safari only reads the prefixed one
   -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 :root {
@@ -16,7 +16,6 @@ html {
   --success: var(--primary-800);
   --d-hover-subtle: color-mix(in srgb, var(--d-hover), transparent 40%);
   --primary-25: color-mix(in srgb, var(--primary-50), var(--secondary) 50%);
-
   --category-1-color: none !important;
   --category-2-color: none !important;
   --category-3-color: none !important;
@@ -137,13 +136,12 @@ body {
 // -----------------------------------------------------------------------
 // Layout — #main-outlet-wrapper, sidebar width, grid columns
 // -----------------------------------------------------------------------
-
 #main-outlet-wrapper {
   gap: var(--main-grid-gap);
 }
 
 body.has-sidebar-page.has-full-page-chat #main-outlet-wrapper {
-  grid-column-gap: var(--main-grid-gap);
+  column-gap: var(--main-grid-gap);
   background-color: var(--background-color);
 }
 
@@ -223,7 +221,7 @@ body:not(.has-full-page-chat, .wizard) {
         padding-bottom: var(--composer-height);
       }
 
-      >*:not(.experimental-screen, .activate-account) {
+      > *:not(.experimental-screen, .activate-account) {
         @include viewport.from(lg) {
           box-sizing: border-box;
           max-width: 1000px;
@@ -326,7 +324,6 @@ body.category .navigation-controls,
 }
 
 @include viewport.from(lg) {
-
   // Hide header links on homepage for avoid redundancy
   .welcome-banner--enabled .custom-header-links {
     display: none !important;
@@ -357,7 +354,9 @@ body.category .navigation-controls,
   color: var(--header_primary);
   font-size: unset;
   border-radius: var(--d-border-radius);
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
 // Hover / focus only swap colours — box size stays identical → no header stretch.
@@ -381,7 +380,6 @@ body.category .navigation-controls,
 }
 
 // Hide chat double title
-
 .c-header .c-heading {
   display: none;
 }
@@ -416,7 +414,6 @@ body.category .navigation-controls,
 // -----------------------------------------------------------------------
 // Sidebar / navigation
 // -----------------------------------------------------------------------
-
 [data-section-name="tags"],
 [data-section-name="user-threads"],
 [data-section-name="messages"] {
@@ -432,7 +429,9 @@ body.category .navigation-controls,
 
 // Fix weird CSS color icons on every docs category, not a hardcoded slug list.
 // The docs plugin's sidebar panel only renders inside docs categories.
-body:has(.discourse-docs-sidebar-panel) .sidebar-section-link-wrapper .sidebar-section-link-prefix.icon {
+body:has(.discourse-docs-sidebar-panel)
+  .sidebar-section-link-wrapper
+  .sidebar-section-link-prefix.icon {
   display: none;
 }
 
@@ -602,7 +601,6 @@ button [title="similares"] .d-button-label {
 // Kept only for @agoristas and @team; init.gjs puts the class on <body>. Cosmetic: the
 // markup is still writable by hand, so this hides a shortcut, it does not restrict.
 body:not(.horizon-advanced-composer) {
-
   .dropdown-menu__item:has(.d-icon-file),
   .dropdown-menu__item:has([data-name="toggle-wrap"]) {
     display: none;
@@ -662,7 +660,6 @@ body:not(.horizon-advanced-composer) {
 }
 
 @include viewport.until(sm) {
-
   #main-outlet .tag-drop-header {
     margin-right: 0.75rem;
   }
@@ -670,14 +667,26 @@ body:not(.horizon-advanced-composer) {
 
 // Hide category breadcrumb in mobile, keep it on support and Q&A categories
 @media (width < 40rem) {
-
-  body:not(.category-soporte):not(.category-preguntas) #main-outlet .list-controls .navigation-container .category-breadcrumb.hidden,
-  body:not(.category-soporte):not(.category-preguntas) #main-outlet .list-controls .navigation-container .category-breadcrumb {
+  body:not(.category-soporte, .category-preguntas)
+    #main-outlet
+    .list-controls
+    .navigation-container
+    .category-breadcrumb.hidden,
+  body:not(.category-soporte, .category-preguntas)
+    #main-outlet
+    .list-controls
+    .navigation-container
+    .category-breadcrumb {
     display: none !important;
   }
 
   // Disable hiding top header in custom nav mobile
-  body.f-nav-hidden:not(.archetype-regular):not(.archetype-private_message):not(.has-full-page-chat) .d-header-wrap {
+  body.f-nav-hidden:not(
+      .archetype-regular,
+      .archetype-private_message,
+      .has-full-page-chat
+    )
+    .d-header-wrap {
     transform: unset !important;
     opacity: unset !important;
     transition: unset !important;
@@ -712,7 +721,6 @@ body:not(.horizon-advanced-composer) {
 
 // Hide view on MPs table display
 @include viewport.until(lg) {
-
   .topic-list .topic-list-data.num.posts,
   .topic-list .topic-list-data.num.views {
     display: none;
@@ -736,7 +744,7 @@ body:not(.horizon-advanced-composer) {
   display: none;
 }
 
-// Better margins on timeline 
+// Better margins on timeline
 
 @media (width >=925px) {
   .container.posts .topic-navigation {
@@ -751,22 +759,21 @@ body:not(.horizon-advanced-composer) {
 
 // Display all moderator tools (less size)
 .topic-admin-menu-content {
-  font-size: var(--font-down-1)
+  font-size: var(--font-down-1);
 }
 
 // -----------------------------------------------------------------------
 // TOC
 // -----------------------------------------------------------------------
-
 .d-toc-main #d-toc li.d-toc-item {
   padding-left: 0.33em;
 }
 
-.d-toc-main #d-toc li.d-toc-item.direct-active>a::before {
+.d-toc-main #d-toc li.d-toc-item.direct-active > a::before {
   width: 2px;
 }
 
-.d-toc-main #d-toc>ul>li>ul li.direct-active>a::before {
+.d-toc-main #d-toc > ul > li > ul li.direct-active > a::before {
   margin-left: -5px;
 }
 
@@ -777,7 +784,6 @@ body:not(.horizon-advanced-composer) {
 // -----------------------------------------------------------------------
 // Chat
 // -----------------------------------------------------------------------
-
 .chat-drawer-content {
   font-size: var(--font-down-1);
 }
@@ -846,7 +852,9 @@ nav.c-footer .c-footer__item {
   padding-inline: 0.63em;
 }
 
-.chat-message-separator-date+.chat-message-separator__line-container .chat-message-separator__line {
+.chat-message-separator-date
+  + .chat-message-separator__line-container
+  .chat-message-separator__line {
   border-top: none;
 }
 
@@ -876,7 +884,6 @@ nav.c-footer .c-footer__item {
 // -----------------------------------------------------------------------
 // User profile / user menu / groups
 // -----------------------------------------------------------------------
-
 .user-card .badge-section {
   display: none !important;
 }
@@ -956,7 +963,7 @@ nav.c-footer .c-footer__item {
 
 // Less primary icon size
 .user-profile-names__primary .d-icon {
-  font-size: .75em;
+  font-size: 0.75em;
 }
 
 // Group naming ordering [EXPERIMENTAL]
@@ -965,7 +972,7 @@ nav.c-footer .c-footer__item {
 }
 
 // Styling from Oniel Flat Theme
-.user-main .stats-section>ul>li {
+.user-main .stats-section > ul > li {
   width: auto !important;
   min-width: 0;
   min-height: 82px;
@@ -993,19 +1000,19 @@ nav.c-footer .c-footer__item {
   gap: var(--mf-space-3);
 }
 
-.user-main .stats-section>ul {
+.user-main .stats-section > ul {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 @include viewport.until(sm) {
-  .user-main .stats-section>ul {
+  .user-main .stats-section > ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 .user-content .top-section,
 #user-summary .top-section {
-  background: rgba(0, 0, 0, 0);
+  background: rgb(0, 0, 0, 0);
   border: none;
   border-radius: 0;
   padding: 0;
@@ -1045,8 +1052,11 @@ nav.c-footer .c-footer__item {
 
 // `button.active::after:hover` was invalid (pseudo-class after pseudo-element),
 // which killed the whole rule — the active underline never rendered at all.
-.user-navigation-secondary__horizontal-nav .nav-pills>li a.active::after,
-.user-navigation-secondary__horizontal-nav .nav-pills>li button.active::after {
+.user-navigation-secondary__horizontal-nav .nav-pills > li a.active::after,
+.user-navigation-secondary__horizontal-nav
+  .nav-pills
+  > li
+  button.active::after {
   content: "";
   position: absolute;
   left: 0;
@@ -1060,17 +1070,17 @@ nav.c-footer .c-footer__item {
   border-bottom: unset;
 }
 
-.new-user-content-wrapper .nav-pills>li>a {
+.new-user-content-wrapper .nav-pills > li > a {
   border-radius: 0.3rem;
 }
 
-.new-user-content-wrapper .nav-pills>li>a:hover .d-icon,
-.nav-pills>li button:hover .d-icon {
+.new-user-content-wrapper .nav-pills > li > a:hover .d-icon,
+.nav-pills > li button:hover .d-icon {
   color: unset;
 }
 
-.new-user-content-wrapper .nav-pills>li>a:hover,
-.new-user-content-wrapper .nav-pills>li button:hover {
+.new-user-content-wrapper .nav-pills > li > a:hover,
+.new-user-content-wrapper .nav-pills > li button:hover {
   background: var(--d-sidebar-highlight-background);
   color: var(--d-sidebar-highlight-color);
   outline: none;
@@ -1078,8 +1088,8 @@ nav.c-footer .c-footer__item {
 
 // Hover drops the underline only on inactive pills; the active one keeps its
 // marker in the link colour instead of flickering away under the cursor.
-.new-user-content-wrapper .nav-pills>li>a:not(.active):hover::after,
-.new-user-content-wrapper .nav-pills>li button:not(.active):hover::after {
+.new-user-content-wrapper .nav-pills > li > a:not(.active):hover::after,
+.new-user-content-wrapper .nav-pills > li button:not(.active):hover::after {
   display: none;
 }
 
@@ -1131,7 +1141,6 @@ nav.c-footer .c-footer__item {
 
 .leaderboard .podium__wrapper {
   border-radius: var(--d-border-radius-large);
-
   margin: 1rem auto 3rem;
 }
 
@@ -1192,7 +1201,6 @@ nav.c-footer .c-footer__item {
 }
 
 // Change earned badge styling
-
 .badge-card {
   border: 1px solid var(--primary-300);
 }
@@ -1254,7 +1262,9 @@ $badge-corner-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
 }
 
 .badge-card .check-display .d-icon {
-  color: var(--primary) !important; // core paints it --primary-low, lost on this fill
+  color: var(
+    --primary
+  ) !important; // core paints it --primary-low, lost on this fill
   height: 0.9rem;
   width: 0.9rem;
 }
@@ -1265,6 +1275,7 @@ $badge-corner-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
 color: unset !important;
 }
  */
+
 .is-group-member .svg-icon {
   vertical-align: -0.2em !important;
 }
@@ -1275,7 +1286,7 @@ color: unset !important;
   flex-direction: column;
 }
 
-.badge-grouping>div:has(h2#ogs) {
+.badge-grouping > div:has(h2#ogs) {
   order: 6;
 }
 
@@ -1309,7 +1320,9 @@ tbody tr {
 }
 
 // Padding on Docs
-.discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link {
+.discourse-docs-sidebar-panel
+  .sidebar-section-link-wrapper
+  .sidebar-section-link {
   padding: 0.3rem 0;
 }
 
@@ -1325,6 +1338,7 @@ body.category-preguntas li:has(.tag-drop) {
 // Margin after header category + banner transparent
 .category-title-header {
   margin-bottom: 1rem;
+
   --category-banner-background: transparent !important;
   --category-banner-color: unset !important;
   border: 1px solid var(--primary-200);
@@ -1332,7 +1346,9 @@ body.category-preguntas li:has(.tag-drop) {
 }
 
 // Font-size adjust in Docs categories sidebar
-.discourse-docs-sidebar-panel .sidebar-section-link-wrapper .sidebar-section-link-content-text {
+.discourse-docs-sidebar-panel
+  .sidebar-section-link-wrapper
+  .sidebar-section-link-content-text {
   font-size: var(--font-down-1);
   padding-left: 0.3rem;
 }
@@ -1459,7 +1475,6 @@ body.category-curso .more-topics__container {
 }
 
 @include viewport.from(sm) {
-
   .category-boxes .category-box-heading .badge-category__name,
   .category-boxes-with-topics .category-box-heading .badge-category__name {
     font-size: 1rem;
@@ -1499,7 +1514,7 @@ body.category-curso .more-topics__container {
   max-height: 100% !important;
 }
 
-
+// stylelint-disable-next-line selector-type-no-unknown -- kept as is, changing it would alter the 404 layout
 .page-not-found row {
   display: flex;
 }
@@ -1524,7 +1539,6 @@ body.category-curso .more-topics__container {
 }
 
 @include viewport.from(sm) {
-
   .header-search--enabled .floating-search-input-wrapper,
   .search-header--visible .floating-search-input-wrapper {
     justify-content: unset;
@@ -1589,7 +1603,7 @@ body.category-curso .more-topics__container {
 .banner-featured-links__link,
 .banner-featured-links__link:visited {
   color: var(--accent-text-color);
-  border-radius: var(--d-border-radius-large)
+  border-radius: var(--d-border-radius-large);
 }
 
 .banner-featured-links__link:hover {
@@ -1671,7 +1685,7 @@ aside.onebox {
   max-width: 850px;
 }
 
-.install-theme-item input:checked+label {
+.install-theme-item input:checked + label {
   border-radius: 0.23rem;
 }
 
@@ -1719,8 +1733,10 @@ img.emoji {
 }
 
 [data-wrap="button"] a:hover {
-  background: light-dark(oklch(from var(--accent-color) 40% c h),
-      oklch(from var(--accent-color) 50% c h));
+  background: light-dark(
+    oklch(from var(--accent-color) 40% c h),
+    oklch(from var(--accent-color) 50% c h)
+  );
 }
 
 // Centered videos
@@ -1749,15 +1765,12 @@ img.emoji {
 .d-editor-preview ol {
   padding-inline-start: 0;
   list-style-type: "– ";
-
 }
 
 .cooked ul li,
 .d-editor-preview ul li {
   padding-bottom: 0.5rem;
-
 }
-
 
 // Update ol types
 .cooked ol,
@@ -1821,22 +1834,24 @@ color: var(--primary) !important;
 // Visible progress bar in tiny screens
 @media (width <=400px) {
   .with-topic-progress {
-    bottom: calc(env(safe-area-inset-bottom) + var(--composer-height, 0px) + var(--d-border-radius-large)*3.3);
+    bottom: calc(
+      env(safe-area-inset-bottom) + var(--composer-height, 0px) +
+        var(--d-border-radius-large) * 3.3
+    );
   }
 }
 
-// Less height for progress bar 
+// Less height for progress bar
 .topic-progress-wrapper {
   height: 2.5rem;
 }
 
 // Less padding on progress bar
 .topic-progress {
-  padding: .35rem 1em;
+  padding: 0.35rem 1em;
 }
 
 @include viewport.from(md) {
-
   // Extra breathing room above the progress button
   .topic-progress-wrapper,
   #topic-progress-wrapper {
@@ -1846,7 +1861,7 @@ color: var(--primary) !important;
 
 // Less height in progress bar
 #topic-progress-wrapper #topic-progress {
-  padding: .44rem 0.75em;
+  padding: 0.44rem 0.75em;
 }
 
 // Intro text for groups/badges pages, rendered from after_header.html.
@@ -1864,7 +1879,6 @@ body.static-guidelines .category-banner-guidelines {
 // -----------------------------------------------------------------------
 // Embed comments
 // -----------------------------------------------------------------------
-
 body.embed-mode #main-outlet-wrapper {
   display: block !important;
 }
@@ -1875,7 +1889,9 @@ body.embed-mode #main-outlet-wrapper {
 // sideways. Subtract both so the row fits the iframe exactly; core's max-width
 // rules add them back onto this variable, so those still total 100%.
 body.embed-mode {
-  --topic-body-width: calc(100% - var(--topic-avatar-width) - (var(--topic-body-width-padding) * 2));
+  --topic-body-width: calc(
+    100% - var(--topic-avatar-width) - (var(--topic-body-width-padding) * 2)
+  );
 }
 
 // The iframe runs edge to edge in the blog's article column, so the thread
@@ -1889,7 +1905,6 @@ body.embed-mode #main-outlet {
 // suggested topics. Post-menu buttons and the topic map are trimmed in
 // javascripts/api-initializers/embed-comments.gjs.
 body.embed-mode {
-
   .small-action,
   .time-gap,
   #topic-footer-buttons,
@@ -1983,7 +1998,8 @@ font-size: var(--font-up-1);
 }
 
 // Showing wrap selectors on composer only to staff
-.group-nuevos:not(.group-team):not(.group-agoristas):not(.group-lideres) [data-name="toggle-wrap"] {
+.group-nuevos:not(.group-team, .group-agoristas, .group-lideres)
+  [data-name="toggle-wrap"] {
   display: none;
 }
 
@@ -2001,7 +2017,6 @@ font-size: var(--font-up-1);
 
 // [MOBILE] 10% more size on SVG icons and their titles
 @include viewport.until(sm) {
-
   .svg-icon,
   .svg-icon-title {
     height: 1.1em;
@@ -2031,7 +2046,7 @@ font-size: var(--font-up-1);
 // scss/_topic-list.scss, so there is a single list to edit when one is added.
 
 // Hiding last selectors on MP (we do not use trust_level defaults)
-.messages-dropdown-content .dropdown-menu li:nth-last-of-type(-n+2) {
+.messages-dropdown-content .dropdown-menu li:nth-last-of-type(-n + 2) {
   display: none;
 }
 
@@ -2086,9 +2101,9 @@ body.horizon-no-gists .excerpts-gists-toggle-btn {
   background: unset;
 }
 
-.nested-view:not(.nested-context-view)>.nested-view__controls {
+.nested-view:not(.nested-context-view) > .nested-view__controls {
   z-index: unset;
-  padding: .47rem 1rem;
+  padding: 0.47rem 1rem;
 }
 
 .nested-view__controls-left {
@@ -2102,11 +2117,13 @@ body.horizon-no-gists .excerpts-gists-toggle-btn {
 // Disable weird floating composer in IA Bot
 .docked-composer.ai-bot-docked-composer.docked-composer--keyboard-open {
   position: unset;
-
 }
 
-//Style the anonist (IA Bot) main chat page
-body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector__selection-wrapper label {
+// Style the anonist (IA Bot) main chat page
+body.has-ai-conversations-sidebar
+  .ai-bot-conversations
+  .agent-llm-selector__selection-wrapper
+  label {
   display: none;
 }
 
@@ -2125,16 +2142,24 @@ body.has-ai-conversations-sidebar .ai-bot-conversations__input-container {
   }
 }
 
-body.has-ai-conversations-sidebar .ai-bot-conversations__input-wrapper #ai-bot-conversations-input {
+body.has-ai-conversations-sidebar
+  .ai-bot-conversations__input-wrapper
+  #ai-bot-conversations-input {
   padding-left: 0.5rem;
 }
 
-body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector__selection-wrapper .name {
+body.has-ai-conversations-sidebar
+  .ai-bot-conversations
+  .agent-llm-selector__selection-wrapper
+  .name {
   text-transform: uppercase;
   font-size: var(--font-up-1);
 }
 
-body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn {
+body.has-ai-conversations-sidebar
+  .ai-bot-conversations
+  .agent-llm-selector
+  .btn {
   background-color: var(--primary-50);
   font-weight: bold;
   padding: 0.55rem 0.85rem;
@@ -2145,8 +2170,14 @@ body.has-ai-conversations-sidebar .ai-bot-conversations__input-wrapper {
   border-radius: 1rem;
 }
 
-body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn:hover,
-body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn:focus {
+body.has-ai-conversations-sidebar
+  .ai-bot-conversations
+  .agent-llm-selector
+  .btn:hover,
+body.has-ai-conversations-sidebar
+  .ai-bot-conversations
+  .agent-llm-selector
+  .btn:focus {
   background: unset;
 }
 
@@ -2159,12 +2190,39 @@ body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn
 
 // Re-enable good styling (composer-redesign core experiment)
 @include viewport.until(sm) {
-
-  :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel .btn.btn-primary,
-  :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel .d-modal.json-schema-editor-modal .je-ready .btn-primary.json-editor-btn-add,
-  .d-modal.json-schema-editor-modal .je-ready :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel .btn-primary.json-editor-btn-add,
-  :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel .d-modal.json-schema-editor-modal .je-ready button.btn-primary,
-  .d-modal.json-schema-editor-modal .je-ready :where(.uc-enable-composer-redesign) .composer-footer .submit-panel .save-or-cancel button.btn-primary {
+  :where(.uc-enable-composer-redesign)
+    .composer-footer
+    .submit-panel
+    .save-or-cancel
+    .btn.btn-primary,
+  :where(.uc-enable-composer-redesign)
+    .composer-footer
+    .submit-panel
+    .save-or-cancel
+    .d-modal.json-schema-editor-modal
+    .je-ready
+    .btn-primary.json-editor-btn-add,
+  .d-modal.json-schema-editor-modal
+    .je-ready
+    :where(.uc-enable-composer-redesign)
+    .composer-footer
+    .submit-panel
+    .save-or-cancel
+    .btn-primary.json-editor-btn-add,
+  :where(.uc-enable-composer-redesign)
+    .composer-footer
+    .submit-panel
+    .save-or-cancel
+    .d-modal.json-schema-editor-modal
+    .je-ready
+    button.btn-primary,
+  .d-modal.json-schema-editor-modal
+    .je-ready
+    :where(.uc-enable-composer-redesign)
+    .composer-footer
+    .submit-panel
+    .save-or-cancel
+    button.btn-primary {
     background-color: var(--accent-color) !important;
     color: var(--accent-text-color) !important;
     font-weight: unset !important;
@@ -2193,7 +2251,7 @@ body.has-ai-conversations-sidebar .ai-bot-conversations .agent-llm-selector .btn
 
 // Fix absolute button positioning
 .ai-bot-scroll-indicator {
-  bottom: calc(85% + .75em);
+  bottom: calc(85% + 0.75em);
 }
 
 // Bad margin in hard stylished border
@@ -2276,7 +2334,6 @@ ul li.has-checkbox:has(> .list-item-checkbox:checked) {
 }
 
 /* Styling for Markdown tables */
-
 .md-table {
   margin: 1.25em 0;
   overflow-x: auto;

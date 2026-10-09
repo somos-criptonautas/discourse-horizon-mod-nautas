@@ -40,10 +40,7 @@ import { apiInitializer } from "discourse/lib/api";
 // serialized into every topic list payload and backfill still generates it — discourse-ai
 // has no per-category scoping, so this suppresses rendering, not cost.
 const HIDDEN_CATEGORIES = new Set(
-  (settings.gist_hidden_categories || "")
-    .split("|")
-    .filter(Boolean)
-    .map(Number)
+  (settings.gist_hidden_categories || "").split("|").filter(Boolean).map(Number)
 );
 
 class HorizonAiGist extends Component {
@@ -64,7 +61,10 @@ class HorizonAiGist extends Component {
 
   <template>
     {{#if this.show}}
-      <div class="horizon-ai-gist" aria-hidden="true">{{@topic.ai_topic_gist}}</div>
+      <div
+        class="horizon-ai-gist"
+        aria-hidden="true"
+      >{{@topic.ai_topic_gist}}</div>
     {{/if}}
   </template>
 }

@@ -1,31 +1,30 @@
 // Styling no new-topic button in mobile
 @include viewport.until(sm) {
-
-    /*     .navigation-controls {
+  /*     .navigation-controls {
         position: relative;
         top: -41vh;
         right: 3vh;
     } */
 
-    .select-kit.solved-status-filter {
-        padding-right: unset !important;
-    }
+  .select-kit.solved-status-filter {
+    padding-right: unset !important;
+  }
 
-    .topic-create-button__combo {
-        display: none !important;
-    }
+  .topic-create-button__combo {
+    display: none !important;
+  }
 }
 
 // Style no-tags dropdown display
 .select-kit.combo-box.tag-drop .select-kit-row[data-value="all-tags"],
 .select-kit.combo-box.tag-drop .select-kit-row[data-value="no-tags"] {
-    color: var(--primary-high);
-    font-size: var(--font-down-1-rem);
-    font-weight: normal;
-    padding: 0.5rem 1rem;
+  color: var(--primary-high);
+  font-size: var(--font-down-1-rem);
+  font-weight: normal;
+  padding: 0.5rem 1rem;
 }
 
 // Hide descriptions on categories
 .select-kit.combo-box.category-chooser .select-kit-row .category-desc {
-    display: none;
+  display: none;
 }

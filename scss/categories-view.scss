@@ -1,50 +1,50 @@
 .blocked-sidebar-dialog {
-    --dialog-pad: var(--spacing-inline-m, 1rem);
+  --dialog-pad: var(--spacing-inline-m, 1rem);
 
-    // core's dialog has no responsive rules at all: .dialog-content is only
-    // min-width: 40vw, so on a phone it grows edge to edge. This caps it and
-    // keeps a gutter at every size, no media query needed.
-    .dialog-content {
-        max-width: min(32em, calc(100vw - 2rem));
-        border-radius: var(--d-border-radius);
-        animation-duration: 150ms; // core ships 250ms
-    }
+  // core's dialog has no responsive rules at all: .dialog-content is only
+  // min-width: 40vw, so on a phone it grows edge to edge. This caps it and
+  // keeps a gutter at every size, no media query needed.
+  .dialog-content {
+    max-width: min(32em, calc(100vw - 2rem));
+    border-radius: var(--d-border-radius);
+    animation-duration: 150ms; // core ships 250ms
+  }
 
+  .dialog-overlay {
+    animation-duration: 150ms;
+  }
+
+  // core guards its own animation this way; the overrides above would
+  // otherwise win and reintroduce motion
+  @media (prefers-reduced-motion: reduce) {
+    .dialog-content,
     .dialog-overlay {
-        animation-duration: 150ms;
+      animation-duration: 0s;
     }
+  }
 
-    // core guards its own animation this way; the overrides above would
-    // otherwise win and reintroduce motion
-    @media (prefers-reduced-motion: reduce) {
+  // one uniform 1rem frame instead of core's 10/14/15px mix
+  .dialog-header {
+    border-bottom: none;
+    padding: var(--dialog-pad) var(--dialog-pad) 0;
+  }
 
-        .dialog-content,
-        .dialog-overlay {
-            animation-duration: 0s;
-        }
-    }
+  .dialog-body {
+    padding: var(--spacing-block-s, 0.5rem) var(--dialog-pad);
+    line-height: 1.5;
+  }
 
-    // one uniform 1rem frame instead of core's 10/14/15px mix
-    .dialog-header {
-        border-bottom: none;
-        padding: var(--dialog-pad) var(--dialog-pad) 0;
-    }
+  .dialog-footer {
+    border-top: none;
+    padding: 0 var(--dialog-pad) var(--dialog-pad);
 
-    .dialog-body {
-        padding: var(--spacing-block-s, 0.5rem) var(--dialog-pad);
-        line-height: 1.5;
-    }
-
-    .dialog-footer {
-        border-top: none;
-        padding: 0 var(--dialog-pad) var(--dialog-pad);
-        --btn-bottom-margin: 0; // core adds 0.3em under each button
-    }
+    --btn-bottom-margin: 0; // core adds 0.3em under each button
+  }
 }
 
 // Disable colors everywhere
 .badge-category__wrapper .badge-category.--style-icon .d-icon {
-    color: unset !important;
+  color: unset !important;
 }
 
 // Apply category header style to badges and groups
@@ -52,127 +52,128 @@
 .groups-page .category-title-header,
 .leaderboard-page .category-title-header,
 .static-guidelines .category-title-header {
-    display: flex;
+  display: flex;
 }
 
 .category-title-contents {
-    display: grid;
-    grid-template-areas:
-        "logo title      "
-        "logo description";
-    // minmax(0, 1fr) instead of a bare 1fr: grid tracks default to min-width auto, so
-    // the nowrap badge in the title column widened the track (and the header with it)
-    // and scrolled the page sideways on a phone. The column now clamps to its share.
-    grid-template-columns: auto minmax(0, 1fr);
+  display: grid;
+  grid-template-areas:
+    "logo title      "
+    "logo description";
+
+  // minmax(0, 1fr) instead of a bare 1fr: grid tracks default to min-width auto, so
+  // the nowrap badge in the title column widened the track (and the header with it)
+  // and scrolled the page sideways on a phone. The column now clamps to its share.
+  grid-template-columns: auto minmax(0, 1fr);
 }
 
 // Core gives .badge-category__wrapper white-space: nowrap, which is what lets a long
 // title claim its full single-line width. Wrapping keeps the title at its normal size
 // and inside the clamped column above, instead of truncating or scrolling.
 .category-title-contents .category-title .badge-category__wrapper {
-    white-space: normal;
+  white-space: normal;
 }
 
-
 div[class*="category-title-header"] {
-    display: flex;
-    width: 100%;
-    background-color: var(--skills-surface);
-    border-radius: var(--d-border-radius-large);
-    color: var(--category-banner-color);
-    justify-content: unset !important;
-    text-align: unset !important;
+  display: flex;
+  width: 100%;
+  background-color: var(--skills-surface);
+  border-radius: var(--d-border-radius-large);
+  color: var(--category-banner-color);
+  justify-content: unset !important;
+  text-align: unset !important;
 }
 
 div[class*="category-title-header"] .category-title-contents {
-    max-width: 650px;
-    padding: 40px;
+  max-width: 650px;
+  padding: 40px;
 }
 
-
-div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-icon {
-    height: 1.35em;
-    width: 1.35em;
+div[class*="category-title-header"]
+  .badge-category__wrapper
+  .badge-category
+  .d-icon {
+  height: 1.35em;
+  width: 1.35em;
 }
 
 @include viewport.from(sm) {
-    .category-title-contents .category-title .badge-category__name {
-        font-size: var(--font-up-1);
-    }
+  .category-title-contents .category-title .badge-category__name {
+    font-size: var(--font-up-1);
+  }
 }
 
 .category-title-contents .category-title .badge-category__name {
-    color: var(--primary);
-    font-weight: 800;
-    text-transform: uppercase;
-    text-wrap: wrap;
-    padding-left: 0.5rem;
+  color: var(--primary);
+  font-weight: 800;
+  text-transform: uppercase;
+  text-wrap: wrap;
+  padding-left: 0.5rem;
 }
 
 // Hide redundant tags on category header
 .category-title-header .tag-banner-container {
-    display: none;
+  display: none;
 }
 
 // Fix for sticking tags on categories
 .custom-category-group .category-details .subcategories {
-    gap: 0.25rem;
+  gap: 0.25rem;
 }
 
 .category-boxes {
-    padding-top: 1rem;
+  padding-top: 1rem;
 }
 
 // Coherence between font-sizes everywhere + pointer styling
 .category-boxes .category-box .description {
-    font-size: inherit;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    cursor: default;
+  font-size: inherit;
+  // stylelint-disable-next-line property-no-vendor-prefix -- Safari still needs it
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
 }
 
 // Target links on all the boxes
 .category-boxes .category-box .subcategories {
-    z-index: 2;
+  z-index: 2;
 }
 
 .category-boxes .category-box .description {
-    z-index: 0;
+  z-index: 0;
 }
 
 .category-boxes .category-box .parent-box-link::before {
-    z-index: 1;
+  z-index: 1;
 }
 
 // Distinctive category titles
 .category-boxes .category-box-heading .badge-category__name,
 .category-boxes-with-topics .category-box-heading .badge-category__name {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 // Disable group expand/collapse feature
 .custom-categories-groups a.custom-category-group-toggle {
-    pointer-events: none;
-    cursor: default;
-    text-transform: uppercase;
+  pointer-events: none;
+  cursor: default;
+  text-transform: uppercase;
 }
 
 .custom-categories-groups a.custom-category-group-toggle:not(:first-child) {
-    margin: 2.5rem 0 1.5rem;
+  margin: 2.5rem 0 1.5rem;
 }
 
 .custom-category-group-toggle h2 {
-    font-size: var(--font-up-4);
-    font-weight: 800;
+  font-size: var(--font-up-4);
+  font-weight: 800;
 }
 
 // Hide some elements
 .custom-categories-groups .category-box-soporte,
 .custom-category-group-toggle .d-icon,
 .custom-category-group-muted {
-    display: none !important;
+  display: none !important;
 }
 
 // Go back link from javascripts/discourse/api-initializers/category-back.js, which
@@ -180,144 +181,143 @@ div[class*="category-title-header"] .badge-category__wrapper .badge-category .d-
 // rides Horizon's sticky bar. Framed like the selectors beside it rather than styled as
 // its own kind of button.
 .navigation-container .category-back-link {
-    order: -1; // ahead of the breadcrumbs, whatever order Horizon gives them
-    align-self: center;
-    display: inline-flex;
-    align-items: center;
-    flex: 0 0 auto;
-    box-sizing: border-box;
-    // Same frame Horizon gives .list-controls .combo-box .combo-box-header, so the link
-    // reads as a sibling of the category/tag selectors instead of bare text.
-    //
-    // Height comes from the row, not from --d-control-height: that token is taller than
-    // the nav pills and the tag selector, so the link stood out as the one oversized
-    // item. The padding matches scss/nav-scroller.scss's pills.
-    height: auto;
-    align-self: stretch;
-    padding: 0.35rem 0.75rem;
-    border: 1px solid var(--primary-300);
-    border-radius: var(--d-border-radius);
-    background: var(--secondary);
+  order: -1; // ahead of the breadcrumbs, whatever order Horizon gives them
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+
+  // Same frame Horizon gives .list-controls .combo-box .combo-box-header, so the link
+  // reads as a sibling of the category/tag selectors instead of bare text.
+  //
+  // Height comes from the row, not from --d-control-height: that token is taller than
+  // the nav pills and the tag selector, so the link stood out as the one oversized
+  // item. The padding matches scss/nav-scroller.scss's pills.
+  height: auto;
+  align-self: stretch;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--primary-300);
+  border-radius: var(--d-border-radius);
+  background: var(--secondary);
+  color: var(--primary-high);
+  font-size: var(--font-down-1);
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+
+  // A margin of its own instead of relying on the bar's gap: the negative margin
+  // that used to trim that gap left the link glued to whatever came next.
+  margin-right: 0.5rem;
+
+  &:visited {
     color: var(--primary-high);
-    font-size: var(--font-down-1);
+  }
+
+  // Same hover as the combo-box header next to it.
+  .discourse-no-touch &:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+  }
+
+  .category-back-link__arrow {
     line-height: 1;
-    white-space: nowrap;
-    text-decoration: none;
+  }
 
-    // A margin of its own instead of relying on the bar's gap: the negative margin
-    // that used to trim that gap left the link glued to whatever came next.
-    margin-right: 0.5rem;
+  .category-back-link__label {
+    margin-left: 0.3rem;
 
-    &:visited {
-        color: var(--primary-high);
-    }
-
-    // Same hover as the combo-box header next to it.
-    .discourse-no-touch &:hover {
-        border-color: var(--accent-color);
-        color: var(--accent-color);
-    }
-
-    .category-back-link__arrow {
-        line-height: 1;
-    }
-
-    .category-back-link__label {
-        margin-left: 0.3rem;
-
-        // Arrow only on phones: the sticky bar has to fit the nav pills and the tag
-        // selector too. The link keeps its accessible name from this text, so it is
-        // moved out of sight rather than removed.
-        @include viewport.until(sm) {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            clip-path: inset(50%);
-            white-space: nowrap;
-        }
-    }
-
+    // Arrow only on phones: the sticky bar has to fit the nav pills and the tag
+    // selector too. The link keeps its accessible name from this text, so it is
+    // moved out of sight rather than removed.
     @include viewport.until(sm) {
-        // Phone metrics come from the pills, because on a phone the pills are all that
-        // is left beside this link: main.scss hides .category-breadcrumb outright under
-        // 40rem, so there is no selector in the bar to match heights with, and the
-        // desktop "take the height of the row" trick has nothing sane to measure.
-        //
-        // align-self releases that stretch. With it the link grew to the tallest item in
-        // the flex line instead of settling on the 2rem floor below, which is what made
-        // it the one oversized control on the bar. Padding is the pills' own
-        // (scss/nav-scroller.scss), so the two read as the same kind of thing.
-        align-self: center;
-        min-height: 2rem;
-        padding: 0.45rem 0.8rem;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
     }
+  }
+
+  @include viewport.until(sm) {
+    // Phone metrics come from the pills, because on a phone the pills are all that
+    // is left beside this link: main.scss hides .category-breadcrumb outright under
+    // 40rem, so there is no selector in the bar to match heights with, and the
+    // desktop "take the height of the row" trick has nothing sane to measure.
+    //
+    // align-self releases that stretch. With it the link grew to the tallest item in
+    // the flex line instead of settling on the 2rem floor below, which is what made
+    // it the one oversized control on the bar. Padding is the pills' own
+    // (scss/nav-scroller.scss), so the two read as the same kind of thing.
+    align-self: center;
+    min-height: 2rem;
+    padding: 0.45rem 0.8rem;
+  }
 }
 
 // Recover category descriptions on Horizon
 .category-boxes .category .description,
 .category-boxes-with-topics .category .description {
-    display: inherit !important;
-    font-size: 0.95rem !important;
+  display: inherit !important;
+  font-size: 0.95rem !important;
 }
 
 // Subcategory boxes inside a (sub)category page. .navigation-category is only set
 // on category routes (/categories is .navigation-categories), so the
 // all-categories page keeps its own layout.
 .navigation-category {
+  // Outranks the "Recover category descriptions" !important above.
+  .category-boxes .category .description,
+  .category-boxes-with-topics .category .description {
+    display: none !important;
+  }
 
-    // Outranks the "Recover category descriptions" !important above.
-    .category-boxes .category .description,
-    .category-boxes-with-topics .category .description {
-        display: none !important;
+  .category-boxes .category-box,
+  .category-boxes-with-topics .category-box {
+    background: none;
+  }
+
+  // The description is hidden above, so the icon carries the box: stacked
+  // over the name and centered. .badge-category holds both the icon and
+  // .badge-category__name, so one flex-direction does the whole layout.
+  // 2.25em is the knob — it scales with the box font-size.
+  .category-boxes .category-box-heading,
+  .category-boxes-with-topics .category-box-heading {
+    text-align: center;
+
+    .badge-category__wrapper {
+      justify-content: center;
     }
 
-    .category-boxes .category-box,
-    .category-boxes-with-topics .category-box {
-        background: none;
+    .badge-category {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
     }
 
-    // The description is hidden above, so the icon carries the box: stacked
-    // over the name and centered. .badge-category holds both the icon and
-    // .badge-category__name, so one flex-direction does the whole layout.
-    // 2.25em is the knob — it scales with the box font-size.
-    .category-boxes .category-box-heading,
-    .category-boxes-with-topics .category-box-heading {
-        text-align: center;
+    .badge-category .d-icon {
+      height: 2.25em;
+      width: 2.25em;
+    }
+  }
 
-        .badge-category__wrapper {
-            justify-content: center;
-        }
-
-        .badge-category {
-            flex-direction: column;
-            align-items: center;
-            gap: 0.35rem;
-        }
-
-        .badge-category .d-icon {
-            height: 2.25em;
-            width: 2.25em;
-        }
+  // Boxes of categories: 4 on desktop, 2 on mobile.
+  // A fixed count, NOT core's auto-fit: core's track max is
+  // --category-boxes-max-width (1fr), so auto-fit collapses the empty tracks
+  // and one or two subcategories stretch across the whole row. Fixed columns
+  // keep every box a quarter (or half) wide whatever the count, and
+  // minmax(0, 1fr) lets a long name shrink its box instead of overflowing.
+  // sm is 640px = 40rem: media-query rem ignores the theme's 22-23px root.
+  .category-boxes,
+  .category-boxes-with-topics {
+    @include viewport.from(sm) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
-    // Boxes of categories: 4 on desktop, 2 on mobile.
-    // A fixed count, NOT core's auto-fit: core's track max is
-    // --category-boxes-max-width (1fr), so auto-fit collapses the empty tracks
-    // and one or two subcategories stretch across the whole row. Fixed columns
-    // keep every box a quarter (or half) wide whatever the count, and
-    // minmax(0, 1fr) lets a long name shrink its box instead of overflowing.
-    // sm is 640px = 40rem: media-query rem ignores the theme's 22-23px root.
-    .category-boxes,
-    .category-boxes-with-topics {
-        @include viewport.from(sm) {
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-        }
-
-        @include viewport.until(sm) {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
+    @include viewport.until(sm) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+  }
 }
