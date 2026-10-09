@@ -162,7 +162,7 @@ hidden still shows up in the post.
 ## Development
 
 Edits are local. Deploy via **Admin → Appearance → Themes → Install → From your device**,
-or import from the git remote. See `CLAUDE.MD` for conventions.
+or import from the git remote.
 
 ## License
 

@@ -161,7 +161,7 @@ marcada y después oculta igual aparece en el post.
 ## Desarrollo
 
 Las ediciones son locales. Despliega mediante **Admin → Apariencia → Temas → Instalar → Desde tu dispositivo**,
-o importa desde el remoto git. Consulta `CLAUDE.MD` para las convenciones.
+o importa desde el remoto git.
 
 ## Licencia
 

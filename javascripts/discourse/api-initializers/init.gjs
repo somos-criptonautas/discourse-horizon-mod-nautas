@@ -79,7 +79,7 @@ function autoOpenDocSidebar() {
 // (TopicQuery::SORTABLE_MAPPING has no "title"), so we exhaust the paginated list
 // before sorting. Capped — docs categories are small; anything bigger falls back to
 // sorting whatever is loaded, which the MutationObserver below keeps up to date.
-// ponytail: drop this whole loop if core ever ships server-side title ordering.
+// Drop this whole loop if core ever ships server-side title ordering.
 const MAX_DOC_PAGES = 12; // ~360 topics at 30 per page
 let docLoadRun = 0;
 
