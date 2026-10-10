@@ -202,3 +202,40 @@ $internal-status-tags: resuelto abierto;
     display: none !important;
   }
 }
+
+// Cards with a thumbnail (horizon-topic-thumbnails component). It puts the image in a
+// sibling <td> beside Horizon's card, so the footer's separator line stopped where the
+// image began. On desktop the row becomes a grid and the card `display: contents`, so
+// header and content sit beside the image and the footer spans the whole row under it.
+// Bulk selecting is left alone: Horizon adds a checkbox cell to the row then.
+@include viewport.from(sm) {
+  .topic-list-item.--high-context:not(.bulk-selecting):has(
+      > .htt-thumbnail-cell:not(.htt-empty)
+    ) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) min(var(--htt-size, 240px), 40%);
+    gap: var(--space-3) var(--space-4);
+    padding: var(--space-4);
+
+    > .hc-topic-card {
+      display: contents;
+    }
+
+    .hc-topic-card__header,
+    .hc-topic-card__content,
+    .hc-topic-card__context {
+      grid-column: 1;
+    }
+
+    > .htt-thumbnail-cell {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      max-width: none;
+      margin: 0;
+    }
+
+    .hc-topic-card__footer {
+      grid-column: 1 / -1;
+    }
+  }
+}
