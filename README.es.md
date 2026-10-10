@@ -17,7 +17,7 @@ sobrescribe o extiende Horizon, nada funciona por sí solo.
 | `main.scss` | Escala de fuentes base, sobrescrituras `--d-*`, diseño de cuadrícula/barra lateral, reinicio de colores de categoría, listas de temas, categorías de documentación, búsqueda, ranking, banners, tarjetas de reto y su marca de obtenido, página 404, el embed del blog, correcciones del rediseño del editor |
 | `header.scss` | Diseño de la cabecera con navegación personalizada, visibilidad de logo/avatar en móvil |
 | `topic.scss` | Anchos máximos del tema y ancho del cuerpo |
-| `_topic-list.scss` | Densidad de la lista de temas, estilo de resúmenes (gist) de IA, textos breves en listas de docs, etiquetas ocultas en listas, pie a todo el ancho en tarjetas con miniatura |
+| `_topic-list.scss` | Densidad de la lista de temas, estilo de resúmenes (gist) de IA, textos breves en listas de docs, etiquetas ocultas en listas |
 | `categories-view.scss` | Cajas de categorías y cabeceras de título |
 | `nav-scroller.scss` | Franja de navegación de temas desplazable y sus flechas; mantiene los ítems glosario/wiki fuera de las listas de categorías y etiquetas |
 | `mermaid.scss` | Los diagramas Mermaid se ajustan al ancho del post en lugar de su tamaño intrínseco |
