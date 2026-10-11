@@ -68,7 +68,6 @@ hidden still shows up in the post.
   - Opens the docs sidebar once per category per session on mobile.
   - Replaces the discobot icon, hides "closed" group-membership buttons, disables the
     navigation dropdown on mobile, adds a `leaderboard-page` body class.
-  - Optionally pauses all Discourse-only keyboard shortcuts (`disable_discourse_keyboard_shortcuts`).
 - **`block-sidebar.gjs`** — gates sidebar links by group using the `blocked_sections`
   setting: dims or hides the link and explains the requirement in a modal with a CTA.
   Copy lives in `locales/*.yml`, keyed by each tier's `key`.

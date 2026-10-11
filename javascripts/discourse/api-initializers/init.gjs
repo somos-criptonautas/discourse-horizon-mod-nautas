@@ -192,78 +192,7 @@ function sortDocCategoryTopicLists() {
     });
 }
 
-// Mirrors core's DEFAULT_BINDINGS, minus ones intentionally left enabled or global.
-const DISCOURSE_ONLY_SHORTCUTS = [
-  "!",
-  "#",
-  "/",
-  "=",
-  "?",
-  ".",
-  "a",
-  "b",
-  "c",
-  "shift+c",
-  "command+left",
-  "command+[",
-  "command+right",
-  "command+]",
-  "d",
-  "e",
-  "end",
-  "command+down",
-  "f",
-  "g h",
-  "g l",
-  "g n",
-  "g u",
-  "g y",
-  "g c",
-  "g t",
-  "g b",
-  "g p",
-  "g m",
-  "g d",
-  "g s",
-  "g j",
-  "g k",
-  "home",
-  "command+up",
-  "j",
-  "k",
-  "l",
-  "m m",
-  "m r",
-  "m t",
-  "m w",
-  "tab",
-  "p",
-  "q",
-  "r",
-  "s",
-  "shift+j",
-  "shift+k",
-  "shift+p",
-  "shift+r",
-  "shift+s",
-  "shift+l",
-  "shift+z shift+z",
-  "shift+u",
-  "shift+a",
-  "shift+b",
-  "t",
-  "u",
-  "x",
-  "shift+d",
-];
-
 export default apiInitializer((api) => {
-  if (settings.disable_discourse_keyboard_shortcuts) {
-    api.container
-      .lookup("service:keyboard-shortcuts")
-      .pause(DISCOURSE_ONLY_SHORTCUTS);
-  }
-
   // Replace some icons
   api.replaceIcon("discobot", "ph-dt-anonist");
   api.replaceIcon("far-discobot", "ph-dt-anonist");

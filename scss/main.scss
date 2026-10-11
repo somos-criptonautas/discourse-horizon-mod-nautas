@@ -420,10 +420,9 @@ body.category .navigation-controls,
   display: none !important;
 }
 
-// Disable theme switcher, Sidebar 'More' and keyboard (disabled) shortcuts icon
+// Disable theme switcher and Sidebar 'More'
 .sidebar-more-section-trigger:first-of-type,
-.user-color-palette-selector-trigger,
-.sidebar-footer-actions .sidebar-footer-actions-keyboard-shortcuts {
+.user-color-palette-selector-trigger {
   display: none !important;
 }
 
@@ -591,10 +590,6 @@ button [title="similares"] .d-button-label {
 .dropdown-menu__item:has(.d-icon-align-left),
 .dropdown-menu__item:has(.d-icon-diagram-project),
 .dropdown-menu__item:has(.d-icon-chart-line) {
-  display: none;
-}
-
-.dropdown-menu .shortcut {
   display: none;
 }
 

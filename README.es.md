@@ -68,7 +68,6 @@ marcada y después oculta igual aparece en el post.
   - Abre la barra lateral de docs una vez por categoría y sesión en móvil.
   - Reemplaza el icono de discobot, oculta los botones de pertenencia a grupos "cerrados", desactiva el
     desplegable de navegación en móvil y añade la clase de body `leaderboard-page`.
-  - Opcionalmente pausa todos los atajos de teclado exclusivos de Discourse (`disable_discourse_keyboard_shortcuts`).
 - **`block-sidebar.gjs`**: restringe los enlaces de la barra lateral por grupo mediante el ajuste `blocked_sections`:
   atenúa u oculta el enlace y explica el requisito en un modal con un llamado a la acción.
   Los textos viven en `locales/*.yml`, identificados por la `key` de cada nivel.
