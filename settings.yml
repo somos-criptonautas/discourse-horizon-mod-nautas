@@ -37,8 +37,3 @@ blocked_sections:
       cta_url: "/s"
       cta_icon: "ph-dt-ticket"
       hide: false
-
-gist_hidden_categories:
-  type: list
-  list_type: category
-  default: ""

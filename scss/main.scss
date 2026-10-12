@@ -1375,8 +1375,8 @@ body.category-preguntas li:has(.tag-drop) {
   display: inline-flex !important;
 }
 
-// Which blurb a docs row shows — gist, excerpt, or neither in glosario — is decided in
-// one place: scss/_topic-list.scss. It is imported after this file, so its rules win.
+// Which blurb a docs row shows — gist, excerpt, or neither in glosario — is decided by
+// the Horizon AI Gists component (its gist_hidden_categories setting).
 
 // Fix different font in category groups
 .custom-category-group .badge-category__wrapper {
@@ -2051,15 +2051,6 @@ font-size: var(--font-up-1);
   .messages-dropdown-content .dropdown-menu {
     min-width: 240px;
   }
-}
-
-// The excerpts/gists button toggles Horizon card excerpts. glosario is the one category
-// that hides both the excerpt and the gist, so only there does the button have nothing to
-// act on — every other docs category still shows its gist and keeps the button.
-// !important: it is a core .btn.btn-icon-text, and the component's own stylesheet can
-// outrank a bare class.
-body.horizon-no-gists .excerpts-gists-toggle-btn {
-  display: none !important;
 }
 
 // Hiding text on gists (theme component) button

@@ -10,6 +10,10 @@ sobrescribe o extiende Horizon, nada funciona por sí solo.
 
 ## Qué hace
 
+Los resúmenes de IA en las tarjetas de Horizon viven en el componente independiente
+[Horizon AI Gists](https://github.com/somos-criptonautas/discourse-horizon-ai-gists);
+instálalo junto a este.
+
 ### Estilos (`scss/`, cargados desde `common/common.scss`)
 
 | Archivo | Alcance |
@@ -18,7 +22,7 @@ sobrescribe o extiende Horizon, nada funciona por sí solo.
 | `fonts.scss` | Tipografía de marca: Inter Tight desde `assets/` para texto y titulares, titulares en 800 con interletra -0,02em |
 | `header.scss` | Diseño de la cabecera con navegación personalizada, visibilidad de logo/avatar en móvil |
 | `topic.scss` | Anchos máximos del tema y ancho del cuerpo |
-| `_topic-list.scss` | Densidad de la lista de temas, estilo de resúmenes (gist) de IA, textos breves en listas de docs, etiquetas ocultas en listas |
+| `_topic-list.scss` | Densidad de la lista de temas, marcador de última visita en docs, etiquetas ocultas en listas |
 | `categories-view.scss` | Cajas de categorías y cabeceras de título |
 | `nav-scroller.scss` | Franja de navegación de temas desplazable y sus flechas; mantiene los ítems glosario/wiki fuera de las listas de categorías y etiquetas |
 | `mermaid.scss` | Los diagramas Mermaid se ajustan al ancho del post en lugar de su tamaño intrínseco |
@@ -72,17 +76,6 @@ marcada y después oculta igual aparece en el post.
 - **`block-sidebar.gjs`**: restringe los enlaces de la barra lateral por grupo mediante el ajuste `blocked_sections`:
   atenúa u oculta el enlace y explica el requisito en un modal con un llamado a la acción.
   Los textos viven en `locales/*.yml`, identificados por la `key` de cada nivel.
-- **`ai-gist-horizon.gjs`**: renderiza `ai_topic_gist` en `topic-list-after-title`,
-  el único outlet del núcleo que conserva la tarjeta de alto contexto de Horizon. **Requisito previo:** el
-  atributo solo va en la respuesta cuando pasa el `Guardian#can_see_gists?` de discourse-ai en el servidor:
-  `ai_summarization_enabled` y `ai_summary_gists_enabled` activados y `ai_summary_gists_agent` resolviendo a un agente cuyos
-  `allowed_group_ids` incluyan `everyone` o uno de los grupos del usuario. Esa última
-  condición es la que muerde: el relleno retroactivo genera resúmenes sin consultar los grupos
-  del agente, así que la interfaz de administración puede mostrar resúmenes sanos mientras todas las respuestas omiten
-  el atributo (un `allowed_group_ids` vacío los oculta a todos). Cuando falta el
-  atributo, el outlet no renderiza nada, en silencio; compruébalo con
-  `fetch('/latest.json').then(r=>r.json()).then(d=>console.log(
-  d.topic_list.topics.filter(t=>'ai_topic_gist' in t).length))`.
 - **`checklist-strike.js`**: tacha la etiqueta de un `[x]` marcado en línea (plugin de listas de verificación del núcleo)
   envolviéndola en el propio `span.chcklst-stroked` del núcleo. El CSS solo no puede: la etiqueta
   es un nodo de texto suelto y las líneas van separadas por `<br>` dentro de un mismo párrafo.

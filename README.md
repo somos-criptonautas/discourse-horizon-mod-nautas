@@ -10,6 +10,10 @@ overrides or extends Horizon, nothing stands alone.
 
 ## What it does
 
+AI gists on Horizon's topic cards live in the standalone
+[Horizon AI Gists](https://github.com/somos-criptonautas/discourse-horizon-ai-gists)
+component; install it alongside this one.
+
 ### Styling (`scss/`, loaded from `common/common.scss`)
 
 | File | Scope |
@@ -18,7 +22,7 @@ overrides or extends Horizon, nothing stands alone.
 | `fonts.scss` | Brand type: Inter Tight from `assets/` for text and headings, headings at 800 with -0.02em tracking |
 | `header.scss` | Header layout with custom nav, mobile logo/avatar visibility |
 | `topic.scss` | Topic max-widths and body width |
-| `_topic-list.scss` | Topic-list density, AI gist styling, docs-list blurbs, tags hidden from lists |
+| `_topic-list.scss` | Topic-list density, docs last-visit marker, tags hidden from lists |
 | `categories-view.scss` | Category boxes and title headers |
 | `nav-scroller.scss` | Scrollable topic nav strip and its arrows; keeps the glosario/wiki nav items off category and tag lists |
 | `mermaid.scss` | Mermaid diagrams scale to the post width instead of their intrinsic size |
@@ -72,18 +76,6 @@ hidden still shows up in the post.
 - **`block-sidebar.gjs`** — gates sidebar links by group using the `blocked_sections`
   setting: dims or hides the link and explains the requirement in a modal with a CTA.
   Copy lives in `locales/*.yml`, keyed by each tier's `key`.
-- **`ai-gist-horizon.gjs`** — renders `ai_topic_gist` into `topic-list-after-title`,
-  the only core outlet Horizon's high-context card keeps. **Prerequisite:** the
-  attribute is only in the payload when discourse-ai's server-side
-  `Guardian#can_see_gists?` passes — `ai_summarization_enabled` and
-  `ai_summary_gists_enabled` on, `ai_summary_gists_agent` resolving to an agent whose
-  `allowed_group_ids` include `everyone` or one of the viewer's groups. That last
-  clause is the one that bites: backfill generates gists without consulting the
-  agent's groups, so the admin UI can show healthy gists while every payload omits
-  the attribute (empty `allowed_group_ids` hides them from everyone). When the
-  attribute is missing the outlet renders nothing, silently — check with
-  `fetch('/latest.json').then(r=>r.json()).then(d=>console.log(
-  d.topic_list.topics.filter(t=>'ai_topic_gist' in t).length))`.
 - **`checklist-strike.js`** — strikes the label of a ticked inline `[x]` (core's checklist
   plugin) by wrapping it in core's own `span.chcklst-stroked`. CSS alone cannot: the label
   is a bare text node and lines are `<br>`-separated inside one paragraph.
