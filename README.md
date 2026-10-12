@@ -28,7 +28,7 @@ overrides or extends Horizon, nothing stands alone.
 | `custom-user-menu.scss`, `d-combo-button.scss`, `groups.scss` | User menu, dropdowns, group pages |
 | `ghost-cards.scss` | Ghost bookmark cards inside embedded blog topics |
 | `form-templates.scss` | Checklist headings and a dropdown-swapped checklist in form templates |
-| `avatars.scss` | Comic frame (border and hard shadow) on every avatar, uploaded or generated |
+| `avatars.scss` | Hairline ring (1px `--primary-low`) on every avatar, matching Horizon's card borders |
 | `compatibility.scss` | Overrides that must land after everything else |
 
 Breakpoints use core's viewport library (`@include viewport.from/until(sm|md|lg)`),
