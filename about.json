@@ -72,9 +72,9 @@
     "Light": {
       "primary": "1A1A1A",
       "secondary": "F8F8F8",
-      "tertiary": "46208A",
-      "tertiary-med-or-tertiary": "6B3FBF",
-      "quaternary": "C53825",
+      "tertiary": "5814EA",
+      "tertiary-med-or-tertiary": "733AEE",
+      "quaternary": "E6211E",
       "highlight": "EEDBFF",
       "danger": "9E1B27",
       "success": "1F7A5C",
@@ -87,7 +87,7 @@
     "Dark": {
       "primary": "F1F1F1",
       "secondary": "181719",
-      "tertiary": "CFA1FF",
+      "tertiary": "C89DFF",
       "tertiary-med-or-tertiary": "E1BCFF",
       "quaternary": "F98E76",
       "highlight": "454248",
