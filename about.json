@@ -7,6 +7,10 @@
   "learn_more": "https://meta.discourse.org/t/installing-a-theme-or-theme-component/63682",
   "theme_version": "1.0.0",
   "component": true,
+  "assets": {
+    "inter-tight": "assets/inter-tight.woff2",
+    "inter-tight-italic": "assets/inter-tight-italic.woff2"
+  },
   "modifiers": {
     "svg_icons": [
       "ph-dt-anonist",

@@ -15,6 +15,7 @@ sobrescribe o extiende Horizon, nada funciona por sí solo.
 | Archivo | Alcance |
 |---|---|
 | `main.scss` | Escala de fuentes base, sobrescrituras `--d-*`, diseño de cuadrícula/barra lateral, reinicio de colores de categoría, listas de temas, categorías de documentación, búsqueda, ranking, banners, tarjetas de reto y su marca de obtenido, página 404, el embed del blog, correcciones del rediseño del editor |
+| `fonts.scss` | Tipografía de marca: Inter Tight desde `assets/` para texto y titulares, titulares en 800 con interletra -0,02em |
 | `header.scss` | Diseño de la cabecera con navegación personalizada, visibilidad de logo/avatar en móvil |
 | `topic.scss` | Anchos máximos del tema y ancho del cuerpo |
 | `_topic-list.scss` | Densidad de la lista de temas, estilo de resúmenes (gist) de IA, textos breves en listas de docs, etiquetas ocultas en listas |
@@ -128,7 +129,11 @@ marcada y después oculta igual aparece en el post.
 - `common/after_header.html`: banners de categoría personalizados (ghettos, retos, karma, costumbres).
 - `common/header.html`: analítica Plausible.
 - `about.json`: lista permitida de iconos Phosphor duotone, modificadores `custom_homepage` y
-  `serialize_topic_is_hot`, paletas de color Claro/Oscuro.
+  `serialize_topic_is_hot`, assets de la fuente Inter Tight y las paletas Claro/Oscuro del
+  kit de marca. Discourse ignora `color_schemes` en el `about.json` de un componente
+  (`RemoteTheme` solo las importa en temas completos), así que esas paletas son una copia de
+  referencia: créalas una vez en Admin → Apariencia → Paletas de colores.
+- `assets/`: fuente variable Inter Tight (normal e itálica) con su licencia OFL.
 
 ## Límites conocidos
 

@@ -1,0 +1,31 @@
+// Brand type (brand kit): Inter Tight for text, interface and headings. Discourse
+// doesn't ship it, so it comes from the theme's own assets (variable font, OFL licence in
+// assets/). Core writes --font-family / --heading-font-family on :root from the
+// base_font / heading_font settings in an earlier stylesheet; these win by order.
+@font-face {
+  font-family: "Inter Tight";
+  src: url($inter-tight) format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter Tight";
+  src: url($inter-tight-italic) format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --font-family: "Inter Tight", "Helvetica Neue", arial, sans-serif;
+  --heading-font-family: "Inter Tight", "Helvetica Neue", arial, sans-serif;
+}
+
+// Brand headings: 800 with tracking tightened to -0.02em.
+h1,
+h2,
+h3 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}

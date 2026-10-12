@@ -15,6 +15,7 @@ overrides or extends Horizon, nothing stands alone.
 | File | Scope |
 |---|---|
 | `main.scss` | Base font scale, `--d-*` overrides, grid/sidebar layout, category colour reset, topic lists, docs categories, search, leaderboard, banners, badge cards and their award marker, the 404 page, the blog embed, composer-redesign fixes |
+| `fonts.scss` | Brand type: Inter Tight from `assets/` for text and headings, headings at 800 with -0.02em tracking |
 | `header.scss` | Header layout with custom nav, mobile logo/avatar visibility |
 | `topic.scss` | Topic max-widths and body width |
 | `_topic-list.scss` | Topic-list density, AI gist styling, docs-list blurbs, tags hidden from lists |
@@ -129,7 +130,11 @@ hidden still shows up in the post.
 - `common/after_header.html` — custom category banners (ghettos, retos, karma, costumbres).
 - `common/header.html` — Plausible analytics.
 - `about.json` — Phosphor duotone icon allowlist, `custom_homepage` and
-  `serialize_topic_is_hot` modifiers, Light/Dark colour palettes.
+  `serialize_topic_is_hot` modifiers, Inter Tight font assets, and the brand kit's
+  Light/Dark palettes. Discourse ignores `color_schemes` in a component's `about.json`
+  (`RemoteTheme` imports them only for full themes), so those palettes are a reference copy:
+  create them once under Admin → Appearance → Colour palettes.
+- `assets/` — Inter Tight variable font (upright and italic) with its OFL licence.
 
 ## Known limits
 
