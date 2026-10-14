@@ -1899,14 +1899,18 @@ body.embed-mode #main-outlet {
 }
 
 // The embed is the conversation only; the forum keeps the tools. No system
-// notices (visible, unlisted, closed...), time gaps, topic footer buttons or
-// suggested topics. Post-menu buttons and the topic map are trimmed in
-// javascripts/api-initializers/embed-comments.gjs.
+// notices (visible, unlisted, closed...), time gaps, topic footer buttons,
+// suggested topics, the "2 / 2" progress bar, core's floating timeline button or
+// the Monero tip (it outlives the post-menu whitelist). Post-menu buttons and
+// the topic map are trimmed in javascripts/api-initializers/embed-comments.gjs.
 body.embed-mode {
   .small-action,
   .time-gap,
   #topic-footer-buttons,
-  .more-topics__container {
+  .more-topics__container,
+  .container.posts .topic-navigation,
+  .embed-floating-buttons,
+  .post-action-menu__monero-tip {
     display: none;
   }
 }

@@ -25,7 +25,12 @@ export default apiInitializer((api) => {
         return;
       }
 
-      const keep = [buttonKeys.REPLY, buttonKeys.LIKE, buttonKeys.FLAG];
+      // Anonymous readers get no likes: they cannot give one, and a count
+      // without the button is noise.
+      const keep = [buttonKeys.REPLY, buttonKeys.FLAG];
+      if (api.getCurrentUser()) {
+        keep.push(buttonKeys.LIKE);
+      }
       for (const [key] of dag.entries()) {
         if (!keep.includes(key)) {
           dag.delete(key);
