@@ -19,7 +19,7 @@ instálalo junto a este.
 | Archivo | Alcance |
 |---|---|
 | `main.scss` | Escala de fuentes base, sobrescrituras `--d-*`, diseño de cuadrícula/barra lateral, reinicio de colores de categoría, listas de temas, categorías de documentación, búsqueda, ranking, banners, tarjetas de reto y su marca de obtenido, página 404, el embed del blog, correcciones del rediseño del editor |
-| `fonts.scss` | Tipografía de marca: Inter Tight desde `assets/` para texto y titulares, titulares en 800 con interletra -0,02em |
+| `fonts.scss` | Tipografía de marca: Inter Tight desde `assets/` para titulares (el texto sigue el ajuste `base_font`, Lato), titulares en 800 con interletra -0,02em |
 | `header.scss` | Diseño de la cabecera con navegación personalizada, visibilidad de logo/avatar en móvil |
 | `topic.scss` | Anchos máximos del tema y ancho del cuerpo |
 | `_topic-list.scss` | Densidad de la lista de temas, marcador de última visita en docs, etiquetas ocultas en listas |

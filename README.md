@@ -19,7 +19,7 @@ component; install it alongside this one.
 | File | Scope |
 |---|---|
 | `main.scss` | Base font scale, `--d-*` overrides, grid/sidebar layout, category colour reset, topic lists, docs categories, search, leaderboard, banners, badge cards and their award marker, the 404 page, the blog embed, composer-redesign fixes |
-| `fonts.scss` | Brand type: Inter Tight from `assets/` for text and headings, headings at 800 with -0.02em tracking |
+| `fonts.scss` | Brand type: Inter Tight from `assets/` for headings (body text stays on the `base_font` setting, Lato), headings at 800 with -0.02em tracking |
 | `header.scss` | Header layout with custom nav, mobile logo/avatar visibility |
 | `topic.scss` | Topic max-widths and body width |
 | `_topic-list.scss` | Topic-list density, docs last-visit marker, tags hidden from lists |

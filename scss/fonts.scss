@@ -1,7 +1,7 @@
-// Brand type (brand kit): Inter Tight for text, interface and headings. Discourse
-// doesn't ship it, so it comes from the theme's own assets (variable font, OFL licence in
-// assets/). Core writes --font-family / --heading-font-family on :root from the
-// base_font / heading_font settings in an earlier stylesheet; these win by order.
+// Headings in Inter Tight. Discourse doesn't ship it, so it comes from the theme's own
+// assets (variable font, OFL licence in assets/). Body text stays on the site's
+// base_font (Lato, which core serves itself). Core writes --heading-font-family on :root
+// from the heading_font setting in an earlier stylesheet; this one wins by order.
 @font-face {
   font-family: "Inter Tight";
   src: url($inter-tight) format("woff2");
@@ -18,7 +18,6 @@
 }
 
 :root {
-  --font-family: "Inter Tight", "Helvetica Neue", arial, sans-serif;
   --heading-font-family: "Inter Tight", "Helvetica Neue", arial, sans-serif;
 }
 
