@@ -1894,6 +1894,7 @@ body.embed-mode {
 // The iframe runs edge to edge in the blog's article column, so the thread
 // needs its own inner room or the text runs into the rounded border.
 body.embed-mode #main-outlet {
+  box-sizing: border-box; // core's width: 100% plus this padding scrolled the embed sideways
   padding: 1.5rem;
 }
 
@@ -1914,7 +1915,30 @@ body.embed-mode {
 // full-screen reading; in the blog's comments iframe it dwarfs the article.
 // :has() outranks the plain html rules, so no media-query ordering to fight.
 html:has(body.embed-mode) {
-  font-size: 16px;
+  font-size: 17px; // the blog's article text is 17–19px
+}
+
+// Core's docked reply box (embed-mode-composer) is built for an iframe with its own
+// scroll: sticky at the bottom, a 10em box that grows to 70vh, and a drag handle. The
+// blog sizes the iframe to the whole thread, so vh is the thread's height and the box
+// became a tall scroll trap. Here it is a plain last block that grows with the text.
+body.embed-mode .embed-mode-composer {
+  position: static;
+
+  .docked-composer {
+    --docked-composer-input-min-height: 4em;
+    position: static;
+  }
+
+  .docked-composer__resize-handle {
+    display: none;
+  }
+
+  .d-editor-input {
+    field-sizing: content;
+    max-height: 16em;
+    overscroll-behavior: auto;
+  }
 }
 
 // The composer trapping the scroll on a phone.
