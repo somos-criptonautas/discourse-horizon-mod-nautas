@@ -292,8 +292,10 @@ body.category .navigation-controls,
   display: none !important;
 }
 
-// No categories (they are accesible from sidebar)
-.select-kit.combo-box.category-drop {
+// No categories (they are accesible from sidebar). The <li> goes too: left behind
+// empty, its margin still pushed the tag selector away from the docs back link.
+.select-kit.combo-box.category-drop,
+.category-breadcrumb li:has(> .category-drop) {
   display: none !important;
 }
 

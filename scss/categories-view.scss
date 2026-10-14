@@ -205,10 +205,6 @@ div[class*="category-title-header"]
   white-space: nowrap;
   text-decoration: none;
 
-  // A margin of its own instead of relying on the bar's gap: the negative margin
-  // that used to trim that gap left the link glued to whatever came next.
-  margin-right: 0.5rem;
-
   &:visited {
     color: var(--primary-high);
   }
