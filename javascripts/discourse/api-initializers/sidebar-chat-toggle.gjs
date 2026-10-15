@@ -38,12 +38,12 @@ class SidebarChatToggle extends Component {
 
   <template>
     <DButton
-      class="btn-flat sidebar-footer-actions-button sidebar-chat-toggle
+      class="btn-default sidebar-chat-toggle
         {{if this.isActive 'sidebar-chat-toggle--active'}}"
       @action={{this.toggleChat}}
       @icon="d-chat"
+      @label="chat.title_capitalized"
       @title={{if this.isActive "chat.close" "chat.title_capitalized"}}
-      @ariaLabel={{if this.isActive "chat.close" "chat.title_capitalized"}}
     >
       {{! counts and the user's indicator preference are read by the component itself }}
       <ChatHeaderIconUnreadIndicator />
