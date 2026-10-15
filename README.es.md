@@ -121,6 +121,7 @@ marcada y después oculta igual aparece en el post.
 
 - `common/after_header.html`: banners de categoría personalizados (ghettos, retos, karma, costumbres).
 - `common/header.html`: analítica Plausible.
+- `common/color_definitions.scss`: `--cn-btn`, el violeta de los botones primarios: el tertiary de la paleta en modo claro, `#8E4CFF` en oscuro (4,54:1 con texto blanco), aplicado en `main.scss`.
 - `about.json`: lista permitida de iconos Phosphor duotone, modificadores `custom_homepage` y
   `serialize_topic_is_hot`, assets de la fuente Inter Tight y las paletas Claro/Oscuro del
   kit de marca. Discourse ignora `color_schemes` en el `about.json` de un componente

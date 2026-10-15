@@ -2436,3 +2436,9 @@ blockquote .discourse-automation {
 .page-not-found .search-input__icon {
   display: none;
 }
+
+// Primary buttons take the brand button violet (--cn-btn, common/color_definitions.scss)
+// instead of Horizon's --accent-color, which is the palette's tertiary.
+.btn-primary {
+  --accent-color: var(--cn-btn);
+}

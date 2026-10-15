@@ -121,6 +121,7 @@ hidden still shows up in the post.
 
 - `common/after_header.html` — custom category banners (ghettos, retos, karma, costumbres).
 - `common/header.html` — Plausible analytics.
+- `common/color_definitions.scss` — `--cn-btn`, the primary-button violet: the palette's tertiary in light mode, `#8E4CFF` in dark (4.54:1 under white text), applied in `main.scss`.
 - `about.json` — Phosphor duotone icon allowlist, `custom_homepage` and
   `serialize_topic_is_hot` modifiers, Inter Tight font assets, and the brand kit's
   Light/Dark palettes. Discourse ignores `color_schemes` in a component's `about.json`

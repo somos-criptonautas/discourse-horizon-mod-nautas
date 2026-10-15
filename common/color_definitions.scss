@@ -1,0 +1,7 @@
+// Primary-button violet. Horizon paints .btn-primary from --accent-color, which it sets
+// to $tertiary; in dark mode that is #C89DFF under white text (2.16:1). #8E4CFF reaches
+// 4.54:1. Kept off the palette: changing tertiary would turn every dark-mode link
+// #8E4CFF too, and as text on the dark ground that is only 3.94:1.
+:root {
+  --cn-btn: #{dark-light-choose($tertiary, #8e4cff)};
+}
