@@ -1943,6 +1943,21 @@ body.embed-mode .embed-mode-composer {
     max-height: 16em;
     overscroll-behavior: auto;
   }
+
+  // field-sizing: content sizes the width to the text too: the box opened as
+  // a small one in the middle, and a long line pushed it past the iframe,
+  // which then scrolled sideways. The full width of the thread, always.
+  .docked-composer__header,
+  .docked-composer__inner,
+  .docked-composer__editor,
+  .d-editor-container,
+  .d-editor-textarea-column,
+  .d-editor-textarea-wrapper,
+  .d-editor-input {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 // The composer trapping the scroll on a phone.

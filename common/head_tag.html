@@ -75,6 +75,17 @@
       var theme = event.data && event.data.theme;
       if (theme === "dark" || theme === "light") {
         document.documentElement.setAttribute("data-theme", theme);
+        // The full app picks its palette with two stylesheets keyed to the
+        // OS setting (media="(prefers-color-scheme: ...)"), so the attribute
+        // alone changed nothing: point both at the blog's choice instead.
+        var light = document.querySelectorAll("link.light-scheme");
+        var dark = document.querySelectorAll("link.dark-scheme");
+        for (var i = 0; i < light.length; i++) {
+          light[i].media = theme === "light" ? "all" : "not all";
+        }
+        for (var j = 0; j < dark.length; j++) {
+          dark[j].media = theme === "dark" ? "all" : "not all";
+        }
       }
     });
   })();
