@@ -396,6 +396,34 @@ body.category .navigation-controls,
   }
 }
 
+// Chat is toggled from the sidebar footer instead (api-initializers/sidebar-chat-toggle.gjs)
+// — including the "forum" one shown in full-page chat, which the toggle also covers
+.sidebar__panel-switch-button[data-key="chat"],
+.has-full-page-chat .sidebar__panel-switch-button {
+  display: none;
+}
+
+.sidebar-chat-toggle {
+  position: relative;
+
+  &--active .d-icon {
+    color: var(--tertiary);
+  }
+
+  .chat-channel-unread-indicator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 2px solid var(--d-sidebar-background);
+
+    &.-urgent {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
 // Fix padding in search chat button on sidebar
 .sidebar-section-link-wrapper [data-list-item-name="chat-search"] {
   padding-top: 0.25rem;
