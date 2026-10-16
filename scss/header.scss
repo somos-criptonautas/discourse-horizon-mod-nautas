@@ -41,9 +41,17 @@ html:not(.anon)
   }
 }
 
-// Bigger tap target on the language switcher — wider, shorter.
+// Sign up, log in and the language switcher share one pill size: a fixed height
+// so the bordered switcher and the borderless auth buttons line up exactly.
+.d-header .auth-buttons .btn,
 .btn.no-text.fk-d-menu__trigger.language-switcher-trigger.btn-flat {
-  padding: 0.35em 0.85em;
+  height: 2em;
+  padding: 0 0.9em;
+}
+
+// Core leaves no gap between the auth buttons and the language switcher.
+.d-header .panel .header-buttons {
+  margin-right: 0.5em;
 }
 
 // Forces the login button hover to a brand-tertiary shade instead of core's default color.

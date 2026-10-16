@@ -390,10 +390,6 @@ body.category .navigation-controls,
   .anon .d-header .panel {
     grid-column-start: unset !important;
   }
-
-  .panel .d-header .header-buttons {
-    margin-right: 0.5rem;
-  }
 }
 
 // Chat is toggled from the sidebar footer instead (api-initializers/sidebar-chat-toggle.gjs)
@@ -2254,13 +2250,6 @@ body.has-ai-conversations-sidebar
   .agent-llm-selector
   .btn:focus {
   background: unset;
-}
-
-// Fix to login buttons with searchbar for anons
-@media (width >=1400px) {
-  .anon .d-header .panel {
-    grid-column-start: unset;
-  }
 }
 
 // Re-enable good styling (composer-redesign core experiment)
