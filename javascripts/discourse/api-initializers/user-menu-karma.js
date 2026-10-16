@@ -3,37 +3,28 @@ import { ajax } from "discourse/lib/ajax";
 import { i18n } from "discourse-i18n";
 import { themePrefix } from "virtual:theme";
 
-const CLASS = "fk-d-menu__total-karma";
-
-// The custom-user-menu component exposes no plugin outlet, and its content is
-// teleported into a float-kit portal only after the avatar is clicked — so the
-// line is appended on open instead of rendered. Bail after a few frames rather
-// than observing the document for the lifetime of the page.
-const MAX_FRAMES = 40;
+const CLASS = "fk-d-menu__monthly-karma";
+const USER_INFO = ".custom-user-menu-content .fk-d-menu__user-info";
 
 export default apiInitializer((api) => {
   if (!api.getCurrentUser()) {
     return;
   }
 
-  // Total cheer points, read from the user card — the only place gamification
-  // serializes it: discourse-gamification's plugin.rb does
-  // `add_to_serializer(:user_card, :gamification_score)` and nothing adds it to the
-  // current-user payload. The previous version asked /leaderboard for a monthly
-  // figure, got a shape it could not read, and silently removed its own line.
-  //
-  // One request per page load: the score barely moves and the menu gets opened over
-  // and over.
+  // Monthly cheer points from the leaderboard. A valid response with an empty
+  // `personal` means no points yet this month, so that reads as 0; anything else
+  // that lacks `users` is not a leaderboard and the line is dropped.
+  // One successful request per page load: the menu gets opened over and over.
   let scoreRequest;
-  function totalScore() {
-    const username = api.getCurrentUser()?.username;
-    if (!username) {
-      return Promise.resolve(null);
-    }
-
-    scoreRequest ||= ajax(`/u/${encodeURIComponent(username)}/card.json`)
-      .then((json) => json?.user?.gamification_score ?? null)
-      .catch(() => null);
+  function monthlyScore() {
+    scoreRequest ||= ajax("/leaderboard", { data: { period: "monthly" } })
+      .then((json) =>
+        json?.users ? (json.personal?.user?.total_score ?? 0) : null
+      )
+      .catch(() => {
+        scoreRequest = null; // let the next open retry
+        return null;
+      });
     return scoreRequest;
   }
 
@@ -46,43 +37,29 @@ export default apiInitializer((api) => {
     line.className = CLASS;
     userInfo.append(line);
 
-    const score = await totalScore();
+    const score = await monthlyScore();
 
     if (!line.isConnected) {
       return; // menu was closed while the request was in flight
     }
 
-    // gamification may be absent, or the leaderboard hidden to this user:
-    // drop the line rather than claim a score of zero.
-    if (score === null || score === undefined) {
+    if (score === null) {
       line.remove();
       return;
     }
 
-    line.textContent = i18n(themePrefix("total_karma"), {
+    line.textContent = i18n(themePrefix("monthly_karma"), {
       score: score.toLocaleString(),
     });
   }
 
-  function waitForMenu(frames = 0) {
-    const userInfo = document.querySelector(
-      ".custom-user-menu-content .fk-d-menu__user-info"
-    );
-
+  // The custom-user-menu component exposes no plugin outlet and float-kit
+  // teleports its content into a portal on open, so watch for it to appear
+  // rather than hooking the trigger's click, which float-kit may swallow.
+  new MutationObserver(() => {
+    const userInfo = document.querySelector(USER_INFO);
     if (userInfo) {
       decorate(userInfo);
-      return;
     }
-
-    if (frames < MAX_FRAMES) {
-      requestAnimationFrame(() => waitForMenu(frames + 1));
-    }
-  }
-
-  // Covers keyboard activation too, which also fires a click.
-  document.addEventListener("click", (event) => {
-    if (event.target.closest?.(".custom-user-menu")) {
-      waitForMenu();
-    }
-  });
+  }).observe(document.body, { childList: true, subtree: true });
 });
