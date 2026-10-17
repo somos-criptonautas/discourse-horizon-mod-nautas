@@ -116,11 +116,22 @@ hidden still shows up in the post.
   of the file: an unmapped colour falls back to `note`, and a type this forum no longer
   defines falls back to Quote Callouts' own `callout_fallback_type`. Ghost's emoji is
   dropped in favour of the callout's icon.
+- **`embed-comments.gjs`** — when the forum runs as the blog's comments iframe
+  (`body.embed-mode`), keeps only reply, flag and (for logged-in users) like in the post
+  menu. Notices, time gaps, footer buttons and suggested topics are hidden in `main.scss`.
+- **`sidebar-chat-toggle.gjs`** — a chat button with an unread indicator next to the
+  light/dark selector in the sidebar footer, replacing the sidebar's chat panel switch.
+  Opens drawer or full page following the user's preference; a second press closes it.
+- **`user-menu-karma.js`** — shows the user's monthly karma (from `/leaderboard`,
+  monthly period) as a chip in the user menu. One request per page load.
 
 ### Markup and assets
 
 - `common/after_header.html` — custom category banners (ghettos, retos, karma, costumbres).
 - `common/header.html` — Plausible analytics.
+- `common/head_tag.html` — inside the blog's comments iframe, follows the blog's
+  light/dark theme and reports the thread height. The blog half is
+  `assets/js/discourse-embed.js` in ghost-headline-theme-nautas.
 - `common/color_definitions.scss` — `--cn-btn`, the primary-button violet: the palette's tertiary in light mode, `#8E4CFF` in dark (4.54:1 under white text), applied in `main.scss`.
 - `about.json` — Phosphor duotone icon allowlist, `custom_homepage` and
   `serialize_topic_is_hot` modifiers, Inter Tight font assets, and the brand kit's

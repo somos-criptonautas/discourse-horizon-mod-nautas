@@ -116,11 +116,24 @@ marcada y después oculta igual aparece en el post.
   correspondencia color → tipo está al principio del archivo: un color sin asignar cae en
   `note`, y un tipo que este foro ya no defina cae en el `callout_fallback_type` del propio
   Quote Callouts. El emoji de Ghost se descarta en favor del icono del aviso.
+- **`embed-comments.gjs`**: cuando el foro funciona como iframe de comentarios del blog
+  (`body.embed-mode`), deja en el menú del post solo responder, denunciar y (con sesión
+  iniciada) me gusta. Avisos, saltos de tiempo, botones del pie y temas sugeridos se ocultan
+  en `main.scss`.
+- **`sidebar-chat-toggle.gjs`**: un botón de chat con indicador de no leídos junto al
+  selector claro/oscuro en el pie de la barra lateral, en lugar del botón que cambia al
+  panel de chat. Abre el cajón o la página completa según la preferencia del usuario; una
+  segunda pulsación lo cierra.
+- **`user-menu-karma.js`**: muestra el karma mensual del usuario (de `/leaderboard`,
+  periodo mensual) como chip en el menú de usuario. Una petición por carga de página.
 
 ### Marcado y recursos
 
 - `common/after_header.html`: banners de categoría personalizados (ghettos, retos, karma, costumbres).
 - `common/header.html`: analítica Plausible.
+- `common/head_tag.html`: dentro del iframe de comentarios del blog, sigue el tema
+  claro/oscuro del blog e informa la altura del hilo. La otra mitad está en
+  `assets/js/discourse-embed.js` de ghost-headline-theme-nautas.
 - `common/color_definitions.scss`: `--cn-btn`, el violeta de los botones primarios: el tertiary de la paleta en modo claro, `#8E4CFF` en oscuro (4,54:1 con texto blanco), aplicado en `main.scss`.
 - `about.json`: lista permitida de iconos Phosphor duotone, modificadores `custom_homepage` y
   `serialize_topic_is_hot`, assets de la fuente Inter Tight y las paletas Claro/Oscuro del
