@@ -34,21 +34,39 @@
   border-radius: var(--d-border-radius);
 }
 
-// Karma line, appended below the username by user-menu-karma.js.
-// Upstream lays this block out with named areas, so the extra row has to be
-// declared here or the line lands under the avatar.
+// Karma chip, appended by user-menu-karma.js: a full-width row under the avatar
+// (label on one line, score on the next). Upstream lays this block out with named
+// areas, so the extra row has to be declared here.
 .custom-user-menu-content .fk-d-menu__user-info {
   grid-template-areas:
     "avatar name"
     "avatar username"
-    "avatar karma";
+    "karma karma";
   grid-template-rows: auto auto auto;
 }
 
 .custom-user-menu-content .fk-d-menu__monthly-karma {
   grid-area: karma;
-  font-size: var(--font-down-2);
-  color: var(--primary-medium);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-left: 3px solid var(--tertiary);
+  border-radius: var(--d-border-radius);
+  background: var(--d-sidebar-highlight-background, var(--primary-very-low));
+  line-height: var(--line-height-medium);
+
+  strong {
+    font-size: var(--font-down-1);
+    color: var(--d-sidebar-active-color, var(--primary));
+  }
+
+  span {
+    font-size: var(--font-up-1);
+    font-weight: 700;
+    color: var(--tertiary);
+  }
 }
 
 // Mobile: the profile menu as a right-hand panel, like core's user menu.

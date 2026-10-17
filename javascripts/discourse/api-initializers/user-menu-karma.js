@@ -48,9 +48,11 @@ export default apiInitializer((api) => {
       return;
     }
 
-    line.textContent = i18n(themePrefix("monthly_karma"), {
-      score: score.toLocaleString(),
-    });
+    const label = document.createElement("strong");
+    label.textContent = i18n(themePrefix("monthly_karma"));
+    const value = document.createElement("span");
+    value.textContent = score.toLocaleString();
+    line.replaceChildren(label, value);
   }
 
   // The custom-user-menu component exposes no plugin outlet and float-kit

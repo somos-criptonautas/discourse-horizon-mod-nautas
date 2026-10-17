@@ -15,7 +15,7 @@ es:
     traders:
       title: "Disponible para traders"
       message: "Sector dedicado para @traders. Se desbloquea con participación sostenida o a través de un ticket (suscripción mensual)."
-  monthly_karma: "karma mensual: %{score}"
+  monthly_karma: "karma mensual"
   category_back: "Volver"
   ai_thumbs_down: "No me sirvió"
   podium_note: "Cada puesto recibe 3% del total de suscripciones (en Monero)."
