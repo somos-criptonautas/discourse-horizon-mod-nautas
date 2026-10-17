@@ -1968,10 +1968,15 @@ html:has(body.embed-mode) {
 // became a tall scroll trap. Here it is a plain last block that grows with the text.
 body.embed-mode .embed-mode-composer {
   position: static;
+  box-sizing: border-box;
+  width: 100%;
 
+  // 8em: four lines of room before it starts to grow; 4em read as a one-line chat box.
   .docked-composer {
-    --docked-composer-input-min-height: 4em;
+    --docked-composer-input-min-height: 8em;
     position: static;
+    box-sizing: border-box;
+    width: 100%;
   }
 
   .docked-composer__resize-handle {
@@ -1980,7 +1985,7 @@ body.embed-mode .embed-mode-composer {
 
   .d-editor-input {
     field-sizing: content;
-    max-height: 16em;
+    max-height: 24em;
     overscroll-behavior: auto;
   }
 
@@ -1993,6 +1998,7 @@ body.embed-mode .embed-mode-composer {
   .d-editor-container,
   .d-editor-textarea-column,
   .d-editor-textarea-wrapper,
+  .ProseMirror-container,
   .d-editor-input {
     box-sizing: border-box;
     width: 100%;
