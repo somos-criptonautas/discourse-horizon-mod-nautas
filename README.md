@@ -118,7 +118,8 @@ hidden still shows up in the post.
   dropped in favour of the callout's icon.
 - **`embed-comments.gjs`** — when the forum runs as the blog's comments iframe
   (`body.embed-mode`), keeps only reply, flag and (for logged-in users) like in the post
-  menu. Notices, time gaps, footer buttons and suggested topics are hidden in `main.scss`.
+  menu. Notices, time gaps, footer buttons and suggested topics are hidden in `main.scss`,
+  and the reply composer opens full width and taller.
 - **`sidebar-chat-toggle.gjs`** — a chat button with an unread indicator next to the
   light/dark selector in the sidebar footer, replacing the sidebar's chat panel switch.
   Opens drawer or full page following the user's preference; a second press closes it.

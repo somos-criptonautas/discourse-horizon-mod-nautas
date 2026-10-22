@@ -119,7 +119,7 @@ marcada y después oculta igual aparece en el post.
 - **`embed-comments.gjs`**: cuando el foro funciona como iframe de comentarios del blog
   (`body.embed-mode`), deja en el menú del post solo responder, denunciar y (con sesión
   iniciada) me gusta. Avisos, saltos de tiempo, botones del pie y temas sugeridos se ocultan
-  en `main.scss`.
+  en `main.scss`, y el editor de respuesta se abre a todo el ancho y más alto.
 - **`sidebar-chat-toggle.gjs`**: un botón de chat con indicador de no leídos junto al
   selector claro/oscuro en el pie de la barra lateral, en lugar del botón que cambia al
   panel de chat. Abre el cajón o la página completa según la preferencia del usuario; una

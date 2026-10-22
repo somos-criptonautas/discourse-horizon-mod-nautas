@@ -129,3 +129,5 @@ Edits are made locally. To deploy, manually upload the theme:
 - If context is unclear (which Discourse version, what the setting does, how a
   component is structured), ask before writing code.
 - Add conventions and gotchas you discover to this file, in the same PR.
+- A new feature updates, in the same commit, both READMEs and the admin description
+  (`theme_metadata.description` in `locales/en.yml` and `es.yml`, and `description` in `about.json`).
