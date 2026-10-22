@@ -35,18 +35,12 @@
 }
 
 // Karma chip, appended by user-menu-karma.js: a full-width row under the avatar
-// (label on one line, score on the next). Upstream lays this block out with named
-// areas, so the extra row has to be declared here.
-.custom-user-menu-content .fk-d-menu__user-info {
-  grid-template-areas:
-    "avatar name"
-    "avatar username"
-    "karma karma";
-  grid-template-rows: auto auto auto;
-}
-
+// (label on one line, score on the next). Spans every column of the upstream grid
+// instead of naming an area, because upstream's equally specific
+// grid-template-areas loads after this file and would erase an added one.
 .custom-user-menu-content .fk-d-menu__monthly-karma {
-  grid-area: karma;
+  grid-column: 1 / -1;
+  grid-row: 3;
   display: flex;
   flex-direction: column;
   min-width: 0;
