@@ -118,3 +118,17 @@ $hamburger-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
     display: none;
   }
 }
+
+// Tablet with the sidebar open: the wordmark squeezed into what is left of the header
+// and read tiny, so show only the symbol. The horizontal logo starts with it — its
+// first 276 × 310 at the logo's own proportions — so this crops the same image, dark
+// variant included, rather than swapping in logo_small (Discourse only does that when
+// the header minimises). The selector needs .title to outrank core's object-fit.
+@include viewport.between(sm, lg) {
+  body.has-sidebar-page .d-header .title #site-logo {
+    width: auto;
+    aspect-ratio: 276 / 310;
+    object-fit: cover;
+    object-position: left center;
+  }
+}
