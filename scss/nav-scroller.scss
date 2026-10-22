@@ -138,7 +138,7 @@
   font-weight: var(--d-sidebar-active-font-weight);
 }
 
-// Scroll arrows: round buttons flanking the strip, OUTSIDE the pills.
+// Scroll arrows: plain chevrons flanking the strip, OUTSIDE the pills.
 //
 // They used to be `position: absolute` at the scroller's edges, which laid them over
 // the first and last pill — a pill you could read but not click, and the arrow itself
@@ -160,28 +160,39 @@
   align-items: center;
   justify-content: center;
 
-  // content-box so the padding is real room around the chevron instead of being eaten
-  // out of the width: at `padding: 0` the glyph sat against the circle's edge.
-  box-sizing: content-box;
-  width: 1em;
-  height: 1em;
-  padding: 0.4rem;
+  // Minimal: no fill, no shadow, just the chevron; a soft fill only on hover.
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
   border: 0;
-  border-radius: 50%;
-  background: var(--secondary);
-  color: var(--primary);
-  box-shadow: 0 1px 6px rgb(0 0 0 / 25%);
-  font-size: 1.25rem;
-  line-height: 1;
+  border-radius: var(--d-border-radius);
+  background: transparent;
+  color: var(--primary-medium);
   cursor: pointer;
+
+  // The chevron is two borders of a rotated square, not a ‹ › glyph: a glyph sits on
+  // the font's baseline and never centres in the button.
+  &::before {
+    content: "";
+    width: 0.45rem;
+    height: 0.45rem;
+    border-top: 2px solid currentcolor;
+    border-right: 2px solid currentcolor;
+    transform: translateX(-15%) rotate(45deg);
+  }
 }
 
 .ct-nav-arrow-left {
   order: -1;
+
+  &::before {
+    transform: translateX(15%) rotate(-135deg);
+  }
 }
 
 .ct-nav-arrow:hover {
-  background: var(--primary-low);
+  background: var(--primary-very-low);
+  color: var(--primary);
 }
 
 // display, not the visibility/opacity pair this used to use: in the flow a

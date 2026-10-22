@@ -49,6 +49,11 @@ html:not(.anon)
   padding: 0 0.9em;
 }
 
+// Wider than the shared 0.9em above, short of core's own ~1.7em.
+.d-header .auth-buttons .btn {
+  padding-inline: 1.3em;
+}
+
 // Core leaves no gap between the auth buttons and the language switcher.
 .d-header .panel .header-buttons {
   margin-right: 0.5em;

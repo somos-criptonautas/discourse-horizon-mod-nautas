@@ -39,7 +39,6 @@ function setupNavigationButtons() {
     button.type = "button";
     button.className = `ct-nav-arrow ct-nav-arrow-${side}`;
     button.setAttribute("aria-label", `Scroll navigation ${side}`);
-    button.textContent = dir < 0 ? "‹" : "›";
     button.addEventListener("click", () =>
       nav.scrollBy({
         left: dir * Math.max(nav.clientWidth * 0.7, 250),
