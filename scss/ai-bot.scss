@@ -72,9 +72,13 @@ body.has-ai-conversations-sidebar {
 // (.discourse-reactions-reaction-button) and hovering or holding it opens the emoji
 // picker — out of place in an LLM chat, where the thumb means one thing. Hiding the
 // picker leaves the button's own toggle working: a tap still likes the reply.
+// The counts go too (the reaction list with its 👍/👎 emoji and the like count): the
+// thumbs already show the state, highlighted when active.
 body.has-ai-conversations-sidebar {
   .discourse-reactions-picker,
   .discourse-reactions-state-panel,
+  .discourse-reactions-counter,
+  .post-action-menu__like-count,
   .discourse-reactions-actions .discourse-reactions-secondary-actions {
     display: none !important;
   }
