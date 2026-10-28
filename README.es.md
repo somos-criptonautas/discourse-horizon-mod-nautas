@@ -20,11 +20,11 @@ instálalo junto a este.
 |---|---|
 | `main.scss` | Escala de fuentes base, sobrescrituras `--d-*`, diseño de cuadrícula/barra lateral, reinicio de colores de categoría, listas de temas, categorías de documentación, búsqueda, ranking, banners, tarjetas de reto y su marca de obtenido, página 404, el embed del blog, correcciones del rediseño del editor |
 | `fonts.scss` | Tipografía de marca: Inter Tight desde `assets/` para titulares (el texto sigue el ajuste `base_font`, Lato), titulares en 800 con interletra -0,02em |
-| `header.scss` | Diseño de la cabecera con navegación personalizada, visibilidad de logo/avatar en móvil |
+| `header.scss` | Diseño de la cabecera con navegación personalizada, visibilidad de logo/avatar en móvil, solo el símbolo del logo en tablet con la barra lateral abierta, botones de acceso más amplios |
 | `topic.scss` | Anchos máximos del tema y ancho del cuerpo |
 | `_topic-list.scss` | Densidad de la lista de temas, marcador de última visita en docs, etiquetas ocultas en listas |
 | `categories-view.scss` | Cajas de categorías y cabeceras de título |
-| `nav-scroller.scss` | Franja de navegación de temas desplazable y sus flechas; mantiene los ítems glosario/wiki fuera de las listas de categorías y etiquetas |
+| `nav-scroller.scss` | Franja desplazable de navegación de temas con flechas mínimas fuera de las píldoras, por encima de los posts que recorre; mantiene glosario/wiki fuera de las listas de categorías y etiquetas |
 | `mermaid.scss` | Los diagramas Mermaid se ajustan al ancho del post en lugar de su tamaño intrínseco |
 | `ai-bot.scss` | Pulgar arriba/abajo en lugar de me gusta/reportar dentro de las conversaciones con el bot de IA, sin selector de reacciones ni contadores; los artifacts de IA sin marco ocupan toda la altura del embed en vez de desplazarse dentro de un marco de 1000px |
 | `mobile-stuff.scss` | Tamaños de fuente adaptables, fondos de la barra lateral, categorías de docs en móvil |

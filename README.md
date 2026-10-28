@@ -20,11 +20,11 @@ component; install it alongside this one.
 |---|---|
 | `main.scss` | Base font scale, `--d-*` overrides, grid/sidebar layout, category colour reset, topic lists, docs categories, search, leaderboard, banners, badge cards and their award marker, the 404 page, the blog embed, composer-redesign fixes |
 | `fonts.scss` | Brand type: Inter Tight from `assets/` for headings (body text stays on the `base_font` setting, Lato), headings at 800 with -0.02em tracking |
-| `header.scss` | Header layout with custom nav, mobile logo/avatar visibility |
+| `header.scss` | Header layout with custom nav, mobile logo/avatar visibility, symbol-only logo on tablet while the sidebar is open, roomier auth buttons |
 | `topic.scss` | Topic max-widths and body width |
 | `_topic-list.scss` | Topic-list density, docs last-visit marker, tags hidden from lists |
 | `categories-view.scss` | Category boxes and title headers |
-| `nav-scroller.scss` | Scrollable topic nav strip and its arrows; keeps the glosario/wiki nav items off category and tag lists |
+| `nav-scroller.scss` | Scrollable topic nav strip with minimal chevron arrows outside the pills, layered above the posts it scrolls over; keeps the glosario/wiki nav items off category and tag lists |
 | `mermaid.scss` | Mermaid diagrams scale to the post width instead of their intrinsic size |
 | `ai-bot.scss` | Thumbs up/down instead of like/flag inside AI bot conversations, with no reaction picker or counts; frameless AI artifacts fill their full embed height instead of scrolling inside a 1000px frame |
 | `mobile-stuff.scss` | Responsive font sizes, sidebar backgrounds, docs categories on mobile |
