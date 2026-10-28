@@ -68,9 +68,11 @@
   }
 }
 
-// Topics tagged full-screen: widen the body to the topic container; a single grid column and no side timeline free the room.
+// Full-screen topics: widen the body to the topic container; a single grid column and no side timeline free the room.
+// The marker is a [wrap=full-screen] block in the post, not the tag: logged-in docs-mode pages carry neither the
+// body.tag-* class nor the tag link, so the post itself is the only hook every view shares.
 @include viewport.from(md) {
-  body.tag-full-screen {
+  body:has(.d-wrap[data-wrap="full-screen"]) {
     --topic-body-width: calc(var(--d-max-width-topic) - 60px);
 
     .container.posts {
