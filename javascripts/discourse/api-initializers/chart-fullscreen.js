@@ -203,8 +203,10 @@ function enhance(chart) {
     const Chart = await loadChartJS();
     const instance = Chart.getChart(canvas);
     if (instance) {
-      // Chart.js exposes `options` as a setter that swaps the config's options.
-      instance.options = restyle(instance.options, fontSize());
+      // config.options is the raw object the plugin passed in; instance.options
+      // is a resolver proxy over it and the defaults, which does not survive a
+      // spread. update() rebuilds the resolver from config.options.
+      instance.config.options = restyle(instance.config.options, fontSize());
       instance.update("none");
     }
   });
