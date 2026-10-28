@@ -1,5 +1,5 @@
 // Pele diagrams (the "discourse pele" component): undo the 16/9 squeeze and inner scroll
-// for the old official component, now on Pele's markup:
+// the component CSS applies to its markup:
 //   .pele-wrapper > .pele-wrapper__fullscreen + .pele-diagram > .pele-diagram__canvas > svg.pele
 //
 // The component's common.scss sets .pele-wrapper { aspect-ratio: 16 / 9 } and
