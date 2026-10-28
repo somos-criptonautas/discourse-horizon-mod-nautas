@@ -83,3 +83,12 @@ body.has-ai-conversations-sidebar {
     display: none !important;
   }
 }
+
+// AI artifacts embedded without a frame (data-ai-artifact-seamless): core caps every
+// iframe at max-height: min(1000px, 200vh) while the wrapper honours
+// data-ai-artifact-height, so anything taller scrolls inside the frame above a blank
+// gap. Let the iframe fill the wrapper; the height stays whatever the embed asks for.
+.ai-artifact__wrapper.ai-artifact__seamless iframe {
+  height: 100%;
+  max-height: none;
+}
