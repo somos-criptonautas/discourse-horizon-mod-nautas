@@ -1,0 +1,44 @@
+// Pele diagrams (the "discourse pele" component): undo the 16/9 squeeze and inner scroll
+// the component CSS applies to its markup:
+//   .pele-wrapper > .pele-wrapper__fullscreen + .pele-diagram > .pele-diagram__canvas > svg.pele
+//
+// The component's common.scss sets .pele-wrapper { aspect-ratio: 16 / 9 } and
+// .pele-diagram__canvas { height: 100%; overflow: auto }, so any diagram taller than
+// ~16:9 of the post width (about 350px at the usual 620px column) scrolls inside a
+// short box. The svg already carries max-width:100%; height:auto inline and fits the
+// width on its own; only the frame has to stop dictating the height.
+//
+// Scoped to .cooked so the component's fullscreen modal (.pele-fullscreen) keeps its
+// own sizing.
+.cooked .pele-wrapper {
+  aspect-ratio: auto;
+}
+
+.cooked .pele-wrapper .pele-diagram__canvas {
+  height: auto;
+  overflow: visible;
+}
+
+// Chart series in brand colours. The component maps --pele-series-1 to var(--tertiary)
+// (and 2..8 to other palette slots), which is why the old `%%{init}%%` colour blocks in
+// posts never applied: Pele reads these variables, not Mermaid's init directive.
+.cooked .pele-diagram {
+  --pele-series-1: #7c36ff;
+  --pele-series-2: #c53825;
+}
+
+// Edges keep a readable stroke whatever the diagram is scaled to. Pele draws them at 1px
+// (2.5px for `==>`), then the svg shrinks to the post width and the lines go hairline.
+// non-scaling-stroke measures the width in screen pixels instead. Arrowheads are filled
+// paths, so they get a stroke of their own colour to grow with the lines.
+.cooked svg.pele .pele-edge path:not(.pele-marker) {
+  stroke-width: 2.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.cooked svg.pele .pele-edge .pele-marker {
+  stroke: inherit;
+  stroke-width: 1.5px;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
