@@ -67,3 +67,18 @@
     width: calc(var(--topic-body-width) + var(--topic-body-width-padding) * 2);
   }
 }
+
+// Topics tagged full-screen: widen the body to the topic container; a single grid column and no side timeline free the room.
+@include viewport.from(md) {
+  body.tag-full-screen {
+    --topic-body-width: calc(var(--d-max-width-topic) - 60px);
+
+    .container.posts {
+      grid-template-columns: minmax(0, 1fr);
+
+      .topic-navigation {
+        display: none;
+      }
+    }
+  }
+}
