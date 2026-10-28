@@ -65,7 +65,10 @@ function restyle(options, size) {
       ...scale,
       title,
       ticks: { ...scale.ticks, font, color },
-      grid: { ...scale.grid, color: gridColor },
+      // No grid: the plugin's charts never showed one (Chart.js' default is a 10%
+      // black, invisible on dark). Only the axis line keeps the token colour.
+      grid: { ...scale.grid, display: false },
+      border: { ...scale.border, color: gridColor },
     };
   }
 
