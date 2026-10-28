@@ -1,0 +1,59 @@
+// Fullscreen for discourse-chart (see api-initializers/chart-fullscreen.js).
+//
+// Markup, built by the initializer around the plugin's own div:
+//   .chart-fullscreen-host > .discourse-chart + .chart-fullscreen__open
+// and, while open, appended to <body>:
+//   .chart-fullscreen > .chart-fullscreen__image + .chart-fullscreen__close
+.chart-fullscreen-host {
+  position: relative;
+  margin-block: 1em;
+}
+
+// Same placement and hover reveal as Pele's .pele-wrapper__fullscreen, so both kinds
+// of figure behave alike.
+.chart-fullscreen__open {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+html.no-touch .chart-fullscreen__open {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+html.no-touch .chart-fullscreen-host:hover .chart-fullscreen__open,
+html.no-touch .chart-fullscreen__open:focus-visible {
+  opacity: 1;
+}
+
+.chart-fullscreen {
+  position: fixed;
+  inset: 0;
+
+  // Above the header (core z("header") is 1000) and the chat drawer; nothing else is
+  // meant to be reachable while it is open.
+  z-index: 1700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
+
+  // The canvas has a transparent background, so the overlay supplies the page's.
+  background: var(--secondary);
+}
+
+.chart-fullscreen__image {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.chart-fullscreen__close {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}

@@ -34,3 +34,6 @@ es:
     costumbres:
       title: "Costumbres"
       description: "Quiénes somos y cómo nos relacionamos."
+  chart_fullscreen:
+    open: "Ver en pantalla completa"
+    close: "Cerrar"
