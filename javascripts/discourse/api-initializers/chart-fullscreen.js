@@ -93,6 +93,38 @@ function restyle(options, size) {
   };
 }
 
+// Two plugin limits on bar charts, lifted on the live config before restyling. It pins
+// horizontal bars to `min: 0`, so a negative value never draws; and it never stacks, so
+// when the datasets are mutually exclusive (one series per sign, zeros elsewhere) each
+// visible bar sits in half its row, offset from its label. Stacking exclusive datasets
+// changes no number, only the alignment. Dropping `min` is safe: bars begin at zero.
+function fixBars(config) {
+  if (config.type !== "bar") {
+    return;
+  }
+  const rows = (config.data?.datasets ?? []).map((dataset) =>
+    (dataset.data ?? []).map(Number)
+  );
+  const negative = rows.some((row) => row.some((value) => value < 0));
+  const exclusive =
+    rows.length > 1 &&
+    rows[0].every((_, i) => rows.filter((row) => row[i]).length <= 1);
+  if (!negative && !exclusive) {
+    return;
+  }
+
+  const scales = (config.options.scales ??= {});
+  for (const key of ["x", "y"]) {
+    const scale = (scales[key] ??= {});
+    if (negative && scale.min === 0) {
+      delete scale.min;
+    }
+    if (exclusive) {
+      scale.stacked = true;
+    }
+  }
+}
+
 function enlargedConfig(config) {
   const { type, data, options } = config;
   const size = fontSize() + FULLSCREEN_EXTRA;
@@ -209,6 +241,7 @@ function enhance(chart) {
       // config.options is the raw object the plugin passed in; instance.options
       // is a resolver proxy over it and the defaults, which does not survive a
       // spread. update() rebuilds the resolver from config.options.
+      fixBars(instance.config);
       instance.config.options = restyle(instance.config.options, fontSize());
       instance.update("none");
     }
