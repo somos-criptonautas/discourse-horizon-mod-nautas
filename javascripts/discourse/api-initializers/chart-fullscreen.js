@@ -5,33 +5,38 @@ import { iconHTML } from "discourse/lib/icon-library";
 import loadChartJS from "discourse/lib/load-chart-js";
 import { i18n } from "discourse-i18n";
 
-// Fullscreen button for discourse-chart, the same affordance Pele gives diagrams.
+// discourse-chart, restyled and with a fullscreen button, the affordance Pele gives
+// diagrams.
 //
-// The plugin draws on a <canvas> at the post's width with Chart.js' 12px labels and
-// offers no way to enlarge it. The overlay redraws the chart with Chart.js itself,
-// from the live chart's own config (Chart.getChart(canvas) hands it back), sized to
-// the viewport and with larger fonts and strokes: vector-sharp at any size. Scaling
-// the canvas bitmap instead looked pixelated on 1x screens.
+// The plugin draws on a <canvas> with Chart.js' defaults: 12px labels, a fixed mid
+// grey for text and a faint black for grid lines, which fade on a dark scheme, and no
+// way to enlarge the chart. This initializer takes the live instance back from the
+// canvas (Chart.getChart) and restyles it with the theme's colour tokens and the
+// `chart_font_size` setting; the fullscreen overlay redraws the same config, sized to
+// the viewport and a few points larger. Both are vector redraws, never a scaled bitmap
+// (which looked pixelated on 1x screens).
 //
 // Chart.js comes from core's loader, the same module the plugin uses, so this adds
-// no second copy. If no instance is found on the canvas (plugin changed), the bitmap
-// is shown as an image rather than nothing.
+// no second copy. If no instance is found on the canvas (plugin changed), the overlay
+// falls back to the bitmap as an image rather than nothing.
 //
 // onPageChange + afterRender rather than decorateCookedElement: the pattern the rest
-// of this theme relies on (see checklist-strike.js). addButton() skips charts it has
-// already wrapped, so re-running costs a querySelectorAll. The canvas is read at click
-// time because the plugin renders it asynchronously, after the cooked HTML is in place.
+// of this theme relies on (see checklist-strike.js). enhance() skips charts it has
+// already wrapped, so re-running costs a querySelectorAll. The canvas is awaited
+// because the plugin renders it asynchronously, after the cooked HTML is in place.
 const CHART_SELECTOR = ".cooked .discourse-chart";
 const HOST_CLASS = "chart-fullscreen-host";
-const FONT_SIZE = 18;
+const FULLSCREEN_EXTRA = 4;
 
 function label(key) {
   return i18n(themePrefix(`chart_fullscreen.${key}`));
 }
 
-// Chart.js' defaults are a fixed mid grey for text and a faint black for grid
-// lines, which is why the plugin's charts fade on a dark scheme. The theme's own
-// tokens follow the active color scheme, light or dark.
+function fontSize() {
+  return Number(settings.chart_font_size) || 14;
+}
+
+// The theme's own tokens follow the active colour scheme, light or dark.
 function themeColors() {
   const styles = getComputedStyle(document.documentElement);
   return {
@@ -40,70 +45,65 @@ function themeColors() {
   };
 }
 
-// Recolour a chart the plugin already drew in the post. New objects on
-// chart.options rather than edits in place: pie charts share the plugin's default
-// options object, and a mutation there would leak into every later chart.
-function applyThemeColors(chart) {
+// New options from the plugin's: theme colours, one font size everywhere, and no
+// axis title when the post gave none (the plugin sets display: true with a null
+// text, which Chart.js prints as "null"). Spreads rather than a deep clone: the
+// plugin's options carry functions (tick formatters) that must survive, and pie
+// charts share the plugin's default options object, which must not be mutated.
+function restyle(options, size) {
   const { color, gridColor } = themeColors();
-  const { options } = chart;
+  const font = { size };
   const plugins = options.plugins ?? {};
-
-  options.color = color;
-  for (const scale of Object.values(options.scales ?? {})) {
-    scale.ticks = { ...scale.ticks, color };
-    scale.title = { ...scale.title, color };
-    scale.grid = { ...scale.grid, color: gridColor };
-  }
-  options.plugins = {
-    ...plugins,
-    legend: { ...plugins.legend, labels: { ...plugins.legend?.labels, color } },
-    title: { ...plugins.title, color },
-  };
-  chart.update("none");
-}
-
-// The plugin's options, enlarged. Spreads rather than a deep clone because the
-// plugin's options carry functions (tick formatters) that must survive; data is
-// numbers and strings, so JSON copies it without the listeners Chart.js attaches.
-function enlargedConfig(config) {
-  const { type, data, options } = config;
-  const font = { size: FONT_SIZE };
-  const plugins = options.plugins ?? {};
-  const { color, gridColor } = themeColors();
 
   const scales = {};
   for (const [key, scale] of Object.entries(options.scales ?? {})) {
+    const title = { ...scale.title, font, color };
+    if (title.text === null || title.text === undefined) {
+      title.display = false;
+    }
     scales[key] = {
       ...scale,
+      title,
       ticks: { ...scale.ticks, font, color },
-      title: { ...scale.title, font, color, padding: 12 },
       grid: { ...scale.grid, color: gridColor },
     };
   }
 
   return {
+    ...options,
+    color,
+    font,
+    scales,
+    plugins: {
+      ...plugins,
+      legend: {
+        ...plugins.legend,
+        labels: { ...plugins.legend?.labels, font, color, padding: size },
+      },
+      title: {
+        ...plugins.title,
+        color,
+        font: { size: size + 4, weight: "bold" },
+        padding: { top: 8, bottom: size + 10 },
+      },
+    },
+  };
+}
+
+function enlargedConfig(config) {
+  const { type, data, options } = config;
+  const size = fontSize() + FULLSCREEN_EXTRA;
+
+  return {
     type,
+    // Numbers and strings only, so JSON copies the data without the listeners
+    // Chart.js attaches to the live arrays.
     data: JSON.parse(JSON.stringify(data)),
     options: {
-      ...options,
+      ...restyle(options, size),
       responsive: true,
       maintainAspectRatio: false,
-      color,
-      scales,
       elements: { line: { borderWidth: 3 }, point: { radius: 4 } },
-      plugins: {
-        ...plugins,
-        legend: {
-          ...plugins.legend,
-          labels: { ...plugins.legend?.labels, font, color, padding: 20 },
-        },
-        title: {
-          ...plugins.title,
-          color,
-          font: { size: FONT_SIZE + 4, weight: "bold" },
-          padding: { top: 8, bottom: 28 },
-        },
-      },
     },
   };
 }
@@ -187,7 +187,7 @@ function whenCanvas(chart, callback) {
   observer.observe(chart, { childList: true });
 }
 
-function addButton(chart) {
+function enhance(chart) {
   if (chart.parentElement?.classList.contains(HOST_CLASS)) {
     return;
   }
@@ -203,7 +203,9 @@ function addButton(chart) {
     const Chart = await loadChartJS();
     const instance = Chart.getChart(canvas);
     if (instance) {
-      applyThemeColors(instance);
+      // Chart.js exposes `options` as a setter that swaps the config's options.
+      instance.options = restyle(instance.options, fontSize());
+      instance.update("none");
     }
   });
 
@@ -225,7 +227,7 @@ function addButton(chart) {
 export default apiInitializer((api) => {
   api.onPageChange(() => {
     schedule("afterRender", () => {
-      document.querySelectorAll(CHART_SELECTOR).forEach(addButton);
+      document.querySelectorAll(CHART_SELECTOR).forEach(enhance);
     });
   });
 });

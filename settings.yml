@@ -37,3 +37,9 @@ blocked_sections:
       cta_url: "/s"
       cta_icon: "ph-dt-ticket"
       hide: false
+
+chart_font_size:
+  type: integer
+  default: 14
+  min: 10
+  max: 24

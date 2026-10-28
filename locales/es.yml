@@ -6,6 +6,7 @@ es:
     description: "Personalizaciones de Criptonautas sobre Horizon: estilos y paletas, categorías de documentación de la A a la Z, secciones de la barra lateral restringidas por grupo, avisos de Ghost y comentarios embebidos en el blog, botón de chat en la barra lateral y karma mensual en el menú de usuario."
     settings:
       blocked_sections: "Una fila por nivel. `key` enlaza la fila con su título/mensaje en la pestaña de traducciones. Si `allowed_groups` queda vacío, el nivel aplica a todos. `paths` es una lista separada por comas de rutas para lo que no sea una categoría. Si `cta_url` queda vacío se oculta el segundo botón."
+      chart_font_size: "Tamaño de letra (px) de los gráficos [chart] dentro de los posts. El expandido usa 4 px más."
   blocked_sidebar:
     dismiss: "seguir navegando"
     cta: "entrar ahora"
