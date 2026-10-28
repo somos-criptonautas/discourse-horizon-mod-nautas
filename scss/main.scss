@@ -1746,6 +1746,10 @@ img.emoji {
   height: 23px;
 }
 
+.cooked .d-wrap[data-wrap="cover"] {
+  display: none;
+}
+
 [data-wrap="button"] {
   text-align: center;
   padding-top: 0.3rem;
