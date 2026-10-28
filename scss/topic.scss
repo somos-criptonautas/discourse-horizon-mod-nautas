@@ -71,6 +71,22 @@
 // Full-screen topics: widen the body to the topic container; a single grid column and no side timeline free the room.
 // The marker is a [wrap=full-screen] block in the post, not the tag: logged-in docs-mode pages carry neither the
 // body.tag-* class nor the tag link, so the post itself is the only hook every view shares.
+// Full-screen topics show only the post: no title block, post meta, post menu, footer buttons, suggested
+// topics or progress bar, and no topic title in the header on scroll. Staff edit those posts through the API.
+body:has(.d-wrap[data-wrap="full-screen"]) {
+  #topic-title,
+  .topic-meta-data,
+  .topic-avatar,
+  .post-menu-area,
+  .topic-map,
+  #topic-footer-buttons,
+  .more-topics__container,
+  #topic-progress-wrapper,
+  .d-header .extra-info-wrapper {
+    display: none;
+  }
+}
+
 @include viewport.from(md) {
   body:has(.d-wrap[data-wrap="full-screen"]) {
     --topic-body-width: calc(var(--d-max-width-topic) - 60px);
