@@ -42,3 +42,15 @@
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
 }
+
+// Timelines read as a sequence, so their periods take one hue that builds up and
+// fades instead of the categorical series colours: soft start, full brand purple at
+// the peak, then deeper and greyer towards the end (dawn, morning, afternoon, dusk,
+// night in "Un día del trader"; backtesting to real capital in "Etapa de práctica").
+.cooked .pele-diagram:has(svg.pele-timeline) {
+  --pele-series-1: #8c6ad6;
+  --pele-series-2: #7c36ff;
+  --pele-series-3: #5a2fc0;
+  --pele-series-4: #5c5280;
+  --pele-series-5: #4a4a5e;
+}
