@@ -37,12 +37,20 @@ function enlargedConfig(config) {
   const font = { size: FONT_SIZE };
   const plugins = options.plugins ?? {};
 
+  // Chart.js' defaults are a fixed mid grey for text and a faint black for grid
+  // lines, which is why the plugin's charts fade on a dark scheme. The theme's own
+  // tokens follow the active color scheme, light or dark.
+  const styles = getComputedStyle(document.documentElement);
+  const color = styles.getPropertyValue("--primary").trim();
+  const gridColor = styles.getPropertyValue("--primary-low-mid").trim();
+
   const scales = {};
   for (const [key, scale] of Object.entries(options.scales ?? {})) {
     scales[key] = {
       ...scale,
-      ticks: { ...scale.ticks, font },
-      title: { ...scale.title, font },
+      ticks: { ...scale.ticks, font, color },
+      title: { ...scale.title, font, color, padding: 12 },
+      grid: { ...scale.grid, color: gridColor },
     };
   }
 
@@ -53,17 +61,20 @@ function enlargedConfig(config) {
       ...options,
       responsive: true,
       maintainAspectRatio: false,
+      color,
       scales,
       elements: { line: { borderWidth: 3 }, point: { radius: 4 } },
       plugins: {
         ...plugins,
         legend: {
           ...plugins.legend,
-          labels: { ...plugins.legend?.labels, font },
+          labels: { ...plugins.legend?.labels, font, color, padding: 20 },
         },
         title: {
           ...plugins.title,
+          color,
           font: { size: FONT_SIZE + 4, weight: "bold" },
+          padding: { top: 8, bottom: 28 },
         },
       },
     },
