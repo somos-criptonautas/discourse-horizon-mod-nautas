@@ -3,7 +3,8 @@
 // Markup, built by the initializer around the plugin's own div:
 //   .chart-fullscreen-host > .discourse-chart + .chart-fullscreen__open
 // and, while open, appended to <body>:
-//   .chart-fullscreen > .chart-fullscreen__image + .chart-fullscreen__close
+//   .chart-fullscreen > .chart-fullscreen__stage > canvas, + .chart-fullscreen__close
+// (.chart-fullscreen__image replaces the stage when no Chart.js instance is found).
 .chart-fullscreen-host {
   position: relative;
   margin-block: 1em;
@@ -42,6 +43,14 @@ html.no-touch .chart-fullscreen__open:focus-visible {
 
   // The canvas has a transparent background, so the overlay supplies the page's.
   background: var(--secondary);
+}
+
+// Chart.js fills a responsive canvas to its parent's box, so the stage gives it one:
+// most of the viewport, capped so a wide monitor does not stretch the lines thin.
+.chart-fullscreen__stage {
+  position: relative;
+  width: min(92vw, 1400px);
+  height: 80vh;
 }
 
 .chart-fullscreen__image {
