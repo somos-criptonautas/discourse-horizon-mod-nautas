@@ -42,11 +42,12 @@
     // keeps loading until every reply is shown. "*" for the same reason as
     // announce(): a height is not sensitive.
     //
-    // Grows but never shrinks: the document is always at least as tall as the
-    // iframe viewport, so scrollHeight cannot drop below the current height.
+    // The body, not scrollHeight: the document is always at least as tall as the
+    // iframe viewport, so scrollHeight could grow but never shrink. main.scss
+    // (Embed comments) drops the body's min-height so it follows the content.
     var lastHeight = 0;
     function reportHeight() {
-      var height = document.documentElement.scrollHeight;
+      var height = Math.ceil(document.body.getBoundingClientRect().height);
       if (Math.abs(height - lastHeight) < 2) {
         return;
       }

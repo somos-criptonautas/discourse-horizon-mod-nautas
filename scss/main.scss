@@ -1942,6 +1942,19 @@ body.embed-mode #main-outlet {
   padding: 1.5rem;
 }
 
+// #main-outlet already gives the room; a second padding here narrowed the reply box.
+body.embed-mode #main-outlet > .regular {
+  padding-inline: 0;
+}
+
+// The blog sizes the iframe to the body (head_tag.html): at 100% the body never
+// gets shorter than the iframe, and a thread without replies stays a tall empty box.
+html:has(body.embed-mode),
+body.embed-mode {
+  height: auto;
+  min-height: 0;
+}
+
 // The embed is the conversation only; the forum keeps the tools. No system
 // notices (visible, unlisted, closed...), time gaps, topic footer buttons,
 // suggested topics, the "2 / 2" progress bar, core's floating timeline button or
@@ -1974,6 +1987,7 @@ body.embed-mode .embed-mode-composer {
   position: static;
   box-sizing: border-box;
   width: 100%;
+  padding-inline: 0;
 
   // 8em: four lines of room before it starts to grow; 4em read as a one-line chat box.
   .docked-composer {
